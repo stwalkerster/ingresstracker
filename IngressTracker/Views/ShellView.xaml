@@ -1,0 +1,61 @@
+<fluent:RibbonWindow x:Class="IngressTracker.Views.ShellView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:fluent="urn:fluent-ribbon"
+        xmlns:cal="http://www.caliburnproject.org"
+        xmlns:properties="clr-namespace:IngressTracker.Properties"
+        Title="{Binding ActiveItem.DisplayName, Converter={StaticResource WindowTitleConverter}, FallbackValue={x:Static properties:Resources.ApplicationName}}" Height="465" Width="1178"
+        Icon="pack://application:,,,/IngressTracker;component/Images/Ingress/16.png">
+
+    <fluent:RibbonWindow.Resources>
+        <Style x:Key="OpenConnectionStyle">
+            <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action OpenConnection]" />
+            <!--<Setter Property="cal:Action.TargetWithoutContext" Value="{Binding DataContext, ElementName=ConnectToBookmark}" />-->
+        </Style>
+    </fluent:RibbonWindow.Resources>
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <fluent:Ribbon>
+            <fluent:RibbonTabItem Header="{x:Static properties:Resources.ApplicationName}">
+                <fluent:RibbonGroupBox Header="">
+                </fluent:RibbonGroupBox>
+            </fluent:RibbonTabItem>
+        </fluent:Ribbon>
+
+        <TabControl Grid.Row="1" x:Name="Items" TabStripPlacement="Bottom">
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding DisplayName}" Padding="0,2,5,0" />
+                        <Button Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Width="20" Height="20" cal:Message.Attach="CloseConnection($dataContext)">
+                            <Path Data="M 1,0 0,0 0,1 2.75,3.75 0,6.5 l 0,1 1,0 2.75,-2.75 2.75,2.75 1,0 0,-1 L 4.75,3.75 7.5,1 7.5,0 6.5,0 3.75,2.75 z" Fill="Black"/>
+                        </Button>
+                    </StackPanel>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            <TabControl.ItemContainerStyle>
+                <Style TargetType="TabItem">
+                    <Setter Property="Background" Value="#FFDDDDDD" />
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="FontWeight" Value="Bold"></Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TabControl.ItemContainerStyle>
+        </TabControl>
+
+        <fluent:StatusBar Grid.Row="2">
+            <fluent:StatusBarItem  HorizontalAlignment="Left">
+                <TextBlock Text="StatusBar!" />
+            </fluent:StatusBarItem>
+        </fluent:StatusBar>
+    </Grid>
+</fluent:RibbonWindow>
