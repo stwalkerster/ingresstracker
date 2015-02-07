@@ -29,6 +29,6 @@ _ReSharper*/
 [Tt]est[Rr]esult*
 
 #nuget stuff
-packages/*
-!packages/repositories.config
-!.nuget/NuGet.exe
+src/packages/*
+!src/packages/repositories.config
+!src/.nuget/NuGet.exe
