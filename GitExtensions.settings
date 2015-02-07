@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dictionary>
+  <item>
+    <key>
+      <string>BuildServer.EnableIntegration</string>
+    </key>
+    <value>
+      <string>true</string>
+    </value>
+  </item>
+  <item>
+    <key>
+      <string>BuildServer.Jenkins.BuildServerUrl</string>
+    </key>
+    <value>
+      <string>https://jenkins.stwalkerster.co.uk/</string>
+    </value>
+  </item>
+  <item>
+    <key>
+      <string>BuildServer.Jenkins.ProjectName</string>
+    </key>
+    <value>
+      <string>ingresstracker-build</string>
+    </value>
+  </item>
+  <item>
+    <key>
+      <string>BuildServer.ShowBuildSummaryInGrid</string>
+    </key>
+    <value>
+      <string>true</string>
+    </value>
+  </item>
+  <item>
+    <key>
+      <string>BuildServer.Type</string>
+    </key>
+    <value>
+      <string>Jenkins</string>
+    </value>
+  </item>
+</dictionary>
