@@ -68,5 +68,113 @@ namespace IngressTracker.Properties {
                 return ResourceManager.GetString("ApplicationName", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Badges.
+        /// </summary>
+        public static string BadgeStaticView {
+            get {
+                return ResourceManager.GetString("BadgeStaticView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New.
+        /// </summary>
+        public static string DataAddRecord {
+            get {
+                return ResourceManager.GetString("DataAddRecord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string DataDeleteRecord {
+            get {
+                return ResourceManager.GetString("DataDeleteRecord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh.
+        /// </summary>
+        public static string DataRefreshRecord {
+            get {
+                return ResourceManager.GetString("DataRefreshRecord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string DataSaveRecords {
+            get {
+                return ResourceManager.GetString("DataSaveRecords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Actions.
+        /// </summary>
+        public static string DataToolsActions {
+            get {
+                return ResourceManager.GetString("DataToolsActions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data.
+        /// </summary>
+        public static string DataToolsContextualRibbonTab {
+            get {
+                return ResourceManager.GetString("DataToolsContextualRibbonTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data Tools.
+        /// </summary>
+        public static string DataToolsRibbonTab {
+            get {
+                return ResourceManager.GetString("DataToolsRibbonTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Static Data.
+        /// </summary>
+        public static string StaticData {
+            get {
+                return ResourceManager.GetString("StaticData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Statistics.
+        /// </summary>
+        public static string StatStaticView {
+            get {
+                return ResourceManager.GetString("StatStaticView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Users.
+        /// </summary>
+        public static string UserStaticView {
+            get {
+                return ResourceManager.GetString("UserStaticView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Windows.
+        /// </summary>
+        public static string WindowListRibbonTab {
+            get {
+                return ResourceManager.GetString("WindowListRibbonTab", resourceCulture);
+            }
+        }
     }
 }

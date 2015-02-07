@@ -1,0 +1,39 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:fluent="urn:fluent-ribbon"
+                    xmlns:properties="clr-namespace:IngressTracker.Properties"
+                    xmlns:cal="http://www.caliburnproject.org">
+    <Style x:Key="SaveButtonStyle" TargetType="fluent:Button">
+        <Setter Property="Header" Value="{x:Static properties:Resources.DataSaveRecords}" />
+        <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/32/save_all.png" />
+        <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/16/save_all.png" />
+        <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action Save]"/>
+    </Style>
+
+    <Style x:Key="AddRowButtonStyle" TargetType="fluent:Button">
+        <Setter Property="Header" Value="{x:Static properties:Resources.DataAddRecord}" />
+        <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/32/insert_table_row.png" />
+        <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/16/insert_table_row.png" />
+        <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action AddRecord]"/>
+    </Style>
+
+    <Style x:Key="DeleteButtonStyle" TargetType="fluent:Button">
+        <Setter Property="Header" Value="{x:Static properties:Resources.DataDeleteRecord}" />
+        <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/32/delete_table_row.png" />
+        <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/16/delete_table_row.png" />
+        <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action Delete]"/>
+    </Style>
+
+    <Style x:Key="RefreshButtonStyle" TargetType="fluent:Button">
+        <Setter Property="Header" Value="{x:Static properties:Resources.DataRefreshRecord}" />
+        <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/32/reload.png" />
+        <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/16/reload.png" />
+        <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action RefreshData]"/>
+    </Style>
+
+    <Style x:Key="DataToolsContextualTabGroupStyle" TargetType="fluent:RibbonContextualTabGroup">
+        <Setter Property="Header" Value="{x:Static properties:Resources.DataToolsContextualRibbonTab}" />
+        <Setter Property="Background" Value="Gold" />
+        <Setter Property="BorderBrush" Value="Gold" />
+    </Style>
+</ResourceDictionary>

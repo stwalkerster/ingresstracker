@@ -8,12 +8,26 @@
         Icon="pack://application:,,,/IngressTracker;component/Images/Ingress/16.png">
 
     <fluent:RibbonWindow.Resources>
-        <Style x:Key="OpenConnectionStyle">
-            <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action OpenConnection]" />
-            <!--<Setter Property="cal:Action.TargetWithoutContext" Value="{Binding DataContext, ElementName=ConnectToBookmark}" />-->
+        <Style x:Key="UserStaticButtonStyle" TargetType="fluent:Button">
+            <Setter Property="Header" Value="{x:Static properties:Resources.UserStaticView}" />
+            <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action OpenUserStatic]" />
+            <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/16/personal.png" />
+            <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/32/personal.png" />
+        </Style>
+        <Style x:Key="StatStaticButtonStyle" TargetType="fluent:Button">
+            <Setter Property="Header" Value="{x:Static properties:Resources.StatStaticView}" />
+            <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action OpenStatStatic]" />
+            <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/16/kspread.png" />
+            <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/32/kspread.png" />
+        </Style>
+        <Style x:Key="BadgeStaticButtonStyle" TargetType="fluent:Button">
+            <Setter Property="Header" Value="{x:Static properties:Resources.BadgeStaticView}" />
+            <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action OpenBadgeStatic]" />
+            <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/MindController/16.png" />
+            <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/MindController/32.png" />
         </Style>
     </fluent:RibbonWindow.Resources>
-
+    
     <Grid>
 
         <Grid.RowDefinitions>
@@ -24,9 +38,25 @@
 
         <fluent:Ribbon>
             <fluent:RibbonTabItem Header="{x:Static properties:Resources.ApplicationName}">
-                <fluent:RibbonGroupBox Header="">
+                <fluent:RibbonGroupBox Header="{x:Static properties:Resources.StaticData}">
+                    <fluent:Button Style="{StaticResource UserStaticButtonStyle}" />
+                    <fluent:Button Style="{StaticResource StatStaticButtonStyle}" />
+                    <fluent:Button Style="{StaticResource BadgeStaticButtonStyle}" />
                 </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
+
+            <fluent:RibbonTabItem Header="{x:Static properties:Resources.DataToolsRibbonTab}" Group="{Binding ElementName=DataToolsContextualTabGroup}">
+                <fluent:RibbonGroupBox Header="{x:Static properties:Resources.DataToolsActions}">
+                    <fluent:Button Style="{StaticResource AddRowButtonStyle}" />
+                    <fluent:Button Style="{StaticResource DeleteButtonStyle}" />
+                    <fluent:Button Style="{StaticResource SaveButtonStyle}" />
+                    <fluent:Button Style="{StaticResource RefreshButtonStyle}" />
+                </fluent:RibbonGroupBox>
+            </fluent:RibbonTabItem>
+
+            <fluent:Ribbon.ContextualGroups>
+                <fluent:RibbonContextualTabGroup Visibility="{Binding DataToolsEnabled, Converter={StaticResource boolToVisibilityConverter}}" x:Name="DataToolsContextualTabGroup" Style="{StaticResource DataToolsContextualTabGroupStyle}" />
+            </fluent:Ribbon.ContextualGroups>
         </fluent:Ribbon>
 
         <TabControl Grid.Row="1" x:Name="Items" TabStripPlacement="Bottom">

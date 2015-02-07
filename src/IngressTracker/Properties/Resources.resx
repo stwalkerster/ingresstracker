@@ -120,4 +120,40 @@
   <data name="ApplicationName" xml:space="preserve">
     <value>Ingress Tracker</value>
   </data>
+  <data name="BadgeStaticView" xml:space="preserve">
+    <value>Badges</value>
+  </data>
+  <data name="DataAddRecord" xml:space="preserve">
+    <value>Add New</value>
+  </data>
+  <data name="DataDeleteRecord" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DataRefreshRecord" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="DataSaveRecords" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="DataToolsActions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="DataToolsContextualRibbonTab" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="DataToolsRibbonTab" xml:space="preserve">
+    <value>Data Tools</value>
+  </data>
+  <data name="StaticData" xml:space="preserve">
+    <value>Static Data</value>
+  </data>
+  <data name="StatStaticView" xml:space="preserve">
+    <value>Statistics</value>
+  </data>
+  <data name="UserStaticView" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="WindowListRibbonTab" xml:space="preserve">
+    <value>Windows</value>
+  </data>
 </root>
