@@ -20,7 +20,6 @@
 //   Interaction logic for StatsStaticView.xaml
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace IngressTracker.Views
 {
     /// <summary>
