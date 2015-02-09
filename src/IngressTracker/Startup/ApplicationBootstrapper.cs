@@ -34,6 +34,7 @@ namespace IngressTracker.Startup
     using Castle.MicroKernel.Registration;
     using Castle.Windsor;
 
+    using IngressTracker.Startup.Facilities;
     using IngressTracker.ViewModels.Interfaces;
 
     using Microsoft.Practices.ServiceLocation;
@@ -41,7 +42,7 @@ namespace IngressTracker.Startup
     /// <summary>
     /// The bootstrapper.
     /// </summary>
-    internal class ApplicationBootstrapper : BootstrapperBase
+    public class ApplicationBootstrapper : BootstrapperBase
     {
         #region Fields
 
@@ -75,22 +76,25 @@ namespace IngressTracker.Startup
 
             this.container.AddFacility<EventRegistrationFacility>();
             this.container.AddFacility<TypedFactoryFacility>();
+            this.container.AddFacility<PersistenceFacility>();
             this.container.AddFacility<LoggingFacility>(f => f.UseLog4Net().WithConfig("logger.config"));
 
-            var viewModelRegistrations = Classes.FromThisAssembly()
-                .InNamespace("IngressTracker.ViewModels")
-                .WithServiceDefaultInterfaces()
-                .LifestyleTransient();
+            var viewModelRegistrations =
+                Classes.FromThisAssembly()
+                    .InNamespace("IngressTracker.ViewModels")
+                    .WithServiceAllInterfaces()
+                    .LifestyleTransient();
 
-            var services = Classes.FromThisAssembly()
-                .InNamespace("IngressTracker.Services")
-                .WithServiceAllInterfaces()
-                .LifestyleSingleton();
+            var services =
+                Classes.FromThisAssembly()
+                    .InNamespace("IngressTracker.Services")
+                    .WithServiceAllInterfaces()
+                    .LifestyleSingleton();
 
             this.container.Register(
-                Component.For<IWindowManager>().ImplementedBy<WindowManager>().LifestyleSingleton(),
-                Component.For<IEventAggregator>().ImplementedBy<EventAggregator>().LifestyleSingleton(),
-                services,
+                Component.For<IWindowManager>().ImplementedBy<WindowManager>().LifestyleSingleton(), 
+                Component.For<IEventAggregator>().ImplementedBy<EventAggregator>().LifestyleSingleton(), 
+                services, 
                 viewModelRegistrations);
 
             ServiceLocator.SetLocatorProvider(() => new WindsorServiceLocator(this.container));

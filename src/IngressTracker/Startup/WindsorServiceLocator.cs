@@ -20,7 +20,6 @@
 //   The windsor service locator.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace IngressTracker.Startup
 {
     using System;
@@ -33,7 +32,7 @@ namespace IngressTracker.Startup
     /// <summary>
     /// The windsor service locator.
     /// </summary>
-    internal class WindsorServiceLocator : ServiceLocatorImplBase
+    public class WindsorServiceLocator : ServiceLocatorImplBase
     {
         #region Fields
 

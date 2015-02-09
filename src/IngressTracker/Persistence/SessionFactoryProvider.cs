@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="EventRegistrationFacility.cs" company="Simon Walker">
+// <copyright file="SessionFactoryProvider.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
@@ -17,87 +17,91 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The event registration facility.
+//   The session factory provider.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.Startup
+namespace IngressTracker.Persistence
 {
-    using Caliburn.Micro;
+    using System;
 
-    using Castle.Core;
-    using Castle.MicroKernel.Facilities;
+    using IngressTracker.Persistence.Interfaces;
+
+    using NHibernate;
+    using NHibernate.Cfg;
 
     /// <summary>
-    /// The event registration facility.
+    /// The session factory provider.
     /// </summary>
-    public class EventRegistrationFacility : AbstractFacility
+    public class SessionFactoryProvider : ISessionFactoryProvider
     {
         #region Fields
 
         /// <summary>
-        /// The _event aggregator.
+        /// The config.
         /// </summary>
-        private IEventAggregator eventAggregator;
+        private readonly Configuration config;
+
+        #endregion
+
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="SessionFactoryProvider"/> class.
+        /// </summary>
+        /// <param name="config">
+        /// The config.
+        /// </param>
+        public SessionFactoryProvider(Configuration config)
+        {
+            this.config = config;
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        /// <summary>
+        /// Gets the session factory.
+        /// </summary>
+        public virtual ISessionFactory SessionFactory { get; private set; }
+
+        #endregion
+
+        #region Public Methods and Operators
+
+        /// <summary>
+        /// The dispose.
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// The initialize.
+        /// </summary>
+        public virtual void Initialize()
+        {
+            this.SessionFactory = this.config.BuildSessionFactory();
+        }
 
         #endregion
 
         #region Methods
 
         /// <summary>
-        /// The initialisation method.
+        /// The dispose.
         /// </summary>
-        protected override void Init()
+        /// <param name="disposing">
+        /// The disposing.
+        /// </param>
+        protected virtual void Dispose(bool disposing)
         {
-            this.Kernel.ComponentCreated += this.ComponentCreated;
-            this.Kernel.ComponentDestroyed += this.ComponentDestroyed;
-        }
-
-        /// <summary>
-        /// The component created.
-        /// </summary>
-        /// <param name="model">
-        /// The model.
-        /// </param>
-        /// <param name="instance">
-        /// The instance.
-        /// </param>
-        private void ComponentCreated(ComponentModel model, object instance)
-        {
-            if (!(instance is IHandle))
+            if (disposing)
             {
-                return;
+                this.SessionFactory.Close();
             }
-
-            if (this.eventAggregator == null)
-            {
-                this.eventAggregator = this.Kernel.Resolve<IEventAggregator>();
-            }
-
-            this.eventAggregator.Subscribe(instance);
-        }
-
-        /// <summary>
-        /// The component destroyed.
-        /// </summary>
-        /// <param name="model">
-        /// The model.
-        /// </param>
-        /// <param name="instance">
-        /// The instance.
-        /// </param>
-        private void ComponentDestroyed(ComponentModel model, object instance)
-        {
-            if (!(instance is IHandle))
-            {
-                return;
-            }
-
-            if (this.eventAggregator == null)
-            {
-                return;
-            }
-
-            this.eventAggregator.Unsubscribe(instance);
         }
 
         #endregion

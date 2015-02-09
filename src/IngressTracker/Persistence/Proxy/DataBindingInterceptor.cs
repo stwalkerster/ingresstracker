@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="WindowTitleConverter.cs" company="Simon Walker">
+// <copyright file="DataBindingInterceptor.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
@@ -17,72 +17,80 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The window title converter.
+//   The data binding intercepter.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
-namespace IngressTracker.Converters
+namespace IngressTracker.Persistence.Proxy
 {
     using System;
-    using System.Globalization;
-    using System.Windows.Data;
 
-    using IngressTracker.Properties;
+    using NHibernate;
 
     /// <summary>
-    /// The window title converter.
+    /// The data binding interceptor.
     /// </summary>
-    public class WindowTitleConverter : IValueConverter
+    public class DataBindingInterceptor : EmptyInterceptor
     {
+        #region Public Properties
+
+        /// <summary>
+        /// Gets or sets the session factory.
+        /// </summary>
+        public ISessionFactory SessionFactory { get; set; }
+
+        #endregion
+
         #region Public Methods and Operators
 
         /// <summary>
-        /// The convert.
+        /// The get entity name.
         /// </summary>
-        /// <param name="value">
-        /// The value.
-        /// </param>
-        /// <param name="targetType">
-        /// The target type.
-        /// </param>
-        /// <param name="parameter">
-        /// The parameter.
-        /// </param>
-        /// <param name="culture">
-        /// The culture.
+        /// <param name="entity">
+        /// The entity.
         /// </param>
         /// <returns>
-        /// The <see cref="object"/>.
+        /// The <see cref="string"/>.
         /// </returns>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public override string GetEntityName(object entity)
         {
-            return string.Format("{0} - {1}", value, Resources.ApplicationName);
+            var markerInterface = entity as DataBindingFactory.IMarkerInterface;
+            if (markerInterface != null)
+            {
+                return markerInterface.TypeName;
+            }
+
+            return base.GetEntityName(entity);
         }
 
         /// <summary>
-        /// The convert back.
+        /// The instantiate.
         /// </summary>
-        /// <param name="value">
-        /// The value.
+        /// <param name="typeName">
+        /// The typeName.
         /// </param>
-        /// <param name="targetType">
-        /// The target type.
+        /// <param name="entityMode">
+        /// The entity mode.
         /// </param>
-        /// <param name="parameter">
-        /// The parameter.
-        /// </param>
-        /// <param name="culture">
-        /// The culture.
+        /// <param name="id">
+        /// The id.
         /// </param>
         /// <returns>
         /// The <see cref="object"/>.
         /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// Not supported
-        /// </exception>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public override object Instantiate(string typeName, EntityMode entityMode, object id)
         {
-            throw new NotSupportedException("This operation is not supported");
+            if (entityMode == EntityMode.Poco)
+            {
+                Type type = Type.GetType(typeName);
+                if (type != null)
+                {
+                    var instance = DataBindingFactory.Create(type);
+                    this.SessionFactory.GetClassMetadata(typeName).SetIdentifier(instance, id, entityMode);
+                    return instance;
+                }
+            }
+
+            return base.Instantiate(typeName, entityMode, id);
         }
 
         #endregion

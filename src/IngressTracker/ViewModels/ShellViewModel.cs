@@ -24,39 +24,16 @@ namespace IngressTracker.ViewModels
 {
     using Caliburn.Micro;
 
-    using Castle.Core.Logging;
-
+    using IngressTracker.Interfaces;
     using IngressTracker.ViewModels.Interfaces;
+
+    using Microsoft.Practices.ServiceLocation;
 
     /// <summary>
     /// The shell view model.
     /// </summary>
     public class ShellViewModel : Conductor<IScreen>.Collection.OneActive, IShellViewModel
     {
-        #region Fields
-
-        /// <summary>
-        /// The logger.
-        /// </summary>
-        private readonly ILogger logger;
-
-        #endregion
-
-        #region Constructors and Destructors
-
-        /// <summary>
-        /// Initialises a new instance of the <see cref="ShellViewModel"/> class.
-        /// </summary>
-        /// <param name="logger">
-        /// The logger.
-        /// </param>
-        public ShellViewModel(ILogger logger)
-        {
-            this.logger = logger;
-        }
-
-        #endregion
-
         #region Public Properties
 
         /// <summary>
@@ -66,7 +43,7 @@ namespace IngressTracker.ViewModels
         {
             get
             {
-                return false;
+                return this.ActiveItem is ICanAddRecord;
             }
         }
 
@@ -77,7 +54,7 @@ namespace IngressTracker.ViewModels
         {
             get
             {
-                return false;
+                return this.ActiveItem is ICanDelete;
             }
         }
 
@@ -110,7 +87,7 @@ namespace IngressTracker.ViewModels
         {
             get
             {
-                return false;
+                return true;
             }
         }
 
@@ -121,7 +98,7 @@ namespace IngressTracker.ViewModels
         {
             get
             {
-                return false;
+                return this.ActiveItem is IDataScreen;
             }
         }
 
@@ -132,7 +109,7 @@ namespace IngressTracker.ViewModels
         {
             get
             {
-                return false;
+                return this.ActiveItem is ICanSave;
             }
         }
 
@@ -143,7 +120,7 @@ namespace IngressTracker.ViewModels
         {
             get
             {
-                return false;
+                return this.CanDelete || this.CanSave || this.CanAddRecord || this.CanRefreshData;
             }
         }
 
@@ -156,6 +133,21 @@ namespace IngressTracker.ViewModels
         /// </summary>
         public void AddRecord()
         {
+            if (this.CanAddRecord)
+            {
+                ((ICanAddRecord)this.ActiveItem).AddRecord();
+            }
+        }
+
+        /// <summary>
+        /// The close window.
+        /// </summary>
+        /// <param name="window">
+        /// The window.
+        /// </param>
+        public void CloseWindow(IScreen window)
+        {
+            window.CanClose(allowed => window.TryClose());
         }
 
         /// <summary>
@@ -163,6 +155,10 @@ namespace IngressTracker.ViewModels
         /// </summary>
         public void Delete()
         {
+            if (this.CanDelete)
+            {
+                ((ICanDelete)this.ActiveItem).DeleteRecord();
+            }
         }
 
         /// <summary>
@@ -184,6 +180,9 @@ namespace IngressTracker.ViewModels
         /// </summary>
         public void OpenUserStatic()
         {
+            var window = ServiceLocator.Current.GetInstance<IUserStaticViewModel>();
+
+            this.ActivateItem(window);
         }
 
         /// <summary>
@@ -191,6 +190,10 @@ namespace IngressTracker.ViewModels
         /// </summary>
         public void RefreshData()
         {
+            if (this.CanRefreshData)
+            {
+                ((IDataScreen)this.ActiveItem).RefreshData();
+            }
         }
 
         /// <summary>
@@ -198,6 +201,34 @@ namespace IngressTracker.ViewModels
         /// </summary>
         public void Save()
         {
+            if (this.CanSave)
+            {
+                ((ICanSave)this.ActiveItem).Save();
+            }
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// The on activation processed.
+        /// </summary>
+        /// <param name="item">
+        /// The item.
+        /// </param>
+        /// <param name="success">
+        /// The success.
+        /// </param>
+        protected override void OnActivationProcessed(IScreen item, bool success)
+        {
+            base.OnActivationProcessed(item, success);
+
+            this.NotifyOfPropertyChange(() => this.CanAddRecord);
+            this.NotifyOfPropertyChange(() => this.CanDelete);
+            this.NotifyOfPropertyChange(() => this.CanRefreshData);
+            this.NotifyOfPropertyChange(() => this.CanSave);
+            this.NotifyOfPropertyChange(() => this.DataToolsEnabled);
         }
 
         #endregion

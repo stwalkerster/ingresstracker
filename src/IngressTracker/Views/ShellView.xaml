@@ -29,7 +29,6 @@
     </fluent:RibbonWindow.Resources>
     
     <Grid>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -43,6 +42,12 @@
                     <fluent:Button Style="{StaticResource StatStaticButtonStyle}" />
                     <fluent:Button Style="{StaticResource BadgeStaticButtonStyle}" />
                 </fluent:RibbonGroupBox>
+                <fluent:RibbonGroupBox Header="{x:Static properties:Resources.DataToolsActions}">
+                    <fluent:Button Style="{StaticResource AddRowButtonStyle}" />
+                    <fluent:Button Style="{StaticResource DeleteButtonStyle}" />
+                    <fluent:Button Style="{StaticResource SaveButtonStyle}" />
+                    <fluent:Button Style="{StaticResource RefreshButtonStyle}" />
+                </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
 
             <fluent:RibbonTabItem Header="{x:Static properties:Resources.DataToolsRibbonTab}" Group="{Binding ElementName=DataToolsContextualTabGroup}">
@@ -55,32 +60,11 @@
             </fluent:RibbonTabItem>
 
             <fluent:Ribbon.ContextualGroups>
-                <fluent:RibbonContextualTabGroup Visibility="{Binding DataToolsEnabled, Converter={StaticResource boolToVisibilityConverter}}" x:Name="DataToolsContextualTabGroup" Style="{StaticResource DataToolsContextualTabGroupStyle}" />
+          <!--      <fluent:RibbonContextualTabGroup Visibility="{Binding DataToolsEnabled, Converter={StaticResource boolToVisibilityConverter}}" x:Name="DataToolsContextualTabGroup" Style="{StaticResource DataToolsContextualTabGroupStyle}" /> -->
             </fluent:Ribbon.ContextualGroups>
         </fluent:Ribbon>
 
-        <TabControl Grid.Row="1" x:Name="Items" TabStripPlacement="Bottom">
-            <TabControl.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding DisplayName}" Padding="0,2,5,0" />
-                        <Button Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Width="20" Height="20" cal:Message.Attach="CloseConnection($dataContext)">
-                            <Path Data="M 1,0 0,0 0,1 2.75,3.75 0,6.5 l 0,1 1,0 2.75,-2.75 2.75,2.75 1,0 0,-1 L 4.75,3.75 7.5,1 7.5,0 6.5,0 3.75,2.75 z" Fill="Black"/>
-                        </Button>
-                    </StackPanel>
-                </DataTemplate>
-            </TabControl.ItemTemplate>
-            <TabControl.ItemContainerStyle>
-                <Style TargetType="TabItem">
-                    <Setter Property="Background" Value="#FFDDDDDD" />
-                    <Style.Triggers>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="FontWeight" Value="Bold"></Setter>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </TabControl.ItemContainerStyle>
-        </TabControl>
+        <TabControl Grid.Row="1" x:Name="Items" Style="{StaticResource WindowTabControlStyle}" />
 
         <fluent:StatusBar Grid.Row="2">
             <fluent:StatusBarItem  HorizontalAlignment="Left">
