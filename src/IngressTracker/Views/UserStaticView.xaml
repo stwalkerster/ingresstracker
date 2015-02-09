@@ -7,8 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <DataGrid ItemsSource="{Binding DataItems}" AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" CanUserDeleteRows="False" CanUserAddRows="False"
-                  RowHeaderWidth="30" SelectedItem="{Binding SelectedItem}">
+        <DataGrid Style="{StaticResource DataScreenDataGridStyle}">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Agent Name">
                     <DataGridTemplateColumn.CellTemplate>
@@ -23,7 +22,7 @@
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
                 <DataGridComboBoxColumn Header="Faction" ItemsSource="{x:Static dataModel:Faction.ItemCollection}" SelectedItemBinding="{Binding Faction}" />
-                <DataGridTextColumn Binding="{Binding Type, Mode=OneWay}" Header="Object Type" Visibility="Collapsed" />
+                <DataGridTextColumn Binding="{Binding ObjectType, Mode=OneWay}" Header="ObjectType" Visibility="Collapsed" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

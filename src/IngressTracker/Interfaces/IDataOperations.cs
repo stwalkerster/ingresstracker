@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="User.cs" company="Simon Walker">
+// <copyright file="IDataOperations.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
@@ -17,56 +17,16 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The user.
+//   The DataOperations interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.DataModel
+
+namespace IngressTracker.Interfaces
 {
-    using IngressTracker.Persistence;
-
     /// <summary>
-    /// The user.
+    /// The DataOperations interface.
     /// </summary>
-    public class User : EntityBase
+    public interface IDataOperations : ICanAddRecord, ICanSave, ICanDelete
     {
-        #region Public Properties
-
-        /// <summary>
-        /// Gets or sets the faction.
-        /// </summary>
-        public virtual Faction Faction
-        {
-            get
-            {
-                if (this.FactionCode == "ENL")
-                {
-                    return Faction.Enlightened;
-                }
-
-                if (this.FactionCode == "RES")
-                {
-                    return Faction.Resistance;
-                }
-
-                return null;
-            }
-
-            set
-            {
-                this.FactionCode = value.Code;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the faction.
-        /// </summary>
-        public virtual string FactionCode { get; set; }
-
-        /// <summary>
-        /// Gets or sets the username.
-        /// </summary>
-        public virtual string Username { get; set; }
-
-        #endregion
     }
 }

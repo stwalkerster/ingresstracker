@@ -22,10 +22,12 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace IngressTracker.Interfaces
 {
+    using Caliburn.Micro;
+
     /// <summary>
     /// The DataScreen interface.
     /// </summary>
-    public interface IDataScreen
+    public interface IDataScreen : IScreen
     {
         #region Public Methods and Operators
 

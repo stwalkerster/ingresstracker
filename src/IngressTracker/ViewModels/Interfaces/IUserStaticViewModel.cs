@@ -22,12 +22,12 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace IngressTracker.ViewModels.Interfaces
 {
-    using Caliburn.Micro;
+    using IngressTracker.Interfaces;
 
     /// <summary>
     /// The UserStaticViewModel interface.
     /// </summary>
-    public interface IUserStaticViewModel : IScreen
+    public interface IUserStaticViewModel : IDataOperations
     {
     }
 }

@@ -97,15 +97,18 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\WindowTitleConverter.cs" />
+    <Compile Include="DataModel\Category.cs" />
     <Compile Include="DataModel\Faction.cs" />
     <Compile Include="DataModel\User.cs" />
     <Compile Include="Interfaces\ICanAddRecord.cs" />
     <Compile Include="Interfaces\ICanDelete.cs" />
     <Compile Include="Interfaces\ICanSave.cs" />
+    <Compile Include="Interfaces\IDataOperations.cs" />
     <Compile Include="Interfaces\IDataScreen.cs" />
     <Compile Include="Persistence\EntityBase.cs" />
     <Compile Include="Persistence\Interfaces\IDatabaseEntity.cs" />
     <Compile Include="Persistence\Interfaces\ISessionFactoryProvider.cs" />
+    <Compile Include="Persistence\Mappings\CategoryMap.cs" />
     <Compile Include="Persistence\Mappings\UserMap.cs" />
     <Compile Include="Persistence\Proxy\DataBindingFactory.cs" />
     <Compile Include="Persistence\Proxy\DataBindingInterceptor.cs" />
@@ -115,6 +118,8 @@
     <Compile Include="Startup\Facilities\PersistenceFacility.cs" />
     <Compile Include="Startup\WindsorServiceLocator.cs" />
     <Compile Include="DataScreen.cs" />
+    <Compile Include="ViewModels\CategoryStaticViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\ICategoryStaticViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IShellViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IUserStaticViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
@@ -123,6 +128,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ViewModels\UserStaticViewModel.cs" />
+    <Compile Include="Views\CategoryStaticView.xaml.cs">
+      <DependentUpon>CategoryStaticView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserStaticView.xaml.cs">
       <DependentUpon>UserStaticView.xaml</DependentUpon>
     </Compile>
@@ -135,6 +143,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ShellView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CategoryStaticView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -220,7 +232,12 @@
   <ItemGroup>
     <Resource Include="ingress.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\Crystal\32\no3D.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Crystal\16\no3D.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

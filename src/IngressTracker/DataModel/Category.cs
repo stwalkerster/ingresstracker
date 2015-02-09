@@ -1,5 +1,5 @@
-// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IShellViewModel.cs" company="Simon Walker">
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Category.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
@@ -17,61 +17,25 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The ShellViewModel interface.
+//   The category.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.ViewModels.Interfaces
+
+namespace IngressTracker.DataModel
 {
+    using IngressTracker.Persistence;
+
     /// <summary>
-    /// The ShellViewModel interface.
+    /// The category.
     /// </summary>
-    public interface IShellViewModel
+    public class Category : EntityBase
     {
         #region Public Properties
 
         /// <summary>
-        /// Gets a value indicating whether can open badge static.
+        /// Gets or sets the name.
         /// </summary>
-        bool CanOpenBadgeStatic { get; }
-
-        /// <summary>
-        /// Gets a value indicating whether can open stat static.
-        /// </summary>
-        bool CanOpenStatStatic { get; }
-
-        /// <summary>
-        /// Gets a value indicating whether can open user static.
-        /// </summary>
-        bool CanOpenUserStatic { get; }
-
-        /// <summary>
-        /// Gets a value indicating whether can open category static.
-        /// </summary>
-        bool CanOpenCategoryStatic { get; }
-
-        #endregion
-
-        #region Public Methods and Operators
-
-        /// <summary>
-        /// The open badge static.
-        /// </summary>
-        void OpenBadgeStatic();
-
-        /// <summary>
-        /// The open stat static.
-        /// </summary>
-        void OpenStatStatic();
-
-        /// <summary>
-        /// The open user static.
-        /// </summary>
-        void OpenUserStatic();
-
-        /// <summary>
-        /// The open category static.
-        /// </summary>
-        void OpenCategoryStatic();
+        public virtual string Name { get; set; }
 
         #endregion
     }

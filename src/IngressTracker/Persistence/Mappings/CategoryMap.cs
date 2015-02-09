@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="User.cs" company="Simon Walker">
+// <copyright file="CategoryMap.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
@@ -17,55 +17,32 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The user.
+//   The category map.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.DataModel
+
+namespace IngressTracker.Persistence.Mappings
 {
-    using IngressTracker.Persistence;
+    using FluentNHibernate.Mapping;
+
+    using IngressTracker.DataModel;
 
     /// <summary>
-    /// The user.
+    /// The category map.
     /// </summary>
-    public class User : EntityBase
+    public class CategoryMap : ClassMap<Category>
     {
-        #region Public Properties
+        #region Constructors and Destructors
 
         /// <summary>
-        /// Gets or sets the faction.
+        /// Initialises a new instance of the <see cref="CategoryMap"/> class.
         /// </summary>
-        public virtual Faction Faction
+        public CategoryMap()
         {
-            get
-            {
-                if (this.FactionCode == "ENL")
-                {
-                    return Faction.Enlightened;
-                }
-
-                if (this.FactionCode == "RES")
-                {
-                    return Faction.Resistance;
-                }
-
-                return null;
-            }
-
-            set
-            {
-                this.FactionCode = value.Code;
-            }
+            this.Table("category");
+            this.Id(x => x.Id).Column("id");
+            this.Map(x => x.Name).Column("name");
         }
-
-        /// <summary>
-        /// Gets or sets the faction.
-        /// </summary>
-        public virtual string FactionCode { get; set; }
-
-        /// <summary>
-        /// Gets or sets the username.
-        /// </summary>
-        public virtual string Username { get; set; }
 
         #endregion
     }

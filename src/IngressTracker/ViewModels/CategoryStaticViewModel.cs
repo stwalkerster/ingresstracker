@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="User.cs" company="Simon Walker">
+// <copyright file="CategoryStaticViewModel.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
@@ -17,55 +17,34 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The user.
+//   The category static view model.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.DataModel
+namespace IngressTracker.ViewModels
 {
-    using IngressTracker.Persistence;
+    using IngressTracker.DataModel;
+    using IngressTracker.Properties;
+    using IngressTracker.ViewModels.Interfaces;
+
+    using NHibernate;
 
     /// <summary>
-    /// The user.
+    /// The category static view model.
     /// </summary>
-    public class User : EntityBase
+    public class CategoryStaticViewModel : DataScreen<Category>, ICategoryStaticViewModel
     {
-        #region Public Properties
+        #region Constructors and Destructors
 
         /// <summary>
-        /// Gets or sets the faction.
+        /// Initialises a new instance of the <see cref="CategoryStaticViewModel"/> class.
         /// </summary>
-        public virtual Faction Faction
+        /// <param name="databaseSession">
+        /// The database session.
+        /// </param>
+        public CategoryStaticViewModel(ISession databaseSession)
+            : base(Resources.CategoryStaticView, databaseSession)
         {
-            get
-            {
-                if (this.FactionCode == "ENL")
-                {
-                    return Faction.Enlightened;
-                }
-
-                if (this.FactionCode == "RES")
-                {
-                    return Faction.Resistance;
-                }
-
-                return null;
-            }
-
-            set
-            {
-                this.FactionCode = value.Code;
-            }
         }
-
-        /// <summary>
-        /// Gets or sets the faction.
-        /// </summary>
-        public virtual string FactionCode { get; set; }
-
-        /// <summary>
-        /// Gets or sets the username.
-        /// </summary>
-        public virtual string Username { get; set; }
 
         #endregion
     }

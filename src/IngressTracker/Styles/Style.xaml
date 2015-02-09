@@ -53,4 +53,15 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style x:Key="DataScreenDataGridStyle" TargetType="DataGrid">
+        <Setter Property="ItemsSource" Value="{Binding DataItems}" />
+        <Setter Property="AutoGenerateColumns" Value="False" />
+        <Setter Property="SelectionMode" Value="Single" />
+        <Setter Property="SelectionUnit" Value="FullRow" />
+        <Setter Property="CanUserDeleteRows" Value="False" />
+        <Setter Property="CanUserAddRows" Value="False" />
+        <Setter Property="RowHeaderWidth" Value="30" />
+        <Setter Property="SelectedItem" Value="{Binding SelectedItem}" />
+    </Style>
 </ResourceDictionary>

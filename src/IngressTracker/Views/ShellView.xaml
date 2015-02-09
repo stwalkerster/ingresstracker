@@ -26,6 +26,12 @@
             <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/MindController/16.png" />
             <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/MindController/32.png" />
         </Style>
+        <Style x:Key="CategoryStaticButtonStyle" TargetType="fluent:Button">
+            <Setter Property="Header" Value="{x:Static properties:Resources.CategoryStaticView}" />
+            <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action OpenCategoryStatic]" />
+            <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/16/no3D.png" />
+            <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/32/no3D.png" />
+        </Style>
     </fluent:RibbonWindow.Resources>
     
     <Grid>
@@ -39,6 +45,7 @@
             <fluent:RibbonTabItem Header="{x:Static properties:Resources.ApplicationName}">
                 <fluent:RibbonGroupBox Header="{x:Static properties:Resources.StaticData}">
                     <fluent:Button Style="{StaticResource UserStaticButtonStyle}" />
+                    <fluent:Button Style="{StaticResource CategoryStaticButtonStyle}" />
                     <fluent:Button Style="{StaticResource StatStaticButtonStyle}" />
                     <fluent:Button Style="{StaticResource BadgeStaticButtonStyle}" />
                 </fluent:RibbonGroupBox>

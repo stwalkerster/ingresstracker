@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="User.cs" company="Simon Walker">
+// <copyright file="ICategoryStaticViewModel.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
@@ -17,56 +17,17 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The user.
+//   The CategoryStaticViewModel interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.DataModel
+namespace IngressTracker.ViewModels.Interfaces
 {
-    using IngressTracker.Persistence;
+    using IngressTracker.Interfaces;
 
     /// <summary>
-    /// The user.
+    /// The CategoryStaticViewModel interface.
     /// </summary>
-    public class User : EntityBase
+    public interface ICategoryStaticViewModel : IDataOperations
     {
-        #region Public Properties
-
-        /// <summary>
-        /// Gets or sets the faction.
-        /// </summary>
-        public virtual Faction Faction
-        {
-            get
-            {
-                if (this.FactionCode == "ENL")
-                {
-                    return Faction.Enlightened;
-                }
-
-                if (this.FactionCode == "RES")
-                {
-                    return Faction.Resistance;
-                }
-
-                return null;
-            }
-
-            set
-            {
-                this.FactionCode = value.Code;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the faction.
-        /// </summary>
-        public virtual string FactionCode { get; set; }
-
-        /// <summary>
-        /// Gets or sets the username.
-        /// </summary>
-        public virtual string Username { get; set; }
-
-        #endregion
     }
 }

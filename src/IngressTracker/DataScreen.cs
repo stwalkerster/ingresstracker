@@ -22,11 +22,18 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace IngressTracker
 {
+    using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Windows;
 
     using Caliburn.Micro;
 
     using IngressTracker.Interfaces;
+    using IngressTracker.Persistence.Proxy;
+
+    using NHibernate;
+    using NHibernate.Linq;
 
     /// <summary>
     /// The data screen.
@@ -34,9 +41,19 @@ namespace IngressTracker
     /// <typeparam name="T">
     /// The type of data shown
     /// </typeparam>
-    public abstract class DataScreen<T> : Screen, IDataScreen
+    public abstract class DataScreen<T> : Screen, IDataOperations
     {
         #region Fields
+
+        /// <summary>
+        /// The database session.
+        /// </summary>
+        private readonly ISession databaseSession;
+
+        /// <summary>
+        /// The deleted items.
+        /// </summary>
+        private readonly List<T> deletedItems;
 
         /// <summary>
         /// The DataItems.
@@ -63,9 +80,14 @@ namespace IngressTracker
         /// <param name="displayName">
         /// The display name.
         /// </param>
-        protected DataScreen(string displayName)
+        /// <param name="databaseSession">
+        /// The database Session.
+        /// </param>
+        protected DataScreen(string displayName, ISession databaseSession)
         {
             this.displayName = displayName;
+            this.databaseSession = databaseSession;
+            this.deletedItems = new List<T>();
         }
 
         #endregion
@@ -137,9 +159,72 @@ namespace IngressTracker
         #region Public Methods and Operators
 
         /// <summary>
+        /// The add record.
+        /// </summary>
+        public void AddRecord()
+        {
+            this.DataItems.Add(DataBindingFactory.Create<T>());
+        }
+
+        /// <summary>
+        /// The delete record.
+        /// </summary>
+        public void DeleteRecord()
+        {
+            if (!this.deletedItems.Contains(this.SelectedItem))
+            {
+                this.deletedItems.Add(this.SelectedItem);
+            }
+
+            this.DataItems.Remove(this.SelectedItem);
+        }
+
+        /// <summary>
         /// The refresh data.
         /// </summary>
-        public abstract void RefreshData();
+        public virtual void RefreshData()
+        {
+            if (this.databaseSession.IsDirty())
+            {
+                // prompt save changes
+            }
+
+            this.deletedItems.Clear();
+            this.databaseSession.Clear();
+            var enumerable = this.databaseSession.Query<T>();
+            this.DataItems = new ObservableCollection<T>(enumerable);
+        }
+
+        /// <summary>
+        /// The save.
+        /// </summary>
+        public void Save()
+        {
+            try
+            {
+                foreach (var deletedItem in this.deletedItems)
+                {
+                    this.databaseSession.Delete(deletedItem);
+                }
+
+                foreach (var dataItem in this.DataItems)
+                {
+                    this.databaseSession.SaveOrUpdate(dataItem);
+                }
+
+                this.databaseSession.Flush();
+            }
+            catch (Exception e)
+            {
+                var errorSavingTransaction = string.Format(
+                    "Error saving transaction\r\n\r\n{0}\r\n\r\n{1}", 
+                    e.Message, 
+                    e.StackTrace);
+                MessageBox.Show(errorSavingTransaction);
+            }
+
+            this.RefreshData();
+        }
 
         #endregion
 

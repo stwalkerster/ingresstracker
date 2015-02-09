@@ -36,6 +36,17 @@ namespace IngressTracker.Persistence
         /// </summary>
         public virtual int Id { get; protected set; }
 
+        /// <summary>
+        /// Gets the type.
+        /// </summary>
+        public virtual string ObjectType
+        {
+            get
+            {
+                return this.GetType().ToString();
+            }
+        }
+
         #endregion
     }
 }
