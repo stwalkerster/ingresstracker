@@ -183,4 +183,25 @@
   <data name="UserName" xml:space="preserve">
     <value>Agent Name</value>
   </data>
+  <data name="BadgeBlack" xml:space="preserve">
+    <value>Black Level</value>
+  </data>
+  <data name="BadgeBronze" xml:space="preserve">
+    <value>Bronze Level</value>
+  </data>
+  <data name="BadgeGold" xml:space="preserve">
+    <value>Gold Level</value>
+  </data>
+  <data name="BadgeName" xml:space="preserve">
+    <value>Badge Name</value>
+  </data>
+  <data name="BadgePlatinum" xml:space="preserve">
+    <value>Platinum Level</value>
+  </data>
+  <data name="BadgeSilver" xml:space="preserve">
+    <value>Silver Level</value>
+  </data>
+  <data name="BadgeStatistic" xml:space="preserve">
+    <value>Linked Statistic</value>
+  </data>
 </root>

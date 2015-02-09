@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Stat.cs" company="Simon Walker">
+// <copyright file="BadgeStaticView.xaml.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,48 +17,27 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The stat.
+//   Interaction logic for BadgeStaticView.xaml
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.DataModel
+
+namespace IngressTracker.Views
 {
-    using IngressTracker.Persistence;
+    using System.Windows.Controls;
 
     /// <summary>
-    /// The stat.
+    /// Interaction logic for BadgeStaticView.xaml
     /// </summary>
-    public class Stat : EntityBase
+    public partial class BadgeStaticView : UserControl
     {
-        #region Public Properties
+        #region Constructors and Destructors
 
         /// <summary>
-        /// Gets or sets the category.
+        /// Initialises a new instance of the <see cref="BadgeStaticView"/> class.
         /// </summary>
-        public virtual Category Category { get; set; }
-
-        /// <summary>
-        /// Gets or sets the description.
-        /// </summary>
-        public virtual string Description { get; set; }
-
-        /// <summary>
-        /// Gets or sets the unit.
-        /// </summary>
-        public virtual string Unit { get; set; }
-
-        #endregion
-
-        #region Public Methods and Operators
-
-        /// <summary>
-        /// The to string.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        public override string ToString()
+        public BadgeStaticView()
         {
-            return this.Description;
+            this.InitializeComponent();
         }
 
         #endregion

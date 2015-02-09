@@ -98,6 +98,7 @@
     </ApplicationDefinition>
     <Compile Include="Converters\DebugConverter.cs" />
     <Compile Include="Converters\WindowTitleConverter.cs" />
+    <Compile Include="DataModel\Badge.cs" />
     <Compile Include="DataModel\Category.cs" />
     <Compile Include="DataModel\Faction.cs" />
     <Compile Include="DataModel\Stat.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Persistence\EntityBase.cs" />
     <Compile Include="Persistence\Interfaces\IDatabaseEntity.cs" />
     <Compile Include="Persistence\Interfaces\ISessionFactoryProvider.cs" />
+    <Compile Include="Persistence\Mappings\BadgeMap.cs" />
     <Compile Include="Persistence\Mappings\CategoryMap.cs" />
     <Compile Include="Persistence\Mappings\StatMap.cs" />
     <Compile Include="Persistence\Mappings\UserMap.cs" />
@@ -121,7 +123,9 @@
     <Compile Include="Startup\Facilities\PersistenceFacility.cs" />
     <Compile Include="Startup\WindsorServiceLocator.cs" />
     <Compile Include="DataScreen.cs" />
+    <Compile Include="ViewModels\BadgeStaticViewModel.cs" />
     <Compile Include="ViewModels\CategoryStaticViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\IBadgeStaticViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\ICategoryStaticViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IShellViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IStatStaticViewModel.cs" />
@@ -133,6 +137,9 @@
     </Compile>
     <Compile Include="ViewModels\StatsStaticViewModel.cs" />
     <Compile Include="ViewModels\UserStaticViewModel.cs" />
+    <Compile Include="Views\BadgeStaticView.xaml.cs">
+      <DependentUpon>BadgeStaticView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CategoryStaticView.xaml.cs">
       <DependentUpon>CategoryStaticView.xaml</DependentUpon>
     </Compile>
@@ -147,6 +154,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\Style.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BadgeStaticView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

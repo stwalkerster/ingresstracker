@@ -29,11 +29,6 @@ namespace IngressTracker.ViewModels.Interfaces
     {
         #region Public Properties
 
-        /// <summary>
-        /// Gets a value indicating whether can open badge static.
-        /// </summary>
-        bool CanOpenBadgeStatic { get; }
-
         #endregion
 
         #region Public Methods and Operators

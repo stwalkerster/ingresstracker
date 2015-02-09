@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Stat.cs" company="Simon Walker">
+// <copyright file="BadgeStaticViewModel.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,48 +17,76 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The stat.
+//   The badge static view model.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.DataModel
+namespace IngressTracker.ViewModels
 {
-    using IngressTracker.Persistence;
+    using System.Collections.ObjectModel;
+
+    using IngressTracker.DataModel;
+    using IngressTracker.Properties;
+    using IngressTracker.ViewModels.Interfaces;
+
+    using NHibernate;
+    using NHibernate.Linq;
 
     /// <summary>
-    /// The stat.
+    /// The badge static view model.
     /// </summary>
-    public class Stat : EntityBase
+    public class BadgeStaticViewModel : DataScreen<Badge>, IBadgeStaticViewModel
     {
+        #region Fields
+
+        /// <summary>
+        /// The stats.
+        /// </summary>
+        private ObservableCollection<Stat> stats;
+
+        #endregion
+
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="BadgeStaticViewModel"/> class.
+        /// </summary>
+        /// <param name="databaseSession">
+        /// The database session.
+        /// </param>
+        public BadgeStaticViewModel(ISession databaseSession)
+            : base(Resources.BadgeStaticView, databaseSession)
+        {
+        }
+
+        #endregion
+
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the category.
+        /// Gets the statistics.
         /// </summary>
-        public virtual Category Category { get; set; }
-
-        /// <summary>
-        /// Gets or sets the description.
-        /// </summary>
-        public virtual string Description { get; set; }
-
-        /// <summary>
-        /// Gets or sets the unit.
-        /// </summary>
-        public virtual string Unit { get; set; }
+        public ObservableCollection<Stat> Statistics
+        {
+            get
+            {
+                return this.stats ?? new ObservableCollection<Stat>();
+            }
+        }
 
         #endregion
 
         #region Public Methods and Operators
 
         /// <summary>
-        /// The to string.
+        /// The refresh data.
         /// </summary>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        public override string ToString()
+        public override void RefreshData()
         {
-            return this.Description;
+            base.RefreshData();
+
+            var enumarable = this.DatabaseSession.Query<Stat>();
+            this.stats = new ObservableCollection<Stat>(enumarable);
+            this.NotifyOfPropertyChange(() => this.Statistics);
         }
 
         #endregion

@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <DataGrid Style="{StaticResource DataScreenDataGridStyle}" x:Name="Grid">
+        <DataGrid Style="{StaticResource DataScreenDataGridStyle}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{x:Static properties:Resources.StatisticDescription}" Binding="{Binding Description}" />
                 <DataGridTextColumn Header="{x:Static properties:Resources.StatisticUnit}" Binding="{Binding Unit}" />

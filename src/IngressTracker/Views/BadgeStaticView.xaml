@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="IngressTracker.Views.BadgeStaticView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:properties="clr-namespace:IngressTracker.Properties"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <DataGrid Style="{StaticResource DataScreenDataGridStyle}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="{x:Static properties:Resources.BadgeName}" Binding="{Binding Name}" />
+                <DataGridComboBoxColumn Header="{x:Static properties:Resources.BadgeStatistic}" SelectedItemBinding="{Binding Statistic}">
+                    <DataGridComboBoxColumn.ElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.Statistics}"/>
+                            <Setter Property="IsReadOnly" Value="True"/>
+                        </Style>
+                    </DataGridComboBoxColumn.ElementStyle>
+                    <DataGridComboBoxColumn.EditingElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.Statistics}"/>
+                        </Style>
+                    </DataGridComboBoxColumn.EditingElementStyle>
+                </DataGridComboBoxColumn>
+
+                <DataGridTextColumn Header="{x:Static properties:Resources.BadgeBronze}" Binding="{Binding Bronze}" />
+                <DataGridTextColumn Header="{x:Static properties:Resources.BadgeSilver}" Binding="{Binding Silver}" />
+                <DataGridTextColumn Header="{x:Static properties:Resources.BadgeGold}" Binding="{Binding Gold}" />
+                <DataGridTextColumn Header="{x:Static properties:Resources.BadgePlatinum}" Binding="{Binding Platinum}" />
+                <DataGridTextColumn Header="{x:Static properties:Resources.BadgeBlack}" Binding="{Binding Black}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

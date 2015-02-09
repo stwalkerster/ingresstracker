@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Stat.cs" company="Simon Walker">
+// <copyright file="Badge.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,7 +17,7 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The stat.
+//   The badge.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace IngressTracker.DataModel
@@ -25,26 +25,46 @@ namespace IngressTracker.DataModel
     using IngressTracker.Persistence;
 
     /// <summary>
-    /// The stat.
+    /// The badge.
     /// </summary>
-    public class Stat : EntityBase
+    public class Badge : EntityBase
     {
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the category.
+        /// Gets or sets the black.
         /// </summary>
-        public virtual Category Category { get; set; }
+        public virtual int Black { get; set; }
 
         /// <summary>
-        /// Gets or sets the description.
+        /// Gets or sets the bronze.
         /// </summary>
-        public virtual string Description { get; set; }
+        public virtual int Bronze { get; set; }
 
         /// <summary>
-        /// Gets or sets the unit.
+        /// Gets or sets the gold.
         /// </summary>
-        public virtual string Unit { get; set; }
+        public virtual int Gold { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
+        public virtual string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the platinum.
+        /// </summary>
+        public virtual int Platinum { get; set; }
+
+        /// <summary>
+        /// Gets or sets the silver.
+        /// </summary>
+        public virtual int Silver { get; set; }
+
+        /// <summary>
+        /// Gets or sets the statistic.
+        /// </summary>
+        public virtual Stat Statistic { get; set; }
 
         #endregion
 
@@ -58,7 +78,7 @@ namespace IngressTracker.DataModel
         /// </returns>
         public override string ToString()
         {
-            return this.Description;
+            return this.Name;
         }
 
         #endregion

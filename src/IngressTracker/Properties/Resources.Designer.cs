@@ -70,11 +70,74 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Black Level.
+        /// </summary>
+        public static string BadgeBlack {
+            get {
+                return ResourceManager.GetString("BadgeBlack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bronze Level.
+        /// </summary>
+        public static string BadgeBronze {
+            get {
+                return ResourceManager.GetString("BadgeBronze", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gold Level.
+        /// </summary>
+        public static string BadgeGold {
+            get {
+                return ResourceManager.GetString("BadgeGold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Badge Name.
+        /// </summary>
+        public static string BadgeName {
+            get {
+                return ResourceManager.GetString("BadgeName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Platinum Level.
+        /// </summary>
+        public static string BadgePlatinum {
+            get {
+                return ResourceManager.GetString("BadgePlatinum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Silver Level.
+        /// </summary>
+        public static string BadgeSilver {
+            get {
+                return ResourceManager.GetString("BadgeSilver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Badges.
         /// </summary>
         public static string BadgeStaticView {
             get {
                 return ResourceManager.GetString("BadgeStaticView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Linked Statistic.
+        /// </summary>
+        public static string BadgeStatistic {
+            get {
+                return ResourceManager.GetString("BadgeStatistic", resourceCulture);
             }
         }
         

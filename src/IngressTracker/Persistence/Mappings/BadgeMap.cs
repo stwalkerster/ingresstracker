@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Stat.cs" company="Simon Walker">
+// <copyright file="BadgeMap.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,48 +17,37 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The stat.
+//   The badge map.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.DataModel
+
+namespace IngressTracker.Persistence.Mappings
 {
-    using IngressTracker.Persistence;
+    using FluentNHibernate.Mapping;
+
+    using IngressTracker.DataModel;
 
     /// <summary>
-    /// The stat.
+    /// The badge map.
     /// </summary>
-    public class Stat : EntityBase
+    public class BadgeMap : ClassMap<Badge>
     {
-        #region Public Properties
+        #region Constructors and Destructors
 
         /// <summary>
-        /// Gets or sets the category.
+        /// Initialises a new instance of the <see cref="BadgeMap"/> class.
         /// </summary>
-        public virtual Category Category { get; set; }
-
-        /// <summary>
-        /// Gets or sets the description.
-        /// </summary>
-        public virtual string Description { get; set; }
-
-        /// <summary>
-        /// Gets or sets the unit.
-        /// </summary>
-        public virtual string Unit { get; set; }
-
-        #endregion
-
-        #region Public Methods and Operators
-
-        /// <summary>
-        /// The to string.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        public override string ToString()
+        public BadgeMap()
         {
-            return this.Description;
+            this.Table("badge");
+            this.Id(x => x.Id).Column("id");
+            this.Map(x => x.Name).Column("name");
+            this.References(x => x.Statistic).Column("stat");
+            this.Map(x => x.Bronze).Column("bronze");
+            this.Map(x => x.Silver).Column("silver");
+            this.Map(x => x.Gold).Column("gold");
+            this.Map(x => x.Platinum).Column("platinum");
+            this.Map(x => x.Black).Column("black");
         }
 
         #endregion

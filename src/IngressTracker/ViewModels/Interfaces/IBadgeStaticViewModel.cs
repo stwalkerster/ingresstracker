@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Stat.cs" company="Simon Walker">
+// <copyright file="IBadgeStaticViewModel.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,50 +17,18 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The stat.
+//   The BadgeStaticViewModel interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.DataModel
+
+namespace IngressTracker.ViewModels.Interfaces
 {
-    using IngressTracker.Persistence;
+    using IngressTracker.Interfaces;
 
     /// <summary>
-    /// The stat.
+    /// The BadgeStaticViewModel interface.
     /// </summary>
-    public class Stat : EntityBase
+    public interface IBadgeStaticViewModel : IDataOperations
     {
-        #region Public Properties
-
-        /// <summary>
-        /// Gets or sets the category.
-        /// </summary>
-        public virtual Category Category { get; set; }
-
-        /// <summary>
-        /// Gets or sets the description.
-        /// </summary>
-        public virtual string Description { get; set; }
-
-        /// <summary>
-        /// Gets or sets the unit.
-        /// </summary>
-        public virtual string Unit { get; set; }
-
-        #endregion
-
-        #region Public Methods and Operators
-
-        /// <summary>
-        /// The to string.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        public override string ToString()
-        {
-            return this.Description;
-        }
-
-        #endregion
     }
 }
