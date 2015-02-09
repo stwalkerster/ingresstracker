@@ -4,12 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:dataModel="clr-namespace:IngressTracker.DataModel"
+             xmlns:properties="clr-namespace:IngressTracker.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <DataGrid Style="{StaticResource DataScreenDataGridStyle}">
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Agent Name">
+                <DataGridTemplateColumn Header="{x:Static properties:Resources.UserName}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Username}" Background="{Binding Faction.BackgroundColour}" Padding="3,0"></TextBlock>
@@ -21,8 +22,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
-                <DataGridComboBoxColumn Header="Faction" ItemsSource="{x:Static dataModel:Faction.ItemCollection}" SelectedItemBinding="{Binding Faction}" />
-                <DataGridTextColumn Binding="{Binding ObjectType, Mode=OneWay}" Header="ObjectType" Visibility="Collapsed" />
+                <DataGridComboBoxColumn Header="{x:Static properties:Resources.UserFaction}" ItemsSource="{x:Static dataModel:Faction.ItemCollection}" SelectedItemBinding="{Binding Faction}" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

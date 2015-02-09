@@ -162,6 +162,12 @@
   <data name="CategoryName" xml:space="preserve">
     <value>Category Name</value>
   </data>
+  <data name="FactionEnlightened" xml:space="preserve">
+    <value>Enlightened</value>
+  </data>
+  <data name="FactionResistance" xml:space="preserve">
+    <value>Resistance</value>
+  </data>
   <data name="StatisticCategory" xml:space="preserve">
     <value>Category</value>
   </data>
@@ -170,5 +176,11 @@
   </data>
   <data name="StatisticUnit" xml:space="preserve">
     <value>Unit</value>
+  </data>
+  <data name="UserFaction" xml:space="preserve">
+    <value>Faction</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Agent Name</value>
   </data>
 </root>

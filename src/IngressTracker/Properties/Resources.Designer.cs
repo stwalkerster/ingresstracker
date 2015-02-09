@@ -160,6 +160,24 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enlightened.
+        /// </summary>
+        public static string FactionEnlightened {
+            get {
+                return ResourceManager.GetString("FactionEnlightened", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resistance.
+        /// </summary>
+        public static string FactionResistance {
+            get {
+                return ResourceManager.GetString("FactionResistance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Static Data.
         /// </summary>
         public static string StaticData {
@@ -201,6 +219,24 @@ namespace IngressTracker.Properties {
         public static string StatStaticView {
             get {
                 return ResourceManager.GetString("StatStaticView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Faction.
+        /// </summary>
+        public static string UserFaction {
+            get {
+                return ResourceManager.GetString("UserFaction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Agent Name.
+        /// </summary>
+        public static string UserName {
+            get {
+                return ResourceManager.GetString("UserName", resourceCulture);
             }
         }
         

@@ -25,6 +25,8 @@ namespace IngressTracker.DataModel
     using System.Collections.Generic;
     using System.Windows.Media;
 
+    using IngressTracker.Properties;
+
     /// <summary>
     /// The faction.
     /// </summary>
@@ -36,15 +38,19 @@ namespace IngressTracker.DataModel
         /// The enlightened.
         /// </summary>
         public static readonly Faction Enlightened = new Faction(
-            "Enlightened", 
-            "ENL", 
-            Brushes.Green, 
+            Resources.FactionEnlightened,
+            "ENL",
+            Brushes.Green,
             Brushes.LightGreen);
 
         /// <summary>
         /// The resistance.
         /// </summary>
-        public static readonly Faction Resistance = new Faction("Resistance", "RES", Brushes.Blue, Brushes.LightBlue);
+        public static readonly Faction Resistance = new Faction(
+            Resources.FactionResistance,
+            "RES",
+            Brushes.Blue,
+            Brushes.LightBlue);
 
         /// <summary>
         /// The item collection.
