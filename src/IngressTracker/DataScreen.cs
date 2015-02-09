@@ -154,6 +154,17 @@ namespace IngressTracker
             }
         }
 
+        /// <summary>
+        /// The database session.
+        /// </summary>
+        protected ISession DatabaseSession
+        {
+            get
+            {
+                return this.databaseSession;
+            }
+        }
+
         #endregion
 
         #region Public Methods and Operators
@@ -184,14 +195,14 @@ namespace IngressTracker
         /// </summary>
         public virtual void RefreshData()
         {
-            if (this.databaseSession.IsDirty())
+            if (this.DatabaseSession.IsDirty())
             {
                 // prompt save changes
             }
 
             this.deletedItems.Clear();
-            this.databaseSession.Clear();
-            var enumerable = this.databaseSession.Query<T>();
+            this.DatabaseSession.Clear();
+            var enumerable = this.DatabaseSession.Query<T>();
             this.DataItems = new ObservableCollection<T>(enumerable);
         }
 
@@ -204,15 +215,15 @@ namespace IngressTracker
             {
                 foreach (var deletedItem in this.deletedItems)
                 {
-                    this.databaseSession.Delete(deletedItem);
+                    this.DatabaseSession.Delete(deletedItem);
                 }
 
                 foreach (var dataItem in this.DataItems)
                 {
-                    this.databaseSession.SaveOrUpdate(dataItem);
+                    this.DatabaseSession.SaveOrUpdate(dataItem);
                 }
 
-                this.databaseSession.Flush();
+                this.DatabaseSession.Flush();
             }
             catch (Exception e)
             {

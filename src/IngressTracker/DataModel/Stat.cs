@@ -1,5 +1,5 @@
-// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IShellViewModel.cs" company="Simon Walker">
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Stat.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
@@ -17,46 +17,35 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The ShellViewModel interface.
+//   The stat.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.ViewModels.Interfaces
+
+namespace IngressTracker.DataModel
 {
+    using IngressTracker.Persistence;
+
     /// <summary>
-    /// The ShellViewModel interface.
+    /// The stat.
     /// </summary>
-    public interface IShellViewModel
+    public class Stat : EntityBase
     {
         #region Public Properties
 
         /// <summary>
-        /// Gets a value indicating whether can open badge static.
+        /// Gets or sets the category.
         /// </summary>
-        bool CanOpenBadgeStatic { get; }
-
-        #endregion
-
-        #region Public Methods and Operators
+        public virtual Category Category { get; set; }
 
         /// <summary>
-        /// The open badge static.
+        /// Gets or sets the description.
         /// </summary>
-        void OpenBadgeStatic();
+        public virtual string Description { get; set; }
 
         /// <summary>
-        /// The open stat static.
+        /// Gets or sets the unit.
         /// </summary>
-        void OpenStatStatic();
-
-        /// <summary>
-        /// The open user static.
-        /// </summary>
-        void OpenUserStatic();
-
-        /// <summary>
-        /// The open category static.
-        /// </summary>
-        void OpenCategoryStatic();
+        public virtual string Unit { get; set; }
 
         #endregion
     }

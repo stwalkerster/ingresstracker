@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Category.cs" company="Simon Walker">
+// <copyright file="StatsStaticViewModel.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
@@ -17,38 +17,76 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The category.
+//   The stats static view model.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.DataModel
+namespace IngressTracker.ViewModels
 {
-    using IngressTracker.Persistence;
+    using System.Collections.ObjectModel;
+
+    using IngressTracker.DataModel;
+    using IngressTracker.Properties;
+    using IngressTracker.ViewModels.Interfaces;
+
+    using NHibernate;
+    using NHibernate.Linq;
 
     /// <summary>
-    /// The category.
+    /// The stats static view model.
     /// </summary>
-    public class Category : EntityBase
+    public class StatsStaticViewModel : DataScreen<Stat>, IStatStaticViewModel
     {
+        #region Fields
+
+        /// <summary>
+        /// The categories.
+        /// </summary>
+        private ObservableCollection<Category> categories;
+
+        #endregion
+
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="StatsStaticViewModel"/> class.
+        /// </summary>
+        /// <param name="databaseSession">
+        /// The database session.
+        /// </param>
+        public StatsStaticViewModel(ISession databaseSession)
+            : base(Resources.StatStaticView, databaseSession)
+        {
+        }
+
+        #endregion
+
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the name.
+        /// Gets the categories.
         /// </summary>
-        public virtual string Name { get; set; }
+        public ObservableCollection<Category> Categories
+        {
+            get
+            {
+                return this.categories ?? new ObservableCollection<Category>();
+            }
+        }
 
         #endregion
 
         #region Public Methods and Operators
 
         /// <summary>
-        /// The to string.
+        /// The refresh data.
         /// </summary>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        public override string ToString()
+        public override void RefreshData()
         {
-            return this.Name;
+            base.RefreshData();
+
+            var queryable = this.DatabaseSession.Query<Category>();
+            this.categories = new ObservableCollection<Category>(queryable);
+            this.NotifyOfPropertyChange(() => this.Categories);
         }
 
         #endregion

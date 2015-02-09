@@ -1,5 +1,5 @@
-// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IShellViewModel.cs" company="Simon Walker">
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="StatMap.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
@@ -17,46 +17,34 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The ShellViewModel interface.
+//   The stat map.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.ViewModels.Interfaces
+
+namespace IngressTracker.Persistence.Mappings
 {
+    using FluentNHibernate.Mapping;
+
+    using IngressTracker.DataModel;
+
     /// <summary>
-    /// The ShellViewModel interface.
+    /// The stat map.
     /// </summary>
-    public interface IShellViewModel
+    public class StatMap : ClassMap<Stat>
     {
-        #region Public Properties
+        #region Constructors and Destructors
 
         /// <summary>
-        /// Gets a value indicating whether can open badge static.
+        /// Initialises a new instance of the <see cref="StatMap"/> class.
         /// </summary>
-        bool CanOpenBadgeStatic { get; }
-
-        #endregion
-
-        #region Public Methods and Operators
-
-        /// <summary>
-        /// The open badge static.
-        /// </summary>
-        void OpenBadgeStatic();
-
-        /// <summary>
-        /// The open stat static.
-        /// </summary>
-        void OpenStatStatic();
-
-        /// <summary>
-        /// The open user static.
-        /// </summary>
-        void OpenUserStatic();
-
-        /// <summary>
-        /// The open category static.
-        /// </summary>
-        void OpenCategoryStatic();
+        public StatMap()
+        {
+            this.Table("stat");
+            this.Id(x => x.Id);
+            this.Map(x => x.Description).Column("description");
+            this.Map(x => x.Unit).Column("unit");
+            this.References(x => x.Category).Column("category");
+        }
 
         #endregion
     }

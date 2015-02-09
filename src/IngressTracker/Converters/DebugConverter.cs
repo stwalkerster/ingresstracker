@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="App.xaml.cs" company="Simon Walker">
+// <copyright file="DebugConverter.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
@@ -17,35 +17,68 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   Interaction logic for App.xaml
+//   The debug converter.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker
+namespace IngressTracker.Converters
 {
+    using System;
     using System.Diagnostics;
-    using System.Windows;
+    using System.Globalization;
+    using System.Windows.Data;
 
     /// <summary>
-    /// Interaction logic for App
+    /// The debug converter.
     /// </summary>
-    public partial class App
+    public class DebugConverter : IValueConverter
     {
-        #region Methods
+        #region Public Methods and Operators
 
         /// <summary>
-        /// The on start up.
+        /// The convert.
         /// </summary>
-        /// <param name="e">
-        /// The e.
+        /// <param name="value">
+        /// The value.
         /// </param>
-        protected override void OnStartup(StartupEventArgs e)
+        /// <param name="targetType">
+        /// The target type.
+        /// </param>
+        /// <param name="parameter">
+        /// The parameter.
+        /// </param>
+        /// <param name="culture">
+        /// The culture.
+        /// </param>
+        /// <returns>
+        /// The <see cref="object"/>.
+        /// </returns>
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-#if DATABINDING_TRACE
-            PresentationTraceSources.Refresh();
-            PresentationTraceSources.DataBindingSource.Listeners.Add(new ConsoleTraceListener());
-            PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.Warning | SourceLevels.Error;
-#endif
-            base.OnStartup(e);
+            Debugger.Break();
+            return value;
+        }
+
+        /// <summary>
+        /// The convert back.
+        /// </summary>
+        /// <param name="value">
+        /// The value.
+        /// </param>
+        /// <param name="targetType">
+        /// The target type.
+        /// </param>
+        /// <param name="parameter">
+        /// The parameter.
+        /// </param>
+        /// <param name="culture">
+        /// The culture.
+        /// </param>
+        /// <returns>
+        /// The <see cref="object"/>.
+        /// </returns>
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value;
         }
 
         #endregion

@@ -1,5 +1,5 @@
-// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IShellViewModel.cs" company="Simon Walker">
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="IStatStaticViewModel.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
@@ -17,47 +17,25 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The ShellViewModel interface.
+//   The StatStaticViewModel interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace IngressTracker.ViewModels.Interfaces
 {
+    using System.Collections.ObjectModel;
+
+    using IngressTracker.DataModel;
+    using IngressTracker.Interfaces;
+
     /// <summary>
-    /// The ShellViewModel interface.
+    /// The StatStaticViewModel interface.
     /// </summary>
-    public interface IShellViewModel
+    public interface IStatStaticViewModel : IDataOperations
     {
-        #region Public Properties
-
         /// <summary>
-        /// Gets a value indicating whether can open badge static.
+        /// Gets the categories.
         /// </summary>
-        bool CanOpenBadgeStatic { get; }
-
-        #endregion
-
-        #region Public Methods and Operators
-
-        /// <summary>
-        /// The open badge static.
-        /// </summary>
-        void OpenBadgeStatic();
-
-        /// <summary>
-        /// The open stat static.
-        /// </summary>
-        void OpenStatStatic();
-
-        /// <summary>
-        /// The open user static.
-        /// </summary>
-        void OpenUserStatic();
-
-        /// <summary>
-        /// The open category static.
-        /// </summary>
-        void OpenCategoryStatic();
-
-        #endregion
+        ObservableCollection<Category> Categories { get; }
     }
 }

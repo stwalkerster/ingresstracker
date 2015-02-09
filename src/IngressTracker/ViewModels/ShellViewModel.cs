@@ -70,39 +70,6 @@ namespace IngressTracker.ViewModels
         }
 
         /// <summary>
-        /// Gets a value indicating whether can open stat static.
-        /// </summary>
-        public bool CanOpenStatStatic
-        {
-            get
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether can open user static.
-        /// </summary>
-        public bool CanOpenUserStatic
-        {
-            get
-            {
-                return true;
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether can open category static.
-        /// </summary>
-        public bool CanOpenCategoryStatic
-        {
-            get
-            {
-                return true;
-            }
-        }
-
-        /// <summary>
         /// Gets a value indicating whether can refresh.
         /// </summary>
         public bool CanRefreshData
@@ -184,6 +151,8 @@ namespace IngressTracker.ViewModels
         /// </summary>
         public void OpenStatStatic()
         {
+            var window = ServiceLocator.Current.GetInstance<IStatStaticViewModel>();
+            this.ActivateItem(window);
         }
 
         /// <summary>
@@ -192,7 +161,6 @@ namespace IngressTracker.ViewModels
         public void OpenUserStatic()
         {
             var window = ServiceLocator.Current.GetInstance<IUserStaticViewModel>();
-
             this.ActivateItem(window);
         }
 
@@ -202,7 +170,6 @@ namespace IngressTracker.ViewModels
         public void OpenCategoryStatic()
         {
             var window = ServiceLocator.Current.GetInstance<ICategoryStaticViewModel>();
-
             this.ActivateItem(window);
         }
 

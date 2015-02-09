@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="IngressTracker.Views.StatsStaticView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:properties="clr-namespace:IngressTracker.Properties"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <DataGrid Style="{StaticResource DataScreenDataGridStyle}" x:Name="Grid">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="{x:Static properties:Resources.StatisticDescription}" Binding="{Binding Description}" />
+                <DataGridTextColumn Header="{x:Static properties:Resources.StatisticUnit}" Binding="{Binding Unit}" />
+                <DataGridComboBoxColumn Header="{x:Static properties:Resources.StatisticCategory}" SelectedItemBinding="{Binding Category}">
+                    <DataGridComboBoxColumn.ElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.Categories}"/>
+                            <Setter Property="IsReadOnly" Value="True"/>
+                        </Style>
+                    </DataGridComboBoxColumn.ElementStyle>
+                    <DataGridComboBoxColumn.EditingElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Path=DataContext.Categories}"/>
+                        </Style>
+                    </DataGridComboBoxColumn.EditingElementStyle>
+                </DataGridComboBoxColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

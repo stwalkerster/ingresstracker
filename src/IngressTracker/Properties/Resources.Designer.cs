@@ -79,6 +79,15 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Category Name.
+        /// </summary>
+        public static string CategoryName {
+            get {
+                return ResourceManager.GetString("CategoryName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Categories.
         /// </summary>
         public static string CategoryStaticView {
@@ -156,6 +165,33 @@ namespace IngressTracker.Properties {
         public static string StaticData {
             get {
                 return ResourceManager.GetString("StaticData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category.
+        /// </summary>
+        public static string StatisticCategory {
+            get {
+                return ResourceManager.GetString("StatisticCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string StatisticDescription {
+            get {
+                return ResourceManager.GetString("StatisticDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unit.
+        /// </summary>
+        public static string StatisticUnit {
+            get {
+                return ResourceManager.GetString("StatisticUnit", resourceCulture);
             }
         }
         
