@@ -42,14 +42,14 @@ namespace IngressTracker.DataModel
             Brushes.LightGreen);
 
         /// <summary>
-        /// The item collection.
-        /// </summary>
-        public static readonly List<Faction> ItemCollection = new List<Faction> { Enlightened, Resistance };
-
-        /// <summary>
         /// The resistance.
         /// </summary>
         public static readonly Faction Resistance = new Faction("Resistance", "RES", Brushes.Blue, Brushes.LightBlue);
+
+        /// <summary>
+        /// The item collection.
+        /// </summary>
+        public static readonly List<Faction> ItemCollection = new List<Faction> { Enlightened, Resistance };
 
         #endregion
 
