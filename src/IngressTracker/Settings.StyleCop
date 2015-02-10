@@ -5,6 +5,7 @@
       <Value>bootstrapper</Value>
       <Value>startup</Value>
       <Value>xaml</Value>
+      <Value>callback</Value>
     </CollectionProperty>
   </GlobalSettings>
   <Analyzers>

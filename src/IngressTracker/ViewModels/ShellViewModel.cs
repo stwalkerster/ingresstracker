@@ -114,7 +114,7 @@ namespace IngressTracker.ViewModels
         /// </param>
         public void CloseWindow(IScreen window)
         {
-            window.CanClose(allowed => window.TryClose());
+            window.TryClose();
         }
 
         /// <summary>

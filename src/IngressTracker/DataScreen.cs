@@ -31,6 +31,7 @@ namespace IngressTracker
 
     using IngressTracker.Interfaces;
     using IngressTracker.Persistence.Proxy;
+    using IngressTracker.Properties;
 
     using NHibernate;
     using NHibernate.Linq;
@@ -182,6 +183,22 @@ namespace IngressTracker
         }
 
         /// <summary>
+        /// The can close.
+        /// </summary>
+        /// <param name="callback">
+        /// The callback.
+        /// </param>
+        public override void CanClose(Action<bool> callback)
+        {
+            if (!this.ConfirmDataLoss())
+            {
+                callback(false);
+            }
+
+            base.CanClose(callback);
+        }
+
+        /// <summary>
         /// The delete record.
         /// </summary>
         public void DeleteRecord()
@@ -199,15 +216,13 @@ namespace IngressTracker
         /// </summary>
         public virtual void RefreshData()
         {
-            if (this.DatabaseSession.IsDirty())
+            if (this.ConfirmDataLoss())
             {
-                // prompt save changes
+                this.deletedItems.Clear();
+                this.DatabaseSession.Clear();
+                var enumerable = this.DatabaseSession.Query<T>();
+                this.DataItems = new ObservableCollection<T>(enumerable);
             }
-
-            this.deletedItems.Clear();
-            this.DatabaseSession.Clear();
-            var enumerable = this.DatabaseSession.Query<T>();
-            this.DataItems = new ObservableCollection<T>(enumerable);
         }
 
         /// <summary>
@@ -217,11 +232,15 @@ namespace IngressTracker
         {
             try
             {
+                // handle the deletes
                 foreach (var deletedItem in this.deletedItems)
                 {
                     this.DatabaseSession.Delete(deletedItem);
                 }
 
+                this.deletedItems.Clear();
+
+                // handle the saves
                 foreach (var dataItem in this.DataItems)
                 {
                     this.DatabaseSession.SaveOrUpdate(dataItem);
@@ -255,6 +274,30 @@ namespace IngressTracker
         {
             base.OnViewLoaded(view);
             this.RefreshData();
+        }
+
+        /// <summary>
+        /// The confirm data loss.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private bool ConfirmDataLoss()
+        {
+            if (this.databaseSession.IsDirty() || this.deletedItems.Count > 0)
+            {
+                var messageBoxResult = MessageBox.Show(
+                    Resources.UnsavedChanges, 
+                    Resources.UnsavedChangesTitle, 
+                    MessageBoxButton.YesNo, 
+                    MessageBoxImage.Warning);
+                if (messageBoxResult != MessageBoxResult.Yes)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         #endregion

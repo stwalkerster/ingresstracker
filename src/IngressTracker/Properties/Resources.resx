@@ -204,4 +204,10 @@
   <data name="BadgeStatistic" xml:space="preserve">
     <value>Linked Statistic</value>
   </data>
+  <data name="UnsavedChanges" xml:space="preserve">
+    <value>You haven't saved your changes on this screen! Continuing will discard any changes you have made. Are you sure you wish to continue?</value>
+  </data>
+  <data name="UnsavedChangesTitle" xml:space="preserve">
+    <value>Unsaved changes!</value>
+  </data>
 </root>
