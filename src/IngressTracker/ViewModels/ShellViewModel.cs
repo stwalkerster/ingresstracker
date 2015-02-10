@@ -59,17 +59,6 @@ namespace IngressTracker.ViewModels
         }
 
         /// <summary>
-        /// Gets a value indicating whether can open badge static.
-        /// </summary>
-        public bool CanOpenBadgeStatic
-        {
-            get
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
         /// Gets a value indicating whether can refresh.
         /// </summary>
         public bool CanRefreshData
@@ -144,6 +133,8 @@ namespace IngressTracker.ViewModels
         /// </summary>
         public void OpenBadgeStatic()
         {
+            var window = ServiceLocator.Current.GetInstance<IBadgeStaticViewModel>();
+            this.ActivateItem(window);
         }
 
         /// <summary>

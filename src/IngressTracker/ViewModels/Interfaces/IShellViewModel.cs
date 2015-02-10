@@ -27,10 +27,6 @@ namespace IngressTracker.ViewModels.Interfaces
     /// </summary>
     public interface IShellViewModel
     {
-        #region Public Properties
-
-        #endregion
-
         #region Public Methods and Operators
 
         /// <summary>
