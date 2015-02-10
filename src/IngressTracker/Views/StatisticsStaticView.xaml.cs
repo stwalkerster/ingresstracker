@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IStatStaticViewModel.cs" company="Simon Walker">
+// <copyright file="StatisticsStaticView.xaml.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,27 +17,25 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The StatStaticViewModel interface.
+//   Interaction logic for StatisticsStaticView.xaml
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.ViewModels.Interfaces
+namespace IngressTracker.Views
 {
-    using System.Collections.ObjectModel;
-
-    using IngressTracker.DataModel;
-    using IngressTracker.Interfaces;
-
     /// <summary>
-    /// The StatStaticViewModel interface.
+    /// Interaction logic for StatisticsStaticView.xaml
     /// </summary>
-    public interface IStatStaticViewModel : IDataOperations
+    public partial class StatisticsStaticView
     {
-        #region Public Properties
+        #region Constructors and Destructors
 
         /// <summary>
-        /// Gets the categories.
+        /// Initialises a new instance of the <see cref="StatisticsStaticView"/> class.
         /// </summary>
-        ObservableCollection<Category> Categories { get; }
+        public StatisticsStaticView()
+        {
+            this.InitializeComponent();
+        }
 
         #endregion
     }

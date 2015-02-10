@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="StatsStaticViewModel.cs" company="Simon Walker">
+// <copyright file="StatisticsStaticViewModel.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -34,7 +34,7 @@ namespace IngressTracker.ViewModels
     /// <summary>
     /// The stats static view model.
     /// </summary>
-    public class StatsStaticViewModel : DataScreen<Stat>, IStatStaticViewModel
+    public class StatisticsStaticViewModel : DataScreen<Stat>, IStatisticsStaticViewModel
     {
         #region Fields
 
@@ -48,12 +48,12 @@ namespace IngressTracker.ViewModels
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initialises a new instance of the <see cref="StatsStaticViewModel"/> class.
+        /// Initialises a new instance of the <see cref="StatisticsStaticViewModel"/> class.
         /// </summary>
         /// <param name="databaseSession">
         /// The database session.
         /// </param>
-        public StatsStaticViewModel(ISession databaseSession)
+        public StatisticsStaticViewModel(ISession databaseSession)
             : base(Resources.StatStaticView, databaseSession)
         {
         }

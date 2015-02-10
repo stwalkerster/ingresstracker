@@ -82,7 +82,7 @@ namespace IngressTracker.Startup
             var viewModelRegistrations =
                 Classes.FromThisAssembly()
                     .InNamespace("IngressTracker.ViewModels")
-                    .WithServiceAllInterfaces()
+                    .WithServiceDefaultInterfaces()
                     .LifestyleTransient();
 
             var services =

@@ -128,14 +128,14 @@
     <Compile Include="ViewModels\Interfaces\IBadgeStaticViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\ICategoryStaticViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IShellViewModel.cs" />
-    <Compile Include="ViewModels\Interfaces\IStatStaticViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\IStatisticsStaticViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IUserStaticViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ViewModels\StatsStaticViewModel.cs" />
+    <Compile Include="ViewModels\StatisticsStaticViewModel.cs" />
     <Compile Include="ViewModels\UserStaticViewModel.cs" />
     <Compile Include="Views\BadgeStaticView.xaml.cs">
       <DependentUpon>BadgeStaticView.xaml</DependentUpon>
@@ -143,8 +143,8 @@
     <Compile Include="Views\CategoryStaticView.xaml.cs">
       <DependentUpon>CategoryStaticView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\StatsStaticView.xaml.cs">
-      <DependentUpon>StatsStaticView.xaml</DependentUpon>
+    <Compile Include="Views\StatisticsStaticView.xaml.cs">
+      <DependentUpon>StatisticsStaticView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserStaticView.xaml.cs">
       <DependentUpon>UserStaticView.xaml</DependentUpon>
@@ -169,7 +169,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\StatsStaticView.xaml">
+    <Page Include="Views\StatisticsStaticView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
