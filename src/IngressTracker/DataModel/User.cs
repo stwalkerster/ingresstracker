@@ -32,6 +32,21 @@ namespace IngressTracker.DataModel
         #region Public Properties
 
         /// <summary>
+        /// Gets or sets the username.
+        /// </summary>
+        public virtual string AgentName { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether database admin.
+        /// </summary>
+        public virtual bool DatabaseAdmin { get; set; }
+
+        /// <summary>
+        /// Gets or sets the database username.
+        /// </summary>
+        public virtual string DatabaseUsername { get; set; }
+
+        /// <summary>
         /// Gets or sets the faction.
         /// </summary>
         public virtual Faction Faction
@@ -61,11 +76,6 @@ namespace IngressTracker.DataModel
         /// Gets or sets the faction.
         /// </summary>
         public virtual string FactionCode { get; set; }
-
-        /// <summary>
-        /// Gets or sets the username.
-        /// </summary>
-        public virtual string Username { get; set; }
 
         #endregion
     }

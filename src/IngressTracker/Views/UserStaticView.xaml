@@ -10,19 +10,21 @@
     <Grid>
         <DataGrid Style="{StaticResource DataScreenDataGridStyle}">
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="{x:Static properties:Resources.UserName}">
+                <DataGridTemplateColumn Header="{x:Static properties:Resources.AgentName}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Username}" Background="{Binding Faction.BackgroundColour}" Padding="3,0"></TextBlock>
+                            <TextBlock Text="{Binding AgentName}" Background="{Binding Faction.BackgroundColour}" Padding="3,0"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
-                            <TextBox Text="{Binding Username}" Background="{Binding Faction.BackgroundColour}"></TextBox>
+                            <TextBox Text="{Binding AgentName}" Background="{Binding Faction.BackgroundColour}"></TextBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
                 <DataGridComboBoxColumn Header="{x:Static properties:Resources.UserFaction}" ItemsSource="{x:Static dataModel:Faction.ItemCollection}" SelectedItemBinding="{Binding Faction}" />
+                <DataGridTextColumn Header="{x:Static properties:Resources.DbUserName}" Binding="{Binding DatabaseUsername}" />
+                <DataGridCheckBoxColumn Header="{x:Static properties:Resources.DbUserAdmin}" Binding="{Binding DatabaseAdmin}" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

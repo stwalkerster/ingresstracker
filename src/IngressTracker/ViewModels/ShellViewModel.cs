@@ -151,7 +151,7 @@ namespace IngressTracker.ViewModels
         /// </summary>
         public void OpenStatStatic()
         {
-            var window = ServiceLocator.Current.GetInstance<IStatStaticViewModel>();
+            var window = ServiceLocator.Current.GetInstance<IStatisticsStaticViewModel>();
             this.ActivateItem(window);
         }
 

@@ -61,6 +61,15 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Agent Name.
+        /// </summary>
+        public static string AgentName {
+            get {
+                return ResourceManager.GetString("AgentName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ingress Tracker.
         /// </summary>
         public static string ApplicationName {
@@ -223,6 +232,24 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Admin user.
+        /// </summary>
+        public static string DbUserAdmin {
+            get {
+                return ResourceManager.GetString("DbUserAdmin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Database username.
+        /// </summary>
+        public static string DbUserName {
+            get {
+                return ResourceManager.GetString("DbUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enlightened.
         /// </summary>
         public static string FactionEnlightened {
@@ -309,15 +336,6 @@ namespace IngressTracker.Properties {
         public static string UserFaction {
             get {
                 return ResourceManager.GetString("UserFaction", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Agent Name.
-        /// </summary>
-        public static string UserName {
-            get {
-                return ResourceManager.GetString("UserName", resourceCulture);
             }
         }
         

@@ -180,7 +180,7 @@
   <data name="UserFaction" xml:space="preserve">
     <value>Faction</value>
   </data>
-  <data name="UserName" xml:space="preserve">
+  <data name="AgentName" xml:space="preserve">
     <value>Agent Name</value>
   </data>
   <data name="BadgeBlack" xml:space="preserve">
@@ -209,5 +209,11 @@
   </data>
   <data name="UnsavedChangesTitle" xml:space="preserve">
     <value>Unsaved changes!</value>
+  </data>
+  <data name="DbUserAdmin" xml:space="preserve">
+    <value>Admin user</value>
+  </data>
+  <data name="DbUserName" xml:space="preserve">
+    <value>Database username</value>
   </data>
 </root>
