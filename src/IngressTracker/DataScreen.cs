@@ -159,7 +159,7 @@ namespace IngressTracker
         #region Properties
 
         /// <summary>
-        /// The database session.
+        /// Gets the database session.
         /// </summary>
         protected ISession DatabaseSession
         {
