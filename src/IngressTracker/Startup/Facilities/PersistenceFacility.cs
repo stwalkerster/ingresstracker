@@ -34,9 +34,7 @@ namespace IngressTracker.Startup.Facilities
 
     using NHibernate;
     using NHibernate.Cfg;
-
-    using Settings = IngressTracker.Properties.Settings;
-
+    
     /// <summary>
     /// The persistence facility.
     /// </summary>
@@ -104,14 +102,16 @@ namespace IngressTracker.Startup.Facilities
         /// </returns>
         private IPersistenceConfigurer SetupDatabase()
         {
+            //TODO: move config
+
             return
                 MySQLConfiguration.Standard.ConnectionString(
                     string.Format(
                         "Server={0};Database={1};Uid={2};Pwd={3};", 
-                        Settings.Default.mysqlhost, 
-                        Settings.Default.mysqlschema, 
-                        Settings.Default.mysqluser, 
-                        Settings.Default.mysqlpassword));
+                        "ninetales", 
+                        "ingressdevel", 
+                        "devel",
+                        "devel"));
         }
 
         #endregion
