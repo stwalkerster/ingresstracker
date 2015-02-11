@@ -102,8 +102,7 @@ namespace IngressTracker.Startup.Facilities
         /// </returns>
         private IPersistenceConfigurer SetupDatabase()
         {
-            //TODO: move config
-
+            // TODO: move config
             return
                 MySQLConfiguration.Standard.ConnectionString(
                     string.Format(
