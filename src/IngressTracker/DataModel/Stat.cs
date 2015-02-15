@@ -51,6 +51,11 @@ namespace IngressTracker.DataModel
         /// </summary>
         public virtual bool IsPredictable { get; set; }
 
+        /// <summary>
+        /// Gets or sets the display order.
+        /// </summary>
+        public virtual int DisplayOrder { get; set; }
+
         #endregion
 
         #region Public Methods and Operators

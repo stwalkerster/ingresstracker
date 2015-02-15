@@ -41,6 +41,7 @@ namespace IngressTracker.Persistence.Mappings
             this.Table("category");
             this.Id(x => x.Id).Column("id");
             this.Map(x => x.Name).Column("name");
+            this.Map(x => x.DisplayOrder).Column("displayorder");
         }
 
         #endregion

@@ -25,6 +25,7 @@
                     </DataGridComboBoxColumn.EditingElementStyle>
                 </DataGridComboBoxColumn>
                 <DataGridCheckBoxColumn Header="{x:Static properties:Resources.StatisticPredictable}" Binding="{Binding IsPredictable}" />
+                <DataGridTextColumn Header="{x:Static properties:Resources.DisplayOrder}" Binding="{Binding DisplayOrder}" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

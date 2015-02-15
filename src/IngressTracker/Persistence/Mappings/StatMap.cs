@@ -43,6 +43,7 @@ namespace IngressTracker.Persistence.Mappings
             this.Map(x => x.Description).Column("description");
             this.Map(x => x.Unit).Column("unit");
             this.Map(x => x.IsPredictable).Column("predictability");
+            this.Map(x => x.DisplayOrder).Column("displayorder");
             this.References(x => x.Category).Column("category");
         }
 

@@ -10,6 +10,7 @@
         <DataGrid Style="{StaticResource StaticDataScreenDataGridStyle}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{x:Static properties:Resources.CategoryName}" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="{x:Static properties:Resources.DisplayOrder}" Binding="{Binding DisplayOrder}" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
