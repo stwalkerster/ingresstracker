@@ -169,6 +169,33 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please choose your Agent Name:.
+        /// </summary>
+        public static string ChooseAgentName {
+            get {
+                return ResourceManager.GetString("ChooseAgentName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connect.
+        /// </summary>
+        public static string ConnectButton {
+            get {
+                return ResourceManager.GetString("ConnectButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current Agent:.
+        /// </summary>
+        public static string CurrentAgent {
+            get {
+                return ResourceManager.GetString("CurrentAgent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add New.
         /// </summary>
         public static string DataAddRecord {
@@ -232,6 +259,15 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        public static string DbPassword {
+            get {
+                return ResourceManager.GetString("DbPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Database username.
         /// </summary>
         public static string DbUserName {
@@ -264,6 +300,15 @@ namespace IngressTracker.Properties {
         public static string Login {
             get {
                 return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        public static string LoginButton {
+            get {
+                return ResourceManager.GetString("LoginButton", resourceCulture);
             }
         }
         

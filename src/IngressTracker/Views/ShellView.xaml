@@ -85,7 +85,7 @@
 
         <fluent:StatusBar Grid.Row="2">
             <fluent:StatusBarItem  HorizontalAlignment="Left">
-                <TextBlock Text="Current Agent:" />
+                <TextBlock Text="{x:Static properties:Resources.CurrentAgent}" />
             </fluent:StatusBarItem>
             
             <fluent:StatusBarItem  HorizontalAlignment="Left">

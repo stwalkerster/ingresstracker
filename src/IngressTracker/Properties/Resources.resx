@@ -228,4 +228,19 @@
   <data name="UserAccessToAllUsers" xml:space="preserve">
     <value>Access to all agent profiles</value>
   </data>
+  <data name="ChooseAgentName" xml:space="preserve">
+    <value>Please choose your Agent Name:</value>
+  </data>
+  <data name="ConnectButton" xml:space="preserve">
+    <value>Connect</value>
+  </data>
+  <data name="CurrentAgent" xml:space="preserve">
+    <value>Current Agent:</value>
+  </data>
+  <data name="DbPassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="LoginButton" xml:space="preserve">
+    <value>Login</value>
+  </data>
 </root>
