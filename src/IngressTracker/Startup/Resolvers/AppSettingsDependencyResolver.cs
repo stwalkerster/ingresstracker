@@ -23,6 +23,7 @@
 
 namespace IngressTracker.Startup.Resolvers
 {
+    using System.Collections.Specialized;
     using System.ComponentModel;
     using System.Configuration;
     using System.Linq;
@@ -62,7 +63,7 @@ namespace IngressTracker.Startup.Resolvers
             ComponentModel model, 
             DependencyModel dependency)
         {
-            return ConfigurationManager.AppSettings.AllKeys.Contains(dependency.DependencyKey)
+            return ((NameValueCollection)ConfigurationManager.GetSection("database")).AllKeys.Contains(dependency.DependencyKey)
                    && TypeDescriptor.GetConverter(dependency.TargetType).CanConvertFrom(typeof(string));
         }
 
@@ -96,7 +97,7 @@ namespace IngressTracker.Startup.Resolvers
         {
             return
                 TypeDescriptor.GetConverter(dependency.TargetType)
-                    .ConvertFrom(ConfigurationManager.AppSettings[dependency.DependencyKey]);
+                    .ConvertFrom(((NameValueCollection)ConfigurationManager.GetSection("database"))[dependency.DependencyKey]);
         }
 
         #endregion

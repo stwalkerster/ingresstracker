@@ -22,6 +22,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace IngressTracker.Startup.Facilities
 {
+    using System.Collections.Specialized;
     using System.ComponentModel;
     using System.Configuration;
 
@@ -117,10 +118,10 @@ namespace IngressTracker.Startup.Facilities
 
             var databaseServerHostname =
                 TypeDescriptor.GetConverter(typeof(string))
-                    .ConvertFrom(ConfigurationManager.AppSettings["databaseServerHostname"]);
+                    .ConvertFrom(((NameValueCollection)ConfigurationManager.GetSection("database"))["databaseServerHostname"]);
             var databaseSchemaName =
                 TypeDescriptor.GetConverter(typeof(string))
-                    .ConvertFrom(ConfigurationManager.AppSettings["databaseSchemaName"]);
+                    .ConvertFrom(((NameValueCollection)ConfigurationManager.GetSection("database"))["databaseSchemaName"]);
 
             return
                 MySQLConfiguration.Standard.ConnectionString(
