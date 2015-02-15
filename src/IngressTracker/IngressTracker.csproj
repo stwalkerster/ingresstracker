@@ -28,7 +28,12 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>false</MapFileExtensions>
     <InstallUrl>https://stwalkerster.co.uk/downloads/ingresstracker/</InstallUrl>
+    <SupportUrl>https://stwalkerster.co.uk/projects/ingress-tracker/</SupportUrl>
+    <ProductName>Ingress Tracker</ProductName>
+    <PublisherName>Simon Walker</PublisherName>
     <MinimumRequiredVersion>1.0.0.0</MinimumRequiredVersion>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>index.php</WebPage>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
