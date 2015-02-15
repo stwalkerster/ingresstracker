@@ -225,19 +225,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="database.Debug.config" />
-    <None Include="database.Release.config" />
+    <Content Include="database.config" />
     <None Include="packages.config" />
     <AppDesigner Include="Properties\" />
     <None Include="Settings.StyleCop" />
-  </ItemGroup>
-  <ItemGroup>
-    <DbConfigFile Include="database.$(Configuration).config">
-      <Visible>False</Visible>
-    </DbConfigFile>
-    <DbConfigFileTarget Include="$(OutputPath)\database.config">
-      <Visible>False</Visible>
-    </DbConfigFileTarget>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -272,43 +263,6 @@
     <Resource Include="ingress.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Ingress\128.png" />
-    <Resource Include="Images\Ingress\16.png" />
-    <Resource Include="Images\Ingress\24.png" />
-    <Resource Include="Images\Ingress\32.png" />
-    <Resource Include="Images\Ingress\48.png" />
-    <Resource Include="Images\Ingress\64.png" />
-    <Resource Include="Images\Crystal\32\reload.png" />
-    <Resource Include="Images\Crystal\32\delete_table_row.png" />
-    <Resource Include="Images\Crystal\32\insert_table_row.png" />
-    <Resource Include="Images\Crystal\32\save_all.png" />
-    <Resource Include="Images\Crystal\16\delete_table_row.png" />
-    <Resource Include="Images\Crystal\16\insert_table_row.png" />
-    <Resource Include="Images\Crystal\16\save_all.png" />
-    <Resource Include="Images\Crystal\16\reload.png" />
-    <Resource Include="Images\Crystal\32\personal.png" />
-    <Resource Include="Images\Crystal\32\kspread.png" />
-    <Resource Include="Images\Crystal\16\kspread.png" />
-    <Resource Include="Images\Crystal\16\personal.png" />
-    <Resource Include="Images\MindController\16.png" />
-    <Resource Include="Images\MindController\32.png" />
-    <Resource Include="Images\Crystal\32\no3D.png" />
-    <Resource Include="Images\Crystal\16\no3D.png" />
-    <Resource Include="Images\Crystal\32\connect_creating.png" />
-    <Resource Include="Images\Crystal\16\connect_creating.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <PublishFile Include="database.Release.config">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>database.config</TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>File</FileType>
-    </PublishFile>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
@@ -338,8 +292,7 @@
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
-  </Target>-->
-  <Target Name="AfterBuild">
-    <Copy SourceFiles="@(DbConfigFile)" DestinationFiles="@(DbConfigFileTarget)" />
   </Target>
+  <Target Name="AfterBuild">
+  </Target>-->
 </Project>
