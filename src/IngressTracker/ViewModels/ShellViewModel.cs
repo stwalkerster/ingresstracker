@@ -26,7 +26,6 @@ namespace IngressTracker.ViewModels
 
     using IngressTracker.DataModel;
     using IngressTracker.Interfaces;
-    using IngressTracker.ScreenBase;
     using IngressTracker.ScreenBase.Interfaces;
     using IngressTracker.Services.Interfaces;
     using IngressTracker.ViewModels.Interfaces;
@@ -142,6 +141,17 @@ namespace IngressTracker.ViewModels
             get
             {
                 return !this.loginService.LoginComplete;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether can open raw values.
+        /// </summary>
+        public bool CanOpenRawValues
+        {
+            get
+            {
+                return this.loginService.LoginComplete;
             }
         }
 
@@ -316,6 +326,15 @@ namespace IngressTracker.ViewModels
         public void OpenLogin()
         {
             var window = ServiceLocator.Current.GetInstance<ILoginViewModel>();
+            this.ActivateItem(window);
+        }
+
+        /// <summary>
+        /// The open raw values.
+        /// </summary>
+        public void OpenRawValues()
+        {
+            var window = ServiceLocator.Current.GetInstance<IRawValueViewModel>();
             this.ActivateItem(window);
         }
 

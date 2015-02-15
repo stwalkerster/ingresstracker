@@ -61,6 +61,15 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Agent.
+        /// </summary>
+        public static string Agent {
+            get {
+                return ResourceManager.GetString("Agent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Agent Name.
         /// </summary>
         public static string AgentName {
@@ -331,11 +340,38 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Raw Statistic Values.
+        /// </summary>
+        public static string RawValuesView {
+            get {
+                return ResourceManager.GetString("RawValuesView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Screens.
+        /// </summary>
+        public static string Screens {
+            get {
+                return ResourceManager.GetString("Screens", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Static Data.
         /// </summary>
         public static string StaticData {
             get {
                 return ResourceManager.GetString("StaticData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Statistic.
+        /// </summary>
+        public static string Statistic {
+            get {
+                return ResourceManager.GetString("Statistic", resourceCulture);
             }
         }
         
@@ -381,6 +417,15 @@ namespace IngressTracker.Properties {
         public static string StatStaticView {
             get {
                 return ResourceManager.GetString("StatStaticView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timestamp.
+        /// </summary>
+        public static string Timestamp {
+            get {
+                return ResourceManager.GetString("Timestamp", resourceCulture);
             }
         }
         
@@ -435,6 +480,15 @@ namespace IngressTracker.Properties {
         public static string UserStaticView {
             get {
                 return ResourceManager.GetString("UserStaticView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value.
+        /// </summary>
+        public static string Value {
+            get {
+                return ResourceManager.GetString("Value", resourceCulture);
             }
         }
         

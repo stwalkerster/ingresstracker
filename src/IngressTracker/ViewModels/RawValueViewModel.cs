@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="User.cs" company="Simon Walker">
+// <copyright file="RawValueViewModel.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,84 +17,74 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The user.
+//   The raw value view model.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.DataModel
+namespace IngressTracker.ViewModels
 {
-    using IngressTracker.Persistence;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using IngressTracker.DataModel;
+    using IngressTracker.Properties;
+    using IngressTracker.ScreenBase;
+    using IngressTracker.Services.Interfaces;
+    using IngressTracker.ViewModels.Interfaces;
+
+    using NHibernate;
+    using NHibernate.Linq;
 
     /// <summary>
-    /// The user.
+    /// The raw value view model.
     /// </summary>
-    public class User : EntityBase
+    public class RawValueViewModel : StaticDataScreen<ValueEntry>, IRawValueViewModel
     {
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="RawValueViewModel"/> class.
+        /// </summary>
+        /// <param name="databaseSession">
+        /// The database session.
+        /// </param>
+        /// <param name="loginService">
+        /// The login service.
+        /// </param>
+        public RawValueViewModel(ISession databaseSession, ILoginService loginService)
+            : base(Resources.RawValuesView, databaseSession, loginService)
+        {
+        }
+
+        #endregion
+
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets a value indicating whether access to all agents.
+        /// Gets the agents.
         /// </summary>
-        public virtual bool AccessToAllAgents { get; set; }
+        public IEnumerable<User> Agents { get; private set; }
 
         /// <summary>
-        /// Gets or sets the username.
+        /// Gets the statistics.
         /// </summary>
-        public virtual string AgentName { get; set; }
-
-        /// <summary>
-        /// Gets or sets the database username.
-        /// </summary>
-        public virtual string DatabaseUsername { get; set; }
-
-        /// <summary>
-        /// Gets or sets the faction.
-        /// </summary>
-        public virtual Faction Faction
-        {
-            get
-            {
-                if (this.FactionCode == "ENL")
-                {
-                    return Faction.Enlightened;
-                }
-
-                if (this.FactionCode == "RES")
-                {
-                    return Faction.Resistance;
-                }
-
-                return null;
-            }
-
-            set
-            {
-                this.FactionCode = value.Code;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the faction.
-        /// </summary>
-        public virtual string FactionCode { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether database admin.
-        /// </summary>
-        public virtual bool StaticDataAdmin { get; set; }
+        public IEnumerable<Stat> Statistics { get; private set; }
 
         #endregion
 
         #region Public Methods and Operators
 
         /// <summary>
-        /// The to string.
+        /// The refresh data.
         /// </summary>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        public override string ToString()
+        public override void RefreshData()
         {
-            return this.AgentName;
+            base.RefreshData();
+
+            this.Agents = this.DatabaseSession.Query<User>().ToList();
+            this.NotifyOfPropertyChange(() => this.Agents);
+
+            this.Statistics = this.DatabaseSession.Query<Stat>().ToList();
+            this.NotifyOfPropertyChange(() => this.Statistics);
         }
 
         #endregion
