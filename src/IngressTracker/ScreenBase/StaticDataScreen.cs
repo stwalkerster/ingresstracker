@@ -52,11 +52,6 @@ namespace IngressTracker.ScreenBase
         private readonly List<T> deletedItems;
 
         /// <summary>
-        /// The login service.
-        /// </summary>
-        private readonly ILoginService loginService;
-
-        /// <summary>
         /// The DataItems.
         /// </summary>
         private ObservableCollection<T> dataItems;
@@ -83,9 +78,8 @@ namespace IngressTracker.ScreenBase
         /// The login Service.
         /// </param>
         protected StaticDataScreen(string displayName, ISession databaseSession, ILoginService loginService)
-            : base(displayName, databaseSession)
+            : base(displayName, databaseSession, loginService)
         {
-            this.loginService = loginService;
             this.deletedItems = new List<T>();
         }
 
@@ -121,17 +115,6 @@ namespace IngressTracker.ScreenBase
                     this.dataItems = value;
                     this.NotifyOfPropertyChange(() => this.DataItems);
                 }
-            }
-        }
-
-        /// <summary>
-        /// Gets the login service.
-        /// </summary>
-        public ILoginService LoginService
-        {
-            get
-            {
-                return this.loginService;
             }
         }
 

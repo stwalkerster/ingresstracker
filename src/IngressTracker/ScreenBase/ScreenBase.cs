@@ -24,6 +24,8 @@ namespace IngressTracker.ScreenBase
 {
     using Caliburn.Micro;
 
+    using IngressTracker.Services.Interfaces;
+
     using NHibernate;
 
     /// <summary>
@@ -37,6 +39,11 @@ namespace IngressTracker.ScreenBase
         /// The database session.
         /// </summary>
         private readonly ISession databaseSession;
+
+        /// <summary>
+        /// The login service.
+        /// </summary>
+        private readonly ILoginService loginService;
 
         /// <summary>
         /// The display name.
@@ -56,10 +63,14 @@ namespace IngressTracker.ScreenBase
         /// <param name="databaseSession">
         /// The database session.
         /// </param>
-        protected ScreenBase(string displayName, ISession databaseSession)
+        /// <param name="loginService">
+        /// The login Service.
+        /// </param>
+        protected ScreenBase(string displayName, ISession databaseSession, ILoginService loginService)
         {
             this.displayName = displayName;
             this.databaseSession = databaseSession;
+            this.loginService = loginService;
         }
 
         #endregion
@@ -83,6 +94,17 @@ namespace IngressTracker.ScreenBase
                     this.displayName = value;
                     this.NotifyOfPropertyChange(() => this.DisplayName);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Gets the login service.
+        /// </summary>
+        public ILoginService LoginService
+        {
+            get
+            {
+                return this.loginService;
             }
         }
 
