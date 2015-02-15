@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="UserStaticViewModel.cs" company="Simon Walker">
+// <copyright file="Category.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,38 +17,43 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The user static view model.
+//   The category.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.ViewModels
+namespace IngressTracker.DataModel.Models
 {
-    using IngressTracker.DataModel.Models;
-    using IngressTracker.Properties;
-    using IngressTracker.ScreenBase;
-    using IngressTracker.Services.Interfaces;
-    using IngressTracker.ViewModels.Interfaces;
-
-    using NHibernate;
+    using IngressTracker.Persistence;
 
     /// <summary>
-    /// The user static view model.
+    /// The category.
     /// </summary>
-    public class UserStaticViewModel : StaticDataScreen<User>, IUserStaticViewModel
+    public class Category : EntityBase
     {
-        #region Constructors and Destructors
+        #region Public Properties
 
         /// <summary>
-        /// Initialises a new instance of the <see cref="UserStaticViewModel"/> class.
+        /// Gets or sets the name.
         /// </summary>
-        /// <param name="databaseSession">
-        /// The database Session.
-        /// </param>
-        /// <param name="loginService">
-        /// The login Service.
-        /// </param>
-        public UserStaticViewModel(ISession databaseSession, ILoginService loginService)
-            : base(Resources.UserStaticView, databaseSession, loginService)
+        public virtual string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the display order.
+        /// </summary>
+        public virtual int DisplayOrder { get; set; }
+
+        #endregion
+
+        #region Public Methods and Operators
+
+        /// <summary>
+        /// The to string.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public override string ToString()
         {
+            return this.Name;
         }
 
         #endregion

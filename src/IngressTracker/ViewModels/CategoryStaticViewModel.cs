@@ -22,7 +22,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace IngressTracker.ViewModels
 {
-    using IngressTracker.DataModel;
+    using IngressTracker.DataModel.Models;
     using IngressTracker.Properties;
     using IngressTracker.ScreenBase;
     using IngressTracker.Services.Interfaces;

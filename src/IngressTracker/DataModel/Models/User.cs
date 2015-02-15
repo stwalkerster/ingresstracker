@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Badge.cs" company="Simon Walker">
+// <copyright file="User.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,54 +17,70 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The badge.
+//   The user.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.DataModel
+namespace IngressTracker.DataModel.Models
 {
     using IngressTracker.Persistence;
 
     /// <summary>
-    /// The badge.
+    /// The user.
     /// </summary>
-    public class Badge : EntityBase
+    public class User : EntityBase
     {
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the black.
+        /// Gets or sets a value indicating whether access to all agents.
         /// </summary>
-        public virtual int Black { get; set; }
+        public virtual bool AccessToAllAgents { get; set; }
 
         /// <summary>
-        /// Gets or sets the bronze.
+        /// Gets or sets the username.
         /// </summary>
-        public virtual int Bronze { get; set; }
+        public virtual string AgentName { get; set; }
 
         /// <summary>
-        /// Gets or sets the gold.
+        /// Gets or sets the database username.
         /// </summary>
-        public virtual int Gold { get; set; }
+        public virtual string DatabaseUsername { get; set; }
 
         /// <summary>
-        /// Gets or sets the name.
+        /// Gets or sets the faction.
         /// </summary>
-        public virtual string Name { get; set; }
+        public virtual Faction Faction
+        {
+            get
+            {
+                if (this.FactionCode == "ENL")
+                {
+                    return Faction.Enlightened;
+                }
+
+                if (this.FactionCode == "RES")
+                {
+                    return Faction.Resistance;
+                }
+
+                return null;
+            }
+
+            set
+            {
+                this.FactionCode = value.Code;
+            }
+        }
 
         /// <summary>
-        /// Gets or sets the platinum.
+        /// Gets or sets the faction.
         /// </summary>
-        public virtual int Platinum { get; set; }
+        public virtual string FactionCode { get; set; }
 
         /// <summary>
-        /// Gets or sets the silver.
+        /// Gets or sets a value indicating whether database admin.
         /// </summary>
-        public virtual int Silver { get; set; }
-
-        /// <summary>
-        /// Gets or sets the statistic.
-        /// </summary>
-        public virtual Stat Statistic { get; set; }
+        public virtual bool StaticDataAdmin { get; set; }
 
         #endregion
 
@@ -78,7 +94,7 @@ namespace IngressTracker.DataModel
         /// </returns>
         public override string ToString()
         {
-            return this.Name;
+            return this.AgentName;
         }
 
         #endregion

@@ -24,7 +24,7 @@ namespace IngressTracker.ViewModels.Interfaces
 {
     using System.Collections.ObjectModel;
 
-    using IngressTracker.DataModel;
+    using IngressTracker.DataModel.Models;
     using IngressTracker.Interfaces;
 
     /// <summary>

@@ -22,7 +22,6 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace IngressTracker.DataModel
 {
-    using System.Collections.Generic;
     using System.Windows.Media;
 
     using IngressTracker.Properties;
@@ -30,7 +29,7 @@ namespace IngressTracker.DataModel
     /// <summary>
     /// The faction.
     /// </summary>
-    public class Faction
+    public class Faction : DbType<Faction>
     {
         #region Static Fields
 
@@ -49,17 +48,21 @@ namespace IngressTracker.DataModel
         public static readonly Faction Resistance = new Faction(
             Resources.FactionResistance, 
             "RES", 
-            Brushes.Blue,
+            Brushes.Blue, 
             Brushes.LightBlue);
-
-        /// <summary>
-        /// The item collection.
-        /// </summary>
-        public static readonly List<Faction> ItemCollection = new List<Faction> { Enlightened, Resistance };
 
         #endregion
 
         #region Constructors and Destructors
+
+        /// <summary>
+        /// Initialises static members of the <see cref="Faction"/> class.
+        /// </summary>
+        static Faction()
+        {
+            Faction.AddItem(Enlightened);
+            Faction.AddItem(Resistance);
+        }
 
         /// <summary>
         /// Initialises a new instance of the <see cref="Faction"/> class.

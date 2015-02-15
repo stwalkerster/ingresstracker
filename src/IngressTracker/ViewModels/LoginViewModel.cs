@@ -33,7 +33,7 @@ namespace IngressTracker.ViewModels
     using FluentNHibernate.Cfg;
     using FluentNHibernate.Cfg.Db;
 
-    using IngressTracker.DataModel;
+    using IngressTracker.DataModel.Models;
     using IngressTracker.Persistence;
     using IngressTracker.Properties;
     using IngressTracker.Services.Interfaces;
@@ -304,7 +304,7 @@ namespace IngressTracker.ViewModels
             try
             {
                 var collection = tempSession.QueryOver<User>().Where(x => x.DatabaseUsername == this.Username).List();
-                
+
                 // at least one user on this connection is allowed access to all agents.
                 if (collection.Count(x => x.AccessToAllAgents) > 0)
                 {

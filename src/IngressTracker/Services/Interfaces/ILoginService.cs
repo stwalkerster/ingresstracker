@@ -24,7 +24,7 @@ namespace IngressTracker.Services.Interfaces
 {
     using System.Collections.Generic;
 
-    using IngressTracker.DataModel;
+    using IngressTracker.DataModel.Models;
 
     /// <summary>
     /// The LoginService interface.

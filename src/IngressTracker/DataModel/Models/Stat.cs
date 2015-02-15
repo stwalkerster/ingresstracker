@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="User.cs" company="Simon Walker">
+// <copyright file="Stat.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,70 +17,44 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The user.
+//   The stat.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.DataModel
+namespace IngressTracker.DataModel.Models
 {
     using IngressTracker.Persistence;
 
     /// <summary>
-    /// The user.
+    /// The stat.
     /// </summary>
-    public class User : EntityBase
+    public class Stat : EntityBase
     {
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets a value indicating whether access to all agents.
+        /// Gets or sets the category.
         /// </summary>
-        public virtual bool AccessToAllAgents { get; set; }
+        public virtual Category Category { get; set; }
 
         /// <summary>
-        /// Gets or sets the username.
+        /// Gets or sets the description.
         /// </summary>
-        public virtual string AgentName { get; set; }
+        public virtual string Description { get; set; }
 
         /// <summary>
-        /// Gets or sets the database username.
+        /// Gets or sets the unit.
         /// </summary>
-        public virtual string DatabaseUsername { get; set; }
+        public virtual string Unit { get; set; }
 
         /// <summary>
-        /// Gets or sets the faction.
+        /// Gets or sets a value indicating whether is predictable.
         /// </summary>
-        public virtual Faction Faction
-        {
-            get
-            {
-                if (this.FactionCode == "ENL")
-                {
-                    return Faction.Enlightened;
-                }
-
-                if (this.FactionCode == "RES")
-                {
-                    return Faction.Resistance;
-                }
-
-                return null;
-            }
-
-            set
-            {
-                this.FactionCode = value.Code;
-            }
-        }
+        public virtual bool IsPredictable { get; set; }
 
         /// <summary>
-        /// Gets or sets the faction.
+        /// Gets or sets the display order.
         /// </summary>
-        public virtual string FactionCode { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether database admin.
-        /// </summary>
-        public virtual bool StaticDataAdmin { get; set; }
+        public virtual int DisplayOrder { get; set; }
 
         #endregion
 
@@ -94,7 +68,7 @@ namespace IngressTracker.DataModel
         /// </returns>
         public override string ToString()
         {
-            return this.AgentName;
+            return this.Description;
         }
 
         #endregion

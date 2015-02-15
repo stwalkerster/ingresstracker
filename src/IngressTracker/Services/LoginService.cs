@@ -22,10 +22,9 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace IngressTracker.Services
 {
-    using System.Collections;
     using System.Collections.Generic;
 
-    using IngressTracker.DataModel;
+    using IngressTracker.DataModel.Models;
     using IngressTracker.Services.Interfaces;
 
     /// <summary>

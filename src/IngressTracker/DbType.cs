@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ValueEntry.cs" company="Simon Walker">
+// <copyright file="DbType.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,42 +17,43 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The value entry.
+//   The db type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace IngressTracker.DataModel
 {
-    using System;
-
-    using IngressTracker.Persistence;
+    using System.Collections.Generic;
 
     /// <summary>
-    /// The value entry.
+    /// The db type.
     /// </summary>
-    public class ValueEntry : EntityBase
+    /// <typeparam name="T">
+    /// the type
+    /// </typeparam>
+    public class DbType<T>
     {
-        #region Public Properties
+        #region Static Fields
 
         /// <summary>
-        /// Gets or sets the statistic.
+        /// The item collection.
         /// </summary>
-        public virtual Stat Statistic { get; set; }
+        public static readonly List<T> ItemCollection = new List<T>();
+
+        #endregion
+
+        #region Methods
 
         /// <summary>
-        /// Gets or sets the timestamp.
+        /// The add item.
         /// </summary>
-        public virtual DateTime Timestamp { get; set; }
-
-        /// <summary>
-        /// Gets or sets the user.
-        /// </summary>
-        public virtual User Agent { get; set; }
-
-        /// <summary>
-        /// Gets or sets the value.
-        /// </summary>
-        public virtual int Value { get; set; }
+        /// <param name="item">
+        /// The item.
+        /// </param>
+        protected static void AddItem(T item)
+        {
+            ItemCollection.Add(item);
+        }
 
         #endregion
     }

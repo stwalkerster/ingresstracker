@@ -20,12 +20,11 @@
 //   The badge map.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace IngressTracker.Persistence.Mappings
 {
     using FluentNHibernate.Mapping;
 
-    using IngressTracker.DataModel;
+    using IngressTracker.DataModel.Models;
 
     /// <summary>
     /// The badge map.

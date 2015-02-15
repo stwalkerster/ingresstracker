@@ -24,7 +24,7 @@ namespace IngressTracker.Persistence.Mappings
 {
     using FluentNHibernate.Mapping;
 
-    using IngressTracker.DataModel;
+    using IngressTracker.DataModel.Models;
 
     /// <summary>
     /// The category map.

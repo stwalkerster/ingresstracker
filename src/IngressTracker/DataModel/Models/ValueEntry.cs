@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Stat.cs" company="Simon Walker">
+// <copyright file="ValueEntry.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,59 +17,42 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The stat.
+//   The value entry.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.DataModel
+
+namespace IngressTracker.DataModel.Models
 {
+    using System;
+
     using IngressTracker.Persistence;
 
     /// <summary>
-    /// The stat.
+    /// The value entry.
     /// </summary>
-    public class Stat : EntityBase
+    public class ValueEntry : EntityBase
     {
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the category.
+        /// Gets or sets the statistic.
         /// </summary>
-        public virtual Category Category { get; set; }
+        public virtual Stat Statistic { get; set; }
 
         /// <summary>
-        /// Gets or sets the description.
+        /// Gets or sets the timestamp.
         /// </summary>
-        public virtual string Description { get; set; }
+        public virtual DateTime Timestamp { get; set; }
 
         /// <summary>
-        /// Gets or sets the unit.
+        /// Gets or sets the user.
         /// </summary>
-        public virtual string Unit { get; set; }
+        public virtual User Agent { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether is predictable.
+        /// Gets or sets the value.
         /// </summary>
-        public virtual bool IsPredictable { get; set; }
-
-        /// <summary>
-        /// Gets or sets the display order.
-        /// </summary>
-        public virtual int DisplayOrder { get; set; }
-
-        #endregion
-
-        #region Public Methods and Operators
-
-        /// <summary>
-        /// The to string.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        public override string ToString()
-        {
-            return this.Description;
-        }
+        public virtual int Value { get; set; }
 
         #endregion
     }

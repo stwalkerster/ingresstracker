@@ -25,6 +25,7 @@ namespace IngressTracker.ViewModels
     using System.Collections.ObjectModel;
 
     using IngressTracker.DataModel;
+    using IngressTracker.DataModel.Models;
     using IngressTracker.Properties;
     using IngressTracker.ScreenBase;
     using IngressTracker.Services.Interfaces;

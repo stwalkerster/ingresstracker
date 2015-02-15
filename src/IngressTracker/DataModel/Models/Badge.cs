@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Category.cs" company="Simon Walker">
+// <copyright file="Badge.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,19 +17,34 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The category.
+//   The badge.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.DataModel
+namespace IngressTracker.DataModel.Models
 {
     using IngressTracker.Persistence;
 
     /// <summary>
-    /// The category.
+    /// The badge.
     /// </summary>
-    public class Category : EntityBase
+    public class Badge : EntityBase
     {
         #region Public Properties
+
+        /// <summary>
+        /// Gets or sets the black.
+        /// </summary>
+        public virtual int Black { get; set; }
+
+        /// <summary>
+        /// Gets or sets the bronze.
+        /// </summary>
+        public virtual int Bronze { get; set; }
+
+        /// <summary>
+        /// Gets or sets the gold.
+        /// </summary>
+        public virtual int Gold { get; set; }
 
         /// <summary>
         /// Gets or sets the name.
@@ -37,9 +52,19 @@ namespace IngressTracker.DataModel
         public virtual string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets the display order.
+        /// Gets or sets the platinum.
         /// </summary>
-        public virtual int DisplayOrder { get; set; }
+        public virtual int Platinum { get; set; }
+
+        /// <summary>
+        /// Gets or sets the silver.
+        /// </summary>
+        public virtual int Silver { get; set; }
+
+        /// <summary>
+        /// Gets or sets the statistic.
+        /// </summary>
+        public virtual Stat Statistic { get; set; }
 
         #endregion
 
