@@ -6,6 +6,8 @@
         <Setter Property="Foreground" Value="White" />
     </Style>
 
+    <Color x:Key="{x:Static fluent:MetroColors.ThemeColorKey}">#2E2E2E</Color>
+
     <Style x:Key="WindowTabControlStyle" TargetType="TabControl">
         <Setter Property="ItemTemplate">
             <Setter.Value>
