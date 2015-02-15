@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="UserStaticViewModel.cs" company="Simon Walker">
+// <copyright file="IStaticDataScreen.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,40 +17,20 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The user static view model.
+//   The StaticDataScreen interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.ViewModels
+
+namespace IngressTracker.ScreenBase.Interfaces
 {
-    using IngressTracker.DataModel;
-    using IngressTracker.Properties;
-    using IngressTracker.ScreenBase;
-    using IngressTracker.Services.Interfaces;
-    using IngressTracker.ViewModels.Interfaces;
-
-    using NHibernate;
-
     /// <summary>
-    /// The user static view model.
+    /// The StaticDataScreen interface.
     /// </summary>
-    public class UserStaticViewModel : StaticDataScreen<User>, IUserStaticViewModel
+    public interface IStaticDataScreen
     {
-        #region Constructors and Destructors
-
         /// <summary>
-        /// Initialises a new instance of the <see cref="UserStaticViewModel"/> class.
+        /// Gets a value indicating whether user allowed edit.
         /// </summary>
-        /// <param name="databaseSession">
-        /// The database Session.
-        /// </param>
-        /// <param name="loginService">
-        /// The login Service.
-        /// </param>
-        public UserStaticViewModel(ISession databaseSession, ILoginService loginService)
-            : base(Resources.UserStaticView, databaseSession, loginService)
-        {
-        }
-
-        #endregion
+        bool UserAllowedEdit { get; }
     }
 }

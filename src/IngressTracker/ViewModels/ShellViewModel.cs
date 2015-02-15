@@ -26,6 +26,8 @@ namespace IngressTracker.ViewModels
 
     using IngressTracker.DataModel;
     using IngressTracker.Interfaces;
+    using IngressTracker.ScreenBase;
+    using IngressTracker.ScreenBase.Interfaces;
     using IngressTracker.Services.Interfaces;
     using IngressTracker.ViewModels.Interfaces;
 
@@ -69,7 +71,20 @@ namespace IngressTracker.ViewModels
         {
             get
             {
-                return this.ActiveItem is ICanAddRecord;
+                bool allowed = true;
+
+                if (!(this.ActiveItem is ICanAddRecord))
+                {
+                    return false;
+                }
+
+                var sds = this.ActiveItem as IStaticDataScreen;
+                if (sds != null)
+                {
+                    allowed &= sds.UserAllowedEdit;
+                }
+
+                return allowed;
             }
         }
 
@@ -80,7 +95,20 @@ namespace IngressTracker.ViewModels
         {
             get
             {
-                return this.ActiveItem is ICanDelete;
+                bool allowed = true;
+
+                if (!(this.ActiveItem is ICanDelete))
+                {
+                    return false;
+                }
+
+                var sds = this.ActiveItem as IStaticDataScreen;
+                if (sds != null)
+                {
+                    allowed &= sds.UserAllowedEdit;
+                }
+
+                return allowed;
             }
         }
 
@@ -135,7 +163,17 @@ namespace IngressTracker.ViewModels
         {
             get
             {
-                return this.loginService.LoginComplete;
+                if (!this.loginService.LoginComplete)
+                {
+                    return false;
+                }
+
+                if (this.loginService.Agent.StaticDataAdmin || this.loginService.Agent.AccessToAllAgents)
+                {
+                    return true;
+                }
+
+                return false;
             }
         }
 
@@ -157,7 +195,20 @@ namespace IngressTracker.ViewModels
         {
             get
             {
-                return this.ActiveItem is ICanSave;
+                bool allowed = true;
+
+                if (!(this.ActiveItem is ICanSave))
+                {
+                    return false;
+                }
+
+                var sds = this.ActiveItem as IStaticDataScreen;
+                if (sds != null)
+                {
+                    allowed &= sds.UserAllowedEdit;
+                }
+
+                return allowed;
             }
         }
 

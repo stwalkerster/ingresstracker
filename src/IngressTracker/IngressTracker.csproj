@@ -98,6 +98,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\DebugConverter.cs" />
+    <Compile Include="Converters\InverseBooleanConverter.cs" />
     <Compile Include="Converters\WindowTitleConverter.cs" />
     <Compile Include="DataModel\Badge.cs" />
     <Compile Include="DataModel\Category.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="Persistence\Proxy\DataBindingFactory.cs" />
     <Compile Include="Persistence\Proxy\DataBindingInterceptor.cs" />
     <Compile Include="Persistence\SessionFactoryProvider.cs" />
+    <Compile Include="ScreenBase\Interfaces\IStaticDataScreen.cs" />
     <Compile Include="ScreenBase\ScreenBase.cs" />
     <Compile Include="Services\Interfaces\ILoginService.cs" />
     <Compile Include="Services\LoginService.cs" />

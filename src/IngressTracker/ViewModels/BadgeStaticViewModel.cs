@@ -27,6 +27,7 @@ namespace IngressTracker.ViewModels
     using IngressTracker.DataModel;
     using IngressTracker.Properties;
     using IngressTracker.ScreenBase;
+    using IngressTracker.Services.Interfaces;
     using IngressTracker.ViewModels.Interfaces;
 
     using NHibernate;
@@ -54,8 +55,11 @@ namespace IngressTracker.ViewModels
         /// <param name="databaseSession">
         /// The database session.
         /// </param>
-        public BadgeStaticViewModel(ISession databaseSession)
-            : base(Resources.BadgeStaticView, databaseSession)
+        /// <param name="loginService">
+        /// The login Service.
+        /// </param>
+        public BadgeStaticViewModel(ISession databaseSession, ILoginService loginService)
+            : base(Resources.BadgeStaticView, databaseSession, loginService)
         {
         }
 

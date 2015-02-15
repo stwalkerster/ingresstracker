@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <DataGrid Style="{StaticResource DataScreenDataGridStyle}">
+        <DataGrid Style="{StaticResource StaticDataScreenDataGridStyle}">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="{x:Static properties:Resources.AgentName}">
                     <DataGridTemplateColumn.CellTemplate>

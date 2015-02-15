@@ -30,6 +30,8 @@ namespace IngressTracker.ScreenBase
     using IngressTracker.Interfaces;
     using IngressTracker.Persistence.Proxy;
     using IngressTracker.Properties;
+    using IngressTracker.ScreenBase.Interfaces;
+    using IngressTracker.Services.Interfaces;
 
     using NHibernate;
     using NHibernate.Linq;
@@ -40,7 +42,7 @@ namespace IngressTracker.ScreenBase
     /// <typeparam name="T">
     /// The type of data shown
     /// </typeparam>
-    public abstract class StaticDataScreen<T> : ScreenBase, IDataOperations
+    public abstract class StaticDataScreen<T> : ScreenBase, IDataOperations, IStaticDataScreen
     {
         #region Fields
 
@@ -48,6 +50,11 @@ namespace IngressTracker.ScreenBase
         /// The deleted items.
         /// </summary>
         private readonly List<T> deletedItems;
+
+        /// <summary>
+        /// The login service.
+        /// </summary>
+        private readonly ILoginService loginService;
 
         /// <summary>
         /// The DataItems.
@@ -72,15 +79,30 @@ namespace IngressTracker.ScreenBase
         /// <param name="databaseSession">
         /// The database session.
         /// </param>
-        protected StaticDataScreen(string displayName, ISession databaseSession)
+        /// <param name="loginService">
+        /// The login Service.
+        /// </param>
+        protected StaticDataScreen(string displayName, ISession databaseSession, ILoginService loginService)
             : base(displayName, databaseSession)
         {
+            this.loginService = loginService;
             this.deletedItems = new List<T>();
         }
 
         #endregion
 
         #region Public Properties
+
+        /// <summary>
+        /// Gets a value indicating whether user allowed edit.
+        /// </summary>
+        public bool UserAllowedEdit
+        {
+            get
+            {
+                return this.LoginService.Agent.StaticDataAdmin;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the DataItems.
@@ -103,6 +125,17 @@ namespace IngressTracker.ScreenBase
         }
 
         /// <summary>
+        /// Gets the login service.
+        /// </summary>
+        public ILoginService LoginService
+        {
+            get
+            {
+                return this.loginService;
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the selected item.
         /// </summary>
         public T SelectedItem
@@ -121,10 +154,6 @@ namespace IngressTracker.ScreenBase
                 }
             }
         }
-
-        #endregion
-
-        #region Properties
 
         #endregion
 

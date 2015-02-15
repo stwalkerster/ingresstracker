@@ -7,7 +7,7 @@
              d:DesignHeight="300" d:DesignWidth="300"
              xmlns:properties="clr-namespace:IngressTracker.Properties">
     <Grid>
-        <DataGrid Style="{StaticResource DataScreenDataGridStyle}">
+        <DataGrid Style="{StaticResource StaticDataScreenDataGridStyle}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{x:Static properties:Resources.CategoryName}" Binding="{Binding Name}" />
             </DataGrid.Columns>
