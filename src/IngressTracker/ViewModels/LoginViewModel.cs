@@ -304,6 +304,13 @@ namespace IngressTracker.ViewModels
             try
             {
                 var collection = tempSession.QueryOver<User>().Where(x => x.DatabaseUsername == this.Username).List();
+                
+                // at least one user on this connection is allowed access to all agents.
+                if (collection.Count(x => x.AccessToAllAgents) > 0)
+                {
+                    collection = tempSession.QueryOver<User>().List();
+                }
+
                 this.availableAgents = new ObservableCollection<User>(collection);
 
                 if (collection.Count == 1)
