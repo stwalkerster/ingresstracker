@@ -59,7 +59,7 @@
             <PasswordBox Grid.Row="2" Grid.Column="1" helpers:PasswordHelper.Attach="True" helpers:PasswordHelper.Password="{Binding Text, ElementName=Password, Mode=TwoWay}" />
             <TextBox Grid.Row="2" Grid.Column="1" Visibility="Collapsed" x:Name="Password" />
 
-            <Button Grid.Row="3" Grid.Column="1" Style="{StaticResource LoginFormButtonStyle}" x:Name="Connect">Connect</Button>
+            <Button Grid.Row="3" Grid.Column="1" Style="{StaticResource LoginFormButtonStyle}" x:Name="Connect" IsDefault="True">Connect</Button>
         </Grid>
 
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding AgentGridVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
