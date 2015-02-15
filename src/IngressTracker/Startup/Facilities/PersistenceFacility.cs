@@ -22,8 +22,10 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace IngressTracker.Startup.Facilities
 {
+    using System.ComponentModel;
+    using System.Configuration;
+
     using Castle.MicroKernel.Facilities;
-    using Castle.MicroKernel.Registration;
 
     using FluentNHibernate.Cfg;
     using FluentNHibernate.Cfg.Db;
@@ -31,15 +33,44 @@ namespace IngressTracker.Startup.Facilities
     using IngressTracker.Persistence;
     using IngressTracker.Persistence.Interfaces;
     using IngressTracker.Persistence.Proxy;
+    using IngressTracker.Services.Interfaces;
 
     using NHibernate;
-    using NHibernate.Cfg;
-    
+
+    using Component = Castle.MicroKernel.Registration.Component;
+    using Configuration = NHibernate.Cfg.Configuration;
+
     /// <summary>
     /// The persistence facility.
     /// </summary>
     public class PersistenceFacility : AbstractFacility
     {
+        #region Public Methods and Operators
+
+        /// <summary>
+        /// The configure persistence.
+        /// </summary>
+        /// <param name="config">
+        /// The config.
+        /// </param>
+        /// <param name="dataBindingInterceptor">
+        /// Interceptor to enable INPC notifications
+        /// </param>
+        public static void ConfigurePersistence(Configuration config, DataBindingInterceptor dataBindingInterceptor)
+        {
+            // This is a fix for a wierd exception.
+            // {"Column 'ReservedWord' does not belong to table ReservedWords."}
+            // http://stackoverflow.com/questions/1061128/mysql-nhibernate-how-fix-the-error-column-reservedword-does-not-belong-to
+            config.Properties.Add("hbm2ddl.keywords", "none");
+
+            if (dataBindingInterceptor != null)
+            {
+                config.SetInterceptor(dataBindingInterceptor);
+            }
+        }
+
+        #endregion
+
         #region Methods
 
         /// <summary>
@@ -54,8 +85,7 @@ namespace IngressTracker.Startup.Facilities
                     .Database(this.SetupDatabase)
                     .Mappings(a => a.FluentMappings.AddFromAssemblyOf<EntityBase>())
                     .Cache(x => x.Not.UseSecondLevelCache())
-                    .ExposeConfiguration(
-                        configuration => this.ConfigurePersistence(configuration, dataBindingInterceptor))
+                    .ExposeConfiguration(configuration => ConfigurePersistence(configuration, dataBindingInterceptor))
                     .BuildConfiguration();
 
             this.Kernel.Register(
@@ -76,25 +106,6 @@ namespace IngressTracker.Startup.Facilities
         }
 
         /// <summary>
-        /// The configure persistence.
-        /// </summary>
-        /// <param name="config">
-        /// The config.
-        /// </param>
-        /// <param name="dataBindingInterceptor">
-        /// Interceptor to enable INPC notifications
-        /// </param>
-        private void ConfigurePersistence(Configuration config, DataBindingInterceptor dataBindingInterceptor)
-        {
-            // This is a fix for a wierd exception.
-            // {"Column 'ReservedWord' does not belong to table ReservedWords."}
-            // http://stackoverflow.com/questions/1061128/mysql-nhibernate-how-fix-the-error-column-reservedword-does-not-belong-to
-            config.Properties.Add("hbm2ddl.keywords", "none");
-
-            config.SetInterceptor(dataBindingInterceptor);
-        }
-
-        /// <summary>
         /// The setup database.
         /// </summary>
         /// <returns>
@@ -102,15 +113,23 @@ namespace IngressTracker.Startup.Facilities
         /// </returns>
         private IPersistenceConfigurer SetupDatabase()
         {
-            // TODO: move config
+            var loginService = this.Kernel.Resolve<ILoginService>();
+
+            var databaseServerHostname =
+                TypeDescriptor.GetConverter(typeof(string))
+                    .ConvertFrom(ConfigurationManager.AppSettings["databaseServerHostname"]);
+            var databaseSchemaName =
+                TypeDescriptor.GetConverter(typeof(string))
+                    .ConvertFrom(ConfigurationManager.AppSettings["databaseSchemaName"]);
+
             return
                 MySQLConfiguration.Standard.ConnectionString(
                     string.Format(
                         "Server={0};Database={1};Uid={2};Pwd={3};", 
-                        "ninetales", 
-                        "ingressdevel", 
-                        "devel",
-                        "devel"));
+                        databaseServerHostname, 
+                        databaseSchemaName, 
+                        loginService.Username, 
+                        loginService.Password));
         }
 
         #endregion

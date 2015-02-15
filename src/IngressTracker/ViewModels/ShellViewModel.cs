@@ -24,7 +24,9 @@ namespace IngressTracker.ViewModels
 {
     using Caliburn.Micro;
 
+    using IngressTracker.DataModel;
     using IngressTracker.Interfaces;
+    using IngressTracker.Services.Interfaces;
     using IngressTracker.ViewModels.Interfaces;
 
     using Microsoft.Practices.ServiceLocation;
@@ -34,6 +36,30 @@ namespace IngressTracker.ViewModels
     /// </summary>
     public class ShellViewModel : Conductor<IScreen>.Collection.OneActive, IShellViewModel
     {
+        #region Fields
+
+        /// <summary>
+        /// The login service.
+        /// </summary>
+        private readonly ILoginService loginService;
+
+        #endregion
+
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="ShellViewModel"/> class.
+        /// </summary>
+        /// <param name="loginService">
+        /// The login service.
+        /// </param>
+        public ShellViewModel(ILoginService loginService)
+        {
+            this.loginService = loginService;
+        }
+
+        #endregion
+
         #region Public Properties
 
         /// <summary>
@@ -59,6 +85,61 @@ namespace IngressTracker.ViewModels
         }
 
         /// <summary>
+        /// Gets a value indicating whether can open badge static.
+        /// </summary>
+        public bool CanOpenBadgeStatic
+        {
+            get
+            {
+                return this.loginService.LoginComplete;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether can open category static.
+        /// </summary>
+        public bool CanOpenCategoryStatic
+        {
+            get
+            {
+                return this.loginService.LoginComplete;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether can open login.
+        /// </summary>
+        public bool CanOpenLogin
+        {
+            get
+            {
+                return !this.loginService.LoginComplete;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether can open stat static.
+        /// </summary>
+        public bool CanOpenStatStatic
+        {
+            get
+            {
+                return this.loginService.LoginComplete;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether can open user static.
+        /// </summary>
+        public bool CanOpenUserStatic
+        {
+            get
+            {
+                return this.loginService.LoginComplete;
+            }
+        }
+
+        /// <summary>
         /// Gets a value indicating whether can refresh.
         /// </summary>
         public bool CanRefreshData
@@ -77,6 +158,38 @@ namespace IngressTracker.ViewModels
             get
             {
                 return this.ActiveItem is ICanSave;
+            }
+        }
+
+        /// <summary>
+        /// Gets the current agent faction.
+        /// </summary>
+        public Faction CurrentAgentFaction
+        {
+            get
+            {
+                if (this.loginService.Agent == null)
+                {
+                    return null;
+                }
+
+                return this.loginService.Agent.Faction;
+            }
+        }
+
+        /// <summary>
+        /// Gets the current agent name.
+        /// </summary>
+        public string CurrentAgentName
+        {
+            get
+            {
+                if (this.loginService.Agent == null)
+                {
+                    return string.Empty;
+                }
+
+                return this.loginService.Agent.AgentName;
             }
         }
 
@@ -143,6 +256,15 @@ namespace IngressTracker.ViewModels
         public void OpenCategoryStatic()
         {
             var window = ServiceLocator.Current.GetInstance<ICategoryStaticViewModel>();
+            this.ActivateItem(window);
+        }
+
+        /// <summary>
+        /// The open user static.
+        /// </summary>
+        public void OpenLogin()
+        {
+            var window = ServiceLocator.Current.GetInstance<ILoginViewModel>();
             this.ActivateItem(window);
         }
 

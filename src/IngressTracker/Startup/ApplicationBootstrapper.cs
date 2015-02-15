@@ -75,11 +75,13 @@ namespace IngressTracker.Startup
         {
             this.container = new WindsorContainer();
 
+            // add the container to itself. This is probably a Bad Idea(tm) but hey.
+            this.container.Register(Component.For<IWindsorContainer>().Instance(this.container).LifestyleSingleton());
+
             this.container.Kernel.Resolver.AddSubResolver(new AppSettingsDependencyResolver());
 
             this.container.AddFacility<EventRegistrationFacility>();
             this.container.AddFacility<TypedFactoryFacility>();
-            this.container.AddFacility<PersistenceFacility>();
             this.container.AddFacility<LoggingFacility>(f => f.UseLog4Net().WithConfig("logger.config"));
 
             var viewModelRegistrations =

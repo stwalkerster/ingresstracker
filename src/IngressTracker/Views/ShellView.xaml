@@ -32,6 +32,13 @@
             <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/16/no3D.png" />
             <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/32/no3D.png" />
         </Style>
+
+        <Style x:Key="LoginButtonStyle" TargetType="fluent:Button">
+            <Setter Property="Header" Value="{x:Static properties:Resources.Login}" />
+            <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action OpenLogin]" />
+            <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/16/connect_creating.png" />
+            <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/32/connect_creating.png" />
+        </Style>
     </fluent:RibbonWindow.Resources>
     
     <Grid>
@@ -43,6 +50,9 @@
 
         <fluent:Ribbon>
             <fluent:RibbonTabItem Header="{x:Static properties:Resources.ApplicationName}">
+                <fluent:RibbonGroupBox Header="{x:Static properties:Resources.Login}">
+                    <fluent:Button Style="{StaticResource LoginButtonStyle}" />
+                </fluent:RibbonGroupBox>
                 <fluent:RibbonGroupBox Header="{x:Static properties:Resources.StaticData}">
                     <fluent:Button Style="{StaticResource UserStaticButtonStyle}" />
                     <fluent:Button Style="{StaticResource CategoryStaticButtonStyle}" />
@@ -56,7 +66,7 @@
                     <fluent:Button Style="{StaticResource RefreshButtonStyle}" />
                 </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
-
+            <!--
             <fluent:RibbonTabItem Header="{x:Static properties:Resources.DataToolsRibbonTab}" Group="{Binding ElementName=DataToolsContextualTabGroup}">
                 <fluent:RibbonGroupBox Header="{x:Static properties:Resources.DataToolsActions}">
                     <fluent:Button Style="{StaticResource AddRowButtonStyle}" />
@@ -64,7 +74,7 @@
                     <fluent:Button Style="{StaticResource SaveButtonStyle}" />
                     <fluent:Button Style="{StaticResource RefreshButtonStyle}" />
                 </fluent:RibbonGroupBox>
-            </fluent:RibbonTabItem>
+            </fluent:RibbonTabItem>-->
 
             <fluent:Ribbon.ContextualGroups>
           <!--      <fluent:RibbonContextualTabGroup Visibility="{Binding DataToolsEnabled, Converter={StaticResource boolToVisibilityConverter}}" x:Name="DataToolsContextualTabGroup" Style="{StaticResource DataToolsContextualTabGroupStyle}" /> -->
@@ -75,7 +85,15 @@
 
         <fluent:StatusBar Grid.Row="2">
             <fluent:StatusBarItem  HorizontalAlignment="Left">
-                <TextBlock Text="StatusBar!" />
+                <TextBlock Text="Current Agent:" />
+            </fluent:StatusBarItem>
+            
+            <fluent:StatusBarItem  HorizontalAlignment="Left">
+                <TextBlock Text="{Binding CurrentAgentName}" />
+            </fluent:StatusBarItem>
+
+            <fluent:StatusBarItem  HorizontalAlignment="Left">
+                <TextBlock Text="{Binding CurrentAgentFaction.Code}" Background="{Binding CurrentAgentFaction.Colour}" Padding="3,0,3,0" />
             </fluent:StatusBarItem>
         </fluent:StatusBar>
     </Grid>
