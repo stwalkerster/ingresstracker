@@ -88,6 +88,15 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Is Awardable.
+        /// </summary>
+        public static string BadgeAwardable {
+            get {
+                return ResourceManager.GetString("BadgeAwardable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Black Level.
         /// </summary>
         public static string BadgeBlack {

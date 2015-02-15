@@ -32,19 +32,24 @@ namespace IngressTracker.DataModel.Models
         #region Public Properties
 
         /// <summary>
+        /// Gets or sets a value indicating whether awardable.
+        /// </summary>
+        public virtual bool Awardable { get; set; }
+
+        /// <summary>
         /// Gets or sets the black.
         /// </summary>
-        public virtual int Black { get; set; }
+        public virtual int? Black { get; set; }
 
         /// <summary>
         /// Gets or sets the bronze.
         /// </summary>
-        public virtual int Bronze { get; set; }
+        public virtual int? Bronze { get; set; }
 
         /// <summary>
         /// Gets or sets the gold.
         /// </summary>
-        public virtual int Gold { get; set; }
+        public virtual int? Gold { get; set; }
 
         /// <summary>
         /// Gets or sets the name.
@@ -54,12 +59,12 @@ namespace IngressTracker.DataModel.Models
         /// <summary>
         /// Gets or sets the platinum.
         /// </summary>
-        public virtual int Platinum { get; set; }
+        public virtual int? Platinum { get; set; }
 
         /// <summary>
         /// Gets or sets the silver.
         /// </summary>
-        public virtual int Silver { get; set; }
+        public virtual int? Silver { get; set; }
 
         /// <summary>
         /// Gets or sets the statistic.

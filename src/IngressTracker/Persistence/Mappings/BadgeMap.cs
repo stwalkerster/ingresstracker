@@ -47,6 +47,7 @@ namespace IngressTracker.Persistence.Mappings
             this.Map(x => x.Gold).Column("gold");
             this.Map(x => x.Platinum).Column("platinum");
             this.Map(x => x.Black).Column("black");
+            this.Map(x => x.Awardable).Column("awardable");
         }
 
         #endregion

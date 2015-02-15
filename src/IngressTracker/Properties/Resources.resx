@@ -264,4 +264,7 @@
   <data name="Value" xml:space="preserve">
     <value>Value</value>
   </data>
+  <data name="BadgeAwardable" xml:space="preserve">
+    <value>Is Awardable</value>
+  </data>
 </root>

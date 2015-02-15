@@ -29,6 +29,7 @@
                 <DataGridTextColumn Header="{x:Static properties:Resources.BadgeGold}" Binding="{Binding Gold}" />
                 <DataGridTextColumn Header="{x:Static properties:Resources.BadgePlatinum}" Binding="{Binding Platinum}" />
                 <DataGridTextColumn Header="{x:Static properties:Resources.BadgeBlack}" Binding="{Binding Black}" />
+                <DataGridCheckBoxColumn Header="{x:Static properties:Resources.BadgeAwardable}" Binding="{Binding Awardable}" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
