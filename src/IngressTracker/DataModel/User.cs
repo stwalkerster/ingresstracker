@@ -39,7 +39,12 @@ namespace IngressTracker.DataModel
         /// <summary>
         /// Gets or sets a value indicating whether database admin.
         /// </summary>
-        public virtual bool DatabaseAdmin { get; set; }
+        public virtual bool StaticDataAdmin { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether access to all agents.
+        /// </summary>
+        public virtual bool AccessToAllAgents { get; set; }
 
         /// <summary>
         /// Gets or sets the database username.

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Stat.cs" company="Simon Walker">
+// <copyright file="ScreenBase.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,53 +17,88 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The stat.
+//   The screen base.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.DataModel
+namespace IngressTracker.ScreenBase
 {
-    using IngressTracker.Persistence;
+    using Caliburn.Micro;
+
+    using NHibernate;
 
     /// <summary>
-    /// The stat.
+    /// The screen base.
     /// </summary>
-    public class Stat : EntityBase
+    public abstract class ScreenBase : Screen
     {
-        #region Public Properties
+        #region Fields
 
         /// <summary>
-        /// Gets or sets the category.
+        /// The database session.
         /// </summary>
-        public virtual Category Category { get; set; }
+        private readonly ISession databaseSession;
 
         /// <summary>
-        /// Gets or sets the description.
+        /// The display name.
         /// </summary>
-        public virtual string Description { get; set; }
-
-        /// <summary>
-        /// Gets or sets the unit.
-        /// </summary>
-        public virtual string Unit { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether is predictable.
-        /// </summary>
-        public virtual bool IsPredictable { get; set; }
+        private string displayName;
 
         #endregion
 
-        #region Public Methods and Operators
+        #region Constructors and Destructors
 
         /// <summary>
-        /// The to string.
+        /// Initialises a new instance of the <see cref="ScreenBase"/> class.
         /// </summary>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        public override string ToString()
+        /// <param name="displayName">
+        /// The display name.
+        /// </param>
+        /// <param name="databaseSession">
+        /// The database session.
+        /// </param>
+        protected ScreenBase(string displayName, ISession databaseSession)
         {
-            return this.Description;
+            this.displayName = displayName;
+            this.databaseSession = databaseSession;
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        /// <summary>
+        /// Gets or sets the display name.
+        /// </summary>
+        public override string DisplayName
+        {
+            get
+            {
+                return this.displayName;
+            }
+
+            set
+            {
+                if (this.displayName != value)
+                {
+                    this.displayName = value;
+                    this.NotifyOfPropertyChange(() => this.DisplayName);
+                }
+            }
+        }
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Gets the database session.
+        /// </summary>
+        protected ISession DatabaseSession
+        {
+            get
+            {
+                return this.databaseSession;
+            }
         }
 
         #endregion

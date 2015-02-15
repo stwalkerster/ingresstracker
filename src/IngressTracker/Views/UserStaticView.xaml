@@ -24,7 +24,8 @@
                 </DataGridTemplateColumn>
                 <DataGridComboBoxColumn Header="{x:Static properties:Resources.UserFaction}" ItemsSource="{x:Static dataModel:Faction.ItemCollection}" SelectedItemBinding="{Binding Faction}" />
                 <DataGridTextColumn Header="{x:Static properties:Resources.DbUserName}" Binding="{Binding DatabaseUsername}" />
-                <DataGridCheckBoxColumn Header="{x:Static properties:Resources.DbUserAdmin}" Binding="{Binding DatabaseAdmin}" />
+                <DataGridCheckBoxColumn Header="{x:Static properties:Resources.UserStaticDataAdmin}" Binding="{Binding StaticDataAdmin}" />
+                <DataGridCheckBoxColumn Header="{x:Static properties:Resources.UserAccessToAllUsers}" Binding="{Binding AccessToAllUsers}" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

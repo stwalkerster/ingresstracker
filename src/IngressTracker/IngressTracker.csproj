@@ -120,6 +120,7 @@
     <Compile Include="Persistence\Proxy\DataBindingFactory.cs" />
     <Compile Include="Persistence\Proxy\DataBindingInterceptor.cs" />
     <Compile Include="Persistence\SessionFactoryProvider.cs" />
+    <Compile Include="ScreenBase\ScreenBase.cs" />
     <Compile Include="Services\Interfaces\ILoginService.cs" />
     <Compile Include="Services\LoginService.cs" />
     <Compile Include="Startup\ApplicationBootstrapper.cs" />
@@ -127,7 +128,7 @@
     <Compile Include="Startup\Facilities\PersistenceFacility.cs" />
     <Compile Include="Startup\Resolvers\AppSettingsDependencyResolver.cs" />
     <Compile Include="Startup\WindsorServiceLocator.cs" />
-    <Compile Include="DataScreen.cs" />
+    <Compile Include="ScreenBase\StaticDataScreen.cs" />
     <Compile Include="ViewModels\BadgeStaticViewModel.cs" />
     <Compile Include="ViewModels\CategoryStaticViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\ILoginViewModel.cs" />

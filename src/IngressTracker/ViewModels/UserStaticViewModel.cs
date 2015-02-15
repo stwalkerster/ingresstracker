@@ -24,6 +24,7 @@ namespace IngressTracker.ViewModels
 {
     using IngressTracker.DataModel;
     using IngressTracker.Properties;
+    using IngressTracker.ScreenBase;
     using IngressTracker.ViewModels.Interfaces;
 
     using NHibernate;
@@ -31,7 +32,7 @@ namespace IngressTracker.ViewModels
     /// <summary>
     /// The user static view model.
     /// </summary>
-    public class UserStaticViewModel : DataScreen<User>, IUserStaticViewModel
+    public class UserStaticViewModel : StaticDataScreen<User>, IUserStaticViewModel
     {
         #region Constructors and Destructors
 

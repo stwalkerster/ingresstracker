@@ -26,6 +26,7 @@ namespace IngressTracker.ViewModels
 
     using IngressTracker.DataModel;
     using IngressTracker.Properties;
+    using IngressTracker.ScreenBase;
     using IngressTracker.ViewModels.Interfaces;
 
     using NHibernate;
@@ -34,7 +35,7 @@ namespace IngressTracker.ViewModels
     /// <summary>
     /// The stats static view model.
     /// </summary>
-    public class StatisticsStaticViewModel : DataScreen<Stat>, IStatisticsStaticViewModel
+    public class StatisticsStaticViewModel : StaticDataScreen<Stat>, IStatisticsStaticViewModel
     {
         #region Fields
 

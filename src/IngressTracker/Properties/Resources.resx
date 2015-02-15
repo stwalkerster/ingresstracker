@@ -210,8 +210,8 @@
   <data name="UnsavedChangesTitle" xml:space="preserve">
     <value>Unsaved changes!</value>
   </data>
-  <data name="DbUserAdmin" xml:space="preserve">
-    <value>Admin user</value>
+  <data name="UserStaticDataAdmin" xml:space="preserve">
+    <value>Static Data Administrator</value>
   </data>
   <data name="DbUserName" xml:space="preserve">
     <value>Database username</value>
@@ -221,5 +221,11 @@
   </data>
   <data name="LoginView" xml:space="preserve">
     <value>Login</value>
+  </data>
+  <data name="StatisticPredictable" xml:space="preserve">
+    <value>Predictable?</value>
+  </data>
+  <data name="UserAccessToAllUsers" xml:space="preserve">
+    <value>Access to all agent profiles</value>
   </data>
 </root>

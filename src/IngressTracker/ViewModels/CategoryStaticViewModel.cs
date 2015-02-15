@@ -24,6 +24,7 @@ namespace IngressTracker.ViewModels
 {
     using IngressTracker.DataModel;
     using IngressTracker.Properties;
+    using IngressTracker.ScreenBase;
     using IngressTracker.ViewModels.Interfaces;
 
     using NHibernate;
@@ -31,7 +32,7 @@ namespace IngressTracker.ViewModels
     /// <summary>
     /// The category static view model.
     /// </summary>
-    public class CategoryStaticViewModel : DataScreen<Category>, ICategoryStaticViewModel
+    public class CategoryStaticViewModel : StaticDataScreen<Category>, ICategoryStaticViewModel
     {
         #region Constructors and Destructors
 

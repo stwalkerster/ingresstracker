@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DataScreen.cs" company="Simon Walker">
+// <copyright file="StaticDataScreen.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -20,14 +20,12 @@
 //   The data screen.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker
+namespace IngressTracker.ScreenBase
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Windows;
-
-    using Caliburn.Micro;
 
     using IngressTracker.Interfaces;
     using IngressTracker.Persistence.Proxy;
@@ -42,14 +40,9 @@ namespace IngressTracker
     /// <typeparam name="T">
     /// The type of data shown
     /// </typeparam>
-    public abstract class DataScreen<T> : Screen, IDataOperations
+    public abstract class StaticDataScreen<T> : ScreenBase, IDataOperations
     {
         #region Fields
-
-        /// <summary>
-        /// The database session.
-        /// </summary>
-        private readonly ISession databaseSession;
 
         /// <summary>
         /// The deleted items.
@@ -62,11 +55,6 @@ namespace IngressTracker
         private ObservableCollection<T> dataItems;
 
         /// <summary>
-        /// The display name.
-        /// </summary>
-        private string displayName;
-
-        /// <summary>
         /// The selected item.
         /// </summary>
         private T selectedItem;
@@ -76,18 +64,17 @@ namespace IngressTracker
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initialises a new instance of the <see cref="DataScreen{T}"/> class. 
+        /// Initialises a new instance of the <see cref="StaticDataScreen{T}"/> class.
         /// </summary>
         /// <param name="displayName">
         /// The display name.
         /// </param>
         /// <param name="databaseSession">
-        /// The database Session.
+        /// The database session.
         /// </param>
-        protected DataScreen(string displayName, ISession databaseSession)
+        protected StaticDataScreen(string displayName, ISession databaseSession)
+            : base(displayName, databaseSession)
         {
-            this.displayName = displayName;
-            this.databaseSession = databaseSession;
             this.deletedItems = new List<T>();
         }
 
@@ -116,26 +103,6 @@ namespace IngressTracker
         }
 
         /// <summary>
-        /// Gets or sets the display name.
-        /// </summary>
-        public override string DisplayName
-        {
-            get
-            {
-                return this.displayName;
-            }
-
-            set
-            {
-                if (this.displayName != value)
-                {
-                    this.displayName = value;
-                    this.NotifyOfPropertyChange(() => this.DisplayName);
-                }
-            }
-        }
-
-        /// <summary>
         /// Gets or sets the selected item.
         /// </summary>
         public T SelectedItem
@@ -158,17 +125,6 @@ namespace IngressTracker
         #endregion
 
         #region Properties
-
-        /// <summary>
-        /// Gets the database session.
-        /// </summary>
-        protected ISession DatabaseSession
-        {
-            get
-            {
-                return this.databaseSession;
-            }
-        }
 
         #endregion
 
@@ -284,7 +240,7 @@ namespace IngressTracker
         /// </returns>
         private bool ConfirmDataLoss()
         {
-            if (this.databaseSession.IsDirty() || this.deletedItems.Count > 0)
+            if (this.DatabaseSession.IsDirty() || this.deletedItems.Count > 0)
             {
                 var messageBoxResult = MessageBox.Show(
                     Resources.UnsavedChanges, 

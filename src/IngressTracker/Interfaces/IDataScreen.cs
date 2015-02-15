@@ -17,7 +17,7 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The DataScreen interface.
+//   The StaticDataScreen interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace IngressTracker.Interfaces
@@ -25,7 +25,7 @@ namespace IngressTracker.Interfaces
     using Caliburn.Micro;
 
     /// <summary>
-    /// The DataScreen interface.
+    /// The StaticDataScreen interface.
     /// </summary>
     public interface IDataScreen : IScreen
     {

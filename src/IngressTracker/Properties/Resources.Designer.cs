@@ -232,15 +232,6 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Admin user.
-        /// </summary>
-        public static string DbUserAdmin {
-            get {
-                return ResourceManager.GetString("DbUserAdmin", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Database username.
         /// </summary>
         public static string DbUserName {
@@ -313,6 +304,15 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Predictable?.
+        /// </summary>
+        public static string StatisticPredictable {
+            get {
+                return ResourceManager.GetString("StatisticPredictable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unit.
         /// </summary>
         public static string StatisticUnit {
@@ -349,11 +349,29 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Access to all agent profiles.
+        /// </summary>
+        public static string UserAccessToAllUsers {
+            get {
+                return ResourceManager.GetString("UserAccessToAllUsers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Faction.
         /// </summary>
         public static string UserFaction {
             get {
                 return ResourceManager.GetString("UserFaction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Static Data Administrator.
+        /// </summary>
+        public static string UserStaticDataAdmin {
+            get {
+                return ResourceManager.GetString("UserStaticDataAdmin", resourceCulture);
             }
         }
         
