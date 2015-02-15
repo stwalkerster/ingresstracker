@@ -26,7 +26,7 @@
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
+    <MapFileExtensions>false</MapFileExtensions>
     <InstallUrl>https://stwalkerster.co.uk/downloads/ingresstracker/</InstallUrl>
     <MinimumRequiredVersion>1.0.0.0</MinimumRequiredVersion>
     <ApplicationRevision>0</ApplicationRevision>
@@ -298,12 +298,14 @@
     <Resource Include="Images\Crystal\16\connect_creating.png" />
   </ItemGroup>
   <ItemGroup>
-    <PublishFile Include="$(OutputPath)\database.config">
-        <Visible>False</Visible> 
-        <Group></Group> 
-        <PublishState>Include</PublishState> 
-        <TargetPath></TargetPath> 
-        <FileType>File</FileType> 
+    <PublishFile Include="database.Release.config">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>database.config</TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>
   <ItemGroup>
