@@ -32,11 +32,23 @@
             <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/16/no3D.png" />
             <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/32/no3D.png" />
         </Style>
+        <Style x:Key="LevelStaticButtonStyle" TargetType="fluent:Button">
+            <Setter Property="Header" Value="{x:Static properties:Resources.LevelStaticView}" />
+            <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action OpenLevelStatic]" />
+            <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/16/up.png" />
+            <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/32/up.png" />
+        </Style>
         <Style x:Key="RawValuesButtonStyle" TargetType="fluent:Button">
             <Setter Property="Header" Value="{x:Static properties:Resources.RawValuesView}" />
             <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action OpenRawValues]" />
             <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/16/lists.png" />
             <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/32/lists.png" />
+        </Style>
+        <Style x:Key="BadgeAwardButtonStyle" TargetType="fluent:Button">
+            <Setter Property="Header" Value="{x:Static properties:Resources.BadgeAwardView}" />
+            <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action OpenBadgeAwards]" />
+            <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/16/bookmark.png" />
+            <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/32/bookmark.png" />
         </Style>
 
         <Style x:Key="LoginButtonStyle" TargetType="fluent:Button">
@@ -61,12 +73,14 @@
                 </fluent:RibbonGroupBox>
                 <fluent:RibbonGroupBox Header="{x:Static properties:Resources.Screens}">
                     <fluent:Button Style="{StaticResource RawValuesButtonStyle}" />
+                    <fluent:Button Style="{StaticResource BadgeAwardButtonStyle}" />
                 </fluent:RibbonGroupBox>
                 <fluent:RibbonGroupBox Header="{x:Static properties:Resources.StaticData}">
                     <fluent:Button Style="{StaticResource UserStaticButtonStyle}" />
                     <fluent:Button Style="{StaticResource CategoryStaticButtonStyle}" />
                     <fluent:Button Style="{StaticResource StatStaticButtonStyle}" />
                     <fluent:Button Style="{StaticResource BadgeStaticButtonStyle}" />
+                    <fluent:Button Style="{StaticResource LevelStaticButtonStyle}" />
                 </fluent:RibbonGroupBox>
                 <fluent:RibbonGroupBox Header="{x:Static properties:Resources.DataToolsActions}">
                     <fluent:Button Style="{StaticResource AddRowButtonStyle}" />

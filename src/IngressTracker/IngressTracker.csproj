@@ -125,10 +125,13 @@
     <Compile Include="Converters\DebugConverter.cs" />
     <Compile Include="Converters\InverseBooleanConverter.cs" />
     <Compile Include="Converters\WindowTitleConverter.cs" />
+    <Compile Include="DataModel\BadgeLevel.cs" />
     <Compile Include="DataModel\Models\Badge.cs" />
+    <Compile Include="DataModel\Models\BadgeAward.cs" />
     <Compile Include="DataModel\Models\Category.cs" />
-    <Compile Include="DbType.cs" />
+    <Compile Include="DataModel\DbType.cs" />
     <Compile Include="DataModel\Faction.cs" />
+    <Compile Include="DataModel\Models\Level.cs" />
     <Compile Include="DataModel\Models\Stat.cs" />
     <Compile Include="DataModel\Models\User.cs" />
     <Compile Include="DataModel\Models\ValueEntry.cs" />
@@ -140,7 +143,10 @@
     <Compile Include="Interfaces\IDataScreen.cs" />
     <Compile Include="Persistence\EntityBase.cs" />
     <Compile Include="Persistence\Interfaces\IDatabaseEntity.cs" />
+    <Compile Include="Persistence\Interfaces\IDataEntity.cs" />
     <Compile Include="Persistence\Interfaces\ISessionFactoryProvider.cs" />
+    <Compile Include="Persistence\Mappings\BadgeAwardMap.cs" />
+    <Compile Include="Persistence\Mappings\LevelMap.cs" />
     <Compile Include="Persistence\Mappings\ValueEntryMap.cs" />
     <Compile Include="Persistence\Mappings\BadgeMap.cs" />
     <Compile Include="Persistence\Mappings\CategoryMap.cs" />
@@ -149,6 +155,7 @@
     <Compile Include="Persistence\Proxy\DataBindingFactory.cs" />
     <Compile Include="Persistence\Proxy\DataBindingInterceptor.cs" />
     <Compile Include="Persistence\SessionFactoryProvider.cs" />
+    <Compile Include="ScreenBase\DataScreenBase.cs" />
     <Compile Include="ScreenBase\Interfaces\IStaticDataScreen.cs" />
     <Compile Include="ScreenBase\ScreenBase.cs" />
     <Compile Include="Services\Interfaces\ILoginService.cs" />
@@ -159,8 +166,11 @@
     <Compile Include="Startup\Resolvers\AppSettingsDependencyResolver.cs" />
     <Compile Include="Startup\WindsorServiceLocator.cs" />
     <Compile Include="ScreenBase\StaticDataScreen.cs" />
+    <Compile Include="ViewModels\BadgeAwardViewModel.cs" />
     <Compile Include="ViewModels\BadgeStaticViewModel.cs" />
     <Compile Include="ViewModels\CategoryStaticViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\IBadgeAwardViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\ILevelStaticViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\ILoginViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IBadgeStaticViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\ICategoryStaticViewModel.cs" />
@@ -168,6 +178,7 @@
     <Compile Include="ViewModels\Interfaces\IShellViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IStatisticsStaticViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IUserStaticViewModel.cs" />
+    <Compile Include="ViewModels\LevelStaticViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\RawValueViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
@@ -177,11 +188,17 @@
     </Compile>
     <Compile Include="ViewModels\StatisticsStaticViewModel.cs" />
     <Compile Include="ViewModels\UserStaticViewModel.cs" />
+    <Compile Include="Views\BadgeAwardView.xaml.cs">
+      <DependentUpon>BadgeAwardView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\BadgeStaticView.xaml.cs">
       <DependentUpon>BadgeStaticView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CategoryStaticView.xaml.cs">
       <DependentUpon>CategoryStaticView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LevelStaticView.xaml.cs">
+      <DependentUpon>LevelStaticView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
@@ -203,7 +220,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\BadgeAwardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\BadgeStaticView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LevelStaticView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -241,6 +266,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Resource Include="Images\Crystal\16\bookmark.png" />
+    <Resource Include="Images\Crystal\32\bookmark.png" />
+    <Resource Include="Images\Crystal\16\up.png" />
+    <Resource Include="Images\Crystal\32\up.png" />
     <Resource Include="Images\Crystal\16\lists.png" />
     <Resource Include="Images\Crystal\32\lists.png" />
     <EmbeddedResource Include="Properties\Resources.resx">

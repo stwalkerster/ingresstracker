@@ -22,19 +22,11 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace IngressTracker.ScreenBase
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Windows;
-
-    using IngressTracker.Interfaces;
-    using IngressTracker.Persistence.Proxy;
-    using IngressTracker.Properties;
+    using IngressTracker.Persistence.Interfaces;
     using IngressTracker.ScreenBase.Interfaces;
     using IngressTracker.Services.Interfaces;
 
     using NHibernate;
-    using NHibernate.Linq;
 
     /// <summary>
     /// The data screen.
@@ -42,27 +34,9 @@ namespace IngressTracker.ScreenBase
     /// <typeparam name="T">
     /// The type of data shown
     /// </typeparam>
-    public abstract class StaticDataScreen<T> : ScreenBase, IDataOperations, IStaticDataScreen
+    public abstract class StaticDataScreen<T> : DataScreenBase<T>, IStaticDataScreen
+        where T : class, IDataEntity
     {
-        #region Fields
-
-        /// <summary>
-        /// The deleted items.
-        /// </summary>
-        private readonly List<T> deletedItems;
-
-        /// <summary>
-        /// The DataItems.
-        /// </summary>
-        private ObservableCollection<T> dataItems;
-
-        /// <summary>
-        /// The selected item.
-        /// </summary>
-        private T selectedItem;
-
-        #endregion
-
         #region Constructors and Destructors
 
         /// <summary>
@@ -80,7 +54,6 @@ namespace IngressTracker.ScreenBase
         protected StaticDataScreen(string displayName, ISession databaseSession, ILoginService loginService)
             : base(displayName, databaseSession, loginService)
         {
-            this.deletedItems = new List<T>();
         }
 
         #endregion
@@ -96,176 +69,6 @@ namespace IngressTracker.ScreenBase
             {
                 return this.LoginService.Agent.StaticDataAdmin;
             }
-        }
-
-        /// <summary>
-        /// Gets or sets the DataItems.
-        /// </summary>
-        public ObservableCollection<T> DataItems
-        {
-            get
-            {
-                return this.dataItems;
-            }
-
-            set
-            {
-                if (value != this.dataItems)
-                {
-                    this.dataItems = value;
-                    this.NotifyOfPropertyChange(() => this.DataItems);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the selected item.
-        /// </summary>
-        public T SelectedItem
-        {
-            get
-            {
-                return this.selectedItem;
-            }
-
-            set
-            {
-                if (!object.Equals(this.selectedItem, value))
-                {
-                    this.selectedItem = value;
-                    this.NotifyOfPropertyChange(() => this.SelectedItem);
-                }
-            }
-        }
-
-        #endregion
-
-        #region Public Methods and Operators
-
-        /// <summary>
-        /// The add record.
-        /// </summary>
-        public void AddRecord()
-        {
-            this.DataItems.Add(DataBindingFactory.Create<T>());
-        }
-
-        /// <summary>
-        /// The can close.
-        /// </summary>
-        /// <param name="callback">
-        /// The callback.
-        /// </param>
-        public override void CanClose(Action<bool> callback)
-        {
-            if (!this.ConfirmDataLoss())
-            {
-                callback(false);
-            }
-
-            base.CanClose(callback);
-        }
-
-        /// <summary>
-        /// The delete record.
-        /// </summary>
-        public void DeleteRecord()
-        {
-            if (!this.deletedItems.Contains(this.SelectedItem))
-            {
-                this.deletedItems.Add(this.SelectedItem);
-            }
-
-            this.DataItems.Remove(this.SelectedItem);
-        }
-
-        /// <summary>
-        /// The refresh data.
-        /// </summary>
-        public virtual void RefreshData()
-        {
-            if (this.ConfirmDataLoss())
-            {
-                this.deletedItems.Clear();
-                this.DatabaseSession.Clear();
-                var enumerable = this.DatabaseSession.Query<T>();
-                this.DataItems = new ObservableCollection<T>(enumerable);
-            }
-        }
-
-        /// <summary>
-        /// The save.
-        /// </summary>
-        public void Save()
-        {
-            try
-            {
-                // handle the deletes
-                foreach (var deletedItem in this.deletedItems)
-                {
-                    this.DatabaseSession.Delete(deletedItem);
-                }
-
-                this.deletedItems.Clear();
-
-                // handle the saves
-                foreach (var dataItem in this.DataItems)
-                {
-                    this.DatabaseSession.SaveOrUpdate(dataItem);
-                }
-
-                this.DatabaseSession.Flush();
-            }
-            catch (Exception e)
-            {
-                var errorSavingTransaction = string.Format(
-                    "Error saving transaction\r\n\r\n{0}\r\n\r\n{1}", 
-                    e.Message, 
-                    e.StackTrace);
-                MessageBox.Show(errorSavingTransaction);
-            }
-
-            this.RefreshData();
-        }
-
-        #endregion
-
-        #region Methods
-
-        /// <summary>
-        /// The on view loaded.
-        /// </summary>
-        /// <param name="view">
-        /// The view.
-        /// </param>
-        protected override void OnViewLoaded(object view)
-        {
-            base.OnViewLoaded(view);
-            this.RefreshData();
-        }
-
-        /// <summary>
-        /// The confirm data loss.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        private bool ConfirmDataLoss()
-        {
-            if (this.DatabaseSession.IsDirty() || this.deletedItems.Count > 0)
-            {
-                var messageBoxResult = MessageBox.Show(
-                    Resources.UnsavedChanges, 
-                    Resources.UnsavedChangesTitle, 
-                    MessageBoxButton.YesNo, 
-                    MessageBoxImage.Warning);
-                if (messageBoxResult != MessageBoxResult.Yes)
-                {
-                    return false;
-                }
-            }
-
-            return true;
         }
 
         #endregion

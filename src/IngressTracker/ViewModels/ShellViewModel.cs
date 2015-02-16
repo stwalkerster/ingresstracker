@@ -112,6 +112,17 @@ namespace IngressTracker.ViewModels
         }
 
         /// <summary>
+        /// Gets a value indicating whether can open badge awards.
+        /// </summary>
+        public bool CanOpenBadgeAwards
+        {
+            get
+            {
+                return this.loginService.LoginComplete;
+            }
+        }
+
+        /// <summary>
         /// Gets a value indicating whether can open badge static.
         /// </summary>
         public bool CanOpenBadgeStatic
@@ -126,6 +137,17 @@ namespace IngressTracker.ViewModels
         /// Gets a value indicating whether can open category static.
         /// </summary>
         public bool CanOpenCategoryStatic
+        {
+            get
+            {
+                return this.loginService.LoginComplete;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether can open level static.
+        /// </summary>
+        public bool CanOpenLevelStatic
         {
             get
             {
@@ -303,6 +325,15 @@ namespace IngressTracker.ViewModels
         }
 
         /// <summary>
+        /// The open badge awards.
+        /// </summary>
+        public void OpenBadgeAwards()
+        {
+            var window = ServiceLocator.Current.GetInstance<IBadgeAwardViewModel>();
+            this.ActivateItem(window);
+        }
+
+        /// <summary>
         /// The open badge static.
         /// </summary>
         public void OpenBadgeStatic()
@@ -317,6 +348,15 @@ namespace IngressTracker.ViewModels
         public void OpenCategoryStatic()
         {
             var window = ServiceLocator.Current.GetInstance<ICategoryStaticViewModel>();
+            this.ActivateItem(window);
+        }
+
+        /// <summary>
+        /// The open level static.
+        /// </summary>
+        public void OpenLevelStatic()
+        {
+            var window = ServiceLocator.Current.GetInstance<ILevelStaticViewModel>();
             this.ActivateItem(window);
         }
 

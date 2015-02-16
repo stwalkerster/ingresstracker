@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IDatabaseEntity.cs" company="Simon Walker">
+// <copyright file="BadgeAwardMap.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,15 +17,35 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The DatabaseEntity interface.
+//   The badge award map.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.Persistence.Interfaces
+
+namespace IngressTracker.Persistence.Mappings
 {
+    using FluentNHibernate.Mapping;
+
+    using IngressTracker.DataModel.Models;
+
     /// <summary>
-    /// The DatabaseEntity interface.
+    /// The badge award map.
     /// </summary>
-    public interface IDatabaseEntity : IDataEntity
+    public class BadgeAwardMap : ClassMap<BadgeAward>
     {
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="BadgeAwardMap"/> class.
+        /// </summary>
+        public BadgeAwardMap()
+        {
+            this.Table("badgeaward");
+            this.Id(x => x.Id).Column("id");
+            this.References(x => x.Agent).Column("user");
+            this.References(x => x.Badge).Column("badge");
+            this.Map(x => x.LevelCode).Column("level");
+        }
+
+        #endregion
     }
 }

@@ -79,10 +79,9 @@ namespace IngressTracker.DataModel
         /// <param name="backgroundColour">
         /// The background colour.
         /// </param>
-        private Faction(string name, string code, Brush colour, Brush backgroundColour)
+        private Faction(string name, string code, Brush colour, Brush backgroundColour) : base(code)
         {
             this.Name = name;
-            this.Code = code;
             this.Colour = colour;
             this.BackgroundColour = backgroundColour;
         }
@@ -95,11 +94,6 @@ namespace IngressTracker.DataModel
         /// Gets the background colour.
         /// </summary>
         public Brush BackgroundColour { get; private set; }
-
-        /// <summary>
-        /// Gets the code.
-        /// </summary>
-        public string Code { get; private set; }
 
         /// <summary>
         /// Gets the colour.

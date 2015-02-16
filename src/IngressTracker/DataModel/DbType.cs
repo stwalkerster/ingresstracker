@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="User.cs" company="Simon Walker">
+// <copyright file="DbType.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,77 +17,102 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The user.
+//   The db type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.DataModel.Models
+namespace IngressTracker.DataModel
 {
-    using IngressTracker.Persistence;
+    using System.Collections.Generic;
+
+    using IngressTracker.Persistence.Interfaces;
 
     /// <summary>
-    /// The user.
+    /// The database type.
     /// </summary>
-    public class User : EntityBase
+    /// <typeparam name="T">
+    /// the type
+    /// </typeparam>
+    public class DbType<T> : IDataEntity
+        where T : DbType<T>
     {
+        #region Static Fields
+
+        /// <summary>
+        /// The item collection.
+        /// </summary>
+        public static readonly List<T> ItemCollection = new List<T>();
+
+        /// <summary>
+        /// The lookup map.
+        /// </summary>
+        private static readonly Dictionary<string, T> LookupMap = new Dictionary<string, T>();
+
+        #endregion
+
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="DbType{T}"/> class.
+        /// </summary>
+        /// <param name="code">
+        /// The code.
+        /// </param>
+        protected DbType(string code)
+        {
+            this.Code = code;
+        }
+
+        #endregion
+
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets a value indicating whether access to all agents.
+        /// Gets the code.
         /// </summary>
-        public virtual bool AccessToAllAgents { get; set; }
-
-        /// <summary>
-        /// Gets or sets the username.
-        /// </summary>
-        public virtual string AgentName { get; set; }
-
-        /// <summary>
-        /// Gets or sets the database username.
-        /// </summary>
-        public virtual string DatabaseUsername { get; set; }
-
-        /// <summary>
-        /// Gets or sets the faction.
-        /// </summary>
-        public virtual Faction Faction
-        {
-            get
-            {
-                // no-op to trigger static constructor
-                var enlightened = Faction.Enlightened;
-
-                return Faction.Lookup(this.FactionCode);
-            }
-
-            set
-            {
-                this.FactionCode = value.Code;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the faction.
-        /// </summary>
-        public virtual string FactionCode { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether database admin.
-        /// </summary>
-        public virtual bool StaticDataAdmin { get; set; }
+        public string Code { get; private set; }
 
         #endregion
 
         #region Public Methods and Operators
 
         /// <summary>
-        /// The to string.
+        /// The lookup.
         /// </summary>
+        /// <param name="code">
+        /// The code.
+        /// </param>
         /// <returns>
-        /// The <see cref="string"/>.
+        /// The <see cref="T"/>.
         /// </returns>
-        public override string ToString()
+        public static T Lookup(string code)
         {
-            return this.AgentName;
+            if (code == null)
+            {
+                return null;
+            }
+
+            if (LookupMap.ContainsKey(code))
+            {
+                return LookupMap[code];
+            }
+
+            return null;
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// The add item.
+        /// </summary>
+        /// <param name="item">
+        /// The item.
+        /// </param>
+        protected static void AddItem(T item)
+        {
+            ItemCollection.Add(item);
+            LookupMap.Add(item.Code, item);
         }
 
         #endregion

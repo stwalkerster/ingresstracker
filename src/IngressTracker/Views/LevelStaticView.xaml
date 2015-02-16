@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="IngressTracker.Views.LevelStaticView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:properties="clr-namespace:IngressTracker.Properties"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <DataGrid Style="{StaticResource StaticDataScreenDataGridStyle}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="{x:Static properties:Resources.LevelNumber}" Binding="{Binding LevelNumber}" />
+                <DataGridTextColumn Header="{x:Static properties:Resources.LevelAP}" Binding="{Binding AccessPoints}" />
+                <DataGridTextColumn Header="{x:Static properties:Resources.LevelSilvers}" Binding="{Binding SilverBadges}" />
+                <DataGridTextColumn Header="{x:Static properties:Resources.LevelGolds}" Binding="{Binding GoldBadges}" />
+                <DataGridTextColumn Header="{x:Static properties:Resources.LevelPlatinums}" Binding="{Binding PlatinumBadges}" />
+                <DataGridTextColumn Header="{x:Static properties:Resources.LevelBlacks}" Binding="{Binding BlackBadges}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

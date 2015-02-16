@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="User.cs" company="Simon Walker">
+// <copyright file="BadgeLevel.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,63 +17,84 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The user.
+//   The badge level.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.DataModel.Models
+namespace IngressTracker.DataModel
 {
-    using IngressTracker.Persistence;
+    using IngressTracker.Properties;
 
     /// <summary>
-    /// The user.
+    /// The badge level.
     /// </summary>
-    public class User : EntityBase
+    public class BadgeLevel : DbType<BadgeLevel>
     {
-        #region Public Properties
+        #region Static Fields
 
         /// <summary>
-        /// Gets or sets a value indicating whether access to all agents.
+        /// The black.
         /// </summary>
-        public virtual bool AccessToAllAgents { get; set; }
+        public static readonly BadgeLevel Black = new BadgeLevel("K", Resources.Black);
 
         /// <summary>
-        /// Gets or sets the username.
+        /// The bronze.
         /// </summary>
-        public virtual string AgentName { get; set; }
+        public static readonly BadgeLevel Bronze = new BadgeLevel("B", Resources.Bronze);
 
         /// <summary>
-        /// Gets or sets the database username.
+        /// The gold.
         /// </summary>
-        public virtual string DatabaseUsername { get; set; }
+        public static readonly BadgeLevel Gold = new BadgeLevel("G", Resources.Gold);
 
         /// <summary>
-        /// Gets or sets the faction.
+        /// The platinum.
         /// </summary>
-        public virtual Faction Faction
+        public static readonly BadgeLevel Platinum = new BadgeLevel("P", Resources.Platinum);
+
+        /// <summary>
+        /// The silver.
+        /// </summary>
+        public static readonly BadgeLevel Silver = new BadgeLevel("S", Resources.Silver);
+
+        #endregion
+
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initialises static members of the <see cref="BadgeLevel"/> class.
+        /// </summary>
+        static BadgeLevel()
         {
-            get
-            {
-                // no-op to trigger static constructor
-                var enlightened = Faction.Enlightened;
-
-                return Faction.Lookup(this.FactionCode);
-            }
-
-            set
-            {
-                this.FactionCode = value.Code;
-            }
+            BadgeLevel.AddItem(Bronze);
+            BadgeLevel.AddItem(Silver);
+            BadgeLevel.AddItem(Gold);
+            BadgeLevel.AddItem(Platinum);
+            BadgeLevel.AddItem(Black);
         }
 
         /// <summary>
-        /// Gets or sets the faction.
+        /// Initialises a new instance of the <see cref="BadgeLevel"/> class.
         /// </summary>
-        public virtual string FactionCode { get; set; }
+        /// <param name="code">
+        /// The code.
+        /// </param>
+        /// <param name="description">
+        /// The description.
+        /// </param>
+        private BadgeLevel(string code, string description)
+            : base(code)
+        {
+            this.Description = description;
+        }
+
+        #endregion
+
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets a value indicating whether database admin.
+        /// Gets the description.
         /// </summary>
-        public virtual bool StaticDataAdmin { get; set; }
+        public string Description { get; private set; }
 
         #endregion
 
@@ -87,7 +108,7 @@ namespace IngressTracker.DataModel.Models
         /// </returns>
         public override string ToString()
         {
-            return this.AgentName;
+            return this.Description;
         }
 
         #endregion

@@ -88,11 +88,29 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Badge.
+        /// </summary>
+        public static string Badge {
+            get {
+                return ResourceManager.GetString("Badge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Is Awardable.
         /// </summary>
         public static string BadgeAwardable {
             get {
                 return ResourceManager.GetString("BadgeAwardable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Extra Badges.
+        /// </summary>
+        public static string BadgeAwardView {
+            get {
+                return ResourceManager.GetString("BadgeAwardView", resourceCulture);
             }
         }
         
@@ -120,6 +138,15 @@ namespace IngressTracker.Properties {
         public static string BadgeGold {
             get {
                 return ResourceManager.GetString("BadgeGold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Badge Level.
+        /// </summary>
+        public static string BadgeLevel {
+            get {
+                return ResourceManager.GetString("BadgeLevel", resourceCulture);
             }
         }
         
@@ -165,6 +192,24 @@ namespace IngressTracker.Properties {
         public static string BadgeStatistic {
             get {
                 return ResourceManager.GetString("BadgeStatistic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Black.
+        /// </summary>
+        public static string Black {
+            get {
+                return ResourceManager.GetString("Black", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bronze.
+        /// </summary>
+        public static string Bronze {
+            get {
+                return ResourceManager.GetString("Bronze", resourceCulture);
             }
         }
         
@@ -322,6 +367,78 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Gold.
+        /// </summary>
+        public static string Gold {
+            get {
+                return ResourceManager.GetString("Gold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Access Points.
+        /// </summary>
+        public static string LevelAP {
+            get {
+                return ResourceManager.GetString("LevelAP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Black Badges Required.
+        /// </summary>
+        public static string LevelBlacks {
+            get {
+                return ResourceManager.GetString("LevelBlacks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gold Badges Required.
+        /// </summary>
+        public static string LevelGolds {
+            get {
+                return ResourceManager.GetString("LevelGolds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Level #.
+        /// </summary>
+        public static string LevelNumber {
+            get {
+                return ResourceManager.GetString("LevelNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Platinum Badges Required.
+        /// </summary>
+        public static string LevelPlatinums {
+            get {
+                return ResourceManager.GetString("LevelPlatinums", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Silver Badges Required.
+        /// </summary>
+        public static string LevelSilvers {
+            get {
+                return ResourceManager.GetString("LevelSilvers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Levels.
+        /// </summary>
+        public static string LevelStaticView {
+            get {
+                return ResourceManager.GetString("LevelStaticView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
         public static string Login {
@@ -349,6 +466,15 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Platinum.
+        /// </summary>
+        public static string Platinum {
+            get {
+                return ResourceManager.GetString("Platinum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Raw Statistic Values.
         /// </summary>
         public static string RawValuesView {
@@ -363,6 +489,15 @@ namespace IngressTracker.Properties {
         public static string Screens {
             get {
                 return ResourceManager.GetString("Screens", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Silver.
+        /// </summary>
+        public static string Silver {
+            get {
+                return ResourceManager.GetString("Silver", resourceCulture);
             }
         }
         

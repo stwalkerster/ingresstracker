@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="User.cs" company="Simon Walker">
+// <copyright file="BadgeAward.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,7 +17,7 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The user.
+//   The badge award.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace IngressTracker.DataModel.Models
@@ -25,70 +25,47 @@ namespace IngressTracker.DataModel.Models
     using IngressTracker.Persistence;
 
     /// <summary>
-    /// The user.
+    /// The badge award.
     /// </summary>
-    public class User : EntityBase
+    public class BadgeAward : EntityBase
     {
+        public BadgeAward()
+        {
+            var init = BadgeLevel.Bronze;
+        }
+
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets a value indicating whether access to all agents.
+        /// Gets or sets the badge.
         /// </summary>
-        public virtual bool AccessToAllAgents { get; set; }
+        public virtual User Agent { get; set; }
 
         /// <summary>
-        /// Gets or sets the username.
+        /// Gets or sets the badge.
         /// </summary>
-        public virtual string AgentName { get; set; }
+        public virtual Badge Badge { get; set; }
 
         /// <summary>
-        /// Gets or sets the database username.
+        /// Gets or sets the level.
         /// </summary>
-        public virtual string DatabaseUsername { get; set; }
-
-        /// <summary>
-        /// Gets or sets the faction.
-        /// </summary>
-        public virtual Faction Faction
+        public virtual BadgeLevel Level
         {
             get
             {
-                // no-op to trigger static constructor
-                var enlightened = Faction.Enlightened;
-
-                return Faction.Lookup(this.FactionCode);
+                return BadgeLevel.Lookup(this.LevelCode);
             }
 
             set
             {
-                this.FactionCode = value.Code;
+                this.LevelCode = value.Code;
             }
         }
 
         /// <summary>
-        /// Gets or sets the faction.
+        /// Gets or sets the level.
         /// </summary>
-        public virtual string FactionCode { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether database admin.
-        /// </summary>
-        public virtual bool StaticDataAdmin { get; set; }
-
-        #endregion
-
-        #region Public Methods and Operators
-
-        /// <summary>
-        /// The to string.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        public override string ToString()
-        {
-            return this.AgentName;
-        }
+        public virtual string LevelCode { get; set; }
 
         #endregion
     }

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IDatabaseEntity.cs" company="Simon Walker">
+// <copyright file="ILevelStaticViewModel.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,15 +17,18 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The DatabaseEntity interface.
+//   The LevelStaticViewModel interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.Persistence.Interfaces
+
+namespace IngressTracker.ViewModels.Interfaces
 {
+    using Caliburn.Micro;
+
     /// <summary>
-    /// The DatabaseEntity interface.
+    /// The LevelStaticViewModel interface.
     /// </summary>
-    public interface IDatabaseEntity : IDataEntity
+    public interface ILevelStaticViewModel : IScreen
     {
     }
 }

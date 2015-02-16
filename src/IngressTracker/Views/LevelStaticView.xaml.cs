@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IDatabaseEntity.cs" company="Simon Walker">
+// <copyright file="LevelStaticView.xaml.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,15 +17,29 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The DatabaseEntity interface.
+//   Interaction logic for LevelStaticView.xaml
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.Persistence.Interfaces
+
+namespace IngressTracker.Views
 {
+    using System.Windows.Controls;
+
     /// <summary>
-    /// The DatabaseEntity interface.
+    /// Interaction logic for LevelStaticView.xaml
     /// </summary>
-    public interface IDatabaseEntity : IDataEntity
+    public partial class LevelStaticView : UserControl
     {
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="LevelStaticView"/> class.
+        /// </summary>
+        public LevelStaticView()
+        {
+            this.InitializeComponent();
+        }
+
+        #endregion
     }
 }

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IDatabaseEntity.cs" company="Simon Walker">
+// <copyright file="LevelMap.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,15 +17,38 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The DatabaseEntity interface.
+//   The level map.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.Persistence.Interfaces
+
+namespace IngressTracker.Persistence.Mappings
 {
+    using FluentNHibernate.Mapping;
+
+    using IngressTracker.DataModel.Models;
+
     /// <summary>
-    /// The DatabaseEntity interface.
+    /// The level map.
     /// </summary>
-    public interface IDatabaseEntity : IDataEntity
+    public class LevelMap : ClassMap<Level>
     {
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="LevelMap"/> class.
+        /// </summary>
+        public LevelMap()
+        {
+            this.Table("level");
+            this.Id(x => x.Id).Column("id");
+            this.Map(x => x.LevelNumber).Column("level");
+            this.Map(x => x.AccessPoints).Column("ap");
+            this.Map(x => x.SilverBadges).Column("silver");
+            this.Map(x => x.GoldBadges).Column("gold");
+            this.Map(x => x.PlatinumBadges).Column("platinum");
+            this.Map(x => x.BlackBadges).Column("black");
+        }
+
+        #endregion
     }
 }

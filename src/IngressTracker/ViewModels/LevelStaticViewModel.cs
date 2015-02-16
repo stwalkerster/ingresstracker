@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DbType.cs" company="Simon Walker">
+// <copyright file="LevelStaticViewModel.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,42 +17,38 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The db type.
+//   The level static view model.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
-namespace IngressTracker.DataModel
+namespace IngressTracker.ViewModels
 {
-    using System.Collections.Generic;
+    using IngressTracker.DataModel.Models;
+    using IngressTracker.Properties;
+    using IngressTracker.ScreenBase;
+    using IngressTracker.Services.Interfaces;
+    using IngressTracker.ViewModels.Interfaces;
+
+    using NHibernate;
 
     /// <summary>
-    /// The db type.
+    /// The level static view model.
     /// </summary>
-    /// <typeparam name="T">
-    /// the type
-    /// </typeparam>
-    public class DbType<T>
+    public class LevelStaticViewModel : StaticDataScreen<Level>, ILevelStaticViewModel
     {
-        #region Static Fields
+        #region Constructors and Destructors
 
         /// <summary>
-        /// The item collection.
+        /// Initialises a new instance of the <see cref="LevelStaticViewModel"/> class.
         /// </summary>
-        public static readonly List<T> ItemCollection = new List<T>();
-
-        #endregion
-
-        #region Methods
-
-        /// <summary>
-        /// The add item.
-        /// </summary>
-        /// <param name="item">
-        /// The item.
+        /// <param name="databaseSession">
+        /// The database session.
         /// </param>
-        protected static void AddItem(T item)
+        /// <param name="loginService">
+        /// The login service.
+        /// </param>
+        public LevelStaticViewModel(ISession databaseSession, ILoginService loginService)
+            : base(Resources.LevelStaticView, databaseSession, loginService)
         {
-            ItemCollection.Add(item);
         }
 
         #endregion

@@ -267,4 +267,49 @@
   <data name="BadgeAwardable" xml:space="preserve">
     <value>Is Awardable</value>
   </data>
+  <data name="Black" xml:space="preserve">
+    <value>Black</value>
+  </data>
+  <data name="Bronze" xml:space="preserve">
+    <value>Bronze</value>
+  </data>
+  <data name="Gold" xml:space="preserve">
+    <value>Gold</value>
+  </data>
+  <data name="Platinum" xml:space="preserve">
+    <value>Platinum</value>
+  </data>
+  <data name="Silver" xml:space="preserve">
+    <value>Silver</value>
+  </data>
+  <data name="Badge" xml:space="preserve">
+    <value>Badge</value>
+  </data>
+  <data name="BadgeAwardView" xml:space="preserve">
+    <value>Extra Badges</value>
+  </data>
+  <data name="BadgeLevel" xml:space="preserve">
+    <value>Badge Level</value>
+  </data>
+  <data name="LevelAP" xml:space="preserve">
+    <value>Access Points</value>
+  </data>
+  <data name="LevelBlacks" xml:space="preserve">
+    <value>Black Badges Required</value>
+  </data>
+  <data name="LevelGolds" xml:space="preserve">
+    <value>Gold Badges Required</value>
+  </data>
+  <data name="LevelNumber" xml:space="preserve">
+    <value>Level #</value>
+  </data>
+  <data name="LevelPlatinums" xml:space="preserve">
+    <value>Platinum Badges Required</value>
+  </data>
+  <data name="LevelSilvers" xml:space="preserve">
+    <value>Silver Badges Required</value>
+  </data>
+  <data name="LevelStaticView" xml:space="preserve">
+    <value>Levels</value>
+  </data>
 </root>

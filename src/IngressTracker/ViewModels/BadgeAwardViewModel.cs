@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="RawValueViewModel.cs" company="Simon Walker">
+// <copyright file="BadgeAwardViewModel.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,7 +17,7 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The raw value view model.
+//   The badge award view model.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace IngressTracker.ViewModels
@@ -35,14 +35,14 @@ namespace IngressTracker.ViewModels
     using NHibernate.Linq;
 
     /// <summary>
-    /// The raw value view model.
+    /// The badge award view model.
     /// </summary>
-    public class RawValueViewModel : DataScreenBase<ValueEntry>, IRawValueViewModel
+    public class BadgeAwardViewModel : DataScreenBase<BadgeAward>, IBadgeAwardViewModel
     {
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initialises a new instance of the <see cref="RawValueViewModel"/> class.
+        /// Initialises a new instance of the <see cref="BadgeAwardViewModel"/> class.
         /// </summary>
         /// <param name="databaseSession">
         /// The database session.
@@ -50,8 +50,8 @@ namespace IngressTracker.ViewModels
         /// <param name="loginService">
         /// The login service.
         /// </param>
-        public RawValueViewModel(ISession databaseSession, ILoginService loginService)
-            : base(Resources.RawValuesView, databaseSession, loginService)
+        public BadgeAwardViewModel(ISession databaseSession, ILoginService loginService)
+            : base(Resources.BadgeAwardView, databaseSession, loginService)
         {
         }
 
@@ -65,9 +65,9 @@ namespace IngressTracker.ViewModels
         public IEnumerable<User> Agents { get; private set; }
 
         /// <summary>
-        /// Gets the statistics.
+        /// Gets the badges.
         /// </summary>
-        public IEnumerable<Stat> Statistics { get; private set; }
+        public IEnumerable<Badge> Badges { get; private set; }
 
         #endregion
 
@@ -83,31 +83,10 @@ namespace IngressTracker.ViewModels
             this.Agents = this.DatabaseSession.Query<User>().ToList();
             this.NotifyOfPropertyChange(() => this.Agents);
 
-            this.Statistics = this.DatabaseSession.Query<Stat>().ToList();
-            this.NotifyOfPropertyChange(() => this.Statistics);
+            this.Badges = this.DatabaseSession.QueryOver<Badge>().Where(x => !x.Awardable).List();
+            this.NotifyOfPropertyChange(() => this.Badges);
         }
-
-        /// <summary>
-        /// The get data.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="IEnumerable{ValueEntry}"/>.
-        /// </returns>
-        protected override IEnumerable<ValueEntry> GetData()
-        {
-            var agent = this.LoginService.Agent;
-
-            if (agent.AccessToAllAgents)
-            {
-                return this.DatabaseSession.QueryOver<ValueEntry>().List();
-            }
-
-            return
-                this.DatabaseSession.QueryOver<ValueEntry>()
-                    .Where(x => x.Agent == agent)
-                    .List();
-        }
-
+        
         #endregion
     }
 }
