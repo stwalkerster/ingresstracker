@@ -312,4 +312,7 @@
   <data name="LevelStaticView" xml:space="preserve">
     <value>Levels</value>
   </data>
+  <data name="UserOverviewView" xml:space="preserve">
+    <value>Overview</value>
+  </data>
 </root>

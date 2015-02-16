@@ -189,6 +189,18 @@ namespace IngressTracker.ViewModels
         }
 
         /// <summary>
+        /// Gets a value indicating whether can open user overview.
+        /// </summary>
+        public bool CanOpenUserOverview
+        {
+            get
+            {
+                return false;
+                return this.loginService.LoginComplete;
+            }
+        }
+
+        /// <summary>
         /// Gets a value indicating whether can open user static.
         /// </summary>
         public bool CanOpenUserStatic
@@ -384,6 +396,15 @@ namespace IngressTracker.ViewModels
         public void OpenStatStatic()
         {
             var window = ServiceLocator.Current.GetInstance<IStatisticsStaticViewModel>();
+            this.ActivateItem(window);
+        }
+
+        /// <summary>
+        /// The open user overview.
+        /// </summary>
+        public void OpenUserOverview()
+        {
+            var window = ServiceLocator.Current.GetInstance<IUserOverviewViewModel>();
             this.ActivateItem(window);
         }
 

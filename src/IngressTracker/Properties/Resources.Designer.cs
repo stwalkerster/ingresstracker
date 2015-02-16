@@ -610,6 +610,15 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Overview.
+        /// </summary>
+        public static string UserOverviewView {
+            get {
+                return ResourceManager.GetString("UserOverviewView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Static Data Administrator.
         /// </summary>
         public static string UserStaticDataAdmin {

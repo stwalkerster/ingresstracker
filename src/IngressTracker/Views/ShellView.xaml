@@ -11,8 +11,8 @@
         <Style x:Key="UserStaticButtonStyle" TargetType="fluent:Button">
             <Setter Property="Header" Value="{x:Static properties:Resources.UserStaticView}" />
             <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action OpenUserStatic]" />
-            <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/16/personal.png" />
-            <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/32/personal.png" />
+            <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/16/groupevent.png" />
+            <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/32/groupevent.png" />
         </Style>
         <Style x:Key="StatStaticButtonStyle" TargetType="fluent:Button">
             <Setter Property="Header" Value="{x:Static properties:Resources.StatStaticView}" />
@@ -50,6 +50,12 @@
             <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/16/bookmark.png" />
             <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/32/bookmark.png" />
         </Style>
+        <Style x:Key="UserOverviewButtonStyle" TargetType="fluent:Button">
+            <Setter Property="Header" Value="{x:Static properties:Resources.UserOverviewView}" />
+            <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action OpenUserOverview]" />
+            <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/16/personal.png" />
+            <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/32/personal.png" />
+        </Style>
 
         <Style x:Key="LoginButtonStyle" TargetType="fluent:Button">
             <Setter Property="Header" Value="{x:Static properties:Resources.Login}" />
@@ -72,6 +78,7 @@
                     <fluent:Button Style="{StaticResource LoginButtonStyle}" />
                 </fluent:RibbonGroupBox>
                 <fluent:RibbonGroupBox Header="{x:Static properties:Resources.Screens}">
+                    <fluent:Button Style="{StaticResource UserOverviewButtonStyle}" />
                     <fluent:Button Style="{StaticResource RawValuesButtonStyle}" />
                     <fluent:Button Style="{StaticResource BadgeAwardButtonStyle}" />
                 </fluent:RibbonGroupBox>
