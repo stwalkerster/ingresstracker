@@ -29,10 +29,17 @@ namespace IngressTracker.DataModel.Models
     /// </summary>
     public class BadgeAward : EntityBase
     {
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="BadgeAward"/> class.
+        /// </summary>
         public BadgeAward()
         {
             var init = BadgeLevel.Bronze;
         }
+
+        #endregion
 
         #region Public Properties
 

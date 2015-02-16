@@ -28,7 +28,7 @@ namespace IngressTracker.Views
     /// <summary>
     /// Interaction logic for BadgeAwardView.xaml
     /// </summary>
-    public partial class BadgeAwardView : UserControl
+    public partial class BadgeAwardView
     {
         #region Constructors and Destructors
 

@@ -28,7 +28,7 @@ namespace IngressTracker.Views
     /// <summary>
     /// Interaction logic for LevelStaticView.xaml
     /// </summary>
-    public partial class LevelStaticView : UserControl
+    public partial class LevelStaticView
     {
         #region Constructors and Destructors
 
