@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="IngressTracker.Controls.SilverBadge"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="160.19852" d:DesignWidth="139.05042">
+    <Canvas Name="Layer_1" Width="139.05042" Height="160.19852" ClipToBounds="True">
+        <Canvas Name="layer1" RenderTransform="1,0,0,1,-169.07544,-116.19151">
+            <Path Fill="#FF384040" Stroke="#FF9FBABF" StrokeThickness="2.34697032" StrokeMiterLimit="4" Name="path4123">
+                <Path.Data>
+                    <PathGeometry FillRule="Nonzero" Figures="M238.60065,275.21653L170.24892,235.75365 170.24892,156.82788 238.60064,117.36499 306.95237,156.82788 306.95237,235.75365z" />
+                </Path.Data>
+            </Path>
+            <Path Name="path4123_5">
+                <Path.Data>
+                    <PathGeometry FillRule="Nonzero" Figures="M238.60065,269.357L175.32342,232.82388 175.32342,159.75764 238.60064,123.22452 301.87787,159.75764 301.87787,232.82388z" />
+                </Path.Data>
+            </Path>
+        </Canvas>
+    </Canvas>
+</UserControl>

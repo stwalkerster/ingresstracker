@@ -1,0 +1,138 @@
+﻿<UserControl x:Class="IngressTracker.Controls.LevelIndicator"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:IngressTracker.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="144.66551" d:DesignWidth="144.66551">
+    <UserControl.Resources>
+        <SolidColorBrush Color="#ffdcdc4b" x:Key="YellowCol" />
+        <Style TargetType="Path" x:Key="StrokeStyle">
+            <Setter Property="Stroke" Value="Red" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Faction.Code}" Value="ENL">
+                    <Setter Property="Stroke" Value="{StaticResource EnlightenedBrush}"></Setter>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Faction.Code}" Value="RES">
+                    <Setter Property="Stroke" Value="{StaticResource ResistanceBrush}"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="Path" x:Key="FillStyle">
+            <Setter Property="Fill" Value="Red" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Faction.Code}" Value="ENL">
+                    <Setter Property="Fill" Value="{StaticResource EnlightenedBrush}" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Faction.Code}" Value="RES">
+                    <Setter Property="Fill" Value="{StaticResource ResistanceBrush}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <converters:VisibilityGreaterThanEqualToConverter x:Key="VisibilityGreaterThanEqualToConverter"/>
+    </UserControl.Resources>
+
+    <Canvas x:Name="Canvas" Width="144.66551" Height="144.66551" ClipToBounds="True">
+        <Canvas RenderTransform="1,0,0,1,37.989321,-425.9225" Height="8">
+            <Path StrokeThickness="35.07273865" StrokeMiterLimit="4" RenderTransform="0.08209715,0,0,0.08209715,-85.408414,517.3471" Fill="Black" Style="{StaticResource StrokeStyle}">
+                <Path.Data>
+                    <PathGeometry FillRule="Nonzero" Figures="M1816.3447,630.97472L1100.9759,630.97475 595.13371,125.13261 595.13368,-590.23623 1100.9758,-1096.0784 1816.3447,-1096.0784 2322.1868,-590.23631 2322.1869,125.13253z" />
+                </Path.Data>
+            </Path>
+            <Path Style="{StaticResource FillStyle}" Tag="1">
+                <Path.Data>
+                    <PathGeometry FillRule="Nonzero" Figures="M12.752524,434.86179L55.934344,434.86179 55.934344,443.95269 12.752524,443.95269z" />
+                </Path.Data>
+            </Path>
+            <Path Fill="{StaticResource YellowCol}" Tag="9" Visibility="{Binding Level, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=9}">
+                <Path.Data>
+                    <PathGeometry FillRule="Nonzero" Figures="M18.890287,449.30956L34.641089,449.30956 34.641089,452.03566 50.391891,452.03566 50.391891,454.76176 18.890287,454.76176z" />
+                </Path.Data>
+            </Path>
+            <Path Fill="{StaticResource YellowCol}" Tag="10" Visibility="{Binding Level, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=10}">
+                <Path.Data>
+                    <PathGeometry FillRule="Nonzero" Figures="M58.113424,452.50792L69.250923,463.64542 67.323279,465.57307 78.460778,476.71057 76.533134,478.63821 54.258136,456.36321z" />
+                </Path.Data>
+            </Path>
+            <Path Fill="{StaticResource YellowCol}" Tag="11" Visibility="{Binding Level, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=11}">
+                <Path.Data>
+                    <PathGeometry FillRule="Nonzero" Figures="M83.586785,482.50445L83.586785,498.25526 80.860685,498.25526 80.860685,514.00606 78.134585,514.00606 78.134585,482.50445z" />
+                </Path.Data>
+            </Path>
+            <Path Fill="{StaticResource YellowCol}" Tag="12" Visibility="{Binding Level, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=12}">
+                <Path.Data>
+                    <PathGeometry FillRule="Nonzero" Figures="M80.388421,521.72759L69.250923,532.86509 67.323279,530.93745 56.18578,542.07494 54.258136,540.1473 76.533134,517.8723z" />
+                </Path.Data>
+            </Path>
+            <Path Fill="{StaticResource YellowCol}" Tag="13" Visibility="{Binding Level, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=13}">
+                <Path.Data>
+                    <PathGeometry FillRule="Nonzero" Figures="M50.391891,547.20095L34.641089,547.20095 34.641089,544.47485 18.890287,544.47485 18.890287,541.74875 50.391891,541.74875z" />
+                </Path.Data>
+            </Path>
+            <Path Fill="{StaticResource YellowCol}" Tag="14" Visibility="{Binding Level, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=14}">
+                <Path.Data>
+                    <PathGeometry FillRule="Nonzero" Figures="M11.168754,544.00259L0.0312554499999997,532.86509 1.9588992,530.93745 -9.1785997,519.79995 -7.2509559,517.8723 15.024042,540.1473z" />
+                </Path.Data>
+            </Path>
+            <Path Fill="{StaticResource YellowCol}" Tag="15" Visibility="{Binding Level, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=15}">
+                <Path.Data>
+                    <PathGeometry FillRule="Nonzero" Figures="M-14.304608,514.00606L-14.304607,498.25526 -11.578508,498.25525 -11.578507,482.50446 -8.8524078,482.50445 -8.852407,514.00606z" />
+                </Path.Data>
+            </Path>
+            <Path Fill="{StaticResource YellowCol}" Tag="16" Visibility="{Binding Level, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=16}">
+                <Path.Data>
+                    <PathGeometry FillRule="Nonzero" Figures="M-11.106243,474.78292L0.0312554500000015,463.64542 1.9588992,465.57307 13.096398,454.43557 15.024042,456.36321 -7.2509559,478.63821z" />
+                </Path.Data>
+            </Path>
+            <Path Style="{StaticResource FillStyle}" RenderTransform="0.70710678,0.70710678,-0.70710678,0.70710678,0,0"  Tag="2"  Visibility="{Binding Level, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=2}">
+                <Path.Data>
+                    <PathGeometry FillRule="Nonzero" Figures="M355.01324,264.64172L398.19506,264.64172 398.19506,273.73263 355.01324,273.73263z" />
+                </Path.Data>
+            </Path>
+            <Path Style="{StaticResource FillStyle}" RenderTransform="0,1,-1,0,0,0" Tag="3" Visibility="{Binding Level, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=3}">
+                <Path.Data>
+                    <PathGeometry FillRule="Nonzero" Figures="M476.66434,-97.736908L519.84616,-97.736908 519.84616,-88.645999 476.66434,-88.645999z" />
+                </Path.Data>
+            </Path>
+            <Path Style="{StaticResource FillStyle}" RenderTransform="-0.70710678,0.70710678,-0.70710678,-0.70710678,0,0" Tag="4" Visibility="{Binding Level, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=4}">
+                <Path.Data>
+                    <PathGeometry FillRule="Nonzero" Figures="M306.44427,-439.99762L349.62609,-439.99762 349.62609,-430.90671 306.44427,-430.90671z" />
+                </Path.Data>
+            </Path>
+            <Path Style="{StaticResource FillStyle}" RenderTransform="-1,0,0,-1,0,0" Tag="5"  Visibility="{Binding Level, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=5}">
+                <Path.Data>
+                    <PathGeometry FillRule="Nonzero" Figures="M-55.934345,-561.64874L-12.752525,-561.64874 -12.752525,-552.55783 -55.934345,-552.55783z" />
+                </Path.Data>
+            </Path>
+            <Path Style="{StaticResource FillStyle}" RenderTransform="-0.70710678,-0.70710678,0.70710678,-0.70710678,0,0" Tag="6"  Visibility="{Binding Level, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=6}">
+                <Path.Data>
+                    <PathGeometry FillRule="Nonzero" Figures="M-398.19507,-391.42868L-355.01325,-391.42868 -355.01325,-382.33777 -398.19507,-382.33777z" />
+                </Path.Data>
+            </Path>
+            <Path Style="{StaticResource FillStyle}" RenderTransform="0,-1,1,0,0,0" Tag="7"  Visibility="{Binding Level, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=7}">
+                <Path.Data>
+                    <PathGeometry FillRule="Nonzero" Figures="M-519.84619,-29.050039L-476.66437,-29.050039 -476.66437,-19.95913 -519.84619,-19.95913z" />
+                </Path.Data>
+            </Path>
+            <Path Style="{StaticResource FillStyle}" RenderTransform="0.70710678,-0.70710678,0.70710678,0.70710678,0,0" Tag="8"  Visibility="{Binding Level, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=8}">
+                <Path.Data>
+                    <PathGeometry FillRule="Nonzero" Figures="M-349.6261,313.21066L-306.44428,313.21066 -306.44428,322.30157 -349.6261,322.30157z" />
+                </Path.Data>
+            </Path>
+            <Border Height="{Binding ActualHeight, ElementName=Canvas}" Width="{Binding ActualWidth, ElementName=Canvas}">
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform X="-37.989321" Y="425.9225"/>
+                    </TransformGroup>
+                </Border.RenderTransform>
+                <TextBlock Foreground="{StaticResource YellowCol}" Text="{Binding Level}" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="56" FontFamily="Consolas">
+                </TextBlock>
+            </Border>
+        </Canvas>
+    </Canvas>
+
+</UserControl>

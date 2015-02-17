@@ -122,8 +122,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\BlackBadge.xaml.cs">
+      <DependentUpon>BlackBadge.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BronzeBadge.xaml.cs">
+      <DependentUpon>BronzeBadge.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GoldBadge.xaml.cs">
+      <DependentUpon>GoldBadge.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LevelIndicator.xaml.cs">
+      <DependentUpon>LevelIndicator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PlatinumBadge.xaml.cs">
+      <DependentUpon>PlatinumBadge.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SilverBadge.xaml.cs">
+      <DependentUpon>SilverBadge.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\DebugConverter.cs" />
     <Compile Include="Converters\InverseBooleanConverter.cs" />
+    <Compile Include="Converters\VisibilityGreaterThanEqualToConverter.cs" />
     <Compile Include="Converters\WindowTitleConverter.cs" />
     <Compile Include="DataModel\BadgeLevel.cs" />
     <Compile Include="DataModel\Models\Badge.cs" />
@@ -218,6 +237,30 @@
     <Compile Include="Views\UserStaticView.xaml.cs">
       <DependentUpon>UserStaticView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\BlackBadge.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BronzeBadge.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\GoldBadge.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\LevelIndicator.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\PlatinumBadge.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SilverBadge.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\DataTools.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

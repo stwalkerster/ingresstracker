@@ -73,4 +73,7 @@
     <Style x:Key="StaticDataScreenDataGridStyle" TargetType="DataGrid" BasedOn="{StaticResource DataScreenDataGridStyle}">
         <Setter Property="IsReadOnly" Value="{Binding UserAllowedEdit, Converter={StaticResource InverseBooleanConverter}}" />
     </Style>
+
+    <SolidColorBrush x:Key="EnlightenedBrush" Color="#FF239821"/>
+    <SolidColorBrush x:Key="ResistanceBrush" Color="#FF0078b5"/>
 </ResourceDictionary>

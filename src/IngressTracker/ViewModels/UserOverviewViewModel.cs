@@ -22,6 +22,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace IngressTracker.ViewModels
 {
+    using IngressTracker.DataModel;
     using IngressTracker.Properties;
     using IngressTracker.ScreenBase;
     using IngressTracker.Services.Interfaces;
@@ -34,6 +35,40 @@ namespace IngressTracker.ViewModels
     /// </summary>
     public class UserOverviewViewModel : ScreenBase, IUserOverviewViewModel
     {
+        #region Fields
+
+        /// <summary>
+        /// The black count.
+        /// </summary>
+        private int blackCount;
+
+        /// <summary>
+        /// The bronze count.
+        /// </summary>
+        private int bronzeCount;
+
+        /// <summary>
+        /// The gold count.
+        /// </summary>
+        private int goldCount;
+
+        /// <summary>
+        /// The level.
+        /// </summary>
+        private int level;
+
+        /// <summary>
+        /// The platinum count.
+        /// </summary>
+        private int platinumCount;
+
+        /// <summary>
+        /// The silver count.
+        /// </summary>
+        private int silverCount;
+
+        #endregion
+
         #region Constructors and Destructors
 
         /// <summary>
@@ -48,6 +83,171 @@ namespace IngressTracker.ViewModels
         public UserOverviewViewModel(ISession databaseSession, ILoginService loginService)
             : base(Resources.UserOverviewView, databaseSession, loginService)
         {
+            this.level = 11;
+            this.bronzeCount = 16;
+            this.silverCount = 14;
+            this.goldCount = 4;
+            this.platinumCount = 3;
+            this.blackCount = 2;
+
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        /// <summary>
+        /// Gets the agent name.
+        /// </summary>
+        public string AgentName
+        {
+            get
+            {
+                return this.LoginService.Agent.AgentName;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the black count.
+        /// </summary>
+        public int BlackCount
+        {
+            get
+            {
+                return this.blackCount;
+            }
+
+            set
+            {
+                if (value == this.blackCount)
+                {
+                    return;
+                }
+
+                this.blackCount = value;
+                this.NotifyOfPropertyChange(() => this.BlackCount);
+            }
+        }
+
+        /// <summary>
+        /// Gets the level.
+        /// </summary>
+        public int BronzeCount
+        {
+            get
+            {
+                return this.bronzeCount;
+            }
+
+            set
+            {
+                if (value == this.bronzeCount)
+                {
+                    return;
+                }
+
+                this.bronzeCount = value;
+                this.NotifyOfPropertyChange(() => this.BronzeCount);
+            }
+        }
+
+        /// <summary>
+        /// Gets the faction.
+        /// </summary>
+        public Faction Faction
+        {
+            get
+            {
+                return this.LoginService.Agent.Faction;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the gold count.
+        /// </summary>
+        public int GoldCount
+        {
+            get
+            {
+                return this.goldCount;
+            }
+
+            set
+            {
+                if (value == this.goldCount)
+                {
+                    return;
+                }
+
+                this.goldCount = value;
+                this.NotifyOfPropertyChange(() => this.GoldCount);
+            }
+        }
+
+        /// <summary>
+        /// Gets the level.
+        /// </summary>
+        public int Level
+        {
+            get
+            {
+                return this.level;
+            }
+
+            set
+            {
+                if (value == this.level)
+                {
+                    return;
+                }
+
+                this.level = value;
+                this.NotifyOfPropertyChange(() => this.Level);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the platinum count.
+        /// </summary>
+        public int PlatinumCount
+        {
+            get
+            {
+                return this.platinumCount;
+            }
+
+            set
+            {
+                if (value == this.platinumCount)
+                {
+                    return;
+                }
+
+                this.platinumCount = value;
+                this.NotifyOfPropertyChange(() => this.PlatinumCount);
+            }
+        }
+
+        /// <summary>
+        /// Gets the level.
+        /// </summary>
+        public int SilverCount
+        {
+            get
+            {
+                return this.silverCount;
+            }
+
+            set
+            {
+                if (value == this.silverCount)
+                {
+                    return;
+                }
+
+                this.silverCount = value;
+                this.NotifyOfPropertyChange(() => this.SilverCount);
+            }
         }
 
         #endregion
