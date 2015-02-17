@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ILoginService.cs" company="Simon Walker">
+// <copyright file="AutoLoginHelper.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,52 +17,39 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The LoginService interface.
+//   The auto login helper.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.Services.Interfaces
+
+namespace IngressTracker.Helpers
 {
-    using System.Collections.Generic;
-
-    using IngressTracker.DataModel.Models;
-    using IngressTracker.Helpers;
-
     /// <summary>
-    /// The LoginService interface.
+    /// The auto login helper.
     /// </summary>
-    public interface ILoginService
+    public class AutoLoginHelper
     {
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the agent.
-        /// </summary>
-        User Agent { get; set; }
-
-        /// <summary>
-        /// Gets or sets the available agents.
-        /// </summary>
-        IEnumerable<User> AvailableAgents { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether login complete.
-        /// </summary>
-        bool LoginComplete { get; set; }
-
-        /// <summary>
         /// Gets or sets the password.
         /// </summary>
-        string Password { get; set; }
+        public string Password { get; set; }
+
+        /// <summary>
+        /// Gets a value indicating whether used.
+        /// </summary>
+        public bool Used
+        {
+            get
+            {
+                return (!string.IsNullOrEmpty(this.Username)) && (!string.IsNullOrEmpty(this.Password));
+            }
+        }
 
         /// <summary>
         /// Gets or sets the username.
         /// </summary>
-        string Username { get; set; }
-
-        /// <summary>
-        /// Gets or sets the auto login helper.
-        /// </summary>
-        AutoLoginHelper AutoLoginHelper { get; set; }
+        public string Username { get; set; }
 
         #endregion
     }

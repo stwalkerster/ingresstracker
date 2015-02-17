@@ -344,8 +344,36 @@ namespace IngressTracker.ViewModels
 
             this.loginService.LoginComplete = true;
 
-            ((IScreen)this.Parent).Refresh();
+            var shellViewModel = (ShellViewModel)this.Parent;
+
+            shellViewModel.Refresh();
+
+            if (shellViewModel.CanOpenUserOverview)
+            {
+                shellViewModel.OpenUserOverview();
+            }
+
             this.TryClose();
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// The on initialize.
+        /// </summary>
+        protected override void OnInitialize()
+        {
+            base.OnInitialize();
+
+            if (this.loginService.AutoLoginHelper.Used)
+            {
+                this.Username = this.loginService.AutoLoginHelper.Username;
+                this.Password = this.loginService.AutoLoginHelper.Password;
+
+                this.Connect();
+            }
         }
 
         #endregion

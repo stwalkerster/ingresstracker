@@ -34,7 +34,7 @@ namespace IngressTracker.Startup
     using Castle.MicroKernel.Registration;
     using Castle.Windsor;
 
-    using IngressTracker.Startup.Facilities;
+    using IngressTracker.Helpers;
     using IngressTracker.Startup.Resolvers;
     using IngressTracker.ViewModels.Interfaces;
 
@@ -75,6 +75,17 @@ namespace IngressTracker.Startup
         {
             this.container = new WindsorContainer();
 
+            var commandLineArgs = Environment.GetCommandLineArgs();
+            var autoLogin = new AutoLoginHelper();
+
+            if (commandLineArgs.Count() == 3)
+            {
+                autoLogin.Username = commandLineArgs[1];
+                autoLogin.Password = commandLineArgs[2];
+            }
+
+            this.container.Register(Component.For<AutoLoginHelper>().Instance(autoLogin).LifestyleSingleton());
+
             // add the container to itself. This is probably a Bad Idea(tm) but hey.
             this.container.Register(Component.For<IWindsorContainer>().Instance(this.container).LifestyleSingleton());
 
@@ -103,6 +114,8 @@ namespace IngressTracker.Startup
                 viewModelRegistrations);
 
             ServiceLocator.SetLocatorProvider(() => new WindsorServiceLocator(this.container));
+
+
         }
 
         /// <summary>

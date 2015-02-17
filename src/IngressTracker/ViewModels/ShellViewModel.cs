@@ -454,6 +454,18 @@ namespace IngressTracker.ViewModels
             this.NotifyOfPropertyChange(() => this.DataToolsEnabled);
         }
 
+        /// <summary>
+        /// The on initialize.
+        /// </summary>
+        protected override void OnInitialize()
+        {
+            base.OnInitialize();
+
+            if (!this.loginService.LoginComplete)
+            {
+                this.OpenLogin();
+            }
+        }
 
         /// <summary>
         /// The open window.

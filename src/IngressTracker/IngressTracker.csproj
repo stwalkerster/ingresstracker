@@ -135,6 +135,7 @@
     <Compile Include="DataModel\Models\Stat.cs" />
     <Compile Include="DataModel\Models\User.cs" />
     <Compile Include="DataModel\Models\ValueEntry.cs" />
+    <Compile Include="Helpers\AutoLoginHelper.cs" />
     <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Interfaces\ICanAddRecord.cs" />
     <Compile Include="Interfaces\ICanDelete.cs" />
