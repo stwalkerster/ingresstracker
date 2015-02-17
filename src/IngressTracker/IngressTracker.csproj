@@ -125,6 +125,9 @@
     <Compile Include="Controls\Badge.xaml.cs">
       <DependentUpon>Badge.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\BadgeStack.xaml.cs">
+      <DependentUpon>BadgeStack.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LevelIndicator.xaml.cs">
       <DependentUpon>LevelIndicator.xaml</DependentUpon>
     </Compile>
@@ -229,6 +232,10 @@
     <Page Include="Controls\Badge.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\BadgeStack.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\LevelIndicator.xaml">
       <Generator>MSBuild:Compile</Generator>

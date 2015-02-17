@@ -67,6 +67,10 @@ namespace IngressTracker.ViewModels
         /// </summary>
         private int silverCount;
 
+        private int accessPoints;
+
+        private int maxAp;
+
         #endregion
 
         #region Constructors and Destructors
@@ -89,7 +93,8 @@ namespace IngressTracker.ViewModels
             this.goldCount = 4;
             this.platinumCount = 3;
             this.blackCount = 2;
-
+            this.accessPoints = 1000000;
+            this.maxAp = 1200000;
         }
 
         #endregion
@@ -148,6 +153,40 @@ namespace IngressTracker.ViewModels
 
                 this.bronzeCount = value;
                 this.NotifyOfPropertyChange(() => this.BronzeCount);
+            }
+        }
+
+        public int AccessPoints
+        {
+            get
+            {
+                return this.accessPoints;
+            }
+            set
+            {
+                if (value == this.accessPoints)
+                {
+                    return;
+                }
+                this.accessPoints = value;
+                this.NotifyOfPropertyChange(() => this.AccessPoints);
+            }
+        }
+
+        public int MaxAP
+        {
+            get
+            {
+                return this.maxAp;
+            }
+            set
+            {
+                if (value == this.maxAp)
+                {
+                    return;
+                }
+                this.maxAp = value;
+                this.NotifyOfPropertyChange(() => this.MaxAP);
             }
         }
 
