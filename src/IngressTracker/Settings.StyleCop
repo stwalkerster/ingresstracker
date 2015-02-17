@@ -6,6 +6,7 @@
       <Value>startup</Value>
       <Value>xaml</Value>
       <Value>callback</Value>
+      <Value>markup</Value>
     </CollectionProperty>
   </GlobalSettings>
   <Analyzers>

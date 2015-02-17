@@ -5,11 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:IngressTracker.Controls"
              xmlns:converters="clr-namespace:IngressTracker.Converters"
+             xmlns:markupExtensions="clr-namespace:IngressTracker.MarkupExtensions"
 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="900">
     <UserControl.Resources>
-        <Style TargetType="UserControl" x:Key="BadgeStyle">
+        <Style TargetType="controls:Badge" x:Key="BadgeStyle">
             <Setter Property="LayoutTransform">
                 <Setter.Value>
                     <TransformGroup>
@@ -21,13 +22,7 @@
                 </Setter.Value>
             </Setter>
             <Setter Property="Margin" Value="-15,0,0,0" />
-        </Style>
-        <Style TargetType="controls:BronzeBadge" BasedOn="{StaticResource BadgeStyle}" />
-        <Style TargetType="controls:SilverBadge" BasedOn="{StaticResource BadgeStyle}" />
-        <Style TargetType="controls:GoldBadge" BasedOn="{StaticResource BadgeStyle}" />
-        <Style TargetType="controls:PlatinumBadge" BasedOn="{StaticResource BadgeStyle}" />
-        <Style TargetType="controls:BlackBadge" BasedOn="{StaticResource BadgeStyle}" />
-        
+        </Style>       
         <converters:VisibilityGreaterThanEqualToConverter x:Key="VisibilityGreaterThanEqualToConverter"/>
     </UserControl.Resources>
     
@@ -51,160 +46,175 @@
 
         <StackPanel Orientation="Vertical" Grid.Row="1">
             <ItemsControl>
+                <ItemsControl.Resources>
+                    <Style BasedOn="{markupExtensions:MultiStyle BlackBadgeStyle BadgeStyle}" TargetType="controls:Badge" />
+                </ItemsControl.Resources>
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal" IsItemsHost="True" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
 
-                <controls:BlackBadge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=1}" Margin="0" />
-                <controls:BlackBadge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=2}" />
-                <controls:BlackBadge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=3}" />
-                <controls:BlackBadge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=4}" />
-                <controls:BlackBadge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=5}" />
-                <controls:BlackBadge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=6}" />
-                <controls:BlackBadge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=7}" />
-                <controls:BlackBadge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=8}" />
-                <controls:BlackBadge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=9}" />
-                <controls:BlackBadge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=10}" />
-                <controls:BlackBadge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=11}" />
-                <controls:BlackBadge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=12}" />
-                <controls:BlackBadge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=13}" />
-                <controls:BlackBadge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=14}" />
-                <controls:BlackBadge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=15}" />
-                <controls:BlackBadge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=16}" />
-                <controls:BlackBadge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=17}" />
-                <controls:BlackBadge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=18}" />
-                <controls:BlackBadge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=19}" />
-                <controls:BlackBadge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=20}" />
+                <controls:Badge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=1}" Margin="0" />
+                <controls:Badge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=2}" />
+                <controls:Badge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=3}" />
+                <controls:Badge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=4}" />
+                <controls:Badge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=5}" />
+                <controls:Badge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=6}" />
+                <controls:Badge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=7}" />
+                <controls:Badge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=8}" />
+                <controls:Badge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=9}" />
+                <controls:Badge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=10}" />
+                <controls:Badge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=11}" />
+                <controls:Badge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=12}" />
+                <controls:Badge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=13}" />
+                <controls:Badge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=14}" />
+                <controls:Badge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=15}" />
+                <controls:Badge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=16}" />
+                <controls:Badge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=17}" />
+                <controls:Badge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=18}" />
+                <controls:Badge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=19}" />
+                <controls:Badge Visibility="{Binding BlackCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=20}" />
 
                 <TextBlock Text="{Binding BlackCount}" FontSize="16" VerticalAlignment="Center"/>
                 <TextBlock Text=" Black Badges" FontSize="16" VerticalAlignment="Center"/>
             </ItemsControl>
 
             <ItemsControl>
+                <ItemsControl.Resources>
+                    <Style BasedOn="{markupExtensions:MultiStyle PlatinumBadgeStyle BadgeStyle}" TargetType="controls:Badge" />
+                </ItemsControl.Resources>
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal" IsItemsHost="True" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
 
-                <controls:PlatinumBadge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=1}" Margin="0" />
-                <controls:PlatinumBadge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=2}" />
-                <controls:PlatinumBadge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=3}" />
-                <controls:PlatinumBadge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=4}" />
-                <controls:PlatinumBadge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=5}" />
-                <controls:PlatinumBadge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=6}" />
-                <controls:PlatinumBadge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=7}" />
-                <controls:PlatinumBadge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=8}" />
-                <controls:PlatinumBadge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=9}" />
-                <controls:PlatinumBadge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=10}" />
-                <controls:PlatinumBadge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=11}" />
-                <controls:PlatinumBadge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=12}" />
-                <controls:PlatinumBadge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=13}" />
-                <controls:PlatinumBadge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=14}" />
-                <controls:PlatinumBadge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=15}" />
-                <controls:PlatinumBadge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=16}" />
-                <controls:PlatinumBadge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=17}" />
-                <controls:PlatinumBadge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=18}" />
-                <controls:PlatinumBadge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=19}" />
-                <controls:PlatinumBadge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=20}" />
+                <controls:Badge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=1}" Margin="0" />
+                <controls:Badge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=2}" />
+                <controls:Badge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=3}" />
+                <controls:Badge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=4}" />
+                <controls:Badge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=5}" />
+                <controls:Badge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=6}" />
+                <controls:Badge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=7}" />
+                <controls:Badge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=8}" />
+                <controls:Badge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=9}" />
+                <controls:Badge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=10}" />
+                <controls:Badge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=11}" />
+                <controls:Badge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=12}" />
+                <controls:Badge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=13}" />
+                <controls:Badge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=14}" />
+                <controls:Badge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=15}" />
+                <controls:Badge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=16}" />
+                <controls:Badge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=17}" />
+                <controls:Badge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=18}" />
+                <controls:Badge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=19}" />
+                <controls:Badge Visibility="{Binding PlatinumCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=20}" />
 
                 <TextBlock Text="{Binding PlatinumCount}" FontSize="16" VerticalAlignment="Center"/>
                 <TextBlock Text=" Platinum Badges" FontSize="16" VerticalAlignment="Center"/>
             </ItemsControl>
 
             <ItemsControl>
+                <ItemsControl.Resources>
+                    <Style BasedOn="{markupExtensions:MultiStyle GoldBadgeStyle BadgeStyle}" TargetType="controls:Badge" />
+                </ItemsControl.Resources>
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal" IsItemsHost="True" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
 
-                <controls:GoldBadge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=1}" Margin="0" />
-                <controls:GoldBadge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=2}" />
-                <controls:GoldBadge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=3}" />
-                <controls:GoldBadge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=4}" />
-                <controls:GoldBadge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=5}" />
-                <controls:GoldBadge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=6}" />
-                <controls:GoldBadge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=7}" />
-                <controls:GoldBadge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=8}" />
-                <controls:GoldBadge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=9}" />
-                <controls:GoldBadge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=10}" />
-                <controls:GoldBadge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=11}" />
-                <controls:GoldBadge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=12}" />
-                <controls:GoldBadge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=13}" />
-                <controls:GoldBadge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=14}" />
-                <controls:GoldBadge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=15}" />
-                <controls:GoldBadge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=16}" />
-                <controls:GoldBadge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=17}" />
-                <controls:GoldBadge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=18}" />
-                <controls:GoldBadge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=19}" />
-                <controls:GoldBadge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=20}" />
+                <controls:Badge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=1}" Margin="0" />
+                <controls:Badge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=2}" />
+                <controls:Badge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=3}" />
+                <controls:Badge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=4}" />
+                <controls:Badge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=5}" />
+                <controls:Badge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=6}" />
+                <controls:Badge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=7}" />
+                <controls:Badge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=8}" />
+                <controls:Badge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=9}" />
+                <controls:Badge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=10}" />
+                <controls:Badge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=11}" />
+                <controls:Badge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=12}" />
+                <controls:Badge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=13}" />
+                <controls:Badge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=14}" />
+                <controls:Badge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=15}" />
+                <controls:Badge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=16}" />
+                <controls:Badge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=17}" />
+                <controls:Badge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=18}" />
+                <controls:Badge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=19}" />
+                <controls:Badge Visibility="{Binding GoldCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=20}" />
 
                 <TextBlock Text="{Binding GoldCount}" FontSize="16" VerticalAlignment="Center"/>
                 <TextBlock Text=" Gold Badges" FontSize="16" VerticalAlignment="Center"/>
             </ItemsControl>
 
             <ItemsControl>
+                <ItemsControl.Resources>
+                    <Style BasedOn="{markupExtensions:MultiStyle SilverBadgeStyle BadgeStyle}" TargetType="controls:Badge" />
+                </ItemsControl.Resources>
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal" IsItemsHost="True" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
 
-                <controls:SilverBadge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=1}" Margin="0" />
-                <controls:SilverBadge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=2}" />
-                <controls:SilverBadge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=3}" />
-                <controls:SilverBadge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=4}" />
-                <controls:SilverBadge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=5}" />
-                <controls:SilverBadge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=6}" />
-                <controls:SilverBadge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=7}" />
-                <controls:SilverBadge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=8}" />
-                <controls:SilverBadge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=9}" />
-                <controls:SilverBadge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=10}" />
-                <controls:SilverBadge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=11}" />
-                <controls:SilverBadge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=12}" />
-                <controls:SilverBadge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=13}" />
-                <controls:SilverBadge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=14}" />
-                <controls:SilverBadge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=15}" />
-                <controls:SilverBadge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=16}" />
-                <controls:SilverBadge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=17}" />
-                <controls:SilverBadge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=18}" />
-                <controls:SilverBadge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=19}" />
-                <controls:SilverBadge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=20}" />
+                <controls:Badge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=1}" Margin="0" />
+                <controls:Badge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=2}" />
+                <controls:Badge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=3}" />
+                <controls:Badge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=4}" />
+                <controls:Badge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=5}" />
+                <controls:Badge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=6}" />
+                <controls:Badge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=7}" />
+                <controls:Badge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=8}" />
+                <controls:Badge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=9}" />
+                <controls:Badge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=10}" />
+                <controls:Badge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=11}" />
+                <controls:Badge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=12}" />
+                <controls:Badge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=13}" />
+                <controls:Badge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=14}" />
+                <controls:Badge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=15}" />
+                <controls:Badge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=16}" />
+                <controls:Badge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=17}" />
+                <controls:Badge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=18}" />
+                <controls:Badge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=19}" />
+                <controls:Badge Visibility="{Binding SilverCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=20}" />
 
                 <TextBlock Text="{Binding SilverCount}" FontSize="16" VerticalAlignment="Center"/>
                 <TextBlock Text=" Silver Badges" FontSize="16" VerticalAlignment="Center"/>
             </ItemsControl>
 
             <ItemsControl>
+                <ItemsControl.Resources>
+                    <Style BasedOn="{markupExtensions:MultiStyle BronzeBadgeStyle BadgeStyle}" TargetType="controls:Badge" />
+                </ItemsControl.Resources>
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal" IsItemsHost="True" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
 
-                <controls:BronzeBadge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=1}" Margin="0" />
-                <controls:BronzeBadge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=2}" />
-                <controls:BronzeBadge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=3}" />
-                <controls:BronzeBadge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=4}" />
-                <controls:BronzeBadge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=5}" />
-                <controls:BronzeBadge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=6}" />
-                <controls:BronzeBadge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=7}" />
-                <controls:BronzeBadge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=8}" />
-                <controls:BronzeBadge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=9}" />
-                <controls:BronzeBadge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=10}" />
-                <controls:BronzeBadge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=11}" />
-                <controls:BronzeBadge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=12}" />
-                <controls:BronzeBadge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=13}" />
-                <controls:BronzeBadge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=14}" />
-                <controls:BronzeBadge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=15}" />
-                <controls:BronzeBadge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=16}" />
-                <controls:BronzeBadge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=17}" />
-                <controls:BronzeBadge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=18}" />
-                <controls:BronzeBadge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=19}" />
-                <controls:BronzeBadge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=20}" />
+                <controls:Badge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=1}" Margin="0" />
+                <controls:Badge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=2}" />
+                <controls:Badge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=3}" />
+                <controls:Badge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=4}" />
+                <controls:Badge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=5}" />
+                <controls:Badge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=6}" />
+                <controls:Badge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=7}" />
+                <controls:Badge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=8}" />
+                <controls:Badge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=9}" />
+                <controls:Badge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=10}" />
+                <controls:Badge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=11}" />
+                <controls:Badge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=12}" />
+                <controls:Badge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=13}" />
+                <controls:Badge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=14}" />
+                <controls:Badge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=15}" />
+                <controls:Badge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=16}" />
+                <controls:Badge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=17}" />
+                <controls:Badge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=18}" />
+                <controls:Badge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=19}" />
+                <controls:Badge Visibility="{Binding BronzeCount, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=20}" />
 
                 <TextBlock Text="{Binding BronzeCount}" FontSize="16" VerticalAlignment="Center"/>
                 <TextBlock Text=" Bronze Badges" FontSize="16" VerticalAlignment="Center"/>

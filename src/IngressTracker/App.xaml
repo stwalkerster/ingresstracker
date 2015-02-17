@@ -17,6 +17,7 @@
 
                 <ResourceDictionary Source="Styles/Style.xaml" />
                 <ResourceDictionary Source="Styles/DataTools.xaml" />
+                <ResourceDictionary Source="Styles/Badges.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
 

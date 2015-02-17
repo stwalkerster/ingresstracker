@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="IngressTracker.Controls.Badge"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:IngressTracker.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="160.19852" d:DesignWidth="139.05042">
+    <Canvas Width="139.05042" Height="160.19852" ClipToBounds="True">
+        <Canvas RenderTransform="1,0,0,1,-169.07544,-116.19151">
+            <Canvas RenderTransform="0.31267924,0,0,0.31267924,116.20906,79.860834">
+                <Path Fill="{Binding Fill, RelativeSource={RelativeSource AncestorType={x:Type controls:Badge}}}" Stroke="{Binding Stroke, RelativeSource={RelativeSource AncestorType={x:Type controls:Badge}}}" StrokeThickness="2.9949584" StrokeMiterLimit="4" RenderTransform="2.5062118,0,0,2.5062118,760.19972,69.276951">
+                    <Path.Data>
+                        <PathGeometry FillRule="Nonzero" Figures="M-147.14285,221.65043L-234.36618,171.29202 -234.36618,70.575201 -147.14286,20.216789 -59.91953,70.575197 -59.919527,171.29202z" />
+                    </Path.Data>
+                </Path>
+                <Path Stroke="{Binding InnerStroke, RelativeSource={RelativeSource AncestorType={x:Type controls:Badge}}}" StrokeThickness="1.3892591" StrokeMiterLimit="4" RenderTransform="2.3201482,0,0,2.3201482,732.8218,91.778285">
+                    <Path.Data>
+                        <PathGeometry FillRule="Nonzero" Figures="M-147.14285,221.65043L-234.36618,171.29202 -234.36618,70.575201 -147.14286,20.216789 -59.91953,70.575197 -59.919527,171.29202z" />
+                    </Path.Data>
+                </Path>
+            </Canvas>
+        </Canvas>
+    </Canvas>
+</UserControl>
