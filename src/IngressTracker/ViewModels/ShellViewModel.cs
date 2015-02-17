@@ -341,8 +341,7 @@ namespace IngressTracker.ViewModels
         /// </summary>
         public void OpenBadgeAwards()
         {
-            var window = ServiceLocator.Current.GetInstance<IBadgeAwardViewModel>();
-            this.ActivateItem(window);
+            this.OpenWindow<IBadgeAwardViewModel>();
         }
 
         /// <summary>
@@ -350,8 +349,7 @@ namespace IngressTracker.ViewModels
         /// </summary>
         public void OpenBadgeStatic()
         {
-            var window = ServiceLocator.Current.GetInstance<IBadgeStaticViewModel>();
-            this.ActivateItem(window);
+            this.OpenWindow<IBadgeStaticViewModel>();
         }
 
         /// <summary>
@@ -359,8 +357,7 @@ namespace IngressTracker.ViewModels
         /// </summary>
         public void OpenCategoryStatic()
         {
-            var window = ServiceLocator.Current.GetInstance<ICategoryStaticViewModel>();
-            this.ActivateItem(window);
+            this.OpenWindow<ICategoryStaticViewModel>();
         }
 
         /// <summary>
@@ -368,8 +365,7 @@ namespace IngressTracker.ViewModels
         /// </summary>
         public void OpenLevelStatic()
         {
-            var window = ServiceLocator.Current.GetInstance<ILevelStaticViewModel>();
-            this.ActivateItem(window);
+            this.OpenWindow<ILevelStaticViewModel>();
         }
 
         /// <summary>
@@ -377,8 +373,7 @@ namespace IngressTracker.ViewModels
         /// </summary>
         public void OpenLogin()
         {
-            var window = ServiceLocator.Current.GetInstance<ILoginViewModel>();
-            this.ActivateItem(window);
+            this.OpenWindow<ILoginViewModel>();
         }
 
         /// <summary>
@@ -386,8 +381,7 @@ namespace IngressTracker.ViewModels
         /// </summary>
         public void OpenRawValues()
         {
-            var window = ServiceLocator.Current.GetInstance<IRawValueViewModel>();
-            this.ActivateItem(window);
+            this.OpenWindow<IRawValueViewModel>();
         }
 
         /// <summary>
@@ -395,8 +389,7 @@ namespace IngressTracker.ViewModels
         /// </summary>
         public void OpenStatStatic()
         {
-            var window = ServiceLocator.Current.GetInstance<IStatisticsStaticViewModel>();
-            this.ActivateItem(window);
+            this.OpenWindow<IStatisticsStaticViewModel>();
         }
 
         /// <summary>
@@ -404,8 +397,7 @@ namespace IngressTracker.ViewModels
         /// </summary>
         public void OpenUserOverview()
         {
-            var window = ServiceLocator.Current.GetInstance<IUserOverviewViewModel>();
-            this.ActivateItem(window);
+            this.OpenWindow<IUserOverviewViewModel>();
         }
 
         /// <summary>
@@ -413,8 +405,7 @@ namespace IngressTracker.ViewModels
         /// </summary>
         public void OpenUserStatic()
         {
-            var window = ServiceLocator.Current.GetInstance<IUserStaticViewModel>();
-            this.ActivateItem(window);
+            this.OpenWindow<IUserStaticViewModel>();
         }
 
         /// <summary>
@@ -461,6 +452,19 @@ namespace IngressTracker.ViewModels
             this.NotifyOfPropertyChange(() => this.CanRefreshData);
             this.NotifyOfPropertyChange(() => this.CanSave);
             this.NotifyOfPropertyChange(() => this.DataToolsEnabled);
+        }
+
+
+        /// <summary>
+        /// The open window.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The screen to open
+        /// </typeparam>
+        private void OpenWindow<T>() where T : IScreen
+        {
+            var window = ServiceLocator.Current.GetInstance<T>();
+            this.ActivateItem(window);
         }
 
         #endregion
