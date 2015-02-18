@@ -38,6 +38,11 @@ namespace IngressTracker.ViewModels
         #region Fields
 
         /// <summary>
+        /// The access points.
+        /// </summary>
+        private int accessPoints;
+
+        /// <summary>
         /// The black count.
         /// </summary>
         private int blackCount;
@@ -58,6 +63,11 @@ namespace IngressTracker.ViewModels
         private int level;
 
         /// <summary>
+        /// The max AP.
+        /// </summary>
+        private int maxAp;
+
+        /// <summary>
         /// The platinum count.
         /// </summary>
         private int platinumCount;
@@ -66,10 +76,6 @@ namespace IngressTracker.ViewModels
         /// The silver count.
         /// </summary>
         private int silverCount;
-
-        private int accessPoints;
-
-        private int maxAp;
 
         #endregion
 
@@ -100,6 +106,28 @@ namespace IngressTracker.ViewModels
         #endregion
 
         #region Public Properties
+
+        /// <summary>
+        /// Gets or sets the access points.
+        /// </summary>
+        public int AccessPoints
+        {
+            get
+            {
+                return this.accessPoints;
+            }
+
+            set
+            {
+                if (value == this.accessPoints)
+                {
+                    return;
+                }
+
+                this.accessPoints = value;
+                this.NotifyOfPropertyChange(() => this.AccessPoints);
+            }
+        }
 
         /// <summary>
         /// Gets the agent name.
@@ -135,7 +163,7 @@ namespace IngressTracker.ViewModels
         }
 
         /// <summary>
-        /// Gets the level.
+        /// Gets or sets the bronze count.
         /// </summary>
         public int BronzeCount
         {
@@ -153,40 +181,6 @@ namespace IngressTracker.ViewModels
 
                 this.bronzeCount = value;
                 this.NotifyOfPropertyChange(() => this.BronzeCount);
-            }
-        }
-
-        public int AccessPoints
-        {
-            get
-            {
-                return this.accessPoints;
-            }
-            set
-            {
-                if (value == this.accessPoints)
-                {
-                    return;
-                }
-                this.accessPoints = value;
-                this.NotifyOfPropertyChange(() => this.AccessPoints);
-            }
-        }
-
-        public int MaxAP
-        {
-            get
-            {
-                return this.maxAp;
-            }
-            set
-            {
-                if (value == this.maxAp)
-                {
-                    return;
-                }
-                this.maxAp = value;
-                this.NotifyOfPropertyChange(() => this.MaxAP);
             }
         }
 
@@ -224,7 +218,7 @@ namespace IngressTracker.ViewModels
         }
 
         /// <summary>
-        /// Gets the level.
+        /// Gets or sets the level.
         /// </summary>
         public int Level
         {
@@ -242,6 +236,28 @@ namespace IngressTracker.ViewModels
 
                 this.level = value;
                 this.NotifyOfPropertyChange(() => this.Level);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the max AP.
+        /// </summary>
+        public int MaxAP
+        {
+            get
+            {
+                return this.maxAp;
+            }
+
+            set
+            {
+                if (value == this.maxAp)
+                {
+                    return;
+                }
+
+                this.maxAp = value;
+                this.NotifyOfPropertyChange(() => this.MaxAP);
             }
         }
 
@@ -268,7 +284,7 @@ namespace IngressTracker.ViewModels
         }
 
         /// <summary>
-        /// Gets the level.
+        /// Gets or sets the silver count.
         /// </summary>
         public int SilverCount
         {
