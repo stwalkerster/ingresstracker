@@ -8,6 +8,16 @@
         <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/32/save_all.png" />
         <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/16/save_all.png" />
         <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action Save]"/>
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <fluent:ScreenTip Title="{x:Static properties:Resources.DataSaveRecords}"
+                                  Image="pack://application:,,,/IngressTracker;component/Images/Crystal/32/save_all.png"
+                                  Text="{x:Static properties:Resources.DataSaveRecordsHelp}"
+                                  DisableReason="{x:Static properties:Resources.DataSaveRecordsHelp}"
+                                  Width="250"
+                                  />
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="AddRowButtonStyle" TargetType="fluent:Button">
@@ -15,6 +25,16 @@
         <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/32/insert_table_row.png" />
         <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/16/insert_table_row.png" />
         <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action AddRecord]"/>
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <fluent:ScreenTip Title="{x:Static properties:Resources.DataAddRecord}"
+                                  Image="pack://application:,,,/IngressTracker;component/Images/Crystal/32/insert_table_row.png"
+                                  Text="{x:Static properties:Resources.DataAddRecordHelp}"
+                                  DisableReason="{x:Static properties:Resources.DataAddRecordHelpDisabled}"
+                                  Width="250"
+                                  />
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="DeleteButtonStyle" TargetType="fluent:Button">
@@ -22,6 +42,16 @@
         <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/32/delete_table_row.png" />
         <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/16/delete_table_row.png" />
         <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action Delete]"/>
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <fluent:ScreenTip Title="{x:Static properties:Resources.DataDeleteRecord}"
+                                  Image="pack://application:,,,/IngressTracker;component/Images/Crystal/32/delete_table_row.png"
+                                  Text="{x:Static properties:Resources.DataDeleteRecordHelp}"
+                                  DisableReason="{x:Static properties:Resources.DataDeleteRecordHelpDisabled}"
+                                  Width="250"
+                                  />
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="RefreshButtonStyle" TargetType="fluent:Button">
@@ -29,6 +59,16 @@
         <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/32/reload.png" />
         <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/16/reload.png" />
         <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action RefreshData]"/>
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <fluent:ScreenTip Title="{x:Static properties:Resources.DataRefreshRecord}"
+                                  Image="pack://application:,,,/IngressTracker;component/Images/Crystal/32/reload.png"
+                                  Text="{x:Static properties:Resources.DataRefreshRecordHelp}"
+                                  DisableReason="{x:Static properties:Resources.DataRefreshRecordHelpDisabled}"
+                                  Width="250"
+                                  />
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="DataToolsContextualTabGroupStyle" TargetType="fluent:RibbonContextualTabGroup">

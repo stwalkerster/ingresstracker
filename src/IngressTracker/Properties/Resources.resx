@@ -321,4 +321,28 @@
   <data name="LevelProgressView" xml:space="preserve">
     <value>Level Progress</value>
   </data>
+  <data name="DataAddRecordHelp" xml:space="preserve">
+    <value>Adds a new row to the grid on the current screen.</value>
+  </data>
+  <data name="DataAddRecordHelpDisabled" xml:space="preserve">
+    <value>The current screen does not support adding a new row.</value>
+  </data>
+  <data name="DataDeleteRecordHelp" xml:space="preserve">
+    <value>Deletes the currently selected row on the grid on the current screen.</value>
+  </data>
+  <data name="DataDeleteRecordHelpDisabled" xml:space="preserve">
+    <value>The current screen does not support deleting rows.</value>
+  </data>
+  <data name="DataRefreshRecordHelp" xml:space="preserve">
+    <value>Refreshes the data on the current screen from the database, discarding any unsaved changes that have been made</value>
+  </data>
+  <data name="DataRefreshRecordHelpDisabled" xml:space="preserve">
+    <value>The current screen does not support refreshing the data from the database.</value>
+  </data>
+  <data name="DataSaveRecordsHelp" xml:space="preserve">
+    <value>Saves the data on the current screen.</value>
+  </data>
+  <data name="DataSaveRecordsHelpDisabled" xml:space="preserve">
+    <value>The current screen does not support saving.</value>
+  </data>
 </root>

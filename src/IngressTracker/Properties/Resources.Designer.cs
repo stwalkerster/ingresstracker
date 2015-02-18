@@ -277,11 +277,47 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Adds a new row to the grid on the current screen..
+        /// </summary>
+        public static string DataAddRecordHelp {
+            get {
+                return ResourceManager.GetString("DataAddRecordHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The current screen does not support adding a new row..
+        /// </summary>
+        public static string DataAddRecordHelpDisabled {
+            get {
+                return ResourceManager.GetString("DataAddRecordHelpDisabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string DataDeleteRecord {
             get {
                 return ResourceManager.GetString("DataDeleteRecord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deletes the currently selected row on the grid on the current screen..
+        /// </summary>
+        public static string DataDeleteRecordHelp {
+            get {
+                return ResourceManager.GetString("DataDeleteRecordHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The current screen does not support deleting rows..
+        /// </summary>
+        public static string DataDeleteRecordHelpDisabled {
+            get {
+                return ResourceManager.GetString("DataDeleteRecordHelpDisabled", resourceCulture);
             }
         }
         
@@ -295,11 +331,47 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Refreshes the data on the current screen from the database, discarding any unsaved changes that have been made.
+        /// </summary>
+        public static string DataRefreshRecordHelp {
+            get {
+                return ResourceManager.GetString("DataRefreshRecordHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The current screen does not support refreshing the data from the database..
+        /// </summary>
+        public static string DataRefreshRecordHelpDisabled {
+            get {
+                return ResourceManager.GetString("DataRefreshRecordHelpDisabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string DataSaveRecords {
             get {
                 return ResourceManager.GetString("DataSaveRecords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saves the data on the current screen..
+        /// </summary>
+        public static string DataSaveRecordsHelp {
+            get {
+                return ResourceManager.GetString("DataSaveRecordsHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The current screen does not support saving..
+        /// </summary>
+        public static string DataSaveRecordsHelpDisabled {
+            get {
+                return ResourceManager.GetString("DataSaveRecordsHelpDisabled", resourceCulture);
             }
         }
         

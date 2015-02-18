@@ -14,42 +14,49 @@
             <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/16/groupevent.png" />
             <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/32/groupevent.png" />
         </Style>
+        
         <Style x:Key="StatStaticButtonStyle" TargetType="fluent:Button">
             <Setter Property="Header" Value="{x:Static properties:Resources.StatStaticView}" />
             <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action OpenStatStatic]" />
             <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/16/kspread.png" />
             <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/32/kspread.png" />
         </Style>
+        
         <Style x:Key="BadgeStaticButtonStyle" TargetType="fluent:Button">
             <Setter Property="Header" Value="{x:Static properties:Resources.BadgeStaticView}" />
             <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action OpenBadgeStatic]" />
             <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/MindController/16.png" />
             <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/MindController/32.png" />
         </Style>
+        
         <Style x:Key="CategoryStaticButtonStyle" TargetType="fluent:Button">
             <Setter Property="Header" Value="{x:Static properties:Resources.CategoryStaticView}" />
             <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action OpenCategoryStatic]" />
             <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/16/no3D.png" />
             <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/32/no3D.png" />
         </Style>
+        
         <Style x:Key="LevelStaticButtonStyle" TargetType="fluent:Button">
             <Setter Property="Header" Value="{x:Static properties:Resources.LevelStaticView}" />
             <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action OpenLevelStatic]" />
             <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/16/up.png" />
             <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/32/up.png" />
         </Style>
+        
         <Style x:Key="RawValuesButtonStyle" TargetType="fluent:Button">
             <Setter Property="Header" Value="{x:Static properties:Resources.RawValuesView}" />
             <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action OpenRawValues]" />
             <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/16/lists.png" />
             <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/32/lists.png" />
         </Style>
+        
         <Style x:Key="BadgeAwardButtonStyle" TargetType="fluent:Button">
             <Setter Property="Header" Value="{x:Static properties:Resources.BadgeAwardView}" />
             <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action OpenBadgeAwards]" />
             <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/16/bookmark.png" />
             <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/32/bookmark.png" />
         </Style>
+        
         <Style x:Key="UserOverviewButtonStyle" TargetType="fluent:Button">
             <Setter Property="Header" Value="{x:Static properties:Resources.UserOverviewView}" />
             <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action OpenUserOverview]" />
@@ -63,13 +70,13 @@
             <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/16/1rightarrow.png" />
             <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/32/1rightarrow.png" />
         </Style>
+        
         <Style x:Key="LevelProgressButtonStyle" TargetType="fluent:Button">
             <Setter Property="Header" Value="{x:Static properties:Resources.LevelProgressView}" />
             <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action OpenLevelProgress]" />
             <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/16/2rightarrow.png" />
             <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/32/2rightarrow.png" />
         </Style>
-
 
         <Style x:Key="LoginButtonStyle" TargetType="fluent:Button">
             <Setter Property="Header" Value="{x:Static properties:Resources.Login}" />
@@ -93,9 +100,9 @@
                 </fluent:RibbonGroupBox>
                 <fluent:RibbonGroupBox Header="{x:Static properties:Resources.Screens}">
                     <fluent:Button Style="{StaticResource UserOverviewButtonStyle}" />
-                    <fluent:Button Style="{StaticResource BadgeProgressButtonStyle}" />
-                    <fluent:Button Style="{StaticResource LevelProgressButtonStyle}" />
-                    <fluent:Button Style="{StaticResource RawValuesButtonStyle}" />
+                    <fluent:Button Style="{StaticResource BadgeProgressButtonStyle}" Size="Middle"/>
+                    <fluent:Button Style="{StaticResource LevelProgressButtonStyle}" Size="Middle"/>
+                    <fluent:Button Style="{StaticResource RawValuesButtonStyle}" Size="Middle"/>
                     <fluent:Button Style="{StaticResource BadgeAwardButtonStyle}" />
                 </fluent:RibbonGroupBox>
                 <fluent:RibbonGroupBox Header="{x:Static properties:Resources.StaticData}">
