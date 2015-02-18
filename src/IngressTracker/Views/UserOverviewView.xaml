@@ -4,9 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:IngressTracker.Controls"
-             xmlns:converters="clr-namespace:IngressTracker.Converters"
              xmlns:markupExtensions="clr-namespace:IngressTracker.MarkupExtensions"
-
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="900">
     <UserControl.Resources>
@@ -64,7 +62,21 @@
                             <TextBlock Text="{Binding MaxAP, StringFormat='###,###,###,##0'}" VerticalAlignment="Bottom"/>
                         </StackPanel>
                     </Grid>
-                    <ProgressBar Value="{Binding AccessPoints}" Maximum="{Binding MaxAP}" Height="10"/>
+                    <ProgressBar Value="{Binding AccessPoints}" Maximum="{Binding MaxAP}" Height="10">
+                        <ProgressBar.Style>
+                            <Style TargetType="ProgressBar">
+                                <Setter Property="Foreground" Value="Red" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Faction.Code}" Value="ENL">
+                                        <Setter Property="Foreground" Value="{StaticResource EnlightenedBrush}"></Setter>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Faction.Code}" Value="RES">
+                                        <Setter Property="Foreground" Value="{StaticResource ResistanceBrush}"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ProgressBar.Style>
+                    </ProgressBar>
                 </StackPanel>
                 
             </Grid>
