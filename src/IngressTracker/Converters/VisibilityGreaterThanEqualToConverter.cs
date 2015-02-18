@@ -80,8 +80,6 @@ namespace IngressTracker.Converters
         /// <returns>
         /// The <see cref="object"/>.
         /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();

@@ -114,8 +114,6 @@ namespace IngressTracker.Startup
                 viewModelRegistrations);
 
             ServiceLocator.SetLocatorProvider(() => new WindsorServiceLocator(this.container));
-
-
         }
 
         /// <summary>
