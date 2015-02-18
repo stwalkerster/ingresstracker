@@ -169,6 +169,15 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Badge Progress.
+        /// </summary>
+        public static string BadgeProgressView {
+            get {
+                return ResourceManager.GetString("BadgeProgressView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Silver Level.
         /// </summary>
         public static string BadgeSilver {
@@ -417,6 +426,15 @@ namespace IngressTracker.Properties {
         public static string LevelPlatinums {
             get {
                 return ResourceManager.GetString("LevelPlatinums", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Level Progress.
+        /// </summary>
+        public static string LevelProgressView {
+            get {
+                return ResourceManager.GetString("LevelProgressView", resourceCulture);
             }
         }
         

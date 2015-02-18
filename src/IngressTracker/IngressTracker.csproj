@@ -179,9 +179,12 @@
     <Compile Include="Startup\WindsorServiceLocator.cs" />
     <Compile Include="ScreenBase\StaticDataScreen.cs" />
     <Compile Include="ViewModels\BadgeAwardViewModel.cs" />
+    <Compile Include="ViewModels\BadgeProgressViewModel.cs" />
     <Compile Include="ViewModels\BadgeStaticViewModel.cs" />
     <Compile Include="ViewModels\CategoryStaticViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IBadgeAwardViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\IBadgeProgressViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\ILevelProgressViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\ILevelStaticViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\ILoginViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IBadgeStaticViewModel.cs" />
@@ -191,6 +194,7 @@
     <Compile Include="ViewModels\Interfaces\IStatisticsStaticViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IUserOverviewViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IUserStaticViewModel.cs" />
+    <Compile Include="ViewModels\LevelProgressViewModel.cs" />
     <Compile Include="ViewModels\LevelStaticViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\RawValueViewModel.cs" />
@@ -205,11 +209,17 @@
     <Compile Include="Views\BadgeAwardView.xaml.cs">
       <DependentUpon>BadgeAwardView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\BadgeProgressView.xaml.cs">
+      <DependentUpon>BadgeProgressView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\BadgeStaticView.xaml.cs">
       <DependentUpon>BadgeStaticView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CategoryStaticView.xaml.cs">
       <DependentUpon>CategoryStaticView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LevelProgressView.xaml.cs">
+      <DependentUpon>LevelProgressView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LevelStaticView.xaml.cs">
       <DependentUpon>LevelStaticView.xaml</DependentUpon>
@@ -257,7 +267,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\BadgeProgressView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\BadgeStaticView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LevelProgressView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -303,6 +321,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Resource Include="Images\Crystal\16\1rightarrow.png" />
+    <Resource Include="Images\Crystal\16\2rightarrow.png" />
+    <Resource Include="Images\Crystal\32\1rightarrow.png" />
+    <Resource Include="Images\Crystal\32\2rightarrow.png" />
     <Resource Include="Images\Crystal\16\groupevent.png" />
     <Resource Include="Images\Crystal\32\groupevent.png" />
     <Resource Include="Images\Crystal\16\bookmark.png" />

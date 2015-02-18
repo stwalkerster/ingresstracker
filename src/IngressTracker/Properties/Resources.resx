@@ -315,4 +315,10 @@
   <data name="UserOverviewView" xml:space="preserve">
     <value>Overview</value>
   </data>
+  <data name="BadgeProgressView" xml:space="preserve">
+    <value>Badge Progress</value>
+  </data>
+  <data name="LevelProgressView" xml:space="preserve">
+    <value>Level Progress</value>
+  </data>
 </root>

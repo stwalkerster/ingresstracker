@@ -123,6 +123,18 @@ namespace IngressTracker.ViewModels
         }
 
         /// <summary>
+        /// Gets a value indicating whether can open user overview.
+        /// </summary>
+        public bool CanOpenBadgeProgress
+        {
+            get
+            {
+                return false;
+                return this.loginService.LoginComplete;
+            }
+        }
+
+        /// <summary>
         /// Gets a value indicating whether can open badge static.
         /// </summary>
         public bool CanOpenBadgeStatic
@@ -140,6 +152,18 @@ namespace IngressTracker.ViewModels
         {
             get
             {
+                return this.loginService.LoginComplete;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether can open level progress.
+        /// </summary>
+        public bool CanOpenLevelProgress
+        {
+            get
+            {
+                return false;
                 return this.loginService.LoginComplete;
             }
         }
@@ -345,6 +369,14 @@ namespace IngressTracker.ViewModels
         }
 
         /// <summary>
+        /// The open badge progress.
+        /// </summary>
+        public void OpenBadgeProgress()
+        {
+            this.OpenWindow<IBadgeProgressViewModel>();
+        }
+
+        /// <summary>
         /// The open badge static.
         /// </summary>
         public void OpenBadgeStatic()
@@ -358,6 +390,14 @@ namespace IngressTracker.ViewModels
         public void OpenCategoryStatic()
         {
             this.OpenWindow<ICategoryStaticViewModel>();
+        }
+
+        /// <summary>
+        /// The open level progress.
+        /// </summary>
+        public void OpenLevelProgress()
+        {
+            this.OpenWindow<ILevelProgressViewModel>();
         }
 
         /// <summary>

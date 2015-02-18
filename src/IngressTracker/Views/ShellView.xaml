@@ -57,6 +57,20 @@
             <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/32/personal.png" />
         </Style>
 
+        <Style x:Key="BadgeProgressButtonStyle" TargetType="fluent:Button">
+            <Setter Property="Header" Value="{x:Static properties:Resources.BadgeProgressView}" />
+            <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action OpenBadgeProgress]" />
+            <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/16/1rightarrow.png" />
+            <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/32/1rightarrow.png" />
+        </Style>
+        <Style x:Key="LevelProgressButtonStyle" TargetType="fluent:Button">
+            <Setter Property="Header" Value="{x:Static properties:Resources.LevelProgressView}" />
+            <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action OpenLevelProgress]" />
+            <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/16/2rightarrow.png" />
+            <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/32/2rightarrow.png" />
+        </Style>
+
+
         <Style x:Key="LoginButtonStyle" TargetType="fluent:Button">
             <Setter Property="Header" Value="{x:Static properties:Resources.Login}" />
             <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action OpenLogin]" />
@@ -79,6 +93,8 @@
                 </fluent:RibbonGroupBox>
                 <fluent:RibbonGroupBox Header="{x:Static properties:Resources.Screens}">
                     <fluent:Button Style="{StaticResource UserOverviewButtonStyle}" />
+                    <fluent:Button Style="{StaticResource BadgeProgressButtonStyle}" />
+                    <fluent:Button Style="{StaticResource LevelProgressButtonStyle}" />
                     <fluent:Button Style="{StaticResource RawValuesButtonStyle}" />
                     <fluent:Button Style="{StaticResource BadgeAwardButtonStyle}" />
                 </fluent:RibbonGroupBox>
