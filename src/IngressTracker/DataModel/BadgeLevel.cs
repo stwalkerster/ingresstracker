@@ -56,6 +56,11 @@ namespace IngressTracker.DataModel
         /// </summary>
         public static readonly BadgeLevel Silver = new BadgeLevel("S", Resources.Silver);
 
+        /// <summary>
+        /// The locked.
+        /// </summary>
+        public static readonly BadgeLevel Locked = new BadgeLevel("L", Resources.Locked);
+
         #endregion
 
         #region Constructors and Destructors
@@ -65,6 +70,7 @@ namespace IngressTracker.DataModel
         /// </summary>
         static BadgeLevel()
         {
+            BadgeLevel.AddItem(Locked);
             BadgeLevel.AddItem(Bronze);
             BadgeLevel.AddItem(Silver);
             BadgeLevel.AddItem(Gold);

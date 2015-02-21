@@ -52,7 +52,7 @@ namespace IngressTracker.DataModel.Models
         /// <summary>
         /// Gets or sets the value.
         /// </summary>
-        public virtual int Value { get; set; }
+        public virtual int? Value { get; set; }
 
         #endregion
     }

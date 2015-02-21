@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IUserOverviewViewModel.cs" company="Simon Walker">
+// <copyright file="IBadgeProgressService.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,18 +17,29 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The UserOverviewViewModel interface.
+//   The BadgeProgressService interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace IngressTracker.ViewModels.Interfaces
+namespace IngressTracker.Services.Interfaces
 {
-    using IngressTracker.Interfaces;
+    using IngressTracker.DataModel;
+    using IngressTracker.DataModel.Models;
 
     /// <summary>
-    /// The UserOverviewViewModel interface.
+    /// The BadgeProgressService interface.
     /// </summary>
-    public interface IUserOverviewViewModel : IDataScreen
+    public interface IBadgeProgressService
     {
+        /// <summary>
+        /// The get progress.
+        /// </summary>
+        /// <param name="badge">
+        /// The badge.
+        /// </param>
+        /// <returns>
+        /// The <see cref="BadgeProgress"/>.
+        /// </returns>
+        BadgeProgress GetProgress(Badge badge);
     }
 }

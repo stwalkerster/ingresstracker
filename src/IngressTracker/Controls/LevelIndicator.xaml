@@ -11,10 +11,10 @@
         <Style TargetType="Path" x:Key="StrokeStyle">
             <Setter Property="Stroke" Value="Red" />
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Faction.Code}" Value="ENL">
+                <DataTrigger Binding="{Binding LoginService.Agent.Faction.Code}" Value="ENL">
                     <Setter Property="Stroke" Value="{StaticResource EnlightenedBrush}"></Setter>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Faction.Code}" Value="RES">
+                <DataTrigger Binding="{Binding LoginService.Agent.Faction.Code}" Value="RES">
                     <Setter Property="Stroke" Value="{StaticResource ResistanceBrush}"></Setter>
                 </DataTrigger>
             </Style.Triggers>
@@ -22,10 +22,10 @@
         <Style TargetType="Path" x:Key="FillStyle">
             <Setter Property="Fill" Value="Red" />
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Faction.Code}" Value="ENL">
+                <DataTrigger Binding="{Binding LoginService.Agent.Faction.Code}" Value="ENL">
                     <Setter Property="Fill" Value="{StaticResource EnlightenedBrush}" />
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Faction.Code}" Value="RES">
+                <DataTrigger Binding="{Binding LoginService.Agent.Faction.Code}" Value="RES">
                     <Setter Property="Fill" Value="{StaticResource ResistanceBrush}" />
                 </DataTrigger>
             </Style.Triggers>

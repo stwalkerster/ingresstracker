@@ -62,21 +62,7 @@
                             <TextBlock Text="{Binding MaxAP, StringFormat='###,###,###,##0'}" VerticalAlignment="Bottom"/>
                         </StackPanel>
                     </Grid>
-                    <ProgressBar Value="{Binding AccessPoints}" Maximum="{Binding MaxAP}" Height="10">
-                        <ProgressBar.Style>
-                            <Style TargetType="ProgressBar">
-                                <Setter Property="Foreground" Value="Red" />
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Faction.Code}" Value="ENL">
-                                        <Setter Property="Foreground" Value="{StaticResource EnlightenedBrush}"></Setter>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding Faction.Code}" Value="RES">
-                                        <Setter Property="Foreground" Value="{StaticResource ResistanceBrush}"></Setter>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </ProgressBar.Style>
-                    </ProgressBar>
+                    <ProgressBar Value="{Binding AccessPoints}" Maximum="{Binding MaxAP}" />
                 </StackPanel>
                 
             </Grid>

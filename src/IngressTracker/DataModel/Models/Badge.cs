@@ -71,6 +71,11 @@ namespace IngressTracker.DataModel.Models
         /// </summary>
         public virtual Stat Statistic { get; set; }
 
+        /// <summary>
+        /// Gets or sets the description.
+        /// </summary>
+        public virtual string Description { get; set; }
+
         #endregion
 
         #region Public Methods and Operators

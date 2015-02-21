@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IUserOverviewViewModel.cs" company="Simon Walker">
+// <copyright file="EnterStatsView.xaml.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,18 +17,27 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The UserOverviewViewModel interface.
+//   Interaction logic for EnterStatsView.xaml
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace IngressTracker.ViewModels.Interfaces
+namespace IngressTracker.Views
 {
-    using IngressTracker.Interfaces;
-
     /// <summary>
-    /// The UserOverviewViewModel interface.
+    /// Interaction logic for EnterStatsView.xaml
     /// </summary>
-    public interface IUserOverviewViewModel : IDataScreen
+    public partial class EnterStatsView
     {
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="EnterStatsView"/> class.
+        /// </summary>
+        public EnterStatsView()
+        {
+            this.InitializeComponent();
+        }
+
+        #endregion
     }
 }

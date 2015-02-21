@@ -76,4 +76,17 @@
 
     <SolidColorBrush x:Key="EnlightenedBrush" Color="#FF239821"/>
     <SolidColorBrush x:Key="ResistanceBrush" Color="#FF0078b5"/>
+    
+    <Style TargetType="ProgressBar">
+        <Setter Property="Foreground" Value="Red" />
+        <Setter Property="Height" Value="10" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding LoginService.Agent.Faction.Code}" Value="ENL">
+                <Setter Property="Foreground" Value="{StaticResource EnlightenedBrush}"></Setter>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding LoginService.Agent.Faction.Code}" Value="RES">
+                <Setter Property="Foreground" Value="{StaticResource ResistanceBrush}"></Setter>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>

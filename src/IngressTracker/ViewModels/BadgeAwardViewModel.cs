@@ -83,7 +83,7 @@ namespace IngressTracker.ViewModels
             this.Agents = this.DatabaseSession.Query<User>().ToList();
             this.NotifyOfPropertyChange(() => this.Agents);
 
-            this.Badges = this.DatabaseSession.QueryOver<Badge>().Where(x => !x.Awardable).List();
+            this.Badges = this.DatabaseSession.QueryOver<Badge>().Where(x => x.Awardable).List();
             this.NotifyOfPropertyChange(() => this.Badges);
         }
         

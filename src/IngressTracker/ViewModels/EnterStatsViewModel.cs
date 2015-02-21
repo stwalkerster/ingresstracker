@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="BadgeProgressViewModel.cs" company="Simon Walker">
+// <copyright file="EnterStatsViewModel.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,15 +17,18 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The badge progress view model.
+//   The enter stats view model.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace IngressTracker.ViewModels
 {
+    using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
+    using System.Windows;
 
-    using IngressTracker.DataModel;
     using IngressTracker.DataModel.Models;
     using IngressTracker.Properties;
     using IngressTracker.ScreenBase;
@@ -35,33 +38,23 @@ namespace IngressTracker.ViewModels
     using NHibernate;
 
     /// <summary>
-    /// The badge progress view model.
+    /// The enter stats view model.
     /// </summary>
-    public class BadgeProgressViewModel : ScreenBase, IBadgeProgressViewModel
+    public class EnterStatsViewModel : ScreenBase, IEnterStatsViewModel
     {
         #region Fields
 
         /// <summary>
-        /// The badge progress service.
+        /// The value entries.
         /// </summary>
-        private readonly IBadgeProgressService badgeProgressService;
-
-        /// <summary>
-        /// The awarded badges.
-        /// </summary>
-        private IList<BadgeAward> awardedBadges;
-
-        /// <summary>
-        /// The badges.
-        /// </summary>
-        private IEnumerable<BadgeProgress> badges;
+        private ObservableCollection<ValueEntry> valueEntries;
 
         #endregion
 
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initialises a new instance of the <see cref="BadgeProgressViewModel"/> class.
+        /// Initialises a new instance of the <see cref="EnterStatsViewModel"/> class.
         /// </summary>
         /// <param name="databaseSession">
         /// The database session.
@@ -69,16 +62,9 @@ namespace IngressTracker.ViewModels
         /// <param name="loginService">
         /// The login service.
         /// </param>
-        /// <param name="badgeProgressService">
-        /// The badge Progress Service.
-        /// </param>
-        public BadgeProgressViewModel(
-            ISession databaseSession, 
-            ILoginService loginService, 
-            IBadgeProgressService badgeProgressService)
-            : base(Resources.BadgeProgressView, databaseSession, loginService)
+        public EnterStatsViewModel(ISession databaseSession, ILoginService loginService)
+            : base(Resources.EnterStatsView, databaseSession, loginService)
         {
-            this.badgeProgressService = badgeProgressService;
         }
 
         #endregion
@@ -86,24 +72,13 @@ namespace IngressTracker.ViewModels
         #region Public Properties
 
         /// <summary>
-        /// Gets the awarded badges.
+        /// Gets the value entries.
         /// </summary>
-        public IList<BadgeAward> AwardedBadges
+        public IEnumerable<ValueEntry> ValueEntries
         {
             get
             {
-                return this.awardedBadges;
-            }
-        }
-
-        /// <summary>
-        /// Gets the badges.
-        /// </summary>
-        public IEnumerable<BadgeProgress> Badges
-        {
-            get
-            {
-                return this.badges;
+                return this.valueEntries;
             }
         }
 
@@ -112,22 +87,45 @@ namespace IngressTracker.ViewModels
         #region Public Methods and Operators
 
         /// <summary>
+        /// The add record.
+        /// </summary>
+        public void AddRecord()
+        {
+            this.valueEntries = new ObservableCollection<ValueEntry>(
+                this.DatabaseSession.QueryOver<Stat>()
+                .OrderBy(x => x.DisplayOrder).Asc
+                    .List()
+                    .Select(
+                        x => new ValueEntry { Agent = this.LoginService.Agent, Statistic = x, Timestamp = DateTime.Now }));
+
+            this.NotifyOfPropertyChange(() => this.ValueEntries);
+        }
+
+        /// <summary>
         /// The refresh data.
         /// </summary>
         public void RefreshData()
         {
-            var agent = this.LoginService.Agent;
+            this.AddRecord();
+        }
 
-            this.badges =
-                this.DatabaseSession.QueryOver<Badge>()
-                    .Where(x => !x.Awardable)
-                    .List()
-                    .Select(x => this.badgeProgressService.GetProgress(x));
+        /// <summary>
+        /// The save.
+        /// </summary>
+        public void Save()
+        {
+            if (this.valueEntries.Count(x => x.Value == null) != 0)
+            {
+                MessageBox.Show(Resources.NotAllStatsSpecified);
+                return;
+            }
 
-            this.awardedBadges = this.DatabaseSession.QueryOver<BadgeAward>().Where(x => x.Agent == agent).List();
+            foreach (var valueEntry in this.ValueEntries)
+            {
+                this.DatabaseSession.Save(valueEntry);
+            }
 
-            this.NotifyOfPropertyChange(() => this.Badges);
-            this.NotifyOfPropertyChange(() => this.AwardedBadges);
+            this.TryClose();
         }
 
         #endregion
@@ -140,7 +138,8 @@ namespace IngressTracker.ViewModels
         protected override void OnInitialize()
         {
             base.OnInitialize();
-            this.RefreshData();
+
+            this.AddRecord();
         }
 
         #endregion

@@ -88,6 +88,15 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Awardable Badges.
+        /// </summary>
+        public static string AwardableBadges {
+            get {
+                return ResourceManager.GetString("AwardableBadges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Badge.
         /// </summary>
         public static string Badge {
@@ -133,11 +142,29 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string BadgeDescription {
+            get {
+                return ResourceManager.GetString("BadgeDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Gold Level.
         /// </summary>
         public static string BadgeGold {
             get {
                 return ResourceManager.GetString("BadgeGold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Badge is awardable..
+        /// </summary>
+        public static string BadgeIsAwardable {
+            get {
+                return ResourceManager.GetString("BadgeIsAwardable", resourceCulture);
             }
         }
         
@@ -430,6 +457,24 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Earnable Badges.
+        /// </summary>
+        public static string EarnableBadges {
+            get {
+                return ResourceManager.GetString("EarnableBadges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter Stats.
+        /// </summary>
+        public static string EnterStatsView {
+            get {
+                return ResourceManager.GetString("EnterStatsView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enlightened.
         /// </summary>
         public static string FactionEnlightened {
@@ -453,6 +498,15 @@ namespace IngressTracker.Properties {
         public static string Gold {
             get {
                 return ResourceManager.GetString("Gold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is AP statistic?.
+        /// </summary>
+        public static string IsAP {
+            get {
+                return ResourceManager.GetString("IsAP", resourceCulture);
             }
         }
         
@@ -529,6 +583,15 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Locked.
+        /// </summary>
+        public static string Locked {
+            get {
+                return ResourceManager.GetString("Locked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
         public static string Login {
@@ -552,6 +615,15 @@ namespace IngressTracker.Properties {
         public static string LoginView {
             get {
                 return ResourceManager.GetString("LoginView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not all stats are specified..
+        /// </summary>
+        public static string NotAllStatsSpecified {
+            get {
+                return ResourceManager.GetString("NotAllStatsSpecified", resourceCulture);
             }
         }
         

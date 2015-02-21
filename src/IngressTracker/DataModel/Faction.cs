@@ -22,6 +22,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace IngressTracker.DataModel
 {
+    using System.Windows;
     using System.Windows.Media;
 
     using IngressTracker.Properties;
@@ -37,9 +38,9 @@ namespace IngressTracker.DataModel
         /// The enlightened.
         /// </summary>
         public static readonly Faction Enlightened = new Faction(
-            Resources.FactionEnlightened, 
-            "ENL", 
-            Brushes.Green, 
+            Resources.FactionEnlightened,
+            "ENL",
+            (Brush)Application.Current.FindResource("EnlightenedBrush"),
             Brushes.LightGreen);
 
         /// <summary>
@@ -47,8 +48,8 @@ namespace IngressTracker.DataModel
         /// </summary>
         public static readonly Faction Resistance = new Faction(
             Resources.FactionResistance, 
-            "RES", 
-            Brushes.Blue, 
+            "RES",
+            (Brush)Application.Current.FindResource("ResistanceBrush"),
             Brushes.LightBlue);
 
         #endregion

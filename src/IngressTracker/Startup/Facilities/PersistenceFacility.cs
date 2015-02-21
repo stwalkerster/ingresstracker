@@ -79,7 +79,8 @@ namespace IngressTracker.Startup.Facilities
         /// </summary>
         protected override void Init()
         {
-            var dataBindingInterceptor = new DataBindingInterceptor();
+            this.Kernel.Register(Component.For<DataBindingInterceptor>());
+            var dataBindingInterceptor = this.Kernel.Resolve<DataBindingInterceptor>();
 
             var config =
                 Fluently.Configure()

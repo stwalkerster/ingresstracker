@@ -26,6 +26,13 @@
                 </DataGridComboBoxColumn>
                 <DataGridCheckBoxColumn Header="{x:Static properties:Resources.StatisticPredictable}" Binding="{Binding IsPredictable}" />
                 <DataGridTextColumn Header="{x:Static properties:Resources.DisplayOrder}" Binding="{Binding DisplayOrder}" />
+                <DataGridTemplateColumn Header="{x:Static properties:Resources.IsAP}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <RadioButton GroupName="AP" IsChecked="{Binding IsAccessPointsStat, UpdateSourceTrigger=PropertyChanged}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

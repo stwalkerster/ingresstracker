@@ -78,6 +78,13 @@
             <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/32/2rightarrow.png" />
         </Style>
 
+        <Style x:Key="EnterStatsButtonStyle" TargetType="fluent:Button">
+            <Setter Property="Header" Value="{x:Static properties:Resources.EnterStatsView}" />
+            <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action OpenEnterStats]" />
+            <Setter Property="Icon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/16/edit_add.png" />
+            <Setter Property="LargeIcon" Value="pack://application:,,,/IngressTracker;component/Images/Crystal/32/edit_add.png" />
+        </Style>
+
         <Style x:Key="LoginButtonStyle" TargetType="fluent:Button">
             <Setter Property="Header" Value="{x:Static properties:Resources.Login}" />
             <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action OpenLogin]" />
@@ -103,6 +110,7 @@
                     <fluent:Button Style="{StaticResource BadgeProgressButtonStyle}" Size="Middle"/>
                     <fluent:Button Style="{StaticResource LevelProgressButtonStyle}" Size="Middle"/>
                     <fluent:Button Style="{StaticResource RawValuesButtonStyle}" Size="Middle"/>
+                    <fluent:Button Style="{StaticResource EnterStatsButtonStyle}" />
                     <fluent:Button Style="{StaticResource BadgeAwardButtonStyle}" />
                 </fluent:RibbonGroupBox>
                 <fluent:RibbonGroupBox Header="{x:Static properties:Resources.StaticData}">

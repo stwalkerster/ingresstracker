@@ -345,4 +345,28 @@
   <data name="DataSaveRecordsHelpDisabled" xml:space="preserve">
     <value>The current screen does not support saving.</value>
   </data>
+  <data name="Locked" xml:space="preserve">
+    <value>Locked</value>
+  </data>
+  <data name="BadgeIsAwardable" xml:space="preserve">
+    <value>Badge is awardable.</value>
+  </data>
+  <data name="BadgeDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="AwardableBadges" xml:space="preserve">
+    <value>Awardable Badges</value>
+  </data>
+  <data name="EarnableBadges" xml:space="preserve">
+    <value>Earnable Badges</value>
+  </data>
+  <data name="IsAP" xml:space="preserve">
+    <value>Is AP statistic?</value>
+  </data>
+  <data name="EnterStatsView" xml:space="preserve">
+    <value>Enter Stats</value>
+  </data>
+  <data name="NotAllStatsSpecified" xml:space="preserve">
+    <value>Not all stats are specified.</value>
+  </data>
 </root>

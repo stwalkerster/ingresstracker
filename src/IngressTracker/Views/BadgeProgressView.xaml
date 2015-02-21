@@ -2,10 +2,164 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:IngressTracker.Controls"
+             xmlns:properties="clr-namespace:IngressTracker.Properties"
+             xmlns:views="clr-namespace:IngressTracker.Views"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
-    </Grid>
+    <UserControl.Resources>
+        <Style TargetType="controls:Badge">
+            <Setter Property="Fill" Value="Transparent" />
+            <Setter Property="Stroke" Value="Transparent" />
+            <Setter Property="InnerStroke" Value="Transparent" />
+
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Code}" Value="B">
+                    <Setter Property="Fill" Value="{StaticResource BronzeBadgeFill}" />
+                    <Setter Property="Stroke" Value="{StaticResource BronzeBadgeStroke}" />
+                    <Setter Property="InnerStroke" Value="{StaticResource BronzeBadgeFill}" />
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding Code}" Value="S">
+                    <Setter Property="Fill" Value="{StaticResource SilverBadgeFill}" />
+                    <Setter Property="Stroke" Value="{StaticResource SilverBadgeStroke}" />
+                    <Setter Property="InnerStroke" Value="{StaticResource SilverBadgeFill}" />
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding Code}" Value="G">
+                    <Setter Property="Fill" Value="{StaticResource GoldBadgeFill}" />
+                    <Setter Property="Stroke" Value="{StaticResource GoldBadgeStroke}" />
+                    <Setter Property="InnerStroke" Value="{StaticResource GoldBadgeFill}" />
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding Code}" Value="P">
+                    <Setter Property="Fill" Value="{StaticResource PlatinumBadgeFill}" />
+                    <Setter Property="Stroke" Value="{StaticResource PlatinumBadgeStroke}" />
+                    <Setter Property="InnerStroke" Value="{StaticResource PlatinumBadgeInnerStroke}" />
+                </DataTrigger>
+                                                
+                <DataTrigger Binding="{Binding Code}" Value="K">
+                    <Setter Property="Fill" Value="{StaticResource BlackBadgeFill}" />
+                    <Setter Property="Stroke" Value="{StaticResource BlackBadgeStroke}" />
+                    <Setter Property="InnerStroke" Value="{StaticResource BlackBadgeStroke}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <ScrollViewer HorizontalScrollBarVisibility="Hidden">
+        <StackPanel Orientation="Vertical" Margin="0,0,20,0">
+            <Expander>
+                <Expander.Header>
+                    <TextBlock FontSize="20" Text="{x:Static properties:Resources.EarnableBadges}" />
+                </Expander.Header>
+                <ItemsControl ItemsSource="{Binding Badges}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="58" />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <controls:Badge DataContext="{Binding CurrentLevel}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="4">
+                                    <controls:Badge.LayoutTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform ScaleX="0.33" ScaleY="0.33"/>
+                                                <SkewTransform/>
+                                                <RotateTransform/>
+                                                <TranslateTransform/>
+                                        </TransformGroup>
+                                    </controls:Badge.LayoutTransform>
+                                </controls:Badge>
+
+                                <TextBlock Grid.Column="1" FontSize="16" Margin="0, 5, 0, 0" Grid.Row="0"
+                                           Grid.ColumnSpan="3" Text="{Binding Badge.Name}" />
+
+                                <controls:Badge DataContext="{Binding NextLevel}" Grid.Row="0" Grid.Column="4" Grid.RowSpan="4" VerticalAlignment="Bottom" Margin="5,0,0,0">
+                                    <controls:Badge.LayoutTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform ScaleX="0.2" ScaleY="0.2"/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </controls:Badge.LayoutTransform>
+                                </controls:Badge>
+
+                                <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Text="{Binding Badge.Statistic.Description}" />
+
+                                <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="2" Text="{Binding LastTarget, Mode=OneWay}" />
+                                <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="2" Text="{Binding CurrentPosition, Mode=OneWay}" />
+                                <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Column="3" Grid.Row="2" Text="{Binding NextTarget, Mode=OneWay}" />
+
+                                <ProgressBar Grid.ColumnSpan="3" Grid.Row="3" Grid.Column="1" Minimum="{Binding LastTarget, Mode=OneWay}" Maximum="{Binding NextTarget, Mode=OneWay}" Value="{Binding CurrentPosition, Mode=OneWay}">
+                                    <ProgressBar.Style>
+                                        <Style TargetType="ProgressBar">
+                                            <Setter Property="Foreground" Value="Red" />
+                                            <Setter Property="Height" Value="10" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding DataContext.LoginService.Agent.Faction.Code, RelativeSource={RelativeSource AncestorType={x:Type views:BadgeProgressView}}}" Value="ENL">
+                                                    <Setter Property="Foreground" Value="{StaticResource EnlightenedBrush}"></Setter>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding DataContext.LoginService.Agent.Faction.Code, RelativeSource={RelativeSource AncestorType={x:Type views:BadgeProgressView}}}" Value="RES">
+                                                    <Setter Property="Foreground" Value="{StaticResource ResistanceBrush}"></Setter>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ProgressBar.Style>
+                                </ProgressBar>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Expander>
+            <Expander>
+                <Expander.Header>
+                    <TextBlock FontSize="20" Text="{x:Static properties:Resources.AwardableBadges}" />
+                </Expander.Header>
+                <ItemsControl ItemsSource="{Binding AwardedBadges}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="58" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+
+                                <controls:Badge DataContext="{Binding Level}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2">
+                                    <controls:Badge.LayoutTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform ScaleX="0.33" ScaleY="0.33"/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </controls:Badge.LayoutTransform>
+                                </controls:Badge>
+
+                                <TextBlock Grid.Column="1" FontSize="16" Margin="0, 5, 0, 0" Grid.Row="0"
+                                           Text="{Binding Badge.Name}" />
+
+                                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Badge.Description}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Expander>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

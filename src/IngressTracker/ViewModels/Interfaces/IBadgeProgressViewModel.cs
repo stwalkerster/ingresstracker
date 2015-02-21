@@ -23,12 +23,12 @@
 
 namespace IngressTracker.ViewModels.Interfaces
 {
-    using Caliburn.Micro;
+    using IngressTracker.Interfaces;
 
     /// <summary>
     /// The BadgeProgressViewModel interface.
     /// </summary>
-    public interface IBadgeProgressViewModel : IScreen
+    public interface IBadgeProgressViewModel : IDataScreen
     {
     }
 }

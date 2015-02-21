@@ -13,7 +13,7 @@
                 <fluent:ScreenTip Title="{x:Static properties:Resources.DataSaveRecords}"
                                   Image="pack://application:,,,/IngressTracker;component/Images/Crystal/32/save_all.png"
                                   Text="{x:Static properties:Resources.DataSaveRecordsHelp}"
-                                  DisableReason="{x:Static properties:Resources.DataSaveRecordsHelp}"
+                                  DisableReason="{x:Static properties:Resources.DataSaveRecordsHelpDisabled}"
                                   Width="250"
                                   />
             </Setter.Value>

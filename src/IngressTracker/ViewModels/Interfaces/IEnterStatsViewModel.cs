@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IUserOverviewViewModel.cs" company="Simon Walker">
+// <copyright file="IEnterStatsViewModel.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,7 +17,7 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The UserOverviewViewModel interface.
+//   The EnterStatsViewModel interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -26,9 +26,9 @@ namespace IngressTracker.ViewModels.Interfaces
     using IngressTracker.Interfaces;
 
     /// <summary>
-    /// The UserOverviewViewModel interface.
+    /// The EnterStatsViewModel interface.
     /// </summary>
-    public interface IUserOverviewViewModel : IDataScreen
+    public interface IEnterStatsViewModel : ICanAddRecord, ICanSave
     {
     }
 }

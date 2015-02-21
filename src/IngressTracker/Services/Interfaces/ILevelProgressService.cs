@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IUserOverviewViewModel.cs" company="Simon Walker">
+// <copyright file="ILevelProgressService.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,18 +17,54 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The UserOverviewViewModel interface.
+//   The LevelProgressService interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
-namespace IngressTracker.ViewModels.Interfaces
+namespace IngressTracker.Services.Interfaces
 {
-    using IngressTracker.Interfaces;
+    using IngressTracker.DataModel.Models;
 
     /// <summary>
-    /// The UserOverviewViewModel interface.
+    /// The LevelProgressService interface.
     /// </summary>
-    public interface IUserOverviewViewModel : IDataScreen
+    public interface ILevelProgressService
     {
+        #region Public Methods and Operators
+
+        /// <summary>
+        /// The get current level.
+        /// </summary>
+        /// <param name="ap">
+        /// The AP.
+        /// </param>
+        /// <param name="silver">
+        /// The silver.
+        /// </param>
+        /// <param name="gold">
+        /// The gold.
+        /// </param>
+        /// <param name="platinum">
+        /// The platinum.
+        /// </param>
+        /// <param name="black">
+        /// The black.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Level"/>.
+        /// </returns>
+        Level GetCurrentLevel(int ap, int silver, int gold, int platinum, int black);
+
+        /// <summary>
+        /// The get next level.
+        /// </summary>
+        /// <param name="currentLevel">
+        /// The current Level.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Level"/>.
+        /// </returns>
+        Level GetNextLevel(Level currentLevel);
+
+        #endregion
     }
 }

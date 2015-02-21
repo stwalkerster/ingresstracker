@@ -24,13 +24,40 @@ namespace IngressTracker.Persistence.Proxy
 {
     using System;
 
+    using Castle.Core.Logging;
+
     using NHibernate;
+    using NHibernate.SqlCommand;
 
     /// <summary>
     /// The data binding interceptor.
     /// </summary>
     public class DataBindingInterceptor : EmptyInterceptor
     {
+        #region Fields
+
+        /// <summary>
+        /// The logger.
+        /// </summary>
+        private readonly ILogger logger;
+
+        #endregion
+
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="DataBindingInterceptor"/> class.
+        /// </summary>
+        /// <param name="logger">
+        /// The logger.
+        /// </param>
+        public DataBindingInterceptor(ILogger logger)
+        {
+            this.logger = logger;
+        }
+
+        #endregion
+
         #region Public Properties
 
         /// <summary>
@@ -91,6 +118,22 @@ namespace IngressTracker.Persistence.Proxy
             }
 
             return base.Instantiate(typeName, entityMode, id);
+        }
+
+        /// <summary>
+        /// The on prepare statement.
+        /// </summary>
+        /// <param name="sql">
+        /// The SQL.
+        /// </param>
+        /// <returns>
+        /// The <see cref="SqlString"/>.
+        /// </returns>
+        public override SqlString OnPrepareStatement(SqlString sql)
+        {
+            this.logger.Debug(sql.ToString());
+
+            return base.OnPrepareStatement(sql);
         }
 
         #endregion

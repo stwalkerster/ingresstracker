@@ -129,7 +129,6 @@ namespace IngressTracker.ViewModels
         {
             get
             {
-                return false;
                 return this.loginService.LoginComplete;
             }
         }
@@ -149,6 +148,17 @@ namespace IngressTracker.ViewModels
         /// Gets a value indicating whether can open category static.
         /// </summary>
         public bool CanOpenCategoryStatic
+        {
+            get
+            {
+                return this.loginService.LoginComplete;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether can open enter stats.
+        /// </summary>
+        public bool CanOpenEnterStats
         {
             get
             {
@@ -219,7 +229,6 @@ namespace IngressTracker.ViewModels
         {
             get
             {
-                return false;
                 return this.loginService.LoginComplete;
             }
         }
@@ -390,6 +399,14 @@ namespace IngressTracker.ViewModels
         public void OpenCategoryStatic()
         {
             this.OpenWindow<ICategoryStaticViewModel>();
+        }
+
+        /// <summary>
+        /// The open enter stats.
+        /// </summary>
+        public void OpenEnterStats()
+        {
+            this.OpenWindow<IEnterStatsViewModel>();
         }
 
         /// <summary>

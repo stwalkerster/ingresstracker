@@ -56,6 +56,11 @@ namespace IngressTracker.DataModel.Models
         /// </summary>
         public virtual int DisplayOrder { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether is access points stat.
+        /// </summary>
+        public virtual bool IsAccessPointsStat { get; set; }
+
         #endregion
 
         #region Public Methods and Operators
