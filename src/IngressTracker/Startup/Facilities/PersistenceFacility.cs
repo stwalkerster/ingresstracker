@@ -22,9 +22,9 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace IngressTracker.Startup.Facilities
 {
-    using System.Collections.Specialized;
-    using System.ComponentModel;
-    using System.Configuration;
+    using System;
+    using System.Data.SQLite;
+    using System.IO;
 
     using Castle.MicroKernel.Facilities;
 
@@ -34,7 +34,6 @@ namespace IngressTracker.Startup.Facilities
     using IngressTracker.Persistence;
     using IngressTracker.Persistence.Interfaces;
     using IngressTracker.Persistence.Proxy;
-    using IngressTracker.Services.Interfaces;
 
     using NHibernate;
 
@@ -59,11 +58,6 @@ namespace IngressTracker.Startup.Facilities
         /// </param>
         public static void ConfigurePersistence(Configuration config, DataBindingInterceptor dataBindingInterceptor)
         {
-            // This is a fix for a wierd exception.
-            // {"Column 'ReservedWord' does not belong to table ReservedWords."}
-            // http://stackoverflow.com/questions/1061128/mysql-nhibernate-how-fix-the-error-column-reservedword-does-not-belong-to
-            config.Properties.Add("hbm2ddl.keywords", "none");
-
             if (dataBindingInterceptor != null)
             {
                 config.SetInterceptor(dataBindingInterceptor);
@@ -115,23 +109,24 @@ namespace IngressTracker.Startup.Facilities
         /// </returns>
         private IPersistenceConfigurer SetupDatabase()
         {
-            var loginService = this.Kernel.Resolve<ILoginService>();
+            var appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "IngressTracker");
 
-            var databaseServerHostname =
-                TypeDescriptor.GetConverter(typeof(string))
-                    .ConvertFrom(((NameValueCollection)ConfigurationManager.GetSection("database"))["databaseServerHostname"]);
-            var databaseSchemaName =
-                TypeDescriptor.GetConverter(typeof(string))
-                    .ConvertFrom(((NameValueCollection)ConfigurationManager.GetSection("database"))["databaseSchemaName"]);
+            var appData = new DirectoryInfo(appDataPath);
+            if (!appData.Exists)
+            {
+                appData.Create();
+            }
 
-            return
-                MySQLConfiguration.Standard.ConnectionString(
-                    string.Format(
-                        "Server={0};Database={1};Uid={2};Pwd={3};", 
-                        databaseServerHostname, 
-                        databaseSchemaName, 
-                        loginService.Username, 
-                        loginService.Password));
+            var dataFilePath = Path.Combine(appDataPath, "data.s3db");
+            if (!File.Exists(dataFilePath))
+            {
+                SQLiteConnection.CreateFile(dataFilePath);
+            }
+
+            var sb = new SchemaBuilder(dataFilePath);
+            sb.UpgradeSchema();
+
+            return new SQLiteConfiguration().UsingFile(dataFilePath);
         }
 
         #endregion

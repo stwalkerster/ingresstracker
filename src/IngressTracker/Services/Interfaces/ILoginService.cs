@@ -25,7 +25,6 @@ namespace IngressTracker.Services.Interfaces
     using System.Collections.Generic;
 
     using IngressTracker.DataModel.Models;
-    using IngressTracker.Helpers;
 
     /// <summary>
     /// The LoginService interface.
@@ -48,21 +47,6 @@ namespace IngressTracker.Services.Interfaces
         /// Gets or sets a value indicating whether login complete.
         /// </summary>
         bool LoginComplete { get; set; }
-
-        /// <summary>
-        /// Gets or sets the password.
-        /// </summary>
-        string Password { get; set; }
-
-        /// <summary>
-        /// Gets or sets the username.
-        /// </summary>
-        string Username { get; set; }
-
-        /// <summary>
-        /// Gets or sets the auto login helper.
-        /// </summary>
-        AutoLoginHelper AutoLoginHelper { get; set; }
 
         #endregion
     }

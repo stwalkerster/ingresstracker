@@ -26,53 +26,21 @@ namespace IngressTracker.ViewModels
     using System.Linq;
     using System.Windows;
 
-    using Caliburn.Micro;
-
-    using Castle.Windsor;
-
-    using FluentNHibernate.Cfg;
-    using FluentNHibernate.Cfg.Db;
-
     using IngressTracker.DataModel.Models;
-    using IngressTracker.Persistence;
     using IngressTracker.Properties;
+    using IngressTracker.ScreenBase;
     using IngressTracker.Services.Interfaces;
-    using IngressTracker.Startup.Facilities;
     using IngressTracker.ViewModels.Interfaces;
 
+    using NHibernate;
     using NHibernate.Exceptions;
 
     /// <summary>
     /// The login view model.
     /// </summary>
-    public class LoginViewModel : Screen, ILoginViewModel
+    public class LoginViewModel : ScreenBase, ILoginViewModel
     {
         #region Fields
-
-        /// <summary>
-        /// The container.
-        /// </summary>
-        private readonly IWindsorContainer container;
-
-        /// <summary>
-        /// The database schema name.
-        /// </summary>
-        private readonly string databaseSchemaName;
-
-        /// <summary>
-        /// The database server hostname.
-        /// </summary>
-        private readonly string databaseServerHostname;
-
-        /// <summary>
-        /// The login service.
-        /// </summary>
-        private readonly ILoginService loginService;
-
-        /// <summary>
-        /// The agent grid visible.
-        /// </summary>
-        private bool agentGridVisible;
 
         /// <summary>
         /// The available agents.
@@ -80,29 +48,9 @@ namespace IngressTracker.ViewModels
         private ObservableCollection<User> availableAgents;
 
         /// <summary>
-        /// The display name.
-        /// </summary>
-        private string displayName;
-
-        /// <summary>
-        /// The login grid visible.
-        /// </summary>
-        private bool loginGridVisible;
-
-        /// <summary>
-        /// The password.
-        /// </summary>
-        private string password;
-
-        /// <summary>
         /// The selected available agent.
         /// </summary>
         private User selectedAvailableAgent;
-
-        /// <summary>
-        /// The username.
-        /// </summary>
-        private string username;
 
         #endregion
 
@@ -111,57 +59,21 @@ namespace IngressTracker.ViewModels
         /// <summary>
         /// Initialises a new instance of the <see cref="LoginViewModel"/> class.
         /// </summary>
-        /// <param name="databaseServerHostname">
-        /// The database Server Hostname.
-        /// </param>
-        /// <param name="databaseSchemaName">
-        /// The database Schema Name.
-        /// </param>
         /// <param name="loginService">
         /// The login Service.
         /// </param>
-        /// <param name="container">
-        /// The container.
+        /// <param name="session">
+        /// The session.
         /// </param>
-        public LoginViewModel(
-            string databaseServerHostname, 
-            string databaseSchemaName, 
-            ILoginService loginService, 
-            IWindsorContainer container)
+        public LoginViewModel(ILoginService loginService, ISession session)
+            : base(Resources.LoginView, session, loginService)
         {
-            this.databaseServerHostname = databaseServerHostname;
-            this.databaseSchemaName = databaseSchemaName;
-            this.loginService = loginService;
-            this.container = container;
-            this.loginGridVisible = true;
             this.availableAgents = new ObservableCollection<User>();
-
-            this.displayName = Resources.LoginView;
         }
 
         #endregion
 
         #region Public Properties
-
-        /// <summary>
-        /// Gets a value indicating whether agent grid visible.
-        /// </summary>
-        public bool AgentGridVisible
-        {
-            get
-            {
-                return this.agentGridVisible;
-            }
-
-            private set
-            {
-                if (!value.Equals(this.agentGridVisible))
-                {
-                    this.agentGridVisible = value;
-                    this.NotifyOfPropertyChange(() => this.AgentGridVisible);
-                }
-            }
-        }
 
         /// <summary>
         /// Gets the available agents.
@@ -171,66 +83,6 @@ namespace IngressTracker.ViewModels
             get
             {
                 return this.availableAgents;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the display name.
-        /// </summary>
-        public override string DisplayName
-        {
-            get
-            {
-                return this.displayName;
-            }
-
-            set
-            {
-                if (value != this.displayName)
-                {
-                    this.displayName = value;
-                    this.NotifyOfPropertyChange(() => this.DisplayName);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether login grid visible.
-        /// </summary>
-        public bool LoginGridVisible
-        {
-            get
-            {
-                return this.loginGridVisible;
-            }
-
-            private set
-            {
-                if (!value.Equals(this.loginGridVisible))
-                {
-                    this.loginGridVisible = value;
-                    this.NotifyOfPropertyChange(() => this.LoginGridVisible);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the password.
-        /// </summary>
-        public string Password
-        {
-            get
-            {
-                return this.password;
-            }
-
-            set
-            {
-                if (value != this.password)
-                {
-                    this.password = value;
-                    this.NotifyOfPropertyChange(() => this.Password);
-                }
             }
         }
 
@@ -254,95 +106,19 @@ namespace IngressTracker.ViewModels
             }
         }
 
-        /// <summary>
-        /// Gets or sets the username.
-        /// </summary>
-        public string Username
-        {
-            get
-            {
-                return this.username;
-            }
-
-            set
-            {
-                if (value != this.username)
-                {
-                    this.username = value;
-                    this.NotifyOfPropertyChange(() => this.Username);
-                }
-            }
-        }
-
         #endregion
 
         #region Public Methods and Operators
-
-        /// <summary>
-        /// The connect.
-        /// </summary>
-        public void Connect()
-        {
-            var sf =
-                Fluently.Configure()
-                    .Database(
-                        () =>
-                        MySQLConfiguration.Standard.ConnectionString(
-                            string.Format(
-                                "Server={0};Database={1};Uid={2};Pwd={3};", 
-                                this.databaseServerHostname, 
-                                this.databaseSchemaName, 
-                                this.Username, 
-                                this.Password)))
-                    .Mappings(a => a.FluentMappings.AddFromAssemblyOf<EntityBase>())
-                    .Cache(x => x.Not.UseSecondLevelCache())
-                    .ExposeConfiguration(configuration => PersistenceFacility.ConfigurePersistence(configuration, null))
-                    .BuildSessionFactory();
-
-            var tempSession = sf.OpenSession();
-
-            try
-            {
-                var collection = tempSession.QueryOver<User>().Where(x => x.DatabaseUsername == this.Username).List();
-
-                // at least one user on this connection is allowed access to all agents.
-                if (collection.Count(x => x.AccessToAllAgents) > 0)
-                {
-                    collection = tempSession.QueryOver<User>().List();
-                }
-
-                this.availableAgents = new ObservableCollection<User>(collection);
-
-                if (collection.Count == 1)
-                {
-                    this.SelectedAvailableAgent = collection.First();
-                    this.Login();
-                }
-
-                this.NotifyOfPropertyChange(() => this.AvailableAgents);
-
-                this.LoginGridVisible = false;
-                this.AgentGridVisible = true;
-            }
-            catch (GenericADOException ex)
-            {
-                MessageBox.Show(ex.InnerException.Message);
-            }
-        }
 
         /// <summary>
         /// The login.
         /// </summary>
         public void Login()
         {
-            this.loginService.Username = this.Username;
-            this.loginService.Password = this.Password;
-            this.loginService.Agent = this.SelectedAvailableAgent;
-            this.loginService.AvailableAgents = this.AvailableAgents;
+            this.LoginService.Agent = this.SelectedAvailableAgent;
+            this.LoginService.AvailableAgents = this.AvailableAgents;
 
-            this.container.AddFacility<PersistenceFacility>();
-
-            this.loginService.LoginComplete = true;
+            this.LoginService.LoginComplete = true;
 
             var shellViewModel = (ShellViewModel)this.Parent;
 
@@ -367,12 +143,23 @@ namespace IngressTracker.ViewModels
         {
             base.OnInitialize();
 
-            if (this.loginService.AutoLoginHelper.Used)
+            try
             {
-                this.Username = this.loginService.AutoLoginHelper.Username;
-                this.Password = this.loginService.AutoLoginHelper.Password;
+                var collection = this.DatabaseSession.QueryOver<User>().List();
 
-                this.Connect();
+                this.availableAgents = new ObservableCollection<User>(collection);
+
+                if (collection.Count == 1)
+                {
+                    this.SelectedAvailableAgent = collection.First();
+                    this.Login();
+                }
+
+                this.NotifyOfPropertyChange(() => this.AvailableAgents);
+            }
+            catch (GenericADOException ex)
+            {
+                MessageBox.Show(ex.InnerException.Message);
             }
         }
 

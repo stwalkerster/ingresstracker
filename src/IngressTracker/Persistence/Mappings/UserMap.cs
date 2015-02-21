@@ -42,9 +42,7 @@ namespace IngressTracker.Persistence.Mappings
             this.Id(x => x.Id).Column("id");
             this.Map(x => x.AgentName).Column("agentname");
             this.Map(x => x.FactionCode).Column("faction");
-            this.Map(x => x.DatabaseUsername).Column("dbusername");
             this.Map(x => x.StaticDataAdmin).Column("staticadmin");
-            this.Map(x => x.AccessToAllAgents).Column("allusers");
         }
 
         #endregion

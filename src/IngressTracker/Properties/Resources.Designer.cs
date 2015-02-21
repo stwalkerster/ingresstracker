@@ -646,6 +646,157 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CREATE TABLE IF NOT EXISTS `user` (
+        ///  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        ///  `agentname` VARCHAR NOT NULL,
+        ///  `faction` VARCHAR NOT NULL,
+        ///  `staticadmin` INTEGER NOT NULL DEFAULT &apos;0&apos;
+        /// );.
+        /// </summary>
+        public static string SchemaUpgrade0To1a {
+            get {
+                return ResourceManager.GetString("SchemaUpgrade0To1a", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CREATE TABLE IF NOT EXISTS `category` (
+        ///  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        ///  `name` VARCHAR NOT NULL,
+        ///  `displayorder` INTEGER NULL);.
+        /// </summary>
+        public static string SchemaUpgrade0To1b {
+            get {
+                return ResourceManager.GetString("SchemaUpgrade0To1b", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CREATE TABLE IF NOT EXISTS `stat` (
+        ///  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        ///  `description` VARCHAR NOT NULL,
+        ///  `unit` VARCHAR NULL,
+        ///  `category` INT NOT NULL,
+        ///  `predictability` INTEGER NOT NULL,
+        ///  `displayorder` INTEGER NULL DEFAULT NULL,
+        ///  `ap` INTEGER NOT NULL DEFAULT 0,
+        ///    FOREIGN KEY (`category`)
+        ///    REFERENCES `category` (`id`))
+        ///;.
+        /// </summary>
+        public static string SchemaUpgrade0To1c {
+            get {
+                return ResourceManager.GetString("SchemaUpgrade0To1c", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CREATE TABLE IF NOT EXISTS `badge` (
+        ///  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        ///  `name` VARCHAR NOT NULL,
+        ///  `stat` INTEGER NULL,
+        ///  `bronze` INTEGER NULL,
+        ///  `silver` INTEGER NULL,
+        ///  `gold` INTEGER NULL,
+        ///  `platinum` INTEGER NULL,
+        ///  `black` INTEGER NULL,
+        ///  `awardable` INTEGER NOT NULL,
+        ///  `description` VARCHAR(255) NULL,
+        ///    FOREIGN KEY (`stat`)
+        ///    REFERENCES `stat` (`id`)
+        ///    ON DELETE RESTRICT
+        ///    ON UPDATE RESTRICT)
+        ///;.
+        /// </summary>
+        public static string SchemaUpgrade0To1d {
+            get {
+                return ResourceManager.GetString("SchemaUpgrade0To1d", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CREATE TABLE IF NOT EXISTS `value` (
+        ///  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        ///  `user` INTEGER NOT NULL,
+        ///  `stat` INTEGER NOT NULL,
+        ///  `value` INTEGER NOT NULL,
+        ///  `timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        ///    FOREIGN KEY (`stat`)
+        ///    REFERENCES `stat` (`id`)
+        ///    ON DELETE RESTRICT
+        ///    ON UPDATE RESTRICT,
+        ///    FOREIGN KEY (`user`)
+        ///    REFERENCES `user` (`id`)
+        ///    ON DELETE RESTRICT
+        ///    ON UPDATE RESTRICT)
+        ///;.
+        /// </summary>
+        public static string SchemaUpgrade0To1e {
+            get {
+                return ResourceManager.GetString("SchemaUpgrade0To1e", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CREATE TABLE IF NOT EXISTS `level` (
+        ///  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        ///  `level` INTEGER NOT NULL,
+        ///  `ap` INTEGER NOT NULL,
+        ///  `silver` INTEGER NOT NULL,
+        ///  `gold` INTEGER NOT NULL,
+        ///  `platinum` INTEGER NOT NULL,
+        ///  `black` INTEGER NOT NULL
+        ///)
+        ///;.
+        /// </summary>
+        public static string SchemaUpgrade0To1f {
+            get {
+                return ResourceManager.GetString("SchemaUpgrade0To1f", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CREATE TABLE IF NOT EXISTS `badgeaward` (
+        ///  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        ///  `user` INTEGER NOT NULL,
+        ///  `badge` INTEGER NOT NULL,
+        ///  `level` VARCHAR(1) NOT NULL,
+        ///    FOREIGN KEY (`user`)
+        ///    REFERENCES `user` (`id`)
+        ///    ON DELETE NO ACTION
+        ///    ON UPDATE NO ACTION,
+        ///    FOREIGN KEY (`badge`)
+        ///    REFERENCES `badge` (`id`)
+        ///    ON DELETE NO ACTION
+        ///    ON UPDATE NO ACTION)
+        ///;.
+        /// </summary>
+        public static string SchemaUpgrade0To1g {
+            get {
+                return ResourceManager.GetString("SchemaUpgrade0To1g", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO user VALUES (1, &apos;defaultuser&apos;, &apos;ENL&apos;, 1);
+        ///INSERT INTO category VALUES (1,&apos;AP&apos;,1);
+        ///INSERT INTO category VALUES (2,&apos;Discovery&apos;,2);
+        ///INSERT INTO category VALUES (3,&apos;Health&apos;,3);
+        ///INSERT INTO category VALUES (4,&apos;Building&apos;,4);
+        ///INSERT INTO category VALUES (5,&apos;Combat&apos;,5);
+        ///INSERT INTO category VALUES (6,&apos;Defence&apos;,6);
+        ///INSERT INTO category VALUES (7,&apos;Missions&apos;,7);
+        ///INSERT INTO category VALUES (8,&apos;Resource Gathering&apos;,8);
+        ///INSERT INTO category VALUES (9,&apos;(unknown)&apos;,9999);
+        ///INSERT INTO level VALUES (1,1, [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string SchemaUpgrade0To1h {
+            get {
+                return ResourceManager.GetString("SchemaUpgrade0To1h", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Screens.
         /// </summary>
         public static string Screens {

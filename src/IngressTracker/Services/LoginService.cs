@@ -25,7 +25,6 @@ namespace IngressTracker.Services
     using System.Collections.Generic;
 
     using IngressTracker.DataModel.Models;
-    using IngressTracker.Helpers;
     using IngressTracker.Services.Interfaces;
 
     /// <summary>
@@ -33,32 +32,12 @@ namespace IngressTracker.Services
     /// </summary>
     public class LoginService : ILoginService
     {
-        #region Constructors and Destructors
-
-        /// <summary>
-        /// Initialises a new instance of the <see cref="LoginService"/> class.
-        /// </summary>
-        /// <param name="autoLoginHelper">
-        /// The auto login helper.
-        /// </param>
-        public LoginService(AutoLoginHelper autoLoginHelper)
-        {
-            this.AutoLoginHelper = autoLoginHelper;
-        }
-
-        #endregion
-
         #region Public Properties
 
         /// <summary>
         /// Gets or sets the agent.
         /// </summary>
         public User Agent { get; set; }
-
-        /// <summary>
-        /// Gets or sets the auto login helper.
-        /// </summary>
-        public AutoLoginHelper AutoLoginHelper { get; set; }
 
         /// <summary>
         /// Gets or sets the available agents.
@@ -69,16 +48,6 @@ namespace IngressTracker.Services
         /// Gets or sets a value indicating whether login complete.
         /// </summary>
         public bool LoginComplete { get; set; }
-
-        /// <summary>
-        /// Gets or sets the password.
-        /// </summary>
-        public string Password { get; set; }
-
-        /// <summary>
-        /// Gets or sets the username.
-        /// </summary>
-        public string Username { get; set; }
 
         #endregion
     }

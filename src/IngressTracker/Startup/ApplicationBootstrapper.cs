@@ -34,7 +34,7 @@ namespace IngressTracker.Startup
     using Castle.MicroKernel.Registration;
     using Castle.Windsor;
 
-    using IngressTracker.Helpers;
+    using IngressTracker.Startup.Facilities;
     using IngressTracker.Startup.Resolvers;
     using IngressTracker.ViewModels.Interfaces;
 
@@ -74,26 +74,13 @@ namespace IngressTracker.Startup
         protected override void Configure()
         {
             this.container = new WindsorContainer();
-
-            var commandLineArgs = Environment.GetCommandLineArgs();
-            var autoLogin = new AutoLoginHelper();
-
-            if (commandLineArgs.Count() == 3)
-            {
-                autoLogin.Username = commandLineArgs[1];
-                autoLogin.Password = commandLineArgs[2];
-            }
-
-            this.container.Register(Component.For<AutoLoginHelper>().Instance(autoLogin).LifestyleSingleton());
-
-            // add the container to itself. This is probably a Bad Idea(tm) but hey.
-            this.container.Register(Component.For<IWindsorContainer>().Instance(this.container).LifestyleSingleton());
-
+            
             this.container.Kernel.Resolver.AddSubResolver(new AppSettingsDependencyResolver());
 
-            this.container.AddFacility<EventRegistrationFacility>();
+            this.container.AddFacility<EventRegistrationFacility>(); 
             this.container.AddFacility<TypedFactoryFacility>();
             this.container.AddFacility<LoggingFacility>(f => f.UseLog4Net().WithConfig("logger.config"));
+            this.container.AddFacility<PersistenceFacility>();
 
             var viewModelRegistrations =
                 Classes.FromThisAssembly()

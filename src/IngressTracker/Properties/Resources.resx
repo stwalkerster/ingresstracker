@@ -369,4 +369,177 @@
   <data name="NotAllStatsSpecified" xml:space="preserve">
     <value>Not all stats are specified.</value>
   </data>
+  <data name="SchemaUpgrade0To1a" xml:space="preserve">
+    <value>CREATE TABLE IF NOT EXISTS `user` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `agentname` VARCHAR NOT NULL,
+  `faction` VARCHAR NOT NULL,
+  `staticadmin` INTEGER NOT NULL DEFAULT '0'
+ );</value>
+  </data>
+  <data name="SchemaUpgrade0To1b" xml:space="preserve">
+    <value>CREATE TABLE IF NOT EXISTS `category` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `name` VARCHAR NOT NULL,
+  `displayorder` INTEGER NULL);</value>
+  </data>
+  <data name="SchemaUpgrade0To1c" xml:space="preserve">
+    <value>CREATE TABLE IF NOT EXISTS `stat` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `description` VARCHAR NOT NULL,
+  `unit` VARCHAR NULL,
+  `category` INT NOT NULL,
+  `predictability` INTEGER NOT NULL,
+  `displayorder` INTEGER NULL DEFAULT NULL,
+  `ap` INTEGER NOT NULL DEFAULT 0,
+    FOREIGN KEY (`category`)
+    REFERENCES `category` (`id`))
+;</value>
+  </data>
+  <data name="SchemaUpgrade0To1d" xml:space="preserve">
+    <value>CREATE TABLE IF NOT EXISTS `badge` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `name` VARCHAR NOT NULL,
+  `stat` INTEGER NULL,
+  `bronze` INTEGER NULL,
+  `silver` INTEGER NULL,
+  `gold` INTEGER NULL,
+  `platinum` INTEGER NULL,
+  `black` INTEGER NULL,
+  `awardable` INTEGER NOT NULL,
+  `description` VARCHAR(255) NULL,
+    FOREIGN KEY (`stat`)
+    REFERENCES `stat` (`id`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT)
+;</value>
+  </data>
+  <data name="SchemaUpgrade0To1e" xml:space="preserve">
+    <value>CREATE TABLE IF NOT EXISTS `value` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `user` INTEGER NOT NULL,
+  `stat` INTEGER NOT NULL,
+  `value` INTEGER NOT NULL,
+  `timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (`stat`)
+    REFERENCES `stat` (`id`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT,
+    FOREIGN KEY (`user`)
+    REFERENCES `user` (`id`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT)
+;</value>
+  </data>
+  <data name="SchemaUpgrade0To1f" xml:space="preserve">
+    <value>CREATE TABLE IF NOT EXISTS `level` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `level` INTEGER NOT NULL,
+  `ap` INTEGER NOT NULL,
+  `silver` INTEGER NOT NULL,
+  `gold` INTEGER NOT NULL,
+  `platinum` INTEGER NOT NULL,
+  `black` INTEGER NOT NULL
+)
+;</value>
+  </data>
+  <data name="SchemaUpgrade0To1g" xml:space="preserve">
+    <value>CREATE TABLE IF NOT EXISTS `badgeaward` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `user` INTEGER NOT NULL,
+  `badge` INTEGER NOT NULL,
+  `level` VARCHAR(1) NOT NULL,
+    FOREIGN KEY (`user`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+    FOREIGN KEY (`badge`)
+    REFERENCES `badge` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+;</value>
+  </data>
+  <data name="SchemaUpgrade0To1h" xml:space="preserve">
+    <value>INSERT INTO user VALUES (1, 'defaultuser', 'ENL', 1);
+INSERT INTO category VALUES (1,'AP',1);
+INSERT INTO category VALUES (2,'Discovery',2);
+INSERT INTO category VALUES (3,'Health',3);
+INSERT INTO category VALUES (4,'Building',4);
+INSERT INTO category VALUES (5,'Combat',5);
+INSERT INTO category VALUES (6,'Defence',6);
+INSERT INTO category VALUES (7,'Missions',7);
+INSERT INTO category VALUES (8,'Resource Gathering',8);
+INSERT INTO category VALUES (9,'(unknown)',9999);
+INSERT INTO level VALUES (1,1,0,0,0,0,0);
+INSERT INTO level VALUES (2,2,2500,0,0,0,0);
+INSERT INTO level VALUES (3,3,20000,0,0,0,0);
+INSERT INTO level VALUES (4,4,70000,0,0,0,0);
+INSERT INTO level VALUES (5,5,150000,0,0,0,0);
+INSERT INTO level VALUES (6,6,300000,0,0,0,0);
+INSERT INTO level VALUES (7,7,600000,0,0,0,0);
+INSERT INTO level VALUES (8,8,1200000,0,0,0,0);
+INSERT INTO level VALUES (9,9,2400000,4,1,0,0);
+INSERT INTO level VALUES (10,10,4000000,5,2,0,0);
+INSERT INTO level VALUES (11,11,6000000,6,4,0,0);
+INSERT INTO level VALUES (12,12,8400000,7,6,0,0);
+INSERT INTO level VALUES (13,13,12000000,7,7,1,0);
+INSERT INTO level VALUES (14,14,17000000,7,7,2,0);
+INSERT INTO level VALUES (15,15,24000000,7,7,3,0);
+INSERT INTO level VALUES (16,16,40000000,7,7,4,2);
+INSERT INTO stat VALUES (1,'Access Points','AP',1,1,1,1);
+INSERT INTO stat VALUES (2,'Unique Portals Visited',NULL,2,1,2,0);
+INSERT INTO stat VALUES (3,'Portals Discovered',NULL,2,0,3,0);
+INSERT INTO stat VALUES (4,'XM Collected','XM',2,1,4,0);
+INSERT INTO stat VALUES (5,'Distance Walked','km',3,1,5,0);
+INSERT INTO stat VALUES (6,'Resonators Deployed',NULL,4,1,6,0);
+INSERT INTO stat VALUES (7,'Links Created',NULL,4,1,7,0);
+INSERT INTO stat VALUES (8,'Control Fields Created',NULL,4,1,8,0);
+INSERT INTO stat VALUES (9,'Mind Units Captured','MUs',4,1,9,0);
+INSERT INTO stat VALUES (10,'Longest Link Ever Created','km',4,0,10,0);
+INSERT INTO stat VALUES (11,'Largest Control Field','MUs',4,0,11,0);
+INSERT INTO stat VALUES (12,'XM Recharged','XM',4,1,12,0);
+INSERT INTO stat VALUES (13,'Portals Captured',NULL,4,1,13,0);
+INSERT INTO stat VALUES (14,'Unique Portals Captured',NULL,4,1,14,0);
+INSERT INTO stat VALUES (15,'Mods Deployed',NULL,4,1,15,0);
+INSERT INTO stat VALUES (16,'Resonators Destroyed',NULL,5,1,16,0);
+INSERT INTO stat VALUES (17,'Portals Neutralized',NULL,5,1,17,0);
+INSERT INTO stat VALUES (18,'Enemy Links Destroyed',NULL,5,1,18,0);
+INSERT INTO stat VALUES (19,'Enemy Control Fields Destroyed',NULL,5,1,19,0);
+INSERT INTO stat VALUES (20,'Max Time Portal Held','days',6,1,20,0);
+INSERT INTO stat VALUES (21,'Max Time Link Maintained','days',6,1,21,0);
+INSERT INTO stat VALUES (22,'Max Time Link Length x Days','km-days',6,1,22,0);
+INSERT INTO stat VALUES (23,'Max Time Field Held','days',6,1,23,0);
+INSERT INTO stat VALUES (24,'Largest Field MUs x Days','MU-days',6,1,24,0);
+INSERT INTO stat VALUES (25,'Unique Missions Completed',NULL,7,1,25,0);
+INSERT INTO stat VALUES (26,'Hacks',NULL,8,1,26,0);
+INSERT INTO stat VALUES (27,'Glyph Hack Points',NULL,8,1,27,0);
+INSERT INTO stat VALUES (28,'(unknown stat for recruiter badge)',NULL,9,0,9999,0);
+INSERT INTO badge VALUES (1,'Recharger',12,100000,1000000,3000000,10000000,25000000,0,NULL);
+INSERT INTO badge VALUES (2,'Translator',27,200,2000,6000,20000,50000,0,NULL);
+INSERT INTO badge VALUES (3,'SpecOps',25,5,25,100,200,500,0,NULL);
+INSERT INTO badge VALUES (4,'Explorer',2,100,1000,2000,10000,30000,0,NULL);
+INSERT INTO badge VALUES (5,'Pioneer',14,20,200,1000,5000,20000,0,NULL);
+INSERT INTO badge VALUES (6,'Purifier',16,2000,10000,30000,100000,300000,0,NULL);
+INSERT INTO badge VALUES (7,'Hacker',26,2000,10000,30000,100000,200000,0,NULL);
+INSERT INTO badge VALUES (8,'Engineer',15,150,1500,5000,20000,50000,0,NULL);
+INSERT INTO badge VALUES (9,'Liberator',13,100,1000,5000,15000,40000,0,NULL);
+INSERT INTO badge VALUES (10,'Builder',6,2000,10000,30000,100000,200000,0,NULL);
+INSERT INTO badge VALUES (11,'Trekker',5,10,100,300,1000,2500,0,NULL);
+INSERT INTO badge VALUES (12,'Mind controller',8,100,500,2000,10000,40000,0,NULL);
+INSERT INTO badge VALUES (13,'Connector',7,50,1000,5000,25000,100000,0,NULL);
+INSERT INTO badge VALUES (14,'Seer',3,10,50,200,500,5000,0,NULL);
+INSERT INTO badge VALUES (15,'Guardian',20,3,10,20,90,150,0,NULL);
+INSERT INTO badge VALUES (16,'Innovator',NULL,NULL,NULL,NULL,NULL,NULL,1,'In recognition of your contributions during Ingress Year Two.');
+INSERT INTO badge VALUES (18,'Founder',NULL,NULL,NULL,NULL,NULL,NULL,1,'In recognition of valiant contributions during the early days of Ingress.');
+INSERT INTO badge VALUES (19,'Recruiter',28,2,10,25,50,100,0,NULL);
+INSERT INTO badge VALUES (20,'Verified',NULL,NULL,NULL,NULL,NULL,NULL,1,'Passed initial security clearance.');
+INSERT INTO badge VALUES (21,'Interitus',NULL,NULL,NULL,NULL,NULL,NULL,1,'In recognition of contributions during Interitus.');
+INSERT INTO badge VALUES (22,'Helios',NULL,NULL,NULL,NULL,NULL,NULL,1,'In recognition of contributions during Helios.');
+INSERT INTO badge VALUES (23,'Initio',NULL,NULL,NULL,NULL,NULL,NULL,1,'In recognition of contributions during Initio.');
+INSERT INTO badge VALUES (24,'Recursion',NULL,NULL,NULL,NULL,NULL,NULL,1,'In recognition of contributions during Recursion.');
+INSERT INTO badge VALUES (25,'Eve',NULL,NULL,NULL,NULL,NULL,NULL,1,'In recognition of recruiting new iPhone Agents');
+INSERT INTO badge VALUES (26,'Darsana',NULL,NULL,NULL,NULL,NULL,NULL,1,'In recognition of contributions during Darsana.');
+INSERT INTO badge VALUES (27,'Oliver Lynton-Wolfe',NULL,NULL,NULL,NULL,NULL,NULL,1,'Aided XM Researcher and Engineer Dr. Oliver Lynton-Wolfe.');
+INSERT INTO badge VALUES (28,'Shōnin',NULL,NULL,NULL,NULL,NULL,NULL,1,'In recognition of contributions during Shōnin.');</value>
+  </data>
 </root>

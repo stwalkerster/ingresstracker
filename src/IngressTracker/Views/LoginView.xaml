@@ -24,46 +24,14 @@
                 <Setter Property="Height" Value="22" />
                 <Setter Property="Margin" Value="0,5,10,5" />
             </Style>
-            <Style TargetType="TextBox">
-                <Setter Property="Height" Value="22" />
-                <Setter Property="Margin" Value="0,5" />
-            </Style>
-            <Style TargetType="PasswordBox">
-                <Setter Property="Height" Value="22" />
-                <Setter Property="Margin" Value="0,5" />
-            </Style>
             <Style TargetType="ComboBox">
                 <Setter Property="Height" Value="22" />
                 <Setter Property="Margin" Value="0,5" />
             </Style>
         </Grid.Resources>
         
-        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding LoginGridVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="200"/>
-            </Grid.ColumnDefinitions>
-            
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition Height="32" />
-                <RowDefinition Height="32" />
-                <RowDefinition Height="32" />
-            </Grid.RowDefinitions>
-
-            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource LoginHeaderTextBlockStyle}">Please enter your credentials:</TextBlock>
-
-            <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static properties:Resources.DbUserName}"/>
-            <TextBox Grid.Row="1" Grid.Column="1" x:Name="Username" />
-
-            <TextBlock Grid.Row="2" Grid.Column="0" Text="{x:Static properties:Resources.DbPassword}" />
-            <PasswordBox Grid.Row="2" Grid.Column="1" helpers:PasswordHelper.Attach="True" helpers:PasswordHelper.Password="{Binding Text, ElementName=Password, Mode=TwoWay}" />
-            <TextBox Grid.Row="2" Grid.Column="1" Visibility="Collapsed" x:Name="Password" />
-
-            <Button Grid.Row="3" Grid.Column="1" Style="{StaticResource LoginFormButtonStyle}" x:Name="Connect" IsDefault="True" Content="{x:Static properties:Resources.ConnectButton}"/>
-        </Grid>
-
-        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding AgentGridVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+       
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="300"/>
             </Grid.ColumnDefinitions>

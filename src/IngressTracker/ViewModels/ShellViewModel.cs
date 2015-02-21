@@ -245,7 +245,7 @@ namespace IngressTracker.ViewModels
                     return false;
                 }
 
-                if (this.loginService.Agent.StaticDataAdmin || this.loginService.Agent.AccessToAllAgents)
+                if (this.loginService.Agent.StaticDataAdmin)
                 {
                     return true;
                 }

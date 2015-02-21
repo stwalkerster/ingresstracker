@@ -97,15 +97,7 @@ namespace IngressTracker.ViewModels
         {
             var agent = this.LoginService.Agent;
 
-            if (agent.AccessToAllAgents)
-            {
-                return this.DatabaseSession.QueryOver<ValueEntry>().List();
-            }
-
-            return
-                this.DatabaseSession.QueryOver<ValueEntry>()
-                    .Where(x => x.Agent == agent)
-                    .List();
+            return this.DatabaseSession.QueryOver<ValueEntry>().Where(x => x.Agent == agent).List();
         }
 
         #endregion

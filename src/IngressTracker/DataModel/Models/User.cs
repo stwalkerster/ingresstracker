@@ -32,19 +32,9 @@ namespace IngressTracker.DataModel.Models
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets a value indicating whether access to all agents.
-        /// </summary>
-        public virtual bool AccessToAllAgents { get; set; }
-
-        /// <summary>
         /// Gets or sets the username.
         /// </summary>
         public virtual string AgentName { get; set; }
-
-        /// <summary>
-        /// Gets or sets the database username.
-        /// </summary>
-        public virtual string DatabaseUsername { get; set; }
 
         /// <summary>
         /// Gets or sets the faction.
