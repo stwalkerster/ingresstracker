@@ -109,7 +109,12 @@ namespace IngressTracker.Startup.Facilities
         /// </returns>
         private IPersistenceConfigurer SetupDatabase()
         {
-            var appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "IngressTracker");
+            var appDataFolder = "IngressTracker";
+#if DEBUG
+            appDataFolder += "-DEBUG";
+#endif
+
+            var appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), appDataFolder);
 
             var appData = new DirectoryInfo(appDataPath);
             if (!appData.Exists)
