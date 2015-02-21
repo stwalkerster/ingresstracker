@@ -186,7 +186,6 @@
     <Compile Include="Startup\ApplicationBootstrapper.cs" />
     <Compile Include="Startup\EventRegistrationFacility.cs" />
     <Compile Include="Startup\Facilities\PersistenceFacility.cs" />
-    <Compile Include="Startup\Resolvers\AppSettingsDependencyResolver.cs" />
     <Compile Include="Startup\WindsorServiceLocator.cs" />
     <Compile Include="ScreenBase\StaticDataScreen.cs" />
     <Compile Include="ViewModels\BadgeAwardViewModel.cs" />
@@ -358,10 +357,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Content Include="database.config">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="logger.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

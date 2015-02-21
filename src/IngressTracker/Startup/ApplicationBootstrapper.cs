@@ -35,7 +35,6 @@ namespace IngressTracker.Startup
     using Castle.Windsor;
 
     using IngressTracker.Startup.Facilities;
-    using IngressTracker.Startup.Resolvers;
     using IngressTracker.ViewModels.Interfaces;
 
     using Microsoft.Practices.ServiceLocation;
@@ -74,8 +73,6 @@ namespace IngressTracker.Startup
         protected override void Configure()
         {
             this.container = new WindsorContainer();
-            
-            this.container.Kernel.Resolver.AddSubResolver(new AppSettingsDependencyResolver());
 
             this.container.AddFacility<EventRegistrationFacility>(); 
             this.container.AddFacility<TypedFactoryFacility>();
