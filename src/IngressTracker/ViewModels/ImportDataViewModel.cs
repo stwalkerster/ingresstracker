@@ -26,9 +26,7 @@ namespace IngressTracker.ViewModels
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using System.Security.RightsManagement;
     using System.Windows;
-    using System.Xml.Serialization;
 
     using CsvHelper;
     using CsvHelper.Configuration;
@@ -208,6 +206,43 @@ namespace IngressTracker.ViewModels
         #region Public Methods and Operators
 
         /// <summary>
+        /// The assign mappings.
+        /// </summary>
+        public void AssignMappings()
+        {
+            var lookupCache = this.StatNames.ToDictionary(x => x.StatName, y => y.Stat);
+
+            var rejectList = new List<ValueDataRow>();
+
+            foreach (var valueDataRow in this.data)
+            {
+                try
+                {
+                    this.DatabaseSession.Save(
+                        new ValueEntry
+                            {
+                                Agent = this.LoginService.Agent, 
+                                Statistic = lookupCache[valueDataRow.Statistic], 
+                                Value = valueDataRow.DataValue, 
+                                Timestamp = valueDataRow.Timestamp
+                            });
+                }
+                catch (Exception)
+                {
+                    rejectList.Add(valueDataRow);
+                }
+            }
+
+            if (rejectList.Any())
+            {
+                this.DatabaseSession.Transaction.Rollback();
+                MessageBox.Show("Some data rejected, transaction has been rolled back");
+            }
+
+            this.TryClose();
+        }
+
+        /// <summary>
         /// The browse.
         /// </summary>
         public void Browse()
@@ -235,8 +270,8 @@ namespace IngressTracker.ViewModels
                 var csv = new CsvReader(dataStream, csvConfiguration);
                 this.data = csv.GetRecords<ValueDataRow>().ToList();
 
-                this.StatNames =
-                    this.data.Select(x => x.Statistic).Distinct().Select(x =>
+                this.StatNames = this.data.Select(x => x.Statistic).Distinct().Select(
+                    x =>
                         {
                             var matching = this.Stats.Where(s => s.Description == x).ToList();
                             if (matching.Count() == 1)
@@ -253,40 +288,6 @@ namespace IngressTracker.ViewModels
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        public void AssignMappings()
-        {
-            var lookupCache = this.StatNames.ToDictionary(x => x.StatName, y => y.Stat);
-
-            var rejectList = new List<ValueDataRow>();
-
-            foreach (var valueDataRow in this.data)
-            {
-                try
-                {
-                    this.DatabaseSession.Save(
-                        new ValueEntry
-                            {
-                                Agent = this.LoginService.Agent,
-                                Statistic = lookupCache[valueDataRow.Statistic],
-                                Value = valueDataRow.DataValue,
-                                Timestamp = valueDataRow.Timestamp
-                            });
-                }
-                catch (Exception)
-                {
-                    rejectList.Add(valueDataRow);
-                }
-            }
-
-            if (rejectList.Any())
-            {
-                this.DatabaseSession.Transaction.Rollback();
-                MessageBox.Show("Some data rejected, transaction has been rolled back");
-            }
-
-            this.TryClose();
         }
 
         #endregion
