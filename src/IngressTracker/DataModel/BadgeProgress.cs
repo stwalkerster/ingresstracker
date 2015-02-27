@@ -41,7 +41,7 @@ namespace IngressTracker.DataModel
         /// <summary>
         /// The current position.
         /// </summary>
-        private readonly int currentPosition;
+        private readonly long currentPosition;
 
         #endregion
 
@@ -56,7 +56,7 @@ namespace IngressTracker.DataModel
         /// <param name="currentPosition">
         /// The current position.
         /// </param>
-        public BadgeProgress(Badge badge, int currentPosition)
+        public BadgeProgress(Badge badge, long currentPosition)
         {
             this.badge = badge;
             this.currentPosition = currentPosition;
@@ -121,7 +121,7 @@ namespace IngressTracker.DataModel
         /// <summary>
         /// Gets the current position.
         /// </summary>
-        public int CurrentPosition
+        public long CurrentPosition
         {
             get
             {
@@ -178,7 +178,7 @@ namespace IngressTracker.DataModel
         /// <summary>
         /// Gets the last target.
         /// </summary>
-        public int? LastTarget
+        public long? LastTarget
         {
             get
             {
@@ -225,7 +225,7 @@ namespace IngressTracker.DataModel
         /// <summary>
         /// Gets the next target.
         /// </summary>
-        public int? NextTarget
+        public long? NextTarget
         {
             get
             {

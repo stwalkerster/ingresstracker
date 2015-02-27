@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ILevelProgressService.cs" company="Simon Walker">
+// <copyright file="EqualityToVisibilityConverter.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,53 +17,74 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The LevelProgressService interface.
+//   The equality to visibility converter.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.Services.Interfaces
+
+namespace IngressTracker.Converters
 {
-    using IngressTracker.DataModel.Models;
+    using System;
+    using System.Globalization;
+    using System.Windows;
+    using System.Windows.Data;
 
     /// <summary>
-    /// The LevelProgressService interface.
+    /// The equality to visibility converter.
     /// </summary>
-    public interface ILevelProgressService
+    public class EqualityToVisibilityConverter : IValueConverter
     {
         #region Public Methods and Operators
 
         /// <summary>
-        /// The get current level.
+        /// The convert.
         /// </summary>
-        /// <param name="ap">
-        /// The AP.
+        /// <param name="value">
+        /// The value.
         /// </param>
-        /// <param name="silver">
-        /// The silver.
+        /// <param name="targetType">
+        /// The target type.
         /// </param>
-        /// <param name="gold">
-        /// The gold.
+        /// <param name="parameter">
+        /// The parameter.
         /// </param>
-        /// <param name="platinum">
-        /// The platinum.
-        /// </param>
-        /// <param name="black">
-        /// The black.
+        /// <param name="culture">
+        /// The culture.
         /// </param>
         /// <returns>
-        /// The <see cref="Level"/>.
+        /// The <see cref="object"/>.
         /// </returns>
-        Level GetCurrentLevel(long ap, int silver, int gold, int platinum, int black);
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value.ToString() == parameter.ToString())
+            {
+                return Visibility.Visible;
+            }
+
+            return Visibility.Collapsed;
+        }
 
         /// <summary>
-        /// The get next level.
+        /// The convert back.
         /// </summary>
-        /// <param name="currentLevel">
-        /// The current Level.
+        /// <param name="value">
+        /// The value.
+        /// </param>
+        /// <param name="targetType">
+        /// The target type.
+        /// </param>
+        /// <param name="parameter">
+        /// The parameter.
+        /// </param>
+        /// <param name="culture">
+        /// The culture.
         /// </param>
         /// <returns>
-        /// The <see cref="Level"/>.
+        /// The <see cref="object"/>.
         /// </returns>
-        Level GetNextLevel(Level currentLevel);
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
 
         #endregion
     }

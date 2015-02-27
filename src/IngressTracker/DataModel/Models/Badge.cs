@@ -39,17 +39,17 @@ namespace IngressTracker.DataModel.Models
         /// <summary>
         /// Gets or sets the black.
         /// </summary>
-        public virtual int? Black { get; set; }
+        public virtual long? Black { get; set; }
 
         /// <summary>
         /// Gets or sets the bronze.
         /// </summary>
-        public virtual int? Bronze { get; set; }
+        public virtual long? Bronze { get; set; }
 
         /// <summary>
         /// Gets or sets the gold.
         /// </summary>
-        public virtual int? Gold { get; set; }
+        public virtual long? Gold { get; set; }
 
         /// <summary>
         /// Gets or sets the name.
@@ -59,12 +59,12 @@ namespace IngressTracker.DataModel.Models
         /// <summary>
         /// Gets or sets the platinum.
         /// </summary>
-        public virtual int? Platinum { get; set; }
+        public virtual long? Platinum { get; set; }
 
         /// <summary>
         /// Gets or sets the silver.
         /// </summary>
-        public virtual int? Silver { get; set; }
+        public virtual long? Silver { get; set; }
 
         /// <summary>
         /// Gets or sets the statistic.

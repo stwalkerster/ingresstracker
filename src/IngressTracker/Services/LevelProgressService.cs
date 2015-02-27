@@ -79,7 +79,7 @@ namespace IngressTracker.Services
         /// <returns>
         /// The <see cref="Level"/>.
         /// </returns>
-        public Level GetCurrentLevel(int ap, int silver, int gold, int platinum, int black)
+        public Level GetCurrentLevel(long ap, int silver, int gold, int platinum, int black)
         {
             var getLevel =
                 this.databaseSession.QueryOver<Level>()

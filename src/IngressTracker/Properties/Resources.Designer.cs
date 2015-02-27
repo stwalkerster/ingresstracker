@@ -250,6 +250,15 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Browse....
+        /// </summary>
+        public static string Browse {
+            get {
+                return ResourceManager.GetString("Browse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Category Name.
         /// </summary>
         public static string CategoryName {
@@ -502,6 +511,33 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Import Data.
+        /// </summary>
+        public static string ImportDataView {
+            get {
+                return ResourceManager.GetString("ImportDataView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please map the statistic descriptions to the ones defined in this app:.
+        /// </summary>
+        public static string ImportMapStatistics {
+            get {
+                return ResourceManager.GetString("ImportMapStatistics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a CSV file to import:.
+        /// </summary>
+        public static string ImportSelectFile {
+            get {
+                return ResourceManager.GetString("ImportSelectFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Is AP statistic?.
         /// </summary>
         public static string IsAP {
@@ -615,6 +651,15 @@ namespace IngressTracker.Properties {
         public static string LoginView {
             get {
                 return ResourceManager.GetString("LoginView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Next.
+        /// </summary>
+        public static string Next {
+            get {
+                return ResourceManager.GetString("Next", resourceCulture);
             }
         }
         

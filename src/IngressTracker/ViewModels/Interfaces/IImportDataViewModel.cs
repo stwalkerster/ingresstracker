@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ILevelProgressService.cs" company="Simon Walker">
+// <copyright file="IImportDataViewModel.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,54 +17,17 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The LevelProgressService interface.
+//   The ImportDataViewModel interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.Services.Interfaces
+namespace IngressTracker.ViewModels.Interfaces
 {
-    using IngressTracker.DataModel.Models;
+    using Caliburn.Micro;
 
     /// <summary>
-    /// The LevelProgressService interface.
+    /// The ImportDataViewModel interface.
     /// </summary>
-    public interface ILevelProgressService
+    public interface IImportDataViewModel : IScreen
     {
-        #region Public Methods and Operators
-
-        /// <summary>
-        /// The get current level.
-        /// </summary>
-        /// <param name="ap">
-        /// The AP.
-        /// </param>
-        /// <param name="silver">
-        /// The silver.
-        /// </param>
-        /// <param name="gold">
-        /// The gold.
-        /// </param>
-        /// <param name="platinum">
-        /// The platinum.
-        /// </param>
-        /// <param name="black">
-        /// The black.
-        /// </param>
-        /// <returns>
-        /// The <see cref="Level"/>.
-        /// </returns>
-        Level GetCurrentLevel(long ap, int silver, int gold, int platinum, int black);
-
-        /// <summary>
-        /// The get next level.
-        /// </summary>
-        /// <param name="currentLevel">
-        /// The current Level.
-        /// </param>
-        /// <returns>
-        /// The <see cref="Level"/>.
-        /// </returns>
-        Level GetNextLevel(Level currentLevel);
-
-        #endregion
     }
 }

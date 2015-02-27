@@ -55,7 +55,7 @@ namespace IngressTracker.ViewModels
         /// <summary>
         /// The access points.
         /// </summary>
-        private int accessPoints;
+        private long accessPoints;
 
         /// <summary>
         /// The black count.
@@ -129,7 +129,7 @@ namespace IngressTracker.ViewModels
         /// <summary>
         /// Gets or sets the access points.
         /// </summary>
-        public int AccessPoints
+        public long AccessPoints
         {
             get
             {

@@ -542,4 +542,19 @@ INSERT INTO badge VALUES (26,'Darsana',NULL,NULL,NULL,NULL,NULL,NULL,1,'In recog
 INSERT INTO badge VALUES (27,'Oliver Lynton-Wolfe',NULL,NULL,NULL,NULL,NULL,NULL,1,'Aided XM Researcher and Engineer Dr. Oliver Lynton-Wolfe.');
 INSERT INTO badge VALUES (28,'Shōnin',NULL,NULL,NULL,NULL,NULL,NULL,1,'In recognition of contributions during Shōnin.');</value>
   </data>
+  <data name="ImportDataView" xml:space="preserve">
+    <value>Import Data</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Browse...</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="ImportSelectFile" xml:space="preserve">
+    <value>Select a CSV file to import:</value>
+  </data>
+  <data name="ImportMapStatistics" xml:space="preserve">
+    <value>Please map the statistic descriptions to the ones defined in this app:</value>
+  </data>
 </root>

@@ -80,6 +80,9 @@
     <Reference Include="Castle.Windsor">
       <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="CsvHelper">
+      <HintPath>..\packages\CsvHelper.2.11.0\lib\net40-client\CsvHelper.dll</HintPath>
+    </Reference>
     <Reference Include="Fluent">
       <HintPath>..\packages\Fluent.Ribbon.3.3.0\lib\net45\Fluent.dll</HintPath>
     </Reference>
@@ -135,10 +138,13 @@
       <DependentUpon>LevelIndicator.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\DebugConverter.cs" />
+    <Compile Include="Converters\EqualityToVisibilityConverter.cs" />
     <Compile Include="Converters\InverseBooleanConverter.cs" />
     <Compile Include="Converters\VisibilityGreaterThanEqualToConverter.cs" />
     <Compile Include="Converters\WindowTitleConverter.cs" />
     <Compile Include="DataModel\BadgeLevel.cs" />
+    <Compile Include="DataModel\Import\ValueDataRow.cs" />
+    <Compile Include="DataModel\Import\ValueMap.cs" />
     <Compile Include="DataModel\Models\Badge.cs" />
     <Compile Include="DataModel\Models\BadgeAward.cs" />
     <Compile Include="DataModel\BadgeProgress.cs" />
@@ -193,9 +199,12 @@
     <Compile Include="ViewModels\BadgeStaticViewModel.cs" />
     <Compile Include="ViewModels\CategoryStaticViewModel.cs" />
     <Compile Include="ViewModels\EnterStatsViewModel.cs" />
+    <Compile Include="ViewModels\ImportDataViewModel.cs" />
+    <Compile Include="DataModel\Import\ImporterStatisticMapping.cs" />
     <Compile Include="ViewModels\Interfaces\IBadgeAwardViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IBadgeProgressViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IEnterStatsViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\IImportDataViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\ILevelProgressViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\ILevelStaticViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\ILoginViewModel.cs" />
@@ -232,6 +241,9 @@
     </Compile>
     <Compile Include="Views\EnterStatsView.xaml.cs">
       <DependentUpon>EnterStatsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ImportDataView.xaml.cs">
+      <DependentUpon>ImportDataView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LevelProgressView.xaml.cs">
       <DependentUpon>LevelProgressView.xaml</DependentUpon>
@@ -291,6 +303,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\EnterStatsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ImportDataView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -416,6 +432,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\Crystal\32\fileimport.png" />
+    <Resource Include="Images\Crystal\16\fileimport.png" />
     <Content Include="x64\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Visible>False</Visible>

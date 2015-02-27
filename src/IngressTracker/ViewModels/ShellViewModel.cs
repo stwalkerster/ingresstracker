@@ -167,6 +167,17 @@ namespace IngressTracker.ViewModels
         }
 
         /// <summary>
+        /// Gets a value indicating whether can open import data.
+        /// </summary>
+        public bool CanOpenImportData
+        {
+            get
+            {
+                return this.loginService.LoginComplete;
+            }
+        }
+
+        /// <summary>
         /// Gets a value indicating whether can open level progress.
         /// </summary>
         public bool CanOpenLevelProgress
@@ -407,6 +418,14 @@ namespace IngressTracker.ViewModels
         public void OpenEnterStats()
         {
             this.OpenWindow<IEnterStatsViewModel>();
+        }
+
+        /// <summary>
+        /// The open import data.
+        /// </summary>
+        public void OpenImportData()
+        {
+            this.OpenWindow<IImportDataViewModel>();
         }
 
         /// <summary>

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ILevelProgressService.cs" company="Simon Walker">
+// <copyright file="ImportDataView.xaml.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,53 +17,28 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The LevelProgressService interface.
+//   Interaction logic for ImportDataView.xaml
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.Services.Interfaces
+
+namespace IngressTracker.Views
 {
-    using IngressTracker.DataModel.Models;
+    using System.Windows.Controls;
 
     /// <summary>
-    /// The LevelProgressService interface.
+    /// Interaction logic for ImportDataView.xaml
     /// </summary>
-    public interface ILevelProgressService
+    public partial class ImportDataView : UserControl
     {
-        #region Public Methods and Operators
+        #region Constructors and Destructors
 
         /// <summary>
-        /// The get current level.
+        /// Initialises a new instance of the <see cref="ImportDataView"/> class.
         /// </summary>
-        /// <param name="ap">
-        /// The AP.
-        /// </param>
-        /// <param name="silver">
-        /// The silver.
-        /// </param>
-        /// <param name="gold">
-        /// The gold.
-        /// </param>
-        /// <param name="platinum">
-        /// The platinum.
-        /// </param>
-        /// <param name="black">
-        /// The black.
-        /// </param>
-        /// <returns>
-        /// The <see cref="Level"/>.
-        /// </returns>
-        Level GetCurrentLevel(long ap, int silver, int gold, int platinum, int black);
-
-        /// <summary>
-        /// The get next level.
-        /// </summary>
-        /// <param name="currentLevel">
-        /// The current Level.
-        /// </param>
-        /// <returns>
-        /// The <see cref="Level"/>.
-        /// </returns>
-        Level GetNextLevel(Level currentLevel);
+        public ImportDataView()
+        {
+            this.InitializeComponent();
+        }
 
         #endregion
     }

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ILevelProgressService.cs" company="Simon Walker">
+// <copyright file="ImporterStatisticMapping.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,53 +17,59 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The LevelProgressService interface.
+//   The importer statistic mapping.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.Services.Interfaces
+namespace IngressTracker.DataModel.Import
 {
     using IngressTracker.DataModel.Models;
 
     /// <summary>
-    /// The LevelProgressService interface.
+    /// The importer statistic mapping.
     /// </summary>
-    public interface ILevelProgressService
+    public class ImporterStatisticMapping
     {
-        #region Public Methods and Operators
+        #region Constructors and Destructors
 
         /// <summary>
-        /// The get current level.
+        /// Initialises a new instance of the <see cref="ImporterStatisticMapping"/> class.
         /// </summary>
-        /// <param name="ap">
-        /// The AP.
+        /// <param name="statName">
+        /// The stat name.
         /// </param>
-        /// <param name="silver">
-        /// The silver.
-        /// </param>
-        /// <param name="gold">
-        /// The gold.
-        /// </param>
-        /// <param name="platinum">
-        /// The platinum.
-        /// </param>
-        /// <param name="black">
-        /// The black.
-        /// </param>
-        /// <returns>
-        /// The <see cref="Level"/>.
-        /// </returns>
-        Level GetCurrentLevel(long ap, int silver, int gold, int platinum, int black);
+        public ImporterStatisticMapping(string statName)
+        {
+            this.StatName = statName;
+        }
 
         /// <summary>
-        /// The get next level.
+        /// Initialises a new instance of the <see cref="ImporterStatisticMapping"/> class.
         /// </summary>
-        /// <param name="currentLevel">
-        /// The current Level.
+        /// <param name="stat">
+        /// The stat.
         /// </param>
-        /// <returns>
-        /// The <see cref="Level"/>.
-        /// </returns>
-        Level GetNextLevel(Level currentLevel);
+        /// <param name="statName">
+        /// The stat name.
+        /// </param>
+        public ImporterStatisticMapping(Stat stat, string statName)
+        {
+            this.Stat = stat;
+            this.StatName = statName;
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        /// <summary>
+        /// Gets or sets the stat.
+        /// </summary>
+        public Stat Stat { get; set; }
+
+        /// <summary>
+        /// Gets or sets the stat name.
+        /// </summary>
+        public string StatName { get; set; }
 
         #endregion
     }

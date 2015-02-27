@@ -3,34 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:helpers="clr-namespace:IngressTracker.Helpers"
              xmlns:properties="clr-namespace:IngressTracker.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="600">
     <Grid>
         <Grid.Resources>
-            <Style x:Key="LoginFormButtonStyle" TargetType="Button">
-                <Setter Property="Width" Value="100" />
-                <Setter Property="HorizontalAlignment" Value="Right" />
-                <Setter Property="Height" Value="22" />
-                <Setter Property="Margin" Value="0,5" />
-            </Style>
-            <Style x:Key="LoginHeaderTextBlockStyle" TargetType="TextBlock">
-                <Setter Property="FontSize" Value="16" />
-                <Setter Property="Padding" Value="0,10,0,5" />
-            </Style>
-
             <Style TargetType="TextBlock">
                 <Setter Property="Height" Value="22" />
                 <Setter Property="Margin" Value="0,5,10,5" />
             </Style>
+            
             <Style TargetType="ComboBox">
                 <Setter Property="Height" Value="22" />
                 <Setter Property="Margin" Value="0,5" />
             </Style>
         </Grid.Resources>
         
-       
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="300"/>
@@ -42,7 +30,7 @@
                 <RowDefinition Height="32"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource LoginHeaderTextBlockStyle}" Text="{x:Static properties:Resources.ChooseAgentName}"/>
+            <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource HeaderTextBlockStyle}" Text="{x:Static properties:Resources.ChooseAgentName}"/>
             <ComboBox Grid.Row="1" Grid.Column="0" x:Name="AvailableAgents">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -51,8 +39,7 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
 
-            <Button Grid.Row="2" Grid.Column="0" Style="{StaticResource LoginFormButtonStyle}" x:Name="Login" Content="{x:Static properties:Resources.LoginButton}" />
+            <Button Grid.Row="2" Grid.Column="0" Style="{StaticResource FormButtonStyle}" x:Name="Login" Content="{x:Static properties:Resources.LoginButton}" />
         </Grid>
-
     </Grid>
 </UserControl>
