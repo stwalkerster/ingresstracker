@@ -171,7 +171,7 @@ namespace IngressTracker.ViewModels
 
             set
             {
-                if (!Equals(value, this.statNames))
+                if (this.statNames != value)
                 {
                     this.statNames = value;
                     this.NotifyOfPropertyChange(() => this.StatNames);
@@ -180,7 +180,7 @@ namespace IngressTracker.ViewModels
         }
 
         /// <summary>
-        /// Gets the stats.
+        /// Gets or sets the stats.
         /// </summary>
         public IEnumerable<Stat> Stats
         {
@@ -191,13 +191,11 @@ namespace IngressTracker.ViewModels
 
             set
             {
-                if (Equals(value, this.stats))
+                if (this.stats != value)
                 {
-                    return;
+                    this.stats = value;
+                    this.NotifyOfPropertyChange(() => this.Stats);
                 }
-
-                this.stats = value;
-                this.NotifyOfPropertyChange(() => this.Stats);
             }
         }
 

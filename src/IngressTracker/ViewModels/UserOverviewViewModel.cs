@@ -327,6 +327,9 @@ namespace IngressTracker.ViewModels
             this.RefreshData();
         }
 
+        /// <summary>
+        /// The refresh data.
+        /// </summary>
         public void RefreshData()
         {
             var badges =
