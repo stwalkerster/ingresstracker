@@ -1,5 +1,5 @@
-// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IShellViewModel.cs" company="Simon Walker">
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="AboutView.xaml.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,43 +17,29 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The ShellViewModel interface.
+//   Interaction logic for AboutView.xaml
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.ViewModels.Interfaces
+
+namespace IngressTracker.Views
 {
+    using System.Windows.Controls;
+
     /// <summary>
-    /// The ShellViewModel interface.
+    /// Interaction logic for AboutView.xaml
     /// </summary>
-    public interface IShellViewModel
+    public partial class AboutView
     {
-        #region Public Methods and Operators
+        #region Constructors and Destructors
 
         /// <summary>
-        /// The open badge static.
+        /// Initialises a new instance of the <see cref="AboutView"/> class.
         /// </summary>
-        void OpenBadgeStatic();
-
-        /// <summary>
-        /// The open category static.
-        /// </summary>
-        void OpenCategoryStatic();
-
-        /// <summary>
-        /// The open stat static.
-        /// </summary>
-        void OpenStatStatic();
-
-        /// <summary>
-        /// The open user static.
-        /// </summary>
-        void OpenUserStatic();
+        public AboutView()
+        {
+            this.InitializeComponent();
+        }
 
         #endregion
-
-        /// <summary>
-        /// Gets the about.
-        /// </summary>
-        IAboutViewModel About { get; }
     }
 }

@@ -22,6 +22,8 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace IngressTracker.ViewModels
 {
+    using System.Windows;
+
     using Caliburn.Micro;
 
     using IngressTracker.DataModel;
@@ -40,6 +42,11 @@ namespace IngressTracker.ViewModels
         #region Fields
 
         /// <summary>
+        /// The about view model.
+        /// </summary>
+        private readonly IAboutViewModel aboutViewModel;
+
+        /// <summary>
         /// The login service.
         /// </summary>
         private readonly ILoginService loginService;
@@ -54,14 +61,29 @@ namespace IngressTracker.ViewModels
         /// <param name="loginService">
         /// The login service.
         /// </param>
-        public ShellViewModel(ILoginService loginService)
+        /// <param name="aboutViewModel">
+        /// The about View Model.
+        /// </param>
+        public ShellViewModel(ILoginService loginService, IAboutViewModel aboutViewModel)
         {
             this.loginService = loginService;
+            this.aboutViewModel = aboutViewModel;
         }
 
         #endregion
 
         #region Public Properties
+
+        /// <summary>
+        /// Gets the about.
+        /// </summary>
+        public IAboutViewModel About
+        {
+            get
+            {
+                return this.aboutViewModel;
+            }
+        }
 
         /// <summary>
         /// Gets a value indicating whether can add record.
@@ -108,6 +130,28 @@ namespace IngressTracker.ViewModels
                 }
 
                 return allowed;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether can exit.
+        /// </summary>
+        public bool CanExit
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether can open about.
+        /// </summary>
+        public bool CanOpenAbout
+        {
+            get
+            {
+                return true;
             }
         }
 
@@ -378,6 +422,22 @@ namespace IngressTracker.ViewModels
             {
                 ((ICanDelete)this.ActiveItem).DeleteRecord();
             }
+        }
+
+        /// <summary>
+        /// The exit.
+        /// </summary>
+        public void Exit()
+        {
+            Application.Current.Shutdown();
+        }
+
+        /// <summary>
+        /// The open about.
+        /// </summary>
+        public void OpenAbout()
+        {
+            this.OpenWindow<IAboutViewModel>();
         }
 
         /// <summary>

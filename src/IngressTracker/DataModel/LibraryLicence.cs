@@ -1,5 +1,5 @@
-// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IShellViewModel.cs" company="Simon Walker">
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="LibraryLicence.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,43 +17,29 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The ShellViewModel interface.
+//   The library licence.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.ViewModels.Interfaces
+
+namespace IngressTracker.DataModel
 {
     /// <summary>
-    /// The ShellViewModel interface.
+    /// The library licence.
     /// </summary>
-    public interface IShellViewModel
+    public class LibraryLicence
     {
-        #region Public Methods and Operators
+        #region Public Properties
 
         /// <summary>
-        /// The open badge static.
+        /// Gets or sets the licence.
         /// </summary>
-        void OpenBadgeStatic();
+        public string Licence { get; set; }
 
         /// <summary>
-        /// The open category static.
+        /// Gets or sets the name.
         /// </summary>
-        void OpenCategoryStatic();
-
-        /// <summary>
-        /// The open stat static.
-        /// </summary>
-        void OpenStatStatic();
-
-        /// <summary>
-        /// The open user static.
-        /// </summary>
-        void OpenUserStatic();
+        public string Name { get; set; }
 
         #endregion
-
-        /// <summary>
-        /// Gets the about.
-        /// </summary>
-        IAboutViewModel About { get; }
     }
 }

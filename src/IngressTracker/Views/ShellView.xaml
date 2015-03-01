@@ -108,7 +108,7 @@
         </Grid.RowDefinitions>
 
         <fluent:Ribbon>
-            <fluent:RibbonTabItem Header="{x:Static properties:Resources.ApplicationName}">
+            <fluent:RibbonTabItem Header="{x:Static properties:Resources.Home}">
                 <fluent:RibbonGroupBox Header="{x:Static properties:Resources.Login}">
                     <fluent:Button Style="{StaticResource LoginButtonStyle}" />
                 </fluent:RibbonGroupBox>
@@ -148,6 +148,19 @@
             <fluent:Ribbon.ContextualGroups>
           <!--      <fluent:RibbonContextualTabGroup Visibility="{Binding DataToolsEnabled, Converter={StaticResource boolToVisibilityConverter}}" x:Name="DataToolsContextualTabGroup" Style="{StaticResource DataToolsContextualTabGroupStyle}" /> -->
             </fluent:Ribbon.ContextualGroups>
+            
+            <fluent:Ribbon.Menu>
+                <fluent:Backstage Header="{x:Static properties:Resources.ApplicationName}">
+                    <fluent:BackstageTabControl>
+                        <fluent:BackstageTabItem Header="{x:Static properties:Resources.AboutView}" IsSelected="True">
+                            <fluent:BackstageTabItem.Content>
+                                <ContentControl cal:View.Model="{Binding About}" Foreground="{DynamicResource DefaultFontBrush}" />
+                            </fluent:BackstageTabItem.Content>
+                        </fluent:BackstageTabItem>
+                        <fluent:Button Header="{x:Static properties:Resources.Exit}" cal:Message.Attach="Exit" />
+                    </fluent:BackstageTabControl>
+                </fluent:Backstage>
+            </fluent:Ribbon.Menu>
         </fluent:Ribbon>
 
         <TabControl Grid.Row="1" x:Name="Items" Style="{StaticResource WindowTabControlStyle}" />

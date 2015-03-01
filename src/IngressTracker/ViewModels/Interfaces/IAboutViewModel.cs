@@ -1,5 +1,5 @@
-// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IShellViewModel.cs" company="Simon Walker">
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="IAboutViewModel.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,43 +17,18 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The ShellViewModel interface.
+//   The AboutViewModel interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace IngressTracker.ViewModels.Interfaces
 {
+    using Caliburn.Micro;
+
     /// <summary>
-    /// The ShellViewModel interface.
+    /// The AboutViewModel interface.
     /// </summary>
-    public interface IShellViewModel
+    public interface IAboutViewModel : IScreen
     {
-        #region Public Methods and Operators
-
-        /// <summary>
-        /// The open badge static.
-        /// </summary>
-        void OpenBadgeStatic();
-
-        /// <summary>
-        /// The open category static.
-        /// </summary>
-        void OpenCategoryStatic();
-
-        /// <summary>
-        /// The open stat static.
-        /// </summary>
-        void OpenStatStatic();
-
-        /// <summary>
-        /// The open user static.
-        /// </summary>
-        void OpenUserStatic();
-
-        #endregion
-
-        /// <summary>
-        /// Gets the about.
-        /// </summary>
-        IAboutViewModel About { get; }
     }
 }

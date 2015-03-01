@@ -145,6 +145,7 @@
     <Compile Include="DataModel\BadgeLevel.cs" />
     <Compile Include="DataModel\Import\ValueDataRow.cs" />
     <Compile Include="DataModel\Import\ValueMap.cs" />
+    <Compile Include="DataModel\LibraryLicence.cs" />
     <Compile Include="DataModel\Models\Badge.cs" />
     <Compile Include="DataModel\Models\BadgeAward.cs" />
     <Compile Include="DataModel\BadgeProgress.cs" />
@@ -194,6 +195,11 @@
     <Compile Include="Startup\Facilities\PersistenceFacility.cs" />
     <Compile Include="Startup\WindsorServiceLocator.cs" />
     <Compile Include="ScreenBase\StaticDataScreen.cs" />
+    <Compile Include="ViewModels\AboutViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\IAboutViewModel.cs" />
+    <Compile Include="Views\AboutView.xaml.cs">
+      <DependentUpon>AboutView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\BadgeAwardViewModel.cs" />
     <Compile Include="ViewModels\BadgeProgressViewModel.cs" />
     <Compile Include="ViewModels\BadgeStaticViewModel.cs" />
@@ -287,6 +293,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\Style.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AboutView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -61,6 +61,24 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        public static string AboutView {
+            get {
+                return ResourceManager.GetString("AboutView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This project is not officially affiliated with Ingress or Niantic Labs at Google..
+        /// </summary>
+        public static string Affiliation {
+            get {
+                return ResourceManager.GetString("Affiliation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Agent.
         /// </summary>
         public static string Agent {
@@ -75,6 +93,15 @@ namespace IngressTracker.Properties {
         public static string AgentName {
             get {
                 return ResourceManager.GetString("AgentName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A stats tracking app for Windows PCs.
+        /// </summary>
+        public static string AppDescription {
+            get {
+                return ResourceManager.GetString("AppDescription", resourceCulture);
             }
         }
         
@@ -484,6 +511,15 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exit.
+        /// </summary>
+        public static string Exit {
+            get {
+                return ResourceManager.GetString("Exit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enlightened.
         /// </summary>
         public static string FactionEnlightened {
@@ -507,6 +543,15 @@ namespace IngressTracker.Properties {
         public static string Gold {
             get {
                 return ResourceManager.GetString("Gold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        public static string Home {
+            get {
+                return ResourceManager.GetString("Home", resourceCulture);
             }
         }
         
@@ -615,6 +660,119 @@ namespace IngressTracker.Properties {
         public static string LevelStaticView {
             get {
                 return ResourceManager.GetString("LevelStaticView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apache License
+        ///                           Version 2.0, January 2004
+        ///                        http://www.apache.org/licenses/
+        ///
+        ///   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+        ///
+        ///   1. Definitions.
+        ///
+        ///      &quot;License&quot; shall mean the terms and conditions for use, reproduction,
+        ///      and distribution as defined by Sections 1 through 9 of this document.
+        ///
+        ///      &quot;Licensor&quot; shall mean the copyright owner or entity authorized by
+        ///      the copyright owner that is granting the License.
+        ///
+        ///      &quot; [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string LicApache2 {
+            get {
+                return ResourceManager.GetString("LicApache2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copyright (c) {0}, {1}
+        ///All rights reserved.
+        ///
+        ///Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+        ///
+        ///  * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+        ///  * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string LicBSD {
+            get {
+                return ResourceManager.GetString("LicBSD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Licence Information.
+        /// </summary>
+        public static string LicenceInfo {
+            get {
+                return ResourceManager.GetString("LicenceInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GNU LESSER GENERAL PUBLIC LICENSE
+        ///                     Version 2.1, February 1999
+        ///
+        ///       Copyright (C) 1991, 1999 Free Software Foundation, Inc.
+        ///       59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+        ///
+        ///     Everyone is permitted to copy and distribute verbatim copies
+        ///       of this license document, but changing it is not allowed.
+        ///
+        ///[This is the first released version of the Lesser GPL.  It also counts
+        /// as the successor of the GNU Library Public License, version 2, hence
+        /// the version numbe [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string LicLGPL2 {
+            get {
+                return ResourceManager.GetString("LicLGPL2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copyright (c) {0} {1}
+        ///
+        ///Permission is hereby granted, free of charge, to any person obtaining a copy
+        ///of this software and associated documentation files (the &quot;Software&quot;), to deal
+        ///in the Software without restriction, including without limitation the rights
+        ///to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        ///copies of the Software, and to permit persons to whom the Software is
+        ///furnished to do so, subject to the following conditions:
+        ///
+        ///The above copyright notice and this permission [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string LicMIT {
+            get {
+                return ResourceManager.GetString("LicMIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Microsoft Public License (Ms-PL)
+        ///
+        ///This license governs use of the accompanying software. If you use the software, you accept this license. If you do not accept the license, do not use the software.
+        ///
+        ///1. Definitions
+        ///
+        ///The terms &quot;reproduce,&quot; &quot;reproduction,&quot; &quot;derivative works,&quot; and &quot;distribution&quot; have the same meaning here as under U.S. copyright law.
+        ///
+        ///A &quot;contribution&quot; is the original software, or any additions or changes to the software.
+        ///
+        ///A &quot;contributor&quot; is any person that distributes its contribution [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string LicMSPL {
+            get {
+                return ResourceManager.GetString("LicMSPL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} is in the Public Domain..
+        /// </summary>
+        public static string LicPD {
+            get {
+                return ResourceManager.GetString("LicPD", resourceCulture);
             }
         }
         
@@ -932,6 +1090,15 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ingress, the Ingress logo, and graphics relating to Ingress are Copyright (c) Google Inc, and may also be registered trademarks..
+        /// </summary>
+        public static string Trademarks {
+            get {
+                return ResourceManager.GetString("Trademarks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You haven&apos;t saved your changes on this screen! Continuing will discard any changes you have made. Are you sure you wish to continue?.
         /// </summary>
         public static string UnsavedChanges {
@@ -1000,6 +1167,15 @@ namespace IngressTracker.Properties {
         public static string Value {
             get {
                 return ResourceManager.GetString("Value", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version.
+        /// </summary>
+        public static string Version {
+            get {
+                return ResourceManager.GetString("Version", resourceCulture);
             }
         }
         
