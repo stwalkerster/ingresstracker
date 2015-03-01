@@ -112,4 +112,16 @@
         <Setter Property="Height" Value="22" />
         <Setter Property="Margin" Value="0,5" />
     </Style>
+    
+    <Style TargetType="TextBox">
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="true">
+                <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self},
+                        Path=(Validation.Errors).CurrentItem.ErrorContent}" />
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="BorderBrush" Value="Red"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
 </ResourceDictionary>

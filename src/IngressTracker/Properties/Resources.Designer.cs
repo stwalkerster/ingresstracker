@@ -592,6 +592,15 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0:###,###,###,##0}.
+        /// </summary>
+        public static string IntegerFormat {
+            get {
+                return ResourceManager.GetString("IntegerFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Is AP statistic?.
         /// </summary>
         public static string IsAP {
@@ -818,6 +827,15 @@ namespace IngressTracker.Properties {
         public static string LoginView {
             get {
                 return ResourceManager.GetString("LoginView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value entered is less than the last value! This can really mess up the predictions, so you can use the raw value view to find the bad value..
+        /// </summary>
+        public static string NewValueLessThanOldValue {
+            get {
+                return ResourceManager.GetString("NewValueLessThanOldValue", resourceCulture);
             }
         }
         

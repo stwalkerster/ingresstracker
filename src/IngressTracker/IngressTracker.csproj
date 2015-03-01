@@ -159,6 +159,7 @@
     <Compile Include="DataModel\Models\Stat.cs" />
     <Compile Include="DataModel\Models\User.cs" />
     <Compile Include="DataModel\Models\ValueEntry.cs" />
+    <Compile Include="DataModel\NewValueEntryContainer.cs" />
     <Compile Include="Validation\ValidationHelper.cs" />
     <Compile Include="Validation\Validators\BadgeAwardValidator.cs" />
     <Compile Include="Helpers\PasswordHelper.cs" />

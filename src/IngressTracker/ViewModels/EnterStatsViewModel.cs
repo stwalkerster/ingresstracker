@@ -29,6 +29,7 @@ namespace IngressTracker.ViewModels
     using System.Linq;
     using System.Windows;
 
+    using IngressTracker.DataModel;
     using IngressTracker.DataModel.Models;
     using IngressTracker.Properties;
     using IngressTracker.ScreenBase;
@@ -47,7 +48,7 @@ namespace IngressTracker.ViewModels
         /// <summary>
         /// The value entries.
         /// </summary>
-        private ObservableCollection<ValueEntry> valueEntries;
+        private ObservableCollection<NewValueEntryContainer> valueEntries;
 
         #endregion
 
@@ -74,7 +75,7 @@ namespace IngressTracker.ViewModels
         /// <summary>
         /// Gets the value entries.
         /// </summary>
-        public IEnumerable<ValueEntry> ValueEntries
+        public IEnumerable<NewValueEntryContainer> ValueEntries
         {
             get
             {
@@ -91,12 +92,23 @@ namespace IngressTracker.ViewModels
         /// </summary>
         public void AddRecord()
         {
-            this.valueEntries = new ObservableCollection<ValueEntry>(
+            this.valueEntries = new ObservableCollection<NewValueEntryContainer>(
                 this.DatabaseSession.QueryOver<Stat>()
                 .OrderBy(x => x.DisplayOrder).Asc
                     .List()
                     .Select(
-                        x => new ValueEntry { Agent = this.LoginService.Agent, Statistic = x, Timestamp = DateTime.Now }));
+                        x => new NewValueEntryContainer { Agent = this.LoginService.Agent, Statistic = x, Timestamp = DateTime.Now }));
+
+            foreach (var container in this.valueEntries)
+            {
+                NewValueEntryContainer nvec = container;
+                var lastStatValue = this.DatabaseSession.QueryOver<ValueEntry>()
+                    .Where(x => x.Agent == this.LoginService.Agent && x.Statistic == nvec.Statistic)
+                    .OrderBy(x => x.Timestamp)
+                    .Desc.Take(1).SingleOrDefault();
+
+                container.OldValue = lastStatValue == null ? null : lastStatValue.Value;
+            }
 
             this.NotifyOfPropertyChange(() => this.ValueEntries);
         }
@@ -122,7 +134,7 @@ namespace IngressTracker.ViewModels
 
             foreach (var valueEntry in this.ValueEntries)
             {
-                this.DatabaseSession.Save(valueEntry);
+                this.DatabaseSession.Save(valueEntry.ValueEntry);
             }
 
             this.TryClose();
