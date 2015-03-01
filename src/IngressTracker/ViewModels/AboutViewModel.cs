@@ -136,6 +136,11 @@ namespace IngressTracker.ViewModels
                                                            string.Format(Resources.LicMSPL), 
                                                            string.Format(Resources.LicApache2))
                                                }, 
+                                           new LibraryLicence
+                                               {
+                                                   Name = "Fluent Validation", 
+                                                   Licence = string.Format(Resources.LicApache2)
+                                               }, 
                                        };
         }
 
@@ -178,7 +183,7 @@ namespace IngressTracker.ViewModels
         {
             get
             {
-                return string.Format("{1} : {0}", Assembly.GetExecutingAssembly().GetName().Version.ToString(), Resources.Version);
+                return string.Format("{1} : {0}", Assembly.GetExecutingAssembly().GetName().Version, Resources.Version);
             }
         }
 

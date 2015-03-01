@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="BadgeAward.cs" company="Simon Walker">
+// <copyright file="ValueEntryValidator.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,54 +17,33 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The badge award.
+//   The value entry validator.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.DataModel.Models
-{
-    using FluentValidation.Attributes;
 
-    using IngressTracker.Persistence;
-    using IngressTracker.Validation.Validators;
+namespace IngressTracker.Validation.Validators
+{
+    using FluentValidation;
+
+    using IngressTracker.DataModel.Models;
 
     /// <summary>
-    /// The badge award.
+    /// The value entry validator.
     /// </summary>
-    [Validator(typeof(BadgeAwardValidator))]
-    public class BadgeAward : EntityBase
+    internal class ValueEntryValidator : AbstractValidator<ValueEntry>
     {
-        #region Public Properties
+        #region Constructors and Destructors
 
         /// <summary>
-        /// Gets or sets the badge.
+        /// Initialises a new instance of the <see cref="ValueEntryValidator"/> class.
         /// </summary>
-        public virtual User Agent { get; set; }
-
-        /// <summary>
-        /// Gets or sets the badge.
-        /// </summary>
-        public virtual Badge Badge { get; set; }
-
-        /// <summary>
-        /// Gets or sets the level.
-        /// </summary>
-        public virtual BadgeLevel Level
+        public ValueEntryValidator()
         {
-            get
-            {
-                return BadgeLevel.Lookup(this.LevelCode);
-            }
-
-            set
-            {
-                this.LevelCode = value.Code;
-            }
+            this.RuleFor(x => x.Timestamp).NotNull();
+            this.RuleFor(x => x.Statistic).NotNull();
+            this.RuleFor(x => x.Agent).NotNull();
+            this.RuleFor(x => x.Value).NotNull();
         }
-
-        /// <summary>
-        /// Gets or sets the level.
-        /// </summary>
-        public virtual string LevelCode { get; set; }
 
         #endregion
     }

@@ -22,11 +22,15 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace IngressTracker.DataModel.Models
 {
+    using FluentValidation.Attributes;
+
     using IngressTracker.Persistence;
+    using IngressTracker.Validation.Validators;
 
     /// <summary>
     /// The user.
     /// </summary>
+    [Validator(typeof(UserValidator))]
     public class User : EntityBase
     {
         #region Public Properties

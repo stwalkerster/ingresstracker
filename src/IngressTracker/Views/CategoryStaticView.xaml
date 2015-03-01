@@ -8,6 +8,9 @@
              xmlns:properties="clr-namespace:IngressTracker.Properties">
     <Grid>
         <DataGrid Style="{StaticResource StaticDataScreenDataGridStyle}">
+            <DataGrid.RowValidationRules>
+                <DataErrorValidationRule />
+            </DataGrid.RowValidationRules>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{x:Static properties:Resources.CategoryName}" Binding="{Binding Name}" />
                 <DataGridTextColumn Header="{x:Static properties:Resources.DisplayOrder}" Binding="{Binding DisplayOrder}" />

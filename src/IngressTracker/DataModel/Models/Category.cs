@@ -22,11 +22,15 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace IngressTracker.DataModel.Models
 {
+    using FluentValidation.Attributes;
+
     using IngressTracker.Persistence;
+    using IngressTracker.Validation.Validators;
 
     /// <summary>
     /// The category.
     /// </summary>
+    [Validator(typeof(CategoryValidator))]
     public class Category : EntityBase
     {
         #region Public Properties

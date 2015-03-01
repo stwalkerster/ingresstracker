@@ -22,11 +22,15 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace IngressTracker.DataModel.Models
 {
+    using FluentValidation.Attributes;
+
     using IngressTracker.Persistence;
+    using IngressTracker.Validation.Validators;
 
     /// <summary>
     /// The stat.
     /// </summary>
+    [Validator(typeof(StatValidator))]
     public class Stat : EntityBase
     {
         #region Public Properties

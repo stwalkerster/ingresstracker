@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="BadgeAward.cs" company="Simon Walker">
+// <copyright file="ValidationHelper.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,54 +17,48 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The badge award.
+//   The validation helper.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.DataModel.Models
+namespace IngressTracker.Validation
 {
+    using System;
+    using System.Linq;
+    using System.Reflection;
+
+    using FluentValidation;
     using FluentValidation.Attributes;
 
-    using IngressTracker.Persistence;
-    using IngressTracker.Validation.Validators;
-
     /// <summary>
-    /// The badge award.
+    /// The validation helper.
     /// </summary>
-    [Validator(typeof(BadgeAwardValidator))]
-    public class BadgeAward : EntityBase
+    public class ValidationHelper
     {
-        #region Public Properties
+        #region Public Methods and Operators
 
         /// <summary>
-        /// Gets or sets the badge.
+        /// The get validator.
         /// </summary>
-        public virtual User Agent { get; set; }
-
-        /// <summary>
-        /// Gets or sets the badge.
-        /// </summary>
-        public virtual Badge Badge { get; set; }
-
-        /// <summary>
-        /// Gets or sets the level.
-        /// </summary>
-        public virtual BadgeLevel Level
+        /// <param name="type">
+        /// The type.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IValidator"/>.
+        /// </returns>
+        public static IValidator GetValidator(Type type)
         {
-            get
+            var customAttributes = type.GetCustomAttributes(typeof(ValidatorAttribute), true);
+            var attribute = customAttributes.FirstOrDefault();
+
+            if (attribute == null)
             {
-                return BadgeLevel.Lookup(this.LevelCode);
+                return null;
             }
 
-            set
-            {
-                this.LevelCode = value.Code;
-            }
+            var validator = ((ValidatorAttribute)attribute).ValidatorType;
+
+            return (IValidator)Activator.CreateInstance(validator);
         }
-
-        /// <summary>
-        /// Gets or sets the level.
-        /// </summary>
-        public virtual string LevelCode { get; set; }
 
         #endregion
     }

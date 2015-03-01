@@ -23,11 +23,15 @@
 
 namespace IngressTracker.DataModel.Models
 {
+    using FluentValidation.Attributes;
+
     using IngressTracker.Persistence;
+    using IngressTracker.Validation.Validators;
 
     /// <summary>
     /// The level.
     /// </summary>
+    [Validator(typeof(LevelValidator))]
     public class Level : EntityBase
     {
         #region Public Properties

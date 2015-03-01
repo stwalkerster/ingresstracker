@@ -25,11 +25,15 @@ namespace IngressTracker.DataModel.Models
 {
     using System;
 
+    using FluentValidation.Attributes;
+
     using IngressTracker.Persistence;
+    using IngressTracker.Validation.Validators;
 
     /// <summary>
     /// The value entry.
     /// </summary>
+    [Validator(typeof(ValueEntryValidator))]
     public class ValueEntry : EntityBase
     {
         #region Public Properties

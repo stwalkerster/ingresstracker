@@ -8,6 +8,10 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <DataGrid Style="{StaticResource StaticDataScreenDataGridStyle}">
+            <DataGrid.RowValidationRules>
+                <DataErrorValidationRule />
+            </DataGrid.RowValidationRules>
+            
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{x:Static properties:Resources.BadgeName}" Binding="{Binding Name}" />
                 <DataGridComboBoxColumn Header="{x:Static properties:Resources.BadgeStatistic}" SelectedItemBinding="{Binding Statistic}">

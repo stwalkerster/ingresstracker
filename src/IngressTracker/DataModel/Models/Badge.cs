@@ -22,11 +22,15 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace IngressTracker.DataModel.Models
 {
+    using FluentValidation.Attributes;
+
     using IngressTracker.Persistence;
+    using IngressTracker.Validation.Validators;
 
     /// <summary>
     /// The badge.
     /// </summary>
+    [Validator(typeof(BadgeValidator))]
     public class Badge : EntityBase
     {
         #region Public Properties

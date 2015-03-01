@@ -69,7 +69,19 @@
         <Setter Property="RowHeaderWidth" Value="30" />
         <Setter Property="SelectedItem" Value="{Binding SelectedItem}" />
     </Style>
-    
+
+    <Style TargetType="{x:Type DataGridRow}">
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="true">
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="BorderBrush" Value="Red"/>
+                <Setter Property="ToolTip"
+              Value="{Binding RelativeSource={RelativeSource Self},
+                     Path=(Validation.Errors)[0].ErrorContent}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <Style x:Key="StaticDataScreenDataGridStyle" TargetType="DataGrid" BasedOn="{StaticResource DataScreenDataGridStyle}">
         <Setter Property="IsReadOnly" Value="{Binding UserAllowedEdit, Converter={StaticResource InverseBooleanConverter}}" />
     </Style>

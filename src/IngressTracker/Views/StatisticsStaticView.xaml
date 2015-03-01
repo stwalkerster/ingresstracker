@@ -8,6 +8,9 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <DataGrid Style="{StaticResource StaticDataScreenDataGridStyle}">
+            <DataGrid.RowValidationRules>
+                <DataErrorValidationRule />
+            </DataGrid.RowValidationRules>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{x:Static properties:Resources.StatisticDescription}" Binding="{Binding Description}" />
                 <DataGridTextColumn Header="{x:Static properties:Resources.StatisticUnit}" Binding="{Binding Unit}" />

@@ -9,6 +9,9 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <DataGrid Style="{StaticResource StaticDataScreenDataGridStyle}">
+            <DataGrid.RowValidationRules>
+                <DataErrorValidationRule />
+            </DataGrid.RowValidationRules>
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="{x:Static properties:Resources.AgentName}">
                     <DataGridTemplateColumn.CellTemplate>

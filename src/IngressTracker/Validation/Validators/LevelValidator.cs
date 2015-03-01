@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="BadgeAward.cs" company="Simon Walker">
+// <copyright file="LevelValidator.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,54 +17,35 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The badge award.
+//   The level validator.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.DataModel.Models
-{
-    using FluentValidation.Attributes;
 
-    using IngressTracker.Persistence;
-    using IngressTracker.Validation.Validators;
+namespace IngressTracker.Validation.Validators
+{
+    using FluentValidation;
+
+    using IngressTracker.DataModel.Models;
 
     /// <summary>
-    /// The badge award.
+    /// The level validator.
     /// </summary>
-    [Validator(typeof(BadgeAwardValidator))]
-    public class BadgeAward : EntityBase
+    internal class LevelValidator : AbstractValidator<Level>
     {
-        #region Public Properties
+        #region Constructors and Destructors
 
         /// <summary>
-        /// Gets or sets the badge.
+        /// Initialises a new instance of the <see cref="LevelValidator"/> class.
         /// </summary>
-        public virtual User Agent { get; set; }
-
-        /// <summary>
-        /// Gets or sets the badge.
-        /// </summary>
-        public virtual Badge Badge { get; set; }
-
-        /// <summary>
-        /// Gets or sets the level.
-        /// </summary>
-        public virtual BadgeLevel Level
+        public LevelValidator()
         {
-            get
-            {
-                return BadgeLevel.Lookup(this.LevelCode);
-            }
-
-            set
-            {
-                this.LevelCode = value.Code;
-            }
+            this.RuleFor(x => x.LevelNumber).NotNull().GreaterThan(0);
+            this.RuleFor(x => x.AccessPoints).NotNull();
+            this.RuleFor(x => x.SilverBadges).NotNull();
+            this.RuleFor(x => x.GoldBadges).NotNull();
+            this.RuleFor(x => x.PlatinumBadges).NotNull();
+            this.RuleFor(x => x.BlackBadges).NotNull();
         }
-
-        /// <summary>
-        /// Gets or sets the level.
-        /// </summary>
-        public virtual string LevelCode { get; set; }
 
         #endregion
     }

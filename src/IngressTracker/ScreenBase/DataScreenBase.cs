@@ -226,7 +226,7 @@ namespace IngressTracker.ScreenBase
         /// The get data.
         /// </summary>
         /// <returns>
-        /// The <see cref="IEnumerable"/>.
+        /// The <see cref="IEnumerable{T}"/>.
         /// </returns>
         protected virtual IEnumerable<T> GetData()
         {

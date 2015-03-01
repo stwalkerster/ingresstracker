@@ -259,6 +259,15 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Values for badges must be specified if a statistic has been chosen..
+        /// </summary>
+        public static string BadgeValuesMustBeSpecifiedWithStatistic {
+            get {
+                return ResourceManager.GetString("BadgeValuesMustBeSpecifiedWithStatistic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Black.
         /// </summary>
         public static string Black {

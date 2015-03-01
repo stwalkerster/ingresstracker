@@ -22,13 +22,27 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace IngressTracker.Persistence
 {
+    using System;
+    using System.ComponentModel;
+    using System.Linq;
+
+    using FluentValidation;
+
     using IngressTracker.Persistence.Interfaces;
+    using IngressTracker.Validation;
 
     /// <summary>
     /// The entity base.
     /// </summary>
-    public class EntityBase : IDatabaseEntity
+    public class EntityBase : IDatabaseEntity, IDataErrorInfo
     {
+        /// <summary>
+        /// The validator.
+        /// </summary>
+        private IValidator validator;
+
+
+
         #region Public Properties
 
         /// <summary>
@@ -47,6 +61,78 @@ namespace IngressTracker.Persistence
             }
         }
 
+        /// <summary>
+        /// Gets the error.
+        /// </summary>
+        public virtual string Error
+        {
+            get
+            {
+                // resolve the validator
+                if (this.validator == null)
+                {
+                    this.validator = ValidationHelper.GetValidator(this.GetType());
+                }
+
+                // still null? no validator.
+                if (this.validator == null)
+                {
+                    return null;
+                }
+
+                var validationResult = this.validator.Validate(this);
+
+                if (!validationResult.Errors.Any())
+                {
+                    return null;
+                }
+
+                var aggregate = validationResult.Errors.Aggregate(
+                    string.Empty,
+                    (current, x) => current + x + Environment.NewLine);
+                return aggregate.Trim(Environment.NewLine.ToCharArray());
+            }
+        }
+
         #endregion
+
+        /// <summary>
+        /// The this.
+        /// </summary>
+        /// <param name="columnName">
+        /// The column name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public virtual string this[string columnName]
+        {
+            get
+            {
+                // resolve the validator
+                if (this.validator == null)
+                {
+                    this.validator = ValidationHelper.GetValidator(this.GetType());
+                }
+
+                // still null? no validator.
+                if (this.validator == null)
+                {
+                    return null;
+                }
+
+                var validationResult = this.validator.Validate(this);
+
+                var validationFailure =
+                    validationResult.Errors.FirstOrDefault(x => x.PropertyName == columnName);
+
+                if (validationFailure == null)
+                {
+                    return null;
+                }
+
+                return validationFailure.ErrorMessage;
+            }
+        }
     }
 }

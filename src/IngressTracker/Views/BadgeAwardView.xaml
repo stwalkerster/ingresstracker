@@ -9,6 +9,10 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <DataGrid Style="{StaticResource StaticDataScreenDataGridStyle}">
+            <DataGrid.RowValidationRules>
+                <DataErrorValidationRule />
+            </DataGrid.RowValidationRules>
+
             <DataGrid.Columns>
                 <DataGridComboBoxColumn Header="{x:Static properties:Resources.Agent}" SelectedItemBinding="{Binding Agent}">
                     <DataGridComboBoxColumn.ElementStyle>
