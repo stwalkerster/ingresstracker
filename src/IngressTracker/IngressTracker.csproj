@@ -140,9 +140,13 @@
     <Compile Include="Controls\LevelIndicator.xaml.cs">
       <DependentUpon>LevelIndicator.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\LoadingIndicator.xaml.cs">
+      <DependentUpon>LoadingIndicator.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\DebugConverter.cs" />
     <Compile Include="Converters\EqualityToVisibilityConverter.cs" />
     <Compile Include="Converters\InverseBooleanConverter.cs" />
+    <Compile Include="Converters\MultiplyConverter.cs" />
     <Compile Include="Converters\VisibilityGreaterThanEqualToConverter.cs" />
     <Compile Include="Converters\WindowTitleConverter.cs" />
     <Compile Include="DataModel\BadgeLevel.cs" />
@@ -160,6 +164,7 @@
     <Compile Include="DataModel\Models\User.cs" />
     <Compile Include="DataModel\Models\ValueEntry.cs" />
     <Compile Include="DataModel\NewValueEntryContainer.cs" />
+    <Compile Include="ScreenBase\DataScreenBase.cs" />
     <Compile Include="Validation\ValidationHelper.cs" />
     <Compile Include="Validation\Validators\BadgeAwardValidator.cs" />
     <Compile Include="Helpers\PasswordHelper.cs" />
@@ -187,7 +192,7 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ScreenBase\DataScreenBase.cs" />
+    <Compile Include="ScreenBase\EditableDataScreenBase.cs" />
     <Compile Include="ScreenBase\Interfaces\IStaticDataScreen.cs" />
     <Compile Include="ScreenBase\ScreenBase.cs" />
     <Compile Include="Services\BadgeProgressService.cs" />
@@ -295,6 +300,10 @@
     <Page Include="Controls\LevelIndicator.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\LoadingIndicator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\Badges.xaml">
       <SubType>Designer</SubType>

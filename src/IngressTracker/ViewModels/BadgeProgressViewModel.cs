@@ -37,7 +37,7 @@ namespace IngressTracker.ViewModels
     /// <summary>
     /// The badge progress view model.
     /// </summary>
-    public class BadgeProgressViewModel : ScreenBase, IBadgeProgressViewModel
+    public class BadgeProgressViewModel : DataScreenBase, IBadgeProgressViewModel
     {
         #region Fields
 
@@ -109,12 +109,12 @@ namespace IngressTracker.ViewModels
 
         #endregion
 
-        #region Public Methods and Operators
+        #region Methods
 
         /// <summary>
-        /// The refresh data.
+        /// The refresh data async.
         /// </summary>
-        public void RefreshData()
+        protected override void RefreshDataAsync()
         {
             var agent = this.LoginService.Agent;
 
@@ -125,22 +125,15 @@ namespace IngressTracker.ViewModels
                     .Select(x => this.badgeProgressService.GetProgress(x));
 
             this.awardedBadges = this.DatabaseSession.QueryOver<BadgeAward>().Where(x => x.Agent == agent).List();
-
-            this.NotifyOfPropertyChange(() => this.Badges);
-            this.NotifyOfPropertyChange(() => this.AwardedBadges);
         }
 
-        #endregion
-
-        #region Methods
-
         /// <summary>
-        /// The on initialize.
+        /// The refresh data completed.
         /// </summary>
-        protected override void OnInitialize()
+        protected override void RefreshDataCompleted()
         {
-            base.OnInitialize();
-            this.RefreshData();
+            this.NotifyOfPropertyChange(() => this.Badges);
+            this.NotifyOfPropertyChange(() => this.AwardedBadges);
         }
 
         #endregion

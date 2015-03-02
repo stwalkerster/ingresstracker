@@ -50,6 +50,11 @@ namespace IngressTracker.ScreenBase
         /// </summary>
         private string displayName;
 
+        /// <summary>
+        /// The background in progress.
+        /// </summary>
+        private bool backgroundInProgress;
+
         #endregion
 
         #region Constructors and Destructors
@@ -93,6 +98,26 @@ namespace IngressTracker.ScreenBase
                 {
                     this.displayName = value;
                     this.NotifyOfPropertyChange(() => this.DisplayName);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether background in progress.
+        /// </summary>
+        public bool BackgroundInProgress
+        {
+            get
+            {
+                return this.backgroundInProgress;
+            }
+
+            set
+            {
+                if (!value.Equals(this.backgroundInProgress))
+                {
+                    this.backgroundInProgress = value;
+                    this.NotifyOfPropertyChange(() => this.BackgroundInProgress);
                 }
             }
         }

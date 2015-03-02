@@ -37,7 +37,7 @@ namespace IngressTracker.ViewModels
     /// <summary>
     /// The badge award view model.
     /// </summary>
-    public class BadgeAwardViewModel : DataScreenBase<BadgeAward>, IBadgeAwardViewModel
+    public class BadgeAwardViewModel : EditableDataScreenBase<BadgeAward>, IBadgeAwardViewModel
     {
         #region Constructors and Destructors
 
@@ -76,9 +76,9 @@ namespace IngressTracker.ViewModels
         /// <summary>
         /// The refresh data.
         /// </summary>
-        public override void RefreshData()
+        protected override void RefreshDataAsync()
         {
-            base.RefreshData();
+            base.RefreshDataAsync();
 
             this.Agents = this.DatabaseSession.Query<User>().ToList();
             this.NotifyOfPropertyChange(() => this.Agents);

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="StaticDataScreen.cs" company="Simon Walker">
+// <copyright file="MultiplyConverter.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,58 +17,68 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The data screen.
+//   The multiply converter.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.ScreenBase
-{
-    using IngressTracker.Persistence.Interfaces;
-    using IngressTracker.ScreenBase.Interfaces;
-    using IngressTracker.Services.Interfaces;
 
-    using NHibernate;
+namespace IngressTracker.Converters
+{
+    using System;
+    using System.Globalization;
+    using System.Linq;
+    using System.Windows.Data;
 
     /// <summary>
-    /// The data screen.
+    /// The multiply converter.
     /// </summary>
-    /// <typeparam name="T">
-    /// The type of data shown
-    /// </typeparam>
-    public abstract class StaticDataScreen<T> : EditableDataScreenBase<T>, IStaticDataScreen
-        where T : class, IDataEntity
+    public class MultiplyConverter : IMultiValueConverter
     {
-        #region Constructors and Destructors
+        #region Public Methods and Operators
 
         /// <summary>
-        /// Initialises a new instance of the <see cref="StaticDataScreen{T}"/> class.
+        /// The convert.
         /// </summary>
-        /// <param name="displayName">
-        /// The display name.
+        /// <param name="values">
+        /// The values.
         /// </param>
-        /// <param name="databaseSession">
-        /// The database session.
+        /// <param name="targetType">
+        /// The target type.
         /// </param>
-        /// <param name="loginService">
-        /// The login Service.
+        /// <param name="parameter">
+        /// The parameter.
         /// </param>
-        protected StaticDataScreen(string displayName, ISession databaseSession, ILoginService loginService)
-            : base(displayName, databaseSession, loginService)
+        /// <param name="culture">
+        /// The culture.
+        /// </param>
+        /// <returns>
+        /// The <see cref="object"/>.
+        /// </returns>
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
+            return values.OfType<double>().Aggregate(1.0, (current, t) => current * t);
         }
 
-        #endregion
-
-        #region Public Properties
-
         /// <summary>
-        /// Gets a value indicating whether user allowed edit.
+        /// The convert back.
         /// </summary>
-        public bool UserAllowedEdit
+        /// <param name="value">
+        /// The value.
+        /// </param>
+        /// <param name="targetTypes">
+        /// The target types.
+        /// </param>
+        /// <param name="parameter">
+        /// The parameter.
+        /// </param>
+        /// <param name="culture">
+        /// The culture.
+        /// </param>
+        /// <returns>
+        /// The <see cref="object"/>.
+        /// </returns>
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
-            get
-            {
-                return this.LoginService.Agent.StaticDataAdmin;
-            }
+            throw new NotImplementedException();
         }
 
         #endregion

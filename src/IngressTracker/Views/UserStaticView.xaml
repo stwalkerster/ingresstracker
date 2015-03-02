@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:dataModel="clr-namespace:IngressTracker.DataModel"
              xmlns:properties="clr-namespace:IngressTracker.Properties"
+             xmlns:controls="clr-namespace:IngressTracker.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
@@ -29,5 +30,6 @@
                 <DataGridCheckBoxColumn Header="{x:Static properties:Resources.UserStaticDataAdmin}" Binding="{Binding StaticDataAdmin}" />
             </DataGrid.Columns>
         </DataGrid>
+        <controls:LoadingIndicator Visibility="{Binding BackgroundInProgress, Converter={StaticResource BooleanToVisibilityConverter}}" />
     </Grid>
 </UserControl>

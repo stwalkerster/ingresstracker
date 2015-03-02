@@ -85,9 +85,9 @@ namespace IngressTracker.ViewModels
         /// <summary>
         /// The refresh data.
         /// </summary>
-        public override void RefreshData()
+        protected override void RefreshDataAsync()
         {
-            base.RefreshData();
+            base.RefreshDataAsync();
 
             var enumarable = this.DatabaseSession.Query<Stat>();
             this.stats = new ObservableCollection<Stat>(enumarable);

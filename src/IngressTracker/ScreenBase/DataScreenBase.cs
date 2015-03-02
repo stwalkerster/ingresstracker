@@ -22,15 +22,9 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace IngressTracker.ScreenBase
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Windows;
+    using System.ComponentModel;
 
     using IngressTracker.Interfaces;
-    using IngressTracker.Persistence.Interfaces;
-    using IngressTracker.Persistence.Proxy;
-    using IngressTracker.Properties;
     using IngressTracker.Services.Interfaces;
 
     using NHibernate;
@@ -38,36 +32,12 @@ namespace IngressTracker.ScreenBase
     /// <summary>
     /// The data screen base.
     /// </summary>
-    /// <typeparam name="T">
-    /// A data class
-    /// </typeparam>
-    public abstract class DataScreenBase<T> : ScreenBase, IDataOperations
-        where T : class, IDataEntity
+    public abstract class DataScreenBase : ScreenBase, IDataScreen
     {
-        #region Fields
-
-        /// <summary>
-        /// The deleted items.
-        /// </summary>
-        private readonly List<T> deletedItems;
-
-        /// <summary>
-        /// The DataItems.
-        /// </summary>
-        private ObservableCollection<T> dataItems;
-
-        /// <summary>
-        /// The selected item.
-        /// </summary>
-        private T selectedItem;
-
-        #endregion
-
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initialises a new instance of the <see cref="DataScreenBase{T}"/> class. 
-        /// Initialises a new instance of the <see cref="StaticDataScreen{T}"/> class.
+        /// Initialises a new instance of the <see cref="DataScreenBase"/> class.
         /// </summary>
         /// <param name="displayName">
         /// The display name.
@@ -76,12 +46,11 @@ namespace IngressTracker.ScreenBase
         /// The database session.
         /// </param>
         /// <param name="loginService">
-        /// The login Service.
+        /// The login service.
         /// </param>
         protected DataScreenBase(string displayName, ISession databaseSession, ILoginService loginService)
             : base(displayName, databaseSession, loginService)
         {
-            this.deletedItems = new List<T>();
         }
 
         #endregion
@@ -89,133 +58,45 @@ namespace IngressTracker.ScreenBase
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the DataItems.
+        /// Gets or sets a value indicating whether content loaded.
         /// </summary>
-        public ObservableCollection<T> DataItems
-        {
-            get
-            {
-                return this.dataItems;
-            }
-
-            set
-            {
-                if (value != this.dataItems)
-                {
-                    this.dataItems = value;
-                    this.NotifyOfPropertyChange(() => this.DataItems);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the selected item.
-        /// </summary>
-        public T SelectedItem
-        {
-            get
-            {
-                return this.selectedItem;
-            }
-
-            set
-            {
-                if (!object.Equals(this.selectedItem, value))
-                {
-                    this.selectedItem = value;
-                    this.NotifyOfPropertyChange(() => this.SelectedItem);
-                }
-            }
-        }
+        public bool ContentLoaded { get; set; }
 
         #endregion
 
         #region Public Methods and Operators
 
         /// <summary>
-        /// The add record.
-        /// </summary>
-        public void AddRecord()
-        {
-            this.DataItems.Add(DataBindingFactory.Create<T>());
-        }
-
-        /// <summary>
-        /// The can close.
-        /// </summary>
-        /// <param name="callback">
-        /// The callback.
-        /// </param>
-        public override void CanClose(Action<bool> callback)
-        {
-            if (!this.ConfirmDataLoss())
-            {
-                callback(false);
-            }
-
-            base.CanClose(callback);
-        }
-
-        /// <summary>
-        /// The delete record.
-        /// </summary>
-        public void DeleteRecord()
-        {
-            if (!this.deletedItems.Contains(this.SelectedItem))
-            {
-                this.deletedItems.Add(this.SelectedItem);
-            }
-
-            this.DataItems.Remove(this.SelectedItem);
-        }
-
-        /// <summary>
         /// The refresh data.
         /// </summary>
-        public virtual void RefreshData()
+        public void RefreshData()
         {
-            if (this.ConfirmDataLoss())
+            if (this.PreRefreshGuard())
             {
-                this.deletedItems.Clear();
-                this.DatabaseSession.Clear();
-                var enumerable = this.GetData();
-                this.DataItems = new ObservableCollection<T>(enumerable);
+                return;
             }
+
+            if (this.BackgroundInProgress)
+            {
+                return;
+            }
+
+            this.BackgroundInProgress = true;
+
+            var bgw = new BackgroundWorker();
+            bgw.DoWork += (sender, args) => this.RefreshDataAsync();
+            bgw.RunWorkerCompleted += this.OnBackgroundWorkerCompleted;
+
+            bgw.RunWorkerAsync();
         }
 
         /// <summary>
-        /// The save.
+        /// Guard method for refresh
         /// </summary>
-        public void Save()
+        /// <returns>true to abort refresh</returns>
+        protected virtual bool PreRefreshGuard()
         {
-            try
-            {
-                // handle the deletes
-                foreach (var deletedItem in this.deletedItems)
-                {
-                    this.DatabaseSession.Delete(deletedItem);
-                }
-
-                this.deletedItems.Clear();
-
-                // handle the saves
-                foreach (var dataItem in this.DataItems)
-                {
-                    this.DatabaseSession.SaveOrUpdate(dataItem);
-                }
-
-                this.DatabaseSession.Flush();
-            }
-            catch (Exception e)
-            {
-                var errorSavingTransaction = string.Format(
-                    "Error saving transaction\r\n\r\n{0}\r\n\r\n{1}", 
-                    e.Message, 
-                    e.StackTrace);
-                MessageBox.Show(errorSavingTransaction);
-            }
-
-            this.RefreshData();
+            return false;
         }
 
         #endregion
@@ -223,50 +104,47 @@ namespace IngressTracker.ScreenBase
         #region Methods
 
         /// <summary>
-        /// The get data.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="IEnumerable{T}"/>.
-        /// </returns>
-        protected virtual IEnumerable<T> GetData()
-        {
-            return this.DatabaseSession.QueryOver<T>().List();
-        }
-
-        /// <summary>
-        /// The on view loaded.
+        /// The on view ready.
         /// </summary>
         /// <param name="view">
         /// The view.
         /// </param>
-        protected override void OnViewLoaded(object view)
+        protected override void OnViewReady(object view)
         {
-            base.OnViewLoaded(view);
-            this.RefreshData();
+            base.OnViewReady(view);
+
+            if (!this.ContentLoaded)
+            {
+                this.RefreshData();
+            }
         }
 
         /// <summary>
-        /// The confirm data loss.
+        /// The refresh data async.
         /// </summary>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        private bool ConfirmDataLoss()
-        {
-            if (this.DatabaseSession.IsDirty() || this.deletedItems.Count > 0)
-            {
-                var messageBoxResult = MessageBox.Show(
-                    Resources.UnsavedChanges, 
-                    Resources.UnsavedChangesTitle, 
-                    MessageBoxButton.YesNo, 
-                    MessageBoxImage.Warning);
-                if (messageBoxResult != MessageBoxResult.Yes)
-                {
-                    return false;
-                }
-            }
+        protected abstract void RefreshDataAsync();
 
-            return true;
+        /// <summary>
+        /// The refresh data completed.
+        /// </summary>
+        protected virtual void RefreshDataCompleted()
+        {
+        }
+
+        /// <summary>
+        /// The on background worker completed.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="args">
+        /// The args.
+        /// </param>
+        private void OnBackgroundWorkerCompleted(object sender, RunWorkerCompletedEventArgs args)
+        {
+            this.RefreshDataCompleted();
+            this.BackgroundInProgress = false;
+            this.ContentLoaded = true;
         }
 
         #endregion

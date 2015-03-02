@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="StaticDataScreen.cs" company="Simon Walker">
+// <copyright file="LoadingIndicator.xaml.cs" company="Simon Walker">
 //   Copyright (C) 2014 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,58 +17,27 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The data screen.
+//   Interaction logic for LoadingIndicator.xaml
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IngressTracker.ScreenBase
-{
-    using IngressTracker.Persistence.Interfaces;
-    using IngressTracker.ScreenBase.Interfaces;
-    using IngressTracker.Services.Interfaces;
 
-    using NHibernate;
+namespace IngressTracker.Controls
+{
+    using System.Windows.Controls;
 
     /// <summary>
-    /// The data screen.
+    /// Interaction logic for LoadingIndicator.xaml
     /// </summary>
-    /// <typeparam name="T">
-    /// The type of data shown
-    /// </typeparam>
-    public abstract class StaticDataScreen<T> : EditableDataScreenBase<T>, IStaticDataScreen
-        where T : class, IDataEntity
+    public partial class LoadingIndicator
     {
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initialises a new instance of the <see cref="StaticDataScreen{T}"/> class.
+        /// Initialises a new instance of the <see cref="LoadingIndicator"/> class.
         /// </summary>
-        /// <param name="displayName">
-        /// The display name.
-        /// </param>
-        /// <param name="databaseSession">
-        /// The database session.
-        /// </param>
-        /// <param name="loginService">
-        /// The login Service.
-        /// </param>
-        protected StaticDataScreen(string displayName, ISession databaseSession, ILoginService loginService)
-            : base(displayName, databaseSession, loginService)
+        public LoadingIndicator()
         {
-        }
-
-        #endregion
-
-        #region Public Properties
-
-        /// <summary>
-        /// Gets a value indicating whether user allowed edit.
-        /// </summary>
-        public bool UserAllowedEdit
-        {
-            get
-            {
-                return this.LoginService.Agent.StaticDataAdmin;
-            }
+            this.InitializeComponent();
         }
 
         #endregion

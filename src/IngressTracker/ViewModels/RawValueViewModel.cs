@@ -37,7 +37,7 @@ namespace IngressTracker.ViewModels
     /// <summary>
     /// The raw value view model.
     /// </summary>
-    public class RawValueViewModel : DataScreenBase<ValueEntry>, IRawValueViewModel
+    public class RawValueViewModel : EditableDataScreenBase<ValueEntry>, IRawValueViewModel
     {
         #region Constructors and Destructors
 
@@ -76,9 +76,9 @@ namespace IngressTracker.ViewModels
         /// <summary>
         /// The refresh data.
         /// </summary>
-        public override void RefreshData()
+        protected override void RefreshDataAsync()
         {
-            base.RefreshData();
+            base.RefreshDataAsync();
 
             this.Agents = this.DatabaseSession.Query<User>().ToList();
             this.NotifyOfPropertyChange(() => this.Agents);

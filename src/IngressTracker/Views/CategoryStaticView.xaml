@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
-             xmlns:properties="clr-namespace:IngressTracker.Properties">
+             xmlns:properties="clr-namespace:IngressTracker.Properties"
+             xmlns:controls="clr-namespace:IngressTracker.Controls">
     <Grid>
         <DataGrid Style="{StaticResource StaticDataScreenDataGridStyle}">
             <DataGrid.RowValidationRules>
@@ -16,5 +17,6 @@
                 <DataGridTextColumn Header="{x:Static properties:Resources.DisplayOrder}" Binding="{Binding DisplayOrder}" />
             </DataGrid.Columns>
         </DataGrid>
+        <controls:LoadingIndicator Visibility="{Binding BackgroundInProgress, Converter={StaticResource BooleanToVisibilityConverter}}" />
     </Grid>
 </UserControl>
