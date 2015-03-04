@@ -1,5 +1,6 @@
 <StyleCopSettings Version="105">
   <GlobalSettings>
+    <StringProperty Name="Culture">en-GB</StringProperty>
     <CollectionProperty Name="RecognizedWords">
       <Value>bootstrapper</Value>
       <Value>startup</Value>
