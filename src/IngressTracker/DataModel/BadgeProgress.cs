@@ -39,9 +39,19 @@ namespace IngressTracker.DataModel
         private readonly Badge badge;
 
         /// <summary>
-        /// The current position.
+        /// The current value.
         /// </summary>
-        private readonly long currentPosition;
+        private readonly ValueEntry currentValue;
+        
+        /// <summary>
+        /// The month value.
+        /// </summary>
+        private readonly ValueEntry monthValue;
+
+        /// <summary>
+        /// The week value.
+        /// </summary>
+        private readonly ValueEntry weekValue;
 
         #endregion
 
@@ -53,13 +63,21 @@ namespace IngressTracker.DataModel
         /// <param name="badge">
         /// The badge.
         /// </param>
-        /// <param name="currentPosition">
-        /// The current position.
+        /// <param name="currentValue">
+        /// The value Entry.
         /// </param>
-        public BadgeProgress(Badge badge, long currentPosition)
+        /// <param name="weekValue">
+        /// The week Value.
+        /// </param>
+        /// <param name="monthValue">
+        /// The month Value.
+        /// </param>
+        public BadgeProgress(Badge badge, ValueEntry currentValue, ValueEntry weekValue, ValueEntry monthValue)
         {
             this.badge = badge;
-            this.currentPosition = currentPosition;
+            this.currentValue = currentValue;
+            this.weekValue = weekValue;
+            this.monthValue = monthValue;
         }
 
         #endregion
@@ -89,27 +107,27 @@ namespace IngressTracker.DataModel
                     throw new ArgumentOutOfRangeException();
                 }
 
-                if (this.badge.Black <= this.currentPosition)
+                if (this.badge.Black <= this.CurrentPosition)
                 {
                     return BadgeLevel.Black;
                 }
 
-                if (this.badge.Platinum <= this.currentPosition)
+                if (this.badge.Platinum <= this.CurrentPosition)
                 {
                     return BadgeLevel.Platinum;
                 }
 
-                if (this.badge.Gold <= this.currentPosition)
+                if (this.badge.Gold <= this.CurrentPosition)
                 {
                     return BadgeLevel.Gold;
                 }
 
-                if (this.badge.Silver <= this.currentPosition)
+                if (this.badge.Silver <= this.CurrentPosition)
                 {
                     return BadgeLevel.Silver;
                 }
 
-                if (this.badge.Bronze <= this.currentPosition)
+                if (this.badge.Bronze <= this.CurrentPosition)
                 {
                     return BadgeLevel.Bronze;
                 }
@@ -125,7 +143,53 @@ namespace IngressTracker.DataModel
         {
             get
             {
-                return this.currentPosition;
+                return this.currentValue == null ? 0 : this.currentValue.Value.GetValueOrDefault(0);
+            }
+        }
+
+        /// <summary>
+        /// Gets the last target.
+        /// </summary>
+        public long? LastTarget
+        {
+            get
+            {
+                if (this.badge.Awardable)
+                {
+                    throw new ArgumentOutOfRangeException();
+                }
+
+                if (this.CurrentLevel == BadgeLevel.Locked)
+                {
+                    return 0;
+                }
+
+                if (this.CurrentLevel == BadgeLevel.Bronze)
+                {
+                    return this.Badge.Bronze;
+                }
+
+                if (this.CurrentLevel == BadgeLevel.Silver)
+                {
+                    return this.Badge.Silver;
+                }
+
+                if (this.CurrentLevel == BadgeLevel.Gold)
+                {
+                    return this.Badge.Gold;
+                }
+
+                if (this.CurrentLevel == BadgeLevel.Platinum)
+                {
+                    return this.Badge.Platinum;
+                }
+
+                if (this.CurrentLevel == BadgeLevel.Black)
+                {
+                    return this.Badge.Black;
+                }
+
+                throw new ArgumentOutOfRangeException();
             }
         }
 
@@ -176,53 +240,6 @@ namespace IngressTracker.DataModel
         }
 
         /// <summary>
-        /// Gets the last target.
-        /// </summary>
-        public long? LastTarget
-        {
-            get
-            {
-                if (this.badge.Awardable)
-                {
-                    throw new ArgumentOutOfRangeException();
-                }
-
-                if (this.CurrentLevel == BadgeLevel.Locked)
-                {
-                    return 0;
-                }
-
-                if (this.CurrentLevel == BadgeLevel.Bronze)
-                {
-                    return this.Badge.Bronze;
-                }
-
-                if (this.CurrentLevel == BadgeLevel.Silver)
-                {
-                    return this.Badge.Silver;
-                }
-
-                if (this.CurrentLevel == BadgeLevel.Gold)
-                {
-                    return this.Badge.Gold;
-                }
-
-                if (this.CurrentLevel == BadgeLevel.Platinum)
-                {
-                    return this.Badge.Platinum;
-                }
-
-                if (this.CurrentLevel == BadgeLevel.Black)
-                {
-                    return this.Badge.Black;
-                }
-
-                throw new ArgumentOutOfRangeException();
-
-            }
-        }
-
-        /// <summary>
         /// Gets the next target.
         /// </summary>
         public long? NextTarget
@@ -266,6 +283,87 @@ namespace IngressTracker.DataModel
 
                 throw new ArgumentOutOfRangeException();
             }
+        }
+
+        /// <summary>
+        /// Gets the next target date month.
+        /// </summary>
+        public DateTime? NextTargetDateMonth
+        {
+            get
+            {
+                if (this.monthValue == null || this.NextTarget == null)
+                {
+                    return null;
+                }
+
+                var prediction = this.PredictValue(this.monthValue);
+
+                if (prediction == null)
+                {
+                    return null;
+                }
+
+                return this.monthValue.Timestamp.Add(prediction.Value);
+            }
+        }
+
+        /// <summary>
+        /// Gets the next target date week.
+        /// </summary>
+        public DateTime? NextTargetDateWeek
+        {
+            get
+            {
+                if (this.weekValue == null || this.NextTarget == null)
+                {
+                    return null;
+                }
+
+                var prediction = this.PredictValue(this.weekValue);
+
+                if (prediction == null)
+                {
+                    return null;
+                }
+
+                return this.weekValue.Timestamp.Add(prediction.Value);
+            }
+        }
+
+        /// <summary>
+        /// The predict value.
+        /// </summary>
+        /// <param name="historical">
+        /// The historical.
+        /// </param>
+        /// <returns>
+        /// The <see cref="TimeSpan"/> from the historical position.
+        /// </returns>
+        private TimeSpan? PredictValue(ValueEntry historical)
+        {
+            // Okay. Maths time.
+            // y = mx + b.
+            // Let x = deltaTimeTicks, 0
+            long deltaTimeTicks = (this.currentValue.Timestamp - historical.Timestamp).Ticks;
+
+            // let y = deltaValue, 0
+            long deltaValue = this.currentValue.Value.GetValueOrDefault(0) - historical.Value.GetValueOrDefault(0);
+
+            if (deltaValue == 0)
+            {
+                // urm... nothing's happened. Return null so we don't get a nullrefexception.
+                return null;
+            }
+
+            long requiredDelta = this.NextTarget.GetValueOrDefault(0) - this.currentValue.Value.GetValueOrDefault(0);
+
+            // y = mx + b. deltas - point is (0,0). 0 = 0m + b, b = 0.
+            // y = mx, m = y/x
+            decimal m = (decimal)deltaValue / deltaTimeTicks;
+
+            // y = mx + b, requiredValue / m = prediction
+            return new TimeSpan((long)Math.Ceiling(requiredDelta / m));
         }
 
         #endregion

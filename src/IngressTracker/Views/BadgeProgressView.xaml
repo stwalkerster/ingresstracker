@@ -7,7 +7,7 @@
              xmlns:properties="clr-namespace:IngressTracker.Properties"
              xmlns:views="clr-namespace:IngressTracker.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="500">
     <UserControl.Resources>
         <Style TargetType="controls:Badge">
             <Setter Property="Fill" Value="Transparent" />
@@ -55,10 +55,10 @@
                         <TextBlock FontSize="20" Text="{x:Static properties:Resources.EarnableBadges}" />
                     </Expander.Header>
                 
-                    <ItemsControl ItemsSource="{Binding Badges}">
+                    <ItemsControl ItemsSource="{Binding Badges}" AlternationCount="2">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Grid>
+                                <Grid x:Name="ItemGrid">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
@@ -73,7 +73,8 @@
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
 
-                                    <controls:Badge DataContext="{Binding CurrentLevel}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="4">
+                                    <controls:Badge DataContext="{Binding CurrentLevel}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="4"
+                                                    Margin="0,0,0,5">
                                         <controls:Badge.LayoutTransform>
                                             <TransformGroup>
                                                 <ScaleTransform ScaleX="0.33" ScaleY="0.33"/>
@@ -84,10 +85,10 @@
                                         </controls:Badge.LayoutTransform>
                                     </controls:Badge>
 
-                                    <TextBlock Grid.Column="1" FontSize="16" Margin="0, 5, 0, 0" Grid.Row="0"
-                                                Grid.ColumnSpan="3" Text="{Binding Badge.Name}" />
+                                    <TextBlock Grid.Column="1" FontSize="16" Margin="0" Grid.Row="0"
+                                                Grid.ColumnSpan="2" Text="{Binding Badge.Name}" />
 
-                                    <controls:Badge DataContext="{Binding NextLevel}" Grid.Row="0" Grid.Column="4" Grid.RowSpan="4" VerticalAlignment="Bottom" Margin="5,0,0,0">
+                                    <controls:Badge DataContext="{Binding NextLevel}" Grid.Row="0" Grid.Column="4" Grid.RowSpan="4" VerticalAlignment="Bottom" Margin="5,0,0,5">
                                         <controls:Badge.LayoutTransform>
                                             <TransformGroup>
                                                 <ScaleTransform ScaleX="0.2" ScaleY="0.2"/>
@@ -98,13 +99,15 @@
                                         </controls:Badge.LayoutTransform>
                                     </controls:Badge>
 
-                                    <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Text="{Binding Badge.Statistic.Description}" />
+                                    <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding Badge.Statistic.Description}" />
 
                                     <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="2" Text="{Binding LastTarget, Mode=OneWay}" />
                                     <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="2" Text="{Binding CurrentPosition, Mode=OneWay}" />
                                     <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Column="3" Grid.Row="2" Text="{Binding NextTarget, Mode=OneWay}" />
 
-                                    <ProgressBar Grid.ColumnSpan="3" Grid.Row="3" Grid.Column="1" Minimum="{Binding LastTarget, Mode=OneWay}" Maximum="{Binding NextTarget, Mode=OneWay}" Value="{Binding CurrentPosition, Mode=OneWay}">
+                                    <ProgressBar Grid.ColumnSpan="3" Grid.Row="3" Grid.Column="1" Minimum="{Binding LastTarget, Mode=OneWay}" 
+                                                 Maximum="{Binding NextTarget, Mode=OneWay}" Value="{Binding CurrentPosition, Mode=OneWay}"
+                                                 Margin="0,0,0,5">
                                         <ProgressBar.Style>
                                             <Style TargetType="ProgressBar">
                                                 <Setter Property="Foreground" Value="Red" />
@@ -120,7 +123,27 @@
                                             </Style>
                                         </ProgressBar.Style>
                                     </ProgressBar>
+
+                                    <TextBlock Grid.Column="3" Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" 
+                                               Visibility="{Binding NextTargetDateWeek, Converter={StaticResource HideWhenNullConverter}}">
+                                        <Run Text="{x:Static properties:Resources.WeekPrediction}" />
+                                        <Run Text="{Binding NextTargetDateWeek, Mode=OneWay, Converter={StaticResource DateFormattingConverter}}" />
+                                    </TextBlock>
+                                    <TextBlock Grid.Column="3" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" 
+                                               Visibility="{Binding NextTargetDateMonth, Converter={StaticResource HideWhenNullConverter}}">
+                                        <Run Text="{x:Static properties:Resources.MonthPrediction}" />
+                                        <Run Text="{Binding NextTargetDateMonth, Mode=OneWay, Converter={StaticResource DateFormattingConverter}}" />
+                                    </TextBlock>
                                 </Grid>
+                                
+                                <DataTemplate.Triggers>
+                                    <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                        <Setter Property="Background" Value="#F4F4F4" TargetName="ItemGrid" />
+                                    </Trigger>
+                                    <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                        <Setter Property="Background" Value="White" TargetName="ItemGrid" />
+                                    </Trigger>
+                                </DataTemplate.Triggers>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>

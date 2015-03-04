@@ -831,6 +831,15 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Next badge due (using last month&apos;s data):.
+        /// </summary>
+        public static string MonthPrediction {
+            get {
+                return ResourceManager.GetString("MonthPrediction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The value entered is less than the last value! This can really mess up the predictions, so you can use the raw value view to find the bad value..
         /// </summary>
         public static string NewValueLessThanOldValue {
@@ -1203,6 +1212,15 @@ namespace IngressTracker.Properties {
         public static string Version {
             get {
                 return ResourceManager.GetString("Version", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Next badge due (using last week&apos;s data): .
+        /// </summary>
+        public static string WeekPrediction {
+            get {
+                return ResourceManager.GetString("WeekPrediction", resourceCulture);
             }
         }
         

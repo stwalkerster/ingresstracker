@@ -1,6 +1,5 @@
 <StyleCopSettings Version="105">
   <GlobalSettings>
-    <StringProperty Name="Culture">en-GB</StringProperty>
     <CollectionProperty Name="RecognizedWords">
       <Value>bootstrapper</Value>
       <Value>startup</Value>
@@ -12,8 +11,7 @@
   <Analyzers>
     <Analyzer AnalyzerId="StyleCop.CSharp.DocumentationRules">
       <AnalyzerSettings>
-        <StringProperty Name="CompanyName">Simon Walker</StringProperty>
-        <StringProperty Name="Copyright">Copyright (C) 2014 Simon Walker
+        <StringProperty Name="Copyright">Copyright (C) 2015 Simon Walker
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation

@@ -117,7 +117,6 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -143,8 +142,10 @@
     <Compile Include="Controls\LoadingIndicator.xaml.cs">
       <DependentUpon>LoadingIndicator.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\DateFormattingConverter.cs" />
     <Compile Include="Converters\DebugConverter.cs" />
     <Compile Include="Converters\EqualityToVisibilityConverter.cs" />
+    <Compile Include="Converters\HideWhenNullConverter.cs" />
     <Compile Include="Converters\InverseBooleanConverter.cs" />
     <Compile Include="Converters\MultiplyConverter.cs" />
     <Compile Include="Converters\VisibilityGreaterThanEqualToConverter.cs" />

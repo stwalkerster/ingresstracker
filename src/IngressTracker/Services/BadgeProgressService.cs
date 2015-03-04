@@ -24,8 +24,6 @@
 namespace IngressTracker.Services
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using IngressTracker.DataModel;
     using IngressTracker.DataModel.Models;
@@ -107,10 +105,35 @@ namespace IngressTracker.Services
 
             if (value == null)
             {
-                return new BadgeProgress(badge, 0);
+                return new BadgeProgress(badge, null, null, null);
             }
 
-            return new BadgeProgress(badge, value.Value.Value);
+            var weekTime = value.Timestamp.AddDays(-7);
+            var monthTime = value.Timestamp.AddDays(-28);
+
+            QueryOver<ValueEntry, ValueEntry> week =
+                QueryOver.Of<ValueEntry>()
+                    .SelectList(p => p.SelectMax(x => x.Timestamp))
+                    .Where(c => c.Agent == agent && c.Statistic == statistic && c.Timestamp < weekTime);
+
+            QueryOver<ValueEntry, ValueEntry> month =
+                QueryOver.Of<ValueEntry>()
+                    .SelectList(p => p.SelectMax(x => x.Timestamp))
+                    .Where(c => c.Agent == agent && c.Statistic == statistic && c.Timestamp < monthTime);
+
+            ValueEntry weekValue =
+                this.databaseSession.QueryOver<ValueEntry>()
+                    .Where(c => c.Agent == agent && c.Statistic == statistic)
+                    .WithSubquery.Where(x => x.Timestamp == week.As<DateTime>())
+                    .SingleOrDefault();
+
+            ValueEntry monthValue =
+                this.databaseSession.QueryOver<ValueEntry>()
+                    .Where(c => c.Agent == agent && c.Statistic == statistic)
+                    .WithSubquery.Where(x => x.Timestamp == month.As<DateTime>())
+                    .SingleOrDefault();
+            
+            return new BadgeProgress(badge, value, weekValue, monthValue);
         }
 
         #endregion
