@@ -41,8 +41,6 @@ namespace IngressTracker.Persistence
         /// </summary>
         private IValidator validator;
 
-
-
         #region Public Properties
 
         /// <summary>

@@ -73,6 +73,22 @@ namespace IngressTracker.DataModel
         }
 
         /// <summary>
+        /// Gets the error.
+        /// </summary>
+        public string Error
+        {
+            get
+            {
+                if (this.Value < this.OldValue)
+                {
+                    return Resources.NewValueLessThanOldValue;
+                }
+
+                return null;
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the old value.
         /// </summary>
         public long? OldValue { get; set; }
@@ -126,7 +142,7 @@ namespace IngressTracker.DataModel
         }
 
         /// <summary>
-        /// The value entry.
+        /// Gets the value entry.
         /// </summary>
         public ValueEntry ValueEntry
         {
@@ -138,6 +154,17 @@ namespace IngressTracker.DataModel
 
         #endregion
 
+        #region Public Indexers
+
+        /// <summary>
+        /// The this.
+        /// </summary>
+        /// <param name="columnName">
+        /// The column name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
         public string this[string columnName]
         {
             get
@@ -154,17 +181,6 @@ namespace IngressTracker.DataModel
             }
         }
 
-        public string Error
-        {
-            get
-            {
-                if (this.Value < this.OldValue)
-                {
-                    return Resources.NewValueLessThanOldValue;
-                }
-
-                return null;
-            }
-        }
+        #endregion
     }
 }

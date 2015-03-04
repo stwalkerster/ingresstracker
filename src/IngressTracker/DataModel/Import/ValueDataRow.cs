@@ -32,14 +32,21 @@ namespace IngressTracker.DataModel.Import
         #region Public Properties
 
         /// <summary>
+        /// Gets the data value.
+        /// </summary>
+        public long DataValue
+        {
+            get
+            {
+                long dataValue;
+                return long.TryParse(this.Value, out dataValue) ? dataValue : 0;
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the statistic.
         /// </summary>
         public string Statistic { get; set; }
-
-        public override string ToString()
-        {
-            return string.Format("Statistic: ¦{0}¦, Timestamp: ¦{1}¦, Value: ¦{2}¦", this.Statistic, this.Timestamp, this.Value);
-        }
 
         /// <summary>
         /// Gets or sets the timestamp.
@@ -51,15 +58,6 @@ namespace IngressTracker.DataModel.Import
         /// </summary>
         public string Value { get; set; }
 
-        public long DataValue
-        {
-            get
-            {
-                long dataValue;
-                return long.TryParse(this.Value, out dataValue) ? dataValue : 0;
-            }
-        }
-
         #endregion
 
         #region Public Methods and Operators
@@ -68,7 +66,7 @@ namespace IngressTracker.DataModel.Import
         /// The equals.
         /// </summary>
         /// <param name="obj">
-        /// The obj.
+        /// The object.
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
@@ -108,6 +106,21 @@ namespace IngressTracker.DataModel.Import
                 hashCode = (hashCode * 397) ^ this.Value.GetHashCode();
                 return hashCode;
             }
+        }
+
+        /// <summary>
+        /// The to string.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public override string ToString()
+        {
+            return string.Format(
+                "Statistic: ¦{0}¦, Timestamp: ¦{1}¦, Value: ¦{2}¦", 
+                this.Statistic, 
+                this.Timestamp, 
+                this.Value);
         }
 
         #endregion

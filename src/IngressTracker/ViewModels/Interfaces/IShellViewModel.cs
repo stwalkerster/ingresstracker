@@ -27,6 +27,15 @@ namespace IngressTracker.ViewModels.Interfaces
     /// </summary>
     public interface IShellViewModel
     {
+        #region Public Properties
+
+        /// <summary>
+        /// Gets the about.
+        /// </summary>
+        IAboutViewModel About { get; }
+
+        #endregion
+
         #region Public Methods and Operators
 
         /// <summary>
@@ -50,10 +59,5 @@ namespace IngressTracker.ViewModels.Interfaces
         void OpenUserStatic();
 
         #endregion
-
-        /// <summary>
-        /// Gets the about.
-        /// </summary>
-        IAboutViewModel About { get; }
     }
 }

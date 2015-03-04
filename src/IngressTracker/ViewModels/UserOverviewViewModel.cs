@@ -112,9 +112,9 @@ namespace IngressTracker.ViewModels
         /// The level Progress Service.
         /// </param>
         public UserOverviewViewModel(
-            ISession databaseSession,
-            ILoginService loginService,
-            IBadgeProgressService badgeProgressService,
+            ISession databaseSession, 
+            ILoginService loginService, 
+            IBadgeProgressService badgeProgressService, 
             ILevelProgressService levelProgressService)
             : base(Resources.UserOverviewView, databaseSession, loginService)
         {
@@ -315,17 +315,7 @@ namespace IngressTracker.ViewModels
 
         #endregion
 
-        #region Methods
-
-        /// <summary>
-        /// The on initialize.
-        /// </summary>
-        protected override void OnInitialize()
-        {
-            base.OnInitialize();
-
-            this.RefreshData();
-        }
+        #region Public Methods and Operators
 
         /// <summary>
         /// The refresh data.
@@ -371,16 +361,30 @@ namespace IngressTracker.ViewModels
             this.AccessPoints = value == null ? 0 : value.Value.Value;
 
             var currentLevel = this.levelProgressService.GetCurrentLevel(
-                this.AccessPoints,
-                this.SilverCount,
-                this.GoldCount,
-                this.PlatinumCount,
+                this.AccessPoints, 
+                this.SilverCount, 
+                this.GoldCount, 
+                this.PlatinumCount, 
                 this.BlackCount);
 
             var nextLevel = this.levelProgressService.GetNextLevel(currentLevel);
 
             this.Level = currentLevel.LevelNumber;
             this.MaxAP = nextLevel.AccessPoints;
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// The on initialize.
+        /// </summary>
+        protected override void OnInitialize()
+        {
+            base.OnInitialize();
+
+            this.RefreshData();
         }
 
         #endregion
