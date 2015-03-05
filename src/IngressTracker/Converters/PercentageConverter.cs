@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DateFormattingConverter.cs" company="Simon Walker">
-//   Copyright (C) 2014 Simon Walker
+// <copyright file="PercentageConverter.cs" company="Simon Walker">
+//   Copyright (C) 2015 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 //   documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -17,7 +17,7 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The date formatting converter.
+//   The percentage converter.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -25,20 +25,21 @@ namespace IngressTracker.Converters
 {
     using System;
     using System.Globalization;
+    using System.Linq;
     using System.Windows.Data;
 
     /// <summary>
-    /// The date formatting converter.
+    /// The percentage converter.
     /// </summary>
-    internal class DateFormattingConverter : IValueConverter
+    public class PercentageConverter : IMultiValueConverter
     {
         #region Public Methods and Operators
 
         /// <summary>
         /// The convert.
         /// </summary>
-        /// <param name="value">
-        /// The value.
+        /// <param name="values">
+        /// The values.
         /// </param>
         /// <param name="targetType">
         /// The target type.
@@ -52,14 +53,24 @@ namespace IngressTracker.Converters
         /// <returns>
         /// The <see cref="object"/>.
         /// </returns>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null)
+            if (values.Count() != 3)
             {
-                return null;
+                throw new ArgumentException();
             }
 
-            return ((DateTime)value).ToString(CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern);
+            var min = values[0] == null ? 0 : (long)values[0];
+            var val = (long)values[1];
+
+            if (values[2] == null)
+            {
+                return 1;
+            }
+
+            var max = (long)values[2];
+
+            return (val - min) / (decimal)(max - min);
         }
 
         /// <summary>
@@ -68,8 +79,8 @@ namespace IngressTracker.Converters
         /// <param name="value">
         /// The value.
         /// </param>
-        /// <param name="targetType">
-        /// The target type.
+        /// <param name="targetTypes">
+        /// The target types.
         /// </param>
         /// <param name="parameter">
         /// The parameter.
@@ -78,9 +89,11 @@ namespace IngressTracker.Converters
         /// The culture.
         /// </param>
         /// <returns>
-        /// The <see cref="object"/>.
+        /// The <see cref="object[]"/>.
         /// </returns>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        /// <exception cref="NotImplementedException">
+        /// </exception>
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }

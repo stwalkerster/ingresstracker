@@ -831,7 +831,7 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Next badge due (using last month&apos;s data):.
+        ///   Looks up a localized string similar to (Monthly).
         /// </summary>
         public static string MonthPrediction {
             get {
@@ -1216,7 +1216,7 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Next badge due (using last week&apos;s data): .
+        ///   Looks up a localized string similar to (Weekly).
         /// </summary>
         public static string WeekPrediction {
             get {

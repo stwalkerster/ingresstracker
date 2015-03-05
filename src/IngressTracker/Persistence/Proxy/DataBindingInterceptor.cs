@@ -131,8 +131,9 @@ namespace IngressTracker.Persistence.Proxy
         /// </returns>
         public override SqlString OnPrepareStatement(SqlString sql)
         {
+#if LOGGER
             this.logger.Debug(sql.ToString());
-
+#endif
             return base.OnPrepareStatement(sql);
         }
 

@@ -14,6 +14,7 @@
                     <converter:EqualityToVisibilityConverter x:Key="EqualityToVisibilityConverter" />
                     <converter:DateFormattingConverter x:Key="DateFormattingConverter" />
                     <converter:HideWhenNullConverter x:Key="HideWhenNullConverter" />
+                    <converter:PercentageConverter x:Key="PercentageConverter" />
                 </ResourceDictionary>
 
                 <ResourceDictionary Source="pack://application:,,,/Fluent;component/Themes/Office2013/Generic.xaml" />

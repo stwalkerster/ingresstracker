@@ -7,7 +7,7 @@
              xmlns:properties="clr-namespace:IngressTracker.Properties"
              xmlns:views="clr-namespace:IngressTracker.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="500">
+             d:DesignHeight="300" d:DesignWidth="620" x:Name="View">
     <UserControl.Resources>
         <Style TargetType="controls:Badge">
             <Setter Property="Fill" Value="Transparent" />
@@ -47,140 +47,157 @@
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
-    <Grid>
+    <Grid Width="{Binding ActualWidth, ElementName=View}">
         <ScrollViewer HorizontalScrollBarVisibility="Hidden">
-            <StackPanel Orientation="Vertical" Margin="0,0,20,0">
-                <Expander>
+            <StackPanel Orientation="Vertical" Margin="0,0,20,0" Width="{Binding ActualWidth, ElementName=View}">
+                <Expander IsExpanded="True">
                     <Expander.Header>
                         <TextBlock FontSize="20" Text="{x:Static properties:Resources.EarnableBadges}" />
                     </Expander.Header>
                 
-                    <ItemsControl ItemsSource="{Binding Badges}" AlternationCount="2">
+                    <ItemsControl ItemsSource="{Binding Badges}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Width="{Binding ActualWidth, ElementName=View}" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Grid x:Name="ItemGrid">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="58" />
-                                        <ColumnDefinition />
-                                        <ColumnDefinition />
-                                        <ColumnDefinition />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
+                                <Border x:Name="ItemBorder" Width="600" Margin="5" BorderThickness="1" BorderBrush="Black" Background="#E9E9E9">
+                                    <Grid x:Name="ItemGrid">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="58" />
+                                            <ColumnDefinition />
+                                            <ColumnDefinition />
+                                            <ColumnDefinition />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
 
-                                    <controls:Badge DataContext="{Binding CurrentLevel}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="4"
-                                                    Margin="0,0,0,5">
-                                        <controls:Badge.LayoutTransform>
-                                            <TransformGroup>
-                                                <ScaleTransform ScaleX="0.33" ScaleY="0.33"/>
-                                                <SkewTransform/>
-                                                <RotateTransform/>
-                                                <TranslateTransform/>
-                                            </TransformGroup>
-                                        </controls:Badge.LayoutTransform>
-                                    </controls:Badge>
+                                        <controls:Badge DataContext="{Binding CurrentLevel}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="4"
+                                                        Margin="0,0,0,5">
+                                            <controls:Badge.LayoutTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform ScaleX="0.33" ScaleY="0.33"/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </controls:Badge.LayoutTransform>
+                                        </controls:Badge>
 
-                                    <TextBlock Grid.Column="1" FontSize="16" Margin="0" Grid.Row="0"
-                                                Grid.ColumnSpan="2" Text="{Binding Badge.Name}" />
+                                        <TextBlock Grid.Column="1" FontSize="16" Margin="0" Grid.Row="0"
+                                                    Grid.ColumnSpan="2" Text="{Binding Badge.Name}" />
 
-                                    <controls:Badge DataContext="{Binding NextLevel}" Grid.Row="0" Grid.Column="4" Grid.RowSpan="4" VerticalAlignment="Bottom" Margin="5,0,0,5">
-                                        <controls:Badge.LayoutTransform>
-                                            <TransformGroup>
-                                                <ScaleTransform ScaleX="0.2" ScaleY="0.2"/>
-                                                <SkewTransform/>
-                                                <RotateTransform/>
-                                                <TranslateTransform/>
-                                            </TransformGroup>
-                                        </controls:Badge.LayoutTransform>
-                                    </controls:Badge>
+                                        <StackPanel Orientation="Vertical" Grid.Column="4" Grid.Row="0" Grid.RowSpan="4" VerticalAlignment="Bottom">
+                                            <TextBlock Margin="5,5,5,0" HorizontalAlignment="Right">
+                                                <TextBlock.Text>
+                                                    <MultiBinding Converter="{StaticResource PercentageConverter}" StringFormat="{}{0:#0%}">
+                                                        <Binding Path="LastTarget" Mode="OneWay" />
+                                                        <Binding Path="CurrentPosition" Mode="OneWay" />
+                                                        <Binding Path="NextTarget" Mode="OneWay" />
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                            </TextBlock>
 
-                                    <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding Badge.Statistic.Description}" />
+                                            <controls:Badge DataContext="{Binding NextLevel}" Margin="5">
+                                                <controls:Badge.LayoutTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform ScaleX="0.2" ScaleY="0.2"/>
+                                                        <SkewTransform/>
+                                                        <RotateTransform/>
+                                                        <TranslateTransform/>
+                                                    </TransformGroup>
+                                                </controls:Badge.LayoutTransform>
+                                            </controls:Badge>
+                                        </StackPanel>
 
-                                    <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="2" Text="{Binding LastTarget, Mode=OneWay}" />
-                                    <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="2" Text="{Binding CurrentPosition, Mode=OneWay}" />
-                                    <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Column="3" Grid.Row="2" Text="{Binding NextTarget, Mode=OneWay}" />
+                                        <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding Badge.Statistic.Description}" />
 
-                                    <ProgressBar Grid.ColumnSpan="3" Grid.Row="3" Grid.Column="1" Minimum="{Binding LastTarget, Mode=OneWay}" 
-                                                 Maximum="{Binding NextTarget, Mode=OneWay}" Value="{Binding CurrentPosition, Mode=OneWay}"
-                                                 Margin="0,0,0,5">
-                                        <ProgressBar.Style>
-                                            <Style TargetType="ProgressBar">
-                                                <Setter Property="Foreground" Value="Red" />
-                                                <Setter Property="Height" Value="10" />
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding DataContext.LoginService.Agent.Faction.Code, RelativeSource={RelativeSource AncestorType={x:Type views:BadgeProgressView}}}" Value="ENL">
-                                                        <Setter Property="Foreground" Value="{StaticResource EnlightenedBrush}"></Setter>
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding DataContext.LoginService.Agent.Faction.Code, RelativeSource={RelativeSource AncestorType={x:Type views:BadgeProgressView}}}" Value="RES">
-                                                        <Setter Property="Foreground" Value="{StaticResource ResistanceBrush}"></Setter>
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </ProgressBar.Style>
-                                    </ProgressBar>
+                                        <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="2" Text="{Binding LastTarget, Mode=OneWay}" />
+                                        <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="2" Text="{Binding CurrentPosition, Mode=OneWay}" />
+                                        <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Column="3" Grid.Row="2" Text="{Binding NextTarget, Mode=OneWay}" />
 
-                                    <TextBlock Grid.Column="3" Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" 
-                                               Visibility="{Binding NextTargetDateWeek, Converter={StaticResource HideWhenNullConverter}}">
-                                        <Run Text="{x:Static properties:Resources.WeekPrediction}" />
-                                        <Run Text="{Binding NextTargetDateWeek, Mode=OneWay, Converter={StaticResource DateFormattingConverter}}" />
-                                    </TextBlock>
-                                    <TextBlock Grid.Column="3" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" 
-                                               Visibility="{Binding NextTargetDateMonth, Converter={StaticResource HideWhenNullConverter}}">
-                                        <Run Text="{x:Static properties:Resources.MonthPrediction}" />
-                                        <Run Text="{Binding NextTargetDateMonth, Mode=OneWay, Converter={StaticResource DateFormattingConverter}}" />
-                                    </TextBlock>
-                                </Grid>
-                                
-                                <DataTemplate.Triggers>
-                                    <Trigger Property="ItemsControl.AlternationIndex" Value="0">
-                                        <Setter Property="Background" Value="#F4F4F4" TargetName="ItemGrid" />
-                                    </Trigger>
-                                    <Trigger Property="ItemsControl.AlternationIndex" Value="1">
-                                        <Setter Property="Background" Value="White" TargetName="ItemGrid" />
-                                    </Trigger>
-                                </DataTemplate.Triggers>
+                                        <ProgressBar Grid.ColumnSpan="3" Grid.Row="3" Grid.Column="1" Minimum="{Binding LastTarget, Mode=OneWay}" 
+                                                     Maximum="{Binding NextTarget, Mode=OneWay}" Value="{Binding CurrentPosition, Mode=OneWay}"
+                                                     Margin="0,0,0,5">
+                                            <ProgressBar.Style>
+                                                <Style TargetType="ProgressBar">
+                                                    <Setter Property="Foreground" Value="Red" />
+                                                    <Setter Property="Height" Value="10" />
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding DataContext.LoginService.Agent.Faction.Code, RelativeSource={RelativeSource AncestorType={x:Type views:BadgeProgressView}}}" Value="ENL">
+                                                            <Setter Property="Foreground" Value="{StaticResource EnlightenedBrush}"></Setter>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding DataContext.LoginService.Agent.Faction.Code, RelativeSource={RelativeSource AncestorType={x:Type views:BadgeProgressView}}}" Value="RES">
+                                                            <Setter Property="Foreground" Value="{StaticResource ResistanceBrush}"></Setter>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </ProgressBar.Style>
+                                        </ProgressBar>
+
+                                        <TextBlock Grid.Column="3" Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" 
+                                                   Visibility="{Binding NextTargetDateWeek, Converter={StaticResource HideWhenNullConverter}}">
+                                            <Run Text="{x:Static properties:Resources.WeekPrediction}" />
+                                            <Run Text="{Binding NextTargetDateWeek, Mode=OneWay, Converter={StaticResource DateFormattingConverter}}" />
+                                        </TextBlock>
+                                        <TextBlock Grid.Column="3" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" 
+                                                   Visibility="{Binding NextTargetDateMonth, Converter={StaticResource HideWhenNullConverter}}">
+                                            <Run Text="{x:Static properties:Resources.MonthPrediction}" />
+                                            <Run Text="{Binding NextTargetDateMonth, Mode=OneWay, Converter={StaticResource DateFormattingConverter}}" />
+                                        </TextBlock>
+                                    </Grid>
+                                </Border>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </Expander>
-                <Expander>
+                <Expander IsExpanded="True">
                     <Expander.Header>
                         <TextBlock FontSize="20" Text="{x:Static properties:Resources.AwardableBadges}" />
                     </Expander.Header>
                     <ItemsControl ItemsSource="{Binding AwardedBadges}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Width="{Binding ActualWidth, ElementName=View}" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="58" />
-                                        <ColumnDefinition />
-                                    </Grid.ColumnDefinitions>
+                                <Border x:Name="ItemBorder" Width="600" Margin="5" BorderThickness="1" BorderBrush="Black" Background="#E9E9E9">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="58" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
 
-                                    <controls:Badge DataContext="{Binding Level}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2">
-                                        <controls:Badge.LayoutTransform>
-                                            <TransformGroup>
-                                                <ScaleTransform ScaleX="0.33" ScaleY="0.33"/>
-                                                <SkewTransform/>
-                                                <RotateTransform/>
-                                                <TranslateTransform/>
-                                            </TransformGroup>
-                                        </controls:Badge.LayoutTransform>
-                                    </controls:Badge>
+                                        <controls:Badge DataContext="{Binding Level}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2">
+                                            <controls:Badge.LayoutTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform ScaleX="0.33" ScaleY="0.33"/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </controls:Badge.LayoutTransform>
+                                        </controls:Badge>
 
-                                    <TextBlock Grid.Column="1" FontSize="16" Margin="0, 5, 0, 0" Grid.Row="0"
-                                                Text="{Binding Badge.Name}" />
+                                        <TextBlock Grid.Column="1" FontSize="16" Margin="0, 5, 0, 0" Grid.Row="0"
+                                                    Text="{Binding Badge.Name}" />
 
-                                    <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Badge.Description}" />
-                                </Grid>
+                                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Badge.Description}" />
+                                    </Grid>
+                                </Border>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>

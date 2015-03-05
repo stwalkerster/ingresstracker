@@ -148,6 +148,7 @@
     <Compile Include="Converters\HideWhenNullConverter.cs" />
     <Compile Include="Converters\InverseBooleanConverter.cs" />
     <Compile Include="Converters\MultiplyConverter.cs" />
+    <Compile Include="Converters\PercentageConverter.cs" />
     <Compile Include="Converters\VisibilityGreaterThanEqualToConverter.cs" />
     <Compile Include="Converters\WindowTitleConverter.cs" />
     <Compile Include="DataModel\BadgeLevel.cs" />

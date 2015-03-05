@@ -1324,9 +1324,9 @@ A "contributor" is any person that distributes its contribution under this licen
     <value>The value entered is less than the last value! This can really mess up the predictions, so you can use the raw value view to find the bad value.</value>
   </data>
   <data name="MonthPrediction" xml:space="preserve">
-    <value>Next badge due (using last month's data):</value>
+    <value>(Monthly)</value>
   </data>
   <data name="WeekPrediction" xml:space="preserve">
-    <value>Next badge due (using last week's data): </value>
+    <value>(Weekly)</value>
   </data>
 </root>
