@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:IngressTracker.Converters">
+    <converters:WindowTitleConverter x:Key="WindowTitleConverter" />
+    <converters:DebugConverter x:Key="DebugConverter" />
+    <converters:EqualityToVisibilityConverter x:Key="EqualityToVisibilityConverter" />
+    <converters:DateFormattingConverter x:Key="DateFormattingConverter" />
+    <converters:HideWhenNullConverter x:Key="HideWhenNullConverter" />
+    <converters:PercentageConverter x:Key="PercentageConverter" />
+</ResourceDictionary>
