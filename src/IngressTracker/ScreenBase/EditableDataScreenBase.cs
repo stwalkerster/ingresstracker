@@ -183,7 +183,11 @@ namespace IngressTracker.ScreenBase
 
             var bgw = new BackgroundWorker();
             bgw.DoWork += (sender, args) => this.SaveAsync();
-            bgw.RunWorkerCompleted += (sender, args) => this.BackgroundInProgress = false;
+            bgw.RunWorkerCompleted += delegate
+                {
+                    this.BackgroundInProgress = false; 
+                    this.NotifyOfPropertyChange(() => this.DataItems);
+                };
 
             bgw.RunWorkerAsync();
         }
