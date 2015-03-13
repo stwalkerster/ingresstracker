@@ -22,12 +22,12 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace IngressTracker.ViewModels.Interfaces
 {
-    using Caliburn.Micro;
+    using IngressTracker.Interfaces;
 
     /// <summary>
     /// The LevelProgressViewModel interface.
     /// </summary>
-    public interface ILevelProgressViewModel : IScreen
+    public interface ILevelProgressViewModel : IDataScreen
     {
     }
 }
