@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="BadgeProgress.cs" company="Simon Walker">
-//   Copyright (C) 2014 Simon Walker
+//   Copyright (C) 2015 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 //   documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -42,7 +42,7 @@ namespace IngressTracker.DataModel
         /// The current value.
         /// </summary>
         private readonly ValueEntry currentValue;
-        
+
         /// <summary>
         /// The month value.
         /// </summary>
@@ -330,6 +330,10 @@ namespace IngressTracker.DataModel
                 return this.weekValue.Timestamp.Add(prediction.Value);
             }
         }
+
+        #endregion
+
+        #region Methods
 
         /// <summary>
         /// The predict value.
