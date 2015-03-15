@@ -23,7 +23,6 @@
 namespace IngressTracker.DataModel
 {
     using IngressTracker.DataModel.Models;
-    using IngressTracker.Services;
     using IngressTracker.Services.Interfaces;
 
     /// <summary>
@@ -100,6 +99,31 @@ namespace IngressTracker.DataModel
         }
 
         /// <summary>
+        /// Gets or sets the last access points.
+        /// </summary>
+        public int LastAccessPoints { get; set; }
+
+        /// <summary>
+        /// Gets or sets the last black.
+        /// </summary>
+        public int LastBlack { get; set; }
+
+        /// <summary>
+        /// Gets or sets the last gold.
+        /// </summary>
+        public int LastGold { get; set; }
+
+        /// <summary>
+        /// Gets or sets the last platinum.
+        /// </summary>
+        public int LastPlatinum { get; set; }
+
+        /// <summary>
+        /// Gets or sets the last silver.
+        /// </summary>
+        public int LastSilver { get; set; }
+
+        /// <summary>
         /// Gets the level.
         /// </summary>
         public int Level
@@ -107,6 +131,17 @@ namespace IngressTracker.DataModel
             get
             {
                 return this.level.LevelNumber;
+            }
+        }
+
+        /// <summary>
+        /// Gets the login service.
+        /// </summary>
+        public ILoginService LoginService
+        {
+            get
+            {
+                return this.loginService;
             }
         }
 
@@ -131,24 +166,6 @@ namespace IngressTracker.DataModel
                 return this.level.SilverBadges;
             }
         }
-
-        public ILoginService LoginService 
-        {
-            get
-            {
-                return this.loginService;
-            }
-        }
-
-        public int LastAccessPoints { get; set; }
-
-        public int LastGold { get; set; }
-
-        public int LastSilver { get; set; }
-
-        public int LastPlatinum { get; set; }
-
-        public int LastBlack { get; set; }
 
         #endregion
     }
