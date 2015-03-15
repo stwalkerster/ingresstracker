@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="LevelStaticView.xaml.cs" company="">
+// <copyright file="LevelStaticView.xaml.cs" company="Simon Walker">
 //   Copyright (C) 2015 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
