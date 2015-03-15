@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:converters="clr-namespace:IngressTracker.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="144.66551" d:DesignWidth="144.66551">
     <UserControl.Resources>
@@ -30,7 +29,6 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-        <converters:VisibilityGreaterThanEqualToConverter x:Key="VisibilityGreaterThanEqualToConverter"/>
     </UserControl.Resources>
 
     <Canvas x:Name="Canvas" Width="144.66551" Height="144.66551" ClipToBounds="True">

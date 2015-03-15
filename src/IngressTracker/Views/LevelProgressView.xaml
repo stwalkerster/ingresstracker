@@ -4,15 +4,31 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:IngressTracker.Controls"
+             xmlns:markupExtensions="clr-namespace:IngressTracker.MarkupExtensions"
+             xmlns:views="clr-namespace:IngressTracker.Views"
              mc:Ignorable="d" x:Name="View"
              d:DesignHeight="500" d:DesignWidth="620">
 
+    <UserControl.Resources>
+
+        <Style x:Key="SmallBadgeStyle" TargetType="controls:Badge">
+            <Setter Property="Margin" Value="5,0,5,0" />
+            <Setter Property="Width" Value="30" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="0.21" ScaleY="0.21" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    
     <Grid Width="{Binding ActualWidth, ElementName=View}">
         <ScrollViewer>
             <ItemsControl ItemsSource="{Binding Levels}" Grid.IsSharedSizeScope="True">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Grid Margin="5">
+                        <Grid Margin="5" MinHeight="75">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition />
@@ -22,7 +38,7 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
-                                <RowDefinition />
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
                             <controls:LevelIndicator Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Margin="0,-20,10,-20">
@@ -43,13 +59,28 @@
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition />
                                     <ColumnDefinition Width="Auto" SharedSizeGroup="APTotal" />
-                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" SharedSizeGroup="APPercentage" />
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Margin="5,0,5,0" Grid.Column="0">Access Points</TextBlock>
-                                <ProgressBar Margin="5,0,5,0" Grid.Column="1" MinWidth="{Binding LastAccessPoints}" MaxHeight="{Binding AccessPoints}" Value="{Binding CurrentAccessPoints}"/>
-                                <TextBlock Margin="5,0,5,0" Grid.Column="2" Text="{Binding CurrentAccessPoints}"></TextBlock>
-                                <TextBlock Margin="5,0,5,0" Grid.Column="3">100%</TextBlock>
+                                <ProgressBar Margin="5,0,5,0" Grid.Column="1" Minimum="{Binding LastAccessPoints}" Maximum="{Binding AccessPoints}" Value="{Binding DataContext.AccessPoints, RelativeSource={RelativeSource AncestorType={x:Type views:LevelProgressView}}}"/>
+                                <TextBlock Margin="5,0,5,0" Grid.Column="2">
+                                    <TextBlock.Text>
+                                        <MultiBinding Converter="{StaticResource MinimumConverter}">
+                                            <Binding Path="DataContext.AccessPoints" RelativeSource="{RelativeSource AncestorType={x:Type views:LevelProgressView}}" />
+                                            <Binding Path="AccessPoints" Mode="OneWay" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                                <TextBlock Margin="5,0,5,0" Grid.Column="3">
+                                    <TextBlock.Text>
+                                        <MultiBinding Converter="{StaticResource PercentageConverter}" StringFormat="{}{0:#0%}">
+                                            <Binding Path="LastAccessPoints" Mode="OneWay" />
+                                            <Binding Path="DataContext.AccessPoints" RelativeSource="{RelativeSource AncestorType={x:Type views:LevelProgressView}}" />
+                                            <Binding Path="AccessPoints" Mode="OneWay" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
                             </Grid>
 
                             <Grid Grid.Column="1" Grid.Row="2">
@@ -70,24 +101,71 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
-                                <Ellipse Margin="5,0,5,0" Grid.Row="0" Grid.Column="0" Width="30" Height="30" Fill="Red" Grid.RowSpan="2" />
-                                <Ellipse Margin="5,0,5,0" Grid.Row="0" Grid.Column="2" Width="30" Height="30" Fill="Red" Grid.RowSpan="2" />
-                                <Ellipse Margin="5,0,5,0" Grid.Row="0" Grid.Column="4" Width="30" Height="30" Fill="Red" Grid.RowSpan="2" />
-                                <Ellipse Margin="5,0,5,0" Grid.Row="0" Grid.Column="6" Width="30" Height="30" Fill="Red" Grid.RowSpan="2" />
+                                <controls:Badge Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" 
+                                                Visibility="{Binding SilverBadges, Mode=OneWay, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=1}"
+                                                Style="{markupExtensions:MultiStyle SmallBadgeStyle SilverBadgeStyle}" />
+                                <controls:Badge Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" 
+                                                Visibility="{Binding GoldBadges, Mode=OneWay, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=1}"
+                                                Style="{markupExtensions:MultiStyle SmallBadgeStyle GoldBadgeStyle}" />
+                                <controls:Badge Grid.Row="0" Grid.Column="4" Grid.RowSpan="2" 
+                                                Visibility="{Binding PlatinumBadges, Mode=OneWay, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=1}"
+                                                Style="{markupExtensions:MultiStyle SmallBadgeStyle PlatinumBadgeStyle}" />
+                                <controls:Badge Grid.Row="0" Grid.Column="6" Grid.RowSpan="2" 
+                                                Visibility="{Binding BlackBadges, Mode=OneWay, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=1}"
+                                                Style="{markupExtensions:MultiStyle SmallBadgeStyle BlackBadgeStyle}" />
 
-                                <TextBlock Margin="5,0,5,0" Grid.Row="0" Grid.Column="1" Text="5/5" />
-                                <TextBlock Margin="5,0,5,0" Grid.Row="0" Grid.Column="3" Text="5/5" />
-                                <TextBlock Margin="5,0,5,0" Grid.Row="0" Grid.Column="5" Text="5/5" />
-                                <TextBlock Margin="5,0,5,0" Grid.Row="0" Grid.Column="7" Text="5/5" />
-                                
-                                <TextBlock Margin="5,0,5,0" Grid.Row="1" Grid.Column="1" Text="100%" />
-                                <TextBlock Margin="5,0,5,0" Grid.Row="1" Grid.Column="3" Text="100%" />
-                                <TextBlock Margin="5,0,5,0" Grid.Row="1" Grid.Column="5" Text="100%" />
-                                <TextBlock Margin="5,0,5,0" Grid.Row="1" Grid.Column="7" Text="100%" />
+                                <TextBlock Margin="5,0,5,0" Grid.Row="0" Grid.Column="1" Visibility="{Binding SilverBadges, Mode=OneWay, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=1}">
+                                    <Run>
+                                        <Run.Text>
+                                            <MultiBinding Converter="{StaticResource MinimumConverter}">
+                                                <Binding Path="DataContext.SilverCount" RelativeSource="{RelativeSource AncestorType={x:Type views:LevelProgressView}}" />
+                                                <Binding Path="SilverBadges" Mode="OneWay" />
+                                            </MultiBinding>
+                                        </Run.Text>
+                                    </Run>
+                                    <Run>/</Run>
+                                    <Run Text="{Binding SilverBadges, Mode=OneWay}"></Run>
+                                </TextBlock>
+                                <TextBlock Margin="5,0,5,0" Grid.Row="0" Grid.Column="3" Visibility="{Binding GoldBadges, Mode=OneWay, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=1}">
+                                    <Run>
+                                        <Run.Text>
+                                            <MultiBinding Converter="{StaticResource MinimumConverter}">
+                                                <Binding Path="DataContext.GoldCount" RelativeSource="{RelativeSource AncestorType={x:Type views:LevelProgressView}}" />
+                                                <Binding Path="GoldBadges" Mode="OneWay" />
+                                            </MultiBinding>
+                                        </Run.Text>
+                                    </Run>
+                                    <Run>/</Run>
+                                    <Run Text="{Binding GoldBadges, Mode=OneWay}"></Run>
+                                </TextBlock>
+                                <TextBlock Margin="5,0,5,0" Grid.Row="0" Grid.Column="5" Visibility="{Binding PlatinumBadges, Mode=OneWay, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=1}">
+                                    <Run>
+                                        <Run.Text>
+                                            <MultiBinding Converter="{StaticResource MinimumConverter}">
+                                                <Binding Path="DataContext.PlatinumCount" RelativeSource="{RelativeSource AncestorType={x:Type views:LevelProgressView}}" />
+                                                <Binding Path="PlatinumBadges" Mode="OneWay" />
+                                            </MultiBinding>
+                                        </Run.Text>
+                                    </Run>
+                                    <Run>/</Run>
+                                    <Run Text="{Binding PlatinumBadges, Mode=OneWay}"></Run>
+                                </TextBlock>
+                                <TextBlock Margin="5,0,5,0" Grid.Row="0" Grid.Column="7" Visibility="{Binding BlackBadges, Mode=OneWay, Converter={StaticResource VisibilityGreaterThanEqualToConverter}, ConverterParameter=1}">
+                                    <Run>
+                                        <Run.Text>
+                                            <MultiBinding Converter="{StaticResource MinimumConverter}">
+                                                <Binding Path="DataContext.BlackCount" RelativeSource="{RelativeSource AncestorType={x:Type views:LevelProgressView}}" />
+                                                <Binding Path="BlackBadges" Mode="OneWay" />
+                                            </MultiBinding>
+                                        </Run.Text>
+                                    </Run>
+                                    <Run>/</Run>
+                                    <Run Text="{Binding BlackBadges, Mode=OneWay}"></Run>
+                                </TextBlock>
 
                             </Grid>
 
-                            <Grid Grid.Column="2" Grid.Row="0" Grid.RowSpan="3" Margin="5,0,0,0">
+                            <Grid Grid.Column="2" Grid.Row="0" Grid.RowSpan="3" Margin="5,0,0,0" Visibility="Collapsed">
                                 <Grid.RowDefinitions>
                                     <RowDefinition />
                                     <RowDefinition />

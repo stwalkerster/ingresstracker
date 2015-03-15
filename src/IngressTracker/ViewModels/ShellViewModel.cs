@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------------------------
 // <copyright file="ShellViewModel.cs" company="Simon Walker">
-//   Copyright (C) 2014 Simon Walker
+//   Copyright (C) 2015 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 //   documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -228,7 +228,6 @@ namespace IngressTracker.ViewModels
         {
             get
             {
-                return false;
                 return this.loginService.LoginComplete;
             }
         }

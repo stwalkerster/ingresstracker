@@ -7,4 +7,6 @@
     <converters:DateFormattingConverter x:Key="DateFormattingConverter" />
     <converters:HideWhenNullConverter x:Key="HideWhenNullConverter" />
     <converters:PercentageConverter x:Key="PercentageConverter" />
+    <converters:MinimumConverter x:Key="MinimumConverter" />
+    <converters:VisibilityGreaterThanEqualToConverter x:Key="VisibilityGreaterThanEqualToConverter" />
 </ResourceDictionary>

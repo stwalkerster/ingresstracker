@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="VisibilityGreaterThanEqualToConverter.cs" company="Simon Walker">
+// <copyright file="MinimumConverter.cs" company="Simon Walker">
 //   Copyright (C) 2015 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,28 +17,28 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The visibility greater than equal to converter.
+//   The minimum converter.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace IngressTracker.Converters
 {
     using System;
     using System.Globalization;
-    using System.Windows;
+    using System.Linq;
     using System.Windows.Data;
 
     /// <summary>
-    /// The visibility greater than equal to converter.
+    /// The minimum converter.
     /// </summary>
-    public class VisibilityGreaterThanEqualToConverter : IValueConverter
+    public class MinimumConverter : IMultiValueConverter
     {
         #region Public Methods and Operators
 
         /// <summary>
         /// The convert.
         /// </summary>
-        /// <param name="value">
-        /// The value.
+        /// <param name="values">
+        /// The values.
         /// </param>
         /// <param name="targetType">
         /// The target type.
@@ -52,14 +52,9 @@ namespace IngressTracker.Converters
         /// <returns>
         /// The <see cref="object"/>.
         /// </returns>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((int)value < int.Parse((string)parameter))
-            {
-                return Visibility.Collapsed;
-            }
-
-            return Visibility.Visible;
+            return values.Select(System.Convert.ToInt64).Min().ToString(CultureInfo.InvariantCulture);
         }
 
         /// <summary>
@@ -68,8 +63,8 @@ namespace IngressTracker.Converters
         /// <param name="value">
         /// The value.
         /// </param>
-        /// <param name="targetType">
-        /// The target type.
+        /// <param name="targetTypes">
+        /// The target types.
         /// </param>
         /// <param name="parameter">
         /// The parameter.
@@ -78,9 +73,9 @@ namespace IngressTracker.Converters
         /// The culture.
         /// </param>
         /// <returns>
-        /// The <see cref="object"/>.
+        /// The object array.
         /// </returns>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }

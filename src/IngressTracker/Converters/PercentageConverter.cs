@@ -20,7 +20,6 @@
 //   The percentage converter.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace IngressTracker.Converters
 {
     using System;
@@ -60,15 +59,22 @@ namespace IngressTracker.Converters
                 throw new ArgumentException();
             }
 
-            var min = values[0] == null ? 0 : (long)values[0];
-            var val = (long)values[1];
+            var dataItems = values.Select(System.Convert.ToInt64).ToList();
 
-            if (values[2] == null)
+            var min = dataItems[0];
+            var val = dataItems[1];
+
+            if (dataItems[1] < dataItems[0])
+            {
+                return 0;
+            }
+
+            if (dataItems[2] == 0 || dataItems[1] > dataItems[2])
             {
                 return 1;
             }
 
-            var max = (long)values[2];
+            var max = dataItems[2];
 
             return (val - min) / (decimal)(max - min);
         }
@@ -89,10 +95,8 @@ namespace IngressTracker.Converters
         /// The culture.
         /// </param>
         /// <returns>
-        /// The <see cref="object[]"/>.
+        /// The object.
         /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();

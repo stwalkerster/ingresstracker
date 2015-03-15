@@ -150,8 +150,6 @@ namespace IngressTracker.DataModel
 
         public int LastBlack { get; set; }
 
-        public long CurrentAccessPoints { get; set; }
-
         #endregion
     }
 }
