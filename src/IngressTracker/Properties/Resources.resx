@@ -1329,4 +1329,62 @@ A "contributor" is any person that distributes its contribution under this licen
   <data name="WeekPrediction" xml:space="preserve">
     <value>(Weekly)</value>
   </data>
+  <data name="SchemaUpgrade1To2" xml:space="preserve">
+    <value>CREATE TABLE `new_stat` (`id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `description` VARCHAR NOT NULL, `unit` VARCHAR NULL, `category` INT NOT NULL, `predictability` INTEGER NOT NULL, `displayorder` INTEGER NULL DEFAULT NULL, `ap` INTEGER NOT NULL DEFAULT 0, FOREIGN KEY (`category`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE);
+CREATE TABLE `new_badge` (`id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `name` VARCHAR NOT NULL, `stat` INTEGER NULL, `bronze` INTEGER NULL, `silver` INTEGER NULL, `gold` INTEGER NULL, `platinum` INTEGER NULL, `black` INTEGER NULL, `awardable` INTEGER NOT NULL, `description` VARCHAR(255) NULL, FOREIGN KEY (`stat`) REFERENCES `stat` (`id`) ON DELETE CASCADE ON UPDATE CASCADE);
+CREATE TABLE `new_value` (`id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `user` INTEGER NOT NULL, `stat` INTEGER NOT NULL, `value` INTEGER NOT NULL, `timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (`stat`) REFERENCES `stat` (`id`) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY (`user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE);
+CREATE TABLE `new_badgeaward` (`id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `user` INTEGER NOT NULL, `badge` INTEGER NOT NULL, `level` VARCHAR(1) NOT NULL, FOREIGN KEY (`user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY (`badge`) REFERENCES `badge` (`id`) ON DELETE CASCADE ON UPDATE CASCADE);
+PRAGMA foreign_keys = 0;
+INSERT INTO new_stat SELECT * FROM stat;
+INSERT INTO new_badge SELECT * FROM badge;
+INSERT INTO new_value SELECT * FROM value;
+INSERT INTO new_badgeaward SELECT * FROM badgeaward;
+DROP TABLE stat;
+DROP TABLE badge;
+DROP TABLE badgeaward;
+DROP TABLE value;
+ALTER TABLE new_stat RENAME TO stat;
+ALTER TABLE new_badge RENAME TO badge;
+ALTER TABLE new_value RENAME TO value;
+ALTER TABLE new_badgeaward RENAME TO badgeaward;
+PRAGMA foreign_keys = 1;
+VACUUM;</value>
+  </data>
+  <data name="SchemaUpgradeFailed" xml:space="preserve">
+    <value>The schema upgrade failed. The upgrade has been rolled back, and the application will now exit. If this re-occurs, please report this as a bug!
+
+The error was this: {0}</value>
+  </data>
+  <data name="DeleteAreYouSure" xml:space="preserve">
+    <value>Deleting record - are you sure?</value>
+  </data>
+  <data name="DeleteBadgeMessage" xml:space="preserve">
+    <value>Deleting this badge ({0}) will also delete any awards of this badge, which will affect your statistics. Are you sure you wish to delete this badge?</value>
+  </data>
+  <data name="CannotDeleteCategory" xml:space="preserve">
+    <value>Cannot delete Category</value>
+  </data>
+  <data name="CannotDeleteCategoryInUse" xml:space="preserve">
+    <value>You cannot delete the category {0} because it is in use by some statistics. 
+
+Cascading the delete is too dangerous, and could potentially lose a lot of data.
+
+Please remove the statistics that use this category, or reassign them to another category first.</value>
+  </data>
+  <data name="DeleteAgentConfirmation" xml:space="preserve">
+    <value>Deleting this agent ({0}) will also delete any dated values entered by this agent, as well as all data about this agent.
+
+Are you sure you wish to delete this agent?</value>
+  </data>
+  <data name="DeleteStatisticConfirmation" xml:space="preserve">
+    <value>Deleting this statistic ({0}) will also delete any dated values attached to this statistic.
+
+Are you sure you wish to delete this statistic?</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="CannotDeleteLoggedInUser" xml:space="preserve">
+    <value>You cannot delete the currently logged-in user.</value>
+  </data>
 </root>

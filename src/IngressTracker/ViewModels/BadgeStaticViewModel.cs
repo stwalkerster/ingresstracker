@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="BadgeStaticViewModel.cs" company="Simon Walker">
-//   Copyright (C) 2014 Simon Walker
+//   Copyright (C) 2015 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 //   documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -22,9 +22,14 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace IngressTracker.ViewModels
 {
+    using System;
     using System.Collections.ObjectModel;
+    using System.Windows;
+
+    using Caliburn.Micro;
 
     using IngressTracker.DataModel.Models;
+    using IngressTracker.Persistence.Interfaces;
     using IngressTracker.Properties;
     using IngressTracker.ScreenBase;
     using IngressTracker.Services.Interfaces;
@@ -92,6 +97,43 @@ namespace IngressTracker.ViewModels
             var enumarable = this.DatabaseSession.Query<Stat>();
             this.stats = new ObservableCollection<Stat>(enumarable);
             this.NotifyOfPropertyChange(() => this.Statistics);
+        }
+
+        /// <summary>
+        /// The pre delete guard.
+        /// </summary>
+        /// <param name="entity">
+        /// The entity.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        protected override bool PreDeleteGuard(IDataEntity entity)
+        {
+            var dataEntity = (Badge)entity;
+
+            var messageBoxText = string.Format(
+                Resources.DeleteBadgeMessage,
+                dataEntity.Name);
+
+            var messageBoxResult = MessageBox.Show(
+                messageBoxText,
+                Resources.DeleteAreYouSure,
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Exclamation,
+                MessageBoxResult.No);
+
+            if (messageBoxResult == MessageBoxResult.No)
+            {
+                return true;
+            }
+
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                return false;
+            }
+
+            throw new NotSupportedException();
         }
 
         #endregion

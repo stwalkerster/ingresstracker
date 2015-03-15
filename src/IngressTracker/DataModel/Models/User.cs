@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="User.cs" company="Simon Walker">
-//   Copyright (C) 2014 Simon Walker
+//   Copyright (C) 2015 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 //   documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -48,6 +48,7 @@ namespace IngressTracker.DataModel.Models
             get
             {
                 // no-op to trigger static constructor
+                // ReSharper disable once UnusedVariable
                 var enlightened = Faction.Enlightened;
 
                 return Faction.Lookup(this.FactionCode);
@@ -74,6 +75,46 @@ namespace IngressTracker.DataModel.Models
         #region Public Methods and Operators
 
         /// <summary>
+        /// The equals.
+        /// </summary>
+        /// <param name="obj">
+        /// The object.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public override bool Equals(object obj)
+        {
+            if (object.ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (object.ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != this.GetType())
+            {
+                return false;
+            }
+
+            return this.Equals((User)obj);
+        }
+
+        /// <summary>
+        /// The get hash code.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
+        public override int GetHashCode()
+        {
+            return this.AgentName != null ? this.AgentName.GetHashCode() : 0;
+        }
+
+        /// <summary>
         /// The to string.
         /// </summary>
         /// <returns>
@@ -82,6 +123,24 @@ namespace IngressTracker.DataModel.Models
         public override string ToString()
         {
             return this.AgentName;
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// The equals.
+        /// </summary>
+        /// <param name="other">
+        /// The other.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        protected bool Equals(User other)
+        {
+            return string.Equals(this.AgentName, other.AgentName);
         }
 
         #endregion

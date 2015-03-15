@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="CategoryStaticViewModel.cs" company="Simon Walker">
-//   Copyright (C) 2014 Simon Walker
+//   Copyright (C) 2015 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 //   documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -22,7 +22,10 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace IngressTracker.ViewModels
 {
+    using System.Windows;
+
     using IngressTracker.DataModel.Models;
+    using IngressTracker.Persistence.Interfaces;
     using IngressTracker.Properties;
     using IngressTracker.ScreenBase;
     using IngressTracker.Services.Interfaces;
@@ -49,6 +52,37 @@ namespace IngressTracker.ViewModels
         public CategoryStaticViewModel(ISession databaseSession, ILoginService loginService)
             : base(Resources.CategoryStaticView, databaseSession, loginService)
         {
+        }
+
+        /// <summary>
+        /// The pre delete guard.
+        /// </summary>
+        /// <param name="entity">
+        /// The entity.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        protected override bool PreDeleteGuard(IDataEntity entity)
+        {
+            var dataEntity = (Category)entity;
+
+            if (this.DatabaseSession.QueryOver<Stat>().Where(x => x.Category == dataEntity).RowCount() > 0)
+            {
+                var messageBoxTextDenied = string.Format(
+                Resources.CannotDeleteCategoryInUse,
+                dataEntity.Name);
+
+                MessageBox.Show(
+                    messageBoxTextDenied,
+                    Resources.CannotDeleteCategory,
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+
+                return true;
+            }
+
+            return false;
         }
 
         #endregion

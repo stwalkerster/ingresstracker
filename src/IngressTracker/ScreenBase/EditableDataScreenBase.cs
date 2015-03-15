@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="EditableDataScreenBase.cs" company="Simon Walker">
-//   Copyright (C) 2014 Simon Walker
+//   Copyright (C) 2015 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 //   documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -161,6 +161,11 @@ namespace IngressTracker.ScreenBase
         /// </summary>
         public void DeleteRecord()
         {
+            if (this.PreDeleteGuard(this.SelectedItem))
+            {
+                return;
+            }
+
             if (!this.deletedItems.Contains(this.SelectedItem))
             {
                 this.deletedItems.Add(this.SelectedItem);
@@ -185,7 +190,7 @@ namespace IngressTracker.ScreenBase
             bgw.DoWork += (sender, args) => this.SaveAsync();
             bgw.RunWorkerCompleted += delegate
                 {
-                    this.BackgroundInProgress = false; 
+                    this.BackgroundInProgress = false;
                     this.NotifyOfPropertyChange(() => this.DataItems);
                 };
 
@@ -195,6 +200,17 @@ namespace IngressTracker.ScreenBase
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// The do delete.
+        /// </summary>
+        /// <param name="deletedItem">
+        /// The deleted item.
+        /// </param>
+        protected virtual void DoDelete(T deletedItem)
+        {
+            this.DatabaseSession.Delete(deletedItem);
+        }
 
         /// <summary>
         /// The get data.
@@ -217,6 +233,20 @@ namespace IngressTracker.ScreenBase
         {
             base.OnViewLoaded(view);
             this.RefreshData();
+        }
+
+        /// <summary>
+        /// The pre delete guard.
+        /// </summary>
+        /// <param name="entity">
+        /// The entity.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        protected virtual bool PreDeleteGuard(IDataEntity entity)
+        {
+            return false;
         }
 
         /// <summary>
@@ -283,7 +313,7 @@ namespace IngressTracker.ScreenBase
                 // handle the deletes
                 foreach (var deletedItem in this.deletedItems)
                 {
-                    this.DatabaseSession.Delete(deletedItem);
+                    this.DoDelete(deletedItem);
                 }
 
                 this.deletedItems.Clear();

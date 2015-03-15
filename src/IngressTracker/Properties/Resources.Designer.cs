@@ -295,6 +295,37 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot delete Category.
+        /// </summary>
+        public static string CannotDeleteCategory {
+            get {
+                return ResourceManager.GetString("CannotDeleteCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You cannot delete the category {0} because it is in use by some statistics. 
+        ///
+        ///Cascading the delete is too dangerous, and could potentially lose a lot of data.
+        ///
+        ///Please remove the statistics that use this category, or reassign them to another category first..
+        /// </summary>
+        public static string CannotDeleteCategoryInUse {
+            get {
+                return ResourceManager.GetString("CannotDeleteCategoryInUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You cannot delete the currently logged-in user..
+        /// </summary>
+        public static string CannotDeleteLoggedInUser {
+            get {
+                return ResourceManager.GetString("CannotDeleteLoggedInUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Category Name.
         /// </summary>
         public static string CategoryName {
@@ -493,6 +524,46 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Deleting this agent ({0}) will also delete any dated values entered by this agent, as well as all data about this agent.
+        ///
+        ///Are you sure you wish to delete this agent?.
+        /// </summary>
+        public static string DeleteAgentConfirmation {
+            get {
+                return ResourceManager.GetString("DeleteAgentConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleting record - are you sure?.
+        /// </summary>
+        public static string DeleteAreYouSure {
+            get {
+                return ResourceManager.GetString("DeleteAreYouSure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleting this badge ({0}) will also delete any awards of this badge, which will affect your statistics. Are you sure you wish to delete this badge?.
+        /// </summary>
+        public static string DeleteBadgeMessage {
+            get {
+                return ResourceManager.GetString("DeleteBadgeMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleting this statistic ({0}) will also delete any dated values attached to this statistic.
+        ///
+        ///Are you sure you wish to delete this statistic?.
+        /// </summary>
+        public static string DeleteStatisticConfirmation {
+            get {
+                return ResourceManager.GetString("DeleteStatisticConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Display Order.
         /// </summary>
         public static string DisplayOrder {
@@ -516,6 +587,15 @@ namespace IngressTracker.Properties {
         public static string EnterStatsView {
             get {
                 return ResourceManager.GetString("EnterStatsView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
             }
         }
         
@@ -1032,6 +1112,27 @@ namespace IngressTracker.Properties {
         public static string SchemaUpgrade0To1h {
             get {
                 return ResourceManager.GetString("SchemaUpgrade0To1h", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CREATE TABLE `new_stat` (`id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `description` VARCHAR NOT NULL, `unit` VARCHAR NULL, `category` INT NOT NULL, `predictability` INTEGER NOT NULL, `displayorder` INTEGER NULL DEFAULT NULL, `ap` INTEGER NOT NULL DEFAULT 0, FOREIGN KEY (`category`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE);
+        ///CREATE TABLE `new_badge` (`id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `name` VARCHAR NOT NULL, `stat` INTEGER NULL, `bronze` INTEGER NULL, `silver` INTE [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string SchemaUpgrade1To2 {
+            get {
+                return ResourceManager.GetString("SchemaUpgrade1To2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The schema upgrade failed. The upgrade has been rolled back, and the application will now exit. If this re-occurs, please report this as a bug!
+        ///
+        ///The error was this: {0}.
+        /// </summary>
+        public static string SchemaUpgradeFailed {
+            get {
+                return ResourceManager.GetString("SchemaUpgradeFailed", resourceCulture);
             }
         }
         

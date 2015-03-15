@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="StatisticsStaticViewModel.cs" company="Simon Walker">
-//   Copyright (C) 2014 Simon Walker
+//   Copyright (C) 2015 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 //   documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -22,9 +22,12 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace IngressTracker.ViewModels
 {
+    using System;
     using System.Collections.ObjectModel;
+    using System.Windows;
 
     using IngressTracker.DataModel.Models;
+    using IngressTracker.Persistence.Interfaces;
     using IngressTracker.Properties;
     using IngressTracker.ScreenBase;
     using IngressTracker.Services.Interfaces;
@@ -92,6 +95,63 @@ namespace IngressTracker.ViewModels
             var queryable = this.DatabaseSession.Query<Category>();
             this.categories = new ObservableCollection<Category>(queryable);
             this.NotifyOfPropertyChange(() => this.Categories);
+        }
+
+        /// <summary>
+        /// The pre delete guard.
+        /// </summary>
+        /// <param name="entity">
+        /// The entity.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        protected override bool PreDeleteGuard(IDataEntity entity)
+        {
+            var dataEntity = (Stat)entity;
+
+            var messageBoxText = string.Format(
+                Resources.DeleteStatisticConfirmation,
+                dataEntity.Description);
+
+            var messageBoxResult = MessageBox.Show(
+                messageBoxText,
+                Resources.DeleteAreYouSure,
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Exclamation,
+                MessageBoxResult.No);
+
+            if (messageBoxResult == MessageBoxResult.No)
+            {
+                return true;
+            }
+
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                return false;
+            }
+
+            throw new NotSupportedException();
+        }
+
+        /// <summary>
+        /// The do delete.
+        /// </summary>
+        /// <param name="deletedItem">
+        /// The deleted item.
+        /// </param>
+        protected override void DoDelete(Stat deletedItem)
+        {
+            var badges = this.DatabaseSession.QueryOver<Badge>().Where(x => x.Statistic == deletedItem).List();
+
+            foreach (var badge in badges)
+            {
+                badge.Statistic = null;
+                badge.Awardable = true;
+                this.DatabaseSession.Update(badge);
+            }
+
+            this.DatabaseSession.Delete(deletedItem);
         }
 
         #endregion

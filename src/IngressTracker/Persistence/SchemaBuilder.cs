@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="SchemaBuilder.cs" company="Simon Walker">
-//   Copyright (C) 2014 Simon Walker
+//   Copyright (C) 2015 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 //   documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -22,12 +22,14 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace IngressTracker.Persistence
 {
+    using System;
     using System.Data.SQLite;
+    using System.Diagnostics;
     using System.IO;
 
-    using Caliburn.Micro;
-
     using IngressTracker.Properties;
+
+    using EnumerableExtensions = Caliburn.Micro.EnumerableExtensions;
 
     /// <summary>
     /// The schema builder.
@@ -90,19 +92,35 @@ namespace IngressTracker.Persistence
 
             if (version < 1)
             {
-                File.Copy(this.file, this.file + "-schema" + version);
-                this.PerformUpgradeStage(Resources.SchemaUpgrade0To1a);
-                this.PerformUpgradeStage(Resources.SchemaUpgrade0To1b);
-                this.PerformUpgradeStage(Resources.SchemaUpgrade0To1c);
-                this.PerformUpgradeStage(Resources.SchemaUpgrade0To1d);
-                this.PerformUpgradeStage(Resources.SchemaUpgrade0To1e);
-                this.PerformUpgradeStage(Resources.SchemaUpgrade0To1f);
-                this.PerformUpgradeStage(Resources.SchemaUpgrade0To1g);
+                this.SchemaUpgrade(
+                    version, 
+                    () =>
+                        {
+                            this.PerformUpgradeStage(Resources.SchemaUpgrade0To1a);
+                            this.PerformUpgradeStage(Resources.SchemaUpgrade0To1b);
+                            this.PerformUpgradeStage(Resources.SchemaUpgrade0To1c);
+                            this.PerformUpgradeStage(Resources.SchemaUpgrade0To1d);
+                            this.PerformUpgradeStage(Resources.SchemaUpgrade0To1e);
+                            this.PerformUpgradeStage(Resources.SchemaUpgrade0To1f);
+                            this.PerformUpgradeStage(Resources.SchemaUpgrade0To1g);
 
-                Resources.SchemaUpgrade0To1h.Split('\r', '\n').Apply(this.PerformUpgradeStage);
+                            EnumerableExtensions.Apply(
+                                Resources.SchemaUpgrade0To1h.Split('\r', '\n'), 
+                                this.PerformUpgradeStage);
+                        });
 
-                this.SetSchemaVersion(1);
                 version = 1;
+                this.SetSchemaVersion(version);
+            }
+
+            if (version < 2)
+            {
+                this.SchemaUpgrade(
+                    version, 
+                    () =>
+                    EnumerableExtensions.Apply(Resources.SchemaUpgrade1To2.Split('\r', '\n'), this.PerformUpgradeStage));
+                this.SetSchemaVersion(2);
+                version = 2;
             }
         }
 
@@ -120,6 +138,49 @@ namespace IngressTracker.Persistence
         {
             var cmd = new SQLiteCommand(command, this.connection);
             cmd.ExecuteNonQuery();
+        }
+
+        /// <summary>
+        /// The schema upgrade.
+        /// </summary>
+        /// <param name="currentVersion">
+        /// The current version.
+        /// </param>
+        /// <param name="task">
+        /// The task.
+        /// </param>
+        private void SchemaUpgrade(long currentVersion, Action task)
+        {
+            var backupFileName = this.file + "-schema" + currentVersion;
+
+            if (File.Exists(backupFileName))
+            {
+                File.Delete(backupFileName);
+            }
+
+            File.Copy(this.file, backupFileName);
+            try
+            {
+                task();
+            }
+            catch (Exception ex)
+            {
+                this.connection.Close();
+
+                // Force a GC run to close the file.
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+
+                File.Delete(this.file);
+                File.Move(backupFileName, this.file);
+
+                var errorFile = this.file + "-error.txt";
+
+                File.WriteAllText(errorFile, string.Format(Resources.SchemaUpgradeFailed, ex.Message));
+                Process.Start(errorFile);
+
+                Environment.Exit(1);
+            }
         }
 
         /// <summary>
