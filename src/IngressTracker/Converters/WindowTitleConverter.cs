@@ -55,7 +55,14 @@ namespace IngressTracker.Converters
         /// </returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return string.Format("{0} - {1}", value, Resources.ApplicationName);
+            // ReSharper disable once RedundantAssignment
+            string buildData = string.Empty;
+
+#if DEBUG
+            buildData = " **DEBUG BUILD**";
+#endif
+
+            return string.Format("{0} - {1}{2}", value, Resources.ApplicationName, buildData);
         }
 
         /// <summary>
@@ -76,9 +83,6 @@ namespace IngressTracker.Converters
         /// <returns>
         /// The <see cref="object"/>.
         /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// Not supported
-        /// </exception>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotSupportedException("This operation is not supported");
