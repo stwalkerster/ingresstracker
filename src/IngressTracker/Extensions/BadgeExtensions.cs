@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IBadgeProgressService.cs" company="Simon Walker">
+// <copyright file="BadgeExtensions.cs" company="Simon Walker">
 //   Copyright (C) 2015 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,53 +17,64 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The BadgeProgressService interface.
+//   The badge extensions.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace IngressTracker.Services.Interfaces
+namespace IngressTracker.Extensions
 {
-    using System;
-
     using IngressTracker.DataModel;
     using IngressTracker.DataModel.Models;
 
     /// <summary>
-    /// The BadgeProgressService interface.
+    /// The badge extensions.
     /// </summary>
-    public interface IBadgeProgressService
+    public static class BadgeExtensions
     {
+        #region Public Methods and Operators
+
         /// <summary>
-        /// The get progress.
+        /// The get target.
         /// </summary>
         /// <param name="badge">
         /// The badge.
         /// </param>
-        /// <returns>
-        /// The <see cref="BadgeProgress"/>.
-        /// </returns>
-        BadgeProgress GetProgress(Badge badge);
-
-        /// <summary>
-        /// The get next.
-        /// </summary>
-        /// <param name="count">
-        /// The count.
-        /// </param>
         /// <param name="level">
         /// The level.
         /// </param>
-        /// <param name="weekMode">
-        /// The week mode.
-        /// </param>
         /// <returns>
-        /// The <see cref="DateTime?"/>.
+        /// The <see cref="long?"/>.
         /// </returns>
-        DateTime? GetNext(int count, BadgeLevel level, bool weekMode);
+        public static long? GetNextTarget(this Badge badge, BadgeLevel level)
+        {
+            if (level == BadgeLevel.Locked)
+            {
+                return badge.Bronze;
+            }
 
-        /// <summary>
-        /// The refresh - clears all caches
-        /// </summary>
-        void Refresh();
+            if (level == BadgeLevel.Bronze)
+            {
+                return badge.Silver;
+            }
+
+            if (level == BadgeLevel.Silver)
+            {
+                return badge.Gold;
+            }
+
+            if (level == BadgeLevel.Gold)
+            {
+                return badge.Platinum;
+            }
+
+            if (level == BadgeLevel.Platinum)
+            {
+                return badge.Black;
+            }
+
+            return null;
+        }
+
+        #endregion
     }
 }

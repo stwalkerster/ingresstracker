@@ -22,44 +22,55 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace IngressTracker.DataModel
 {
+    using System;
+
     using IngressTracker.Properties;
 
     /// <summary>
     /// The badge level.
     /// </summary>
-    public class BadgeLevel : DbType<BadgeLevel>
+    public class BadgeLevel : DbType<BadgeLevel>, IComparable<BadgeLevel>
     {
         #region Static Fields
 
         /// <summary>
         /// The black.
         /// </summary>
-        public static readonly BadgeLevel Black = new BadgeLevel("K", Resources.Black);
+        public static readonly BadgeLevel Black = new BadgeLevel("K", Resources.Black, 5);
 
         /// <summary>
         /// The bronze.
         /// </summary>
-        public static readonly BadgeLevel Bronze = new BadgeLevel("B", Resources.Bronze);
+        public static readonly BadgeLevel Bronze = new BadgeLevel("B", Resources.Bronze, 1);
 
         /// <summary>
         /// The gold.
         /// </summary>
-        public static readonly BadgeLevel Gold = new BadgeLevel("G", Resources.Gold);
-
-        /// <summary>
-        /// The platinum.
-        /// </summary>
-        public static readonly BadgeLevel Platinum = new BadgeLevel("P", Resources.Platinum);
-
-        /// <summary>
-        /// The silver.
-        /// </summary>
-        public static readonly BadgeLevel Silver = new BadgeLevel("S", Resources.Silver);
+        public static readonly BadgeLevel Gold = new BadgeLevel("G", Resources.Gold, 3);
 
         /// <summary>
         /// The locked.
         /// </summary>
-        public static readonly BadgeLevel Locked = new BadgeLevel("L", Resources.Locked);
+        public static readonly BadgeLevel Locked = new BadgeLevel("L", Resources.Locked, 0);
+
+        /// <summary>
+        /// The platinum.
+        /// </summary>
+        public static readonly BadgeLevel Platinum = new BadgeLevel("P", Resources.Platinum, 4);
+
+        /// <summary>
+        /// The silver.
+        /// </summary>
+        public static readonly BadgeLevel Silver = new BadgeLevel("S", Resources.Silver, 2);
+
+        #endregion
+
+        #region Fields
+
+        /// <summary>
+        /// The position.
+        /// </summary>
+        private readonly int position;
 
         #endregion
 
@@ -87,9 +98,13 @@ namespace IngressTracker.DataModel
         /// <param name="description">
         /// The description.
         /// </param>
-        private BadgeLevel(string code, string description)
+        /// <param name="position">
+        /// The position.
+        /// </param>
+        private BadgeLevel(string code, string description, int position)
             : base(code)
         {
+            this.position = position;
             this.Description = description;
         }
 
@@ -105,6 +120,76 @@ namespace IngressTracker.DataModel
         #endregion
 
         #region Public Methods and Operators
+
+        /// <summary>
+        /// The &gt;.
+        /// </summary>
+        /// <param name="first">
+        /// The first.
+        /// </param>
+        /// <param name="second">
+        /// The second.
+        /// </param>
+        /// <returns>boolean value</returns>
+        public static bool operator >(BadgeLevel first, BadgeLevel second)
+        {
+            return first.CompareTo(second) > 0;
+        }
+
+        /// <summary>
+        /// The &lt;.
+        /// </summary>
+        /// <param name="first">
+        /// The first.
+        /// </param>
+        /// <param name="second">
+        /// The second.
+        /// </param>
+        /// <returns>boolean value</returns>
+        public static bool operator <(BadgeLevel first, BadgeLevel second)
+        {
+            return first.CompareTo(second) < 0;
+        }
+
+        /// <summary>
+        /// Compares the current object with another object of the same type.
+        /// </summary>
+        /// <returns>
+        /// A value that indicates the relative order of the objects being compared. The return value has the following meanings: 
+        ///     Value Meaning Less than zero 
+        ///         This object is less than the <paramref name="other"/> parameter.
+        ///     Zero 
+        ///         This object is equal to <paramref name="other"/>.
+        ///     Greater than zero
+        ///         This object is greater than <paramref name="other"/>. 
+        /// </returns>
+        /// <param name="other">
+        /// An object to compare with this object.
+        /// </param>
+        public int CompareTo(BadgeLevel other)
+        {
+            if (other == null)
+            {
+                return 1;
+            }
+
+            if (this.position < other.position)
+            {
+                return -1;
+            }
+
+            if (this.position == other.position)
+            {
+                return 0;
+            }
+
+            if (this.position > other.position)
+            {
+                return 1;
+            }
+
+            throw new InvalidOperationException();
+        }
 
         /// <summary>
         /// The to string.

@@ -115,6 +115,15 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AP Target.
+        /// </summary>
+        public static string ApTarget {
+            get {
+                return ResourceManager.GetString("ApTarget", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Awardable Badges.
         /// </summary>
         public static string AwardableBadges {
@@ -758,6 +767,15 @@ namespace IngressTracker.Properties {
         public static string LevelStaticView {
             get {
                 return ResourceManager.GetString("LevelStaticView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Level Target.
+        /// </summary>
+        public static string LevelTarget {
+            get {
+                return ResourceManager.GetString("LevelTarget", resourceCulture);
             }
         }
         

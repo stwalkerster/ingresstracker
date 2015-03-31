@@ -26,10 +26,12 @@ namespace IngressTracker.DataModel
 
     using IngressTracker.DataModel.Models;
 
+    using IngressTracker.Extensions;
+
     /// <summary>
     /// The badge progress.
     /// </summary>
-    public class BadgeProgress
+    public class BadgeProgress : StatisticProgress
     {
         #region Fields
 
@@ -37,21 +39,6 @@ namespace IngressTracker.DataModel
         /// The badge.
         /// </summary>
         private readonly Badge badge;
-
-        /// <summary>
-        /// The current value.
-        /// </summary>
-        private readonly ValueEntry currentValue;
-
-        /// <summary>
-        /// The month value.
-        /// </summary>
-        private readonly ValueEntry monthValue;
-
-        /// <summary>
-        /// The week value.
-        /// </summary>
-        private readonly ValueEntry weekValue;
 
         #endregion
 
@@ -73,11 +60,24 @@ namespace IngressTracker.DataModel
         /// The month Value.
         /// </param>
         public BadgeProgress(Badge badge, ValueEntry currentValue, ValueEntry weekValue, ValueEntry monthValue)
+            : base(currentValue, monthValue, weekValue)
         {
             this.badge = badge;
-            this.currentValue = currentValue;
-            this.weekValue = weekValue;
-            this.monthValue = monthValue;
+        }
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="BadgeProgress"/> class.
+        /// </summary>
+        /// <param name="badge">
+        /// The badge.
+        /// </param>
+        /// <param name="progress">
+        /// The progress.
+        /// </param>
+        public BadgeProgress(Badge badge, StatisticProgress progress)
+            : base(progress.CurrentValue, progress.MonthValue, progress.WeekValue)
+        {
+            this.badge = badge;
         }
 
         #endregion
@@ -133,17 +133,6 @@ namespace IngressTracker.DataModel
                 }
 
                 return BadgeLevel.Locked;
-            }
-        }
-
-        /// <summary>
-        /// Gets the current position.
-        /// </summary>
-        public long CurrentPosition
-        {
-            get
-            {
-                return this.currentValue == null ? 0 : this.currentValue.Value.GetValueOrDefault(0);
             }
         }
 
@@ -242,7 +231,7 @@ namespace IngressTracker.DataModel
         /// <summary>
         /// Gets the next target.
         /// </summary>
-        public long? NextTarget
+        public override long? NextTarget
         {
             get
             {
@@ -251,123 +240,23 @@ namespace IngressTracker.DataModel
                     throw new ArgumentOutOfRangeException();
                 }
 
-                if (this.CurrentLevel == BadgeLevel.Locked)
-                {
-                    return this.Badge.Bronze;
-                }
-
-                if (this.CurrentLevel == BadgeLevel.Bronze)
-                {
-                    return this.Badge.Silver;
-                }
-
-                if (this.CurrentLevel == BadgeLevel.Silver)
-                {
-                    return this.Badge.Gold;
-                }
-
-                if (this.CurrentLevel == BadgeLevel.Gold)
-                {
-                    return this.Badge.Platinum;
-                }
-
-                if (this.CurrentLevel == BadgeLevel.Platinum)
-                {
-                    return this.Badge.Black;
-                }
-
-                if (this.CurrentLevel == BadgeLevel.Black)
-                {
-                    return null;
-                }
-
-                throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        /// <summary>
-        /// Gets the next target date month.
-        /// </summary>
-        public DateTime? NextTargetDateMonth
-        {
-            get
-            {
-                if (this.monthValue == null || this.NextTarget == null)
-                {
-                    return null;
-                }
-
-                var prediction = this.PredictValue(this.monthValue);
-
-                if (prediction == null)
-                {
-                    return null;
-                }
-
-                return this.monthValue.Timestamp.Add(prediction.Value);
-            }
-        }
-
-        /// <summary>
-        /// Gets the next target date week.
-        /// </summary>
-        public DateTime? NextTargetDateWeek
-        {
-            get
-            {
-                if (this.weekValue == null || this.NextTarget == null)
-                {
-                    return null;
-                }
-
-                var prediction = this.PredictValue(this.weekValue);
-
-                if (prediction == null)
-                {
-                    return null;
-                }
-
-                return this.weekValue.Timestamp.Add(prediction.Value);
+                return this.Badge.GetNextTarget(this.CurrentLevel);
             }
         }
 
         #endregion
 
-        #region Methods
+        #region Public Methods and Operators
 
         /// <summary>
-        /// The predict value.
+        /// The clone.
         /// </summary>
-        /// <param name="historical">
-        /// The historical.
-        /// </param>
         /// <returns>
-        /// The <see cref="TimeSpan"/> from the historical position.
+        /// The <see cref="object"/>.
         /// </returns>
-        private TimeSpan? PredictValue(ValueEntry historical)
+        public override object Clone()
         {
-            // Okay. Maths time.
-            // y = mx + b.
-            // Let x = deltaTimeTicks, 0
-            long deltaTimeTicks = (this.currentValue.Timestamp - historical.Timestamp).Ticks;
-
-            // let y = deltaValue, 0
-            long deltaValue = this.currentValue.Value.GetValueOrDefault(0) - historical.Value.GetValueOrDefault(0);
-
-            if (deltaValue == 0)
-            {
-                // urm... nothing's happened. Return null so we don't get a nullrefexception.
-                return null;
-            }
-
-            long requiredDelta = this.NextTarget.GetValueOrDefault(0) - this.currentValue.Value.GetValueOrDefault(0);
-
-            // y = mx + b. deltas - point is (0,0). 0 = 0m + b, b = 0.
-            // y = mx, m = y/x
-            decimal m = (decimal)deltaValue / deltaTimeTicks;
-
-            // y = mx + b, requiredValue / m = prediction
-            return new TimeSpan((long)Math.Ceiling(requiredDelta / m));
+            return new BadgeProgress(this.badge, this.CurrentValue, this.MonthValue, this.WeekValue);
         }
 
         #endregion

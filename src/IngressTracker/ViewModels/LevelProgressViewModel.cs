@@ -22,19 +22,18 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace IngressTracker.ViewModels
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
 
     using IngressTracker.DataModel;
     using IngressTracker.DataModel.Models;
+    using IngressTracker.Extensions;
     using IngressTracker.Properties;
     using IngressTracker.ScreenBase;
     using IngressTracker.Services.Interfaces;
     using IngressTracker.ViewModels.Interfaces;
 
     using NHibernate;
-    using NHibernate.Criterion;
 
     /// <summary>
     /// The level progress view model.
@@ -47,6 +46,11 @@ namespace IngressTracker.ViewModels
         /// The badge progress service.
         /// </summary>
         private readonly IBadgeProgressService badgeProgressService;
+
+        /// <summary>
+        /// The statistic progress service.
+        /// </summary>
+        private readonly IStatisticProgressService statisticProgressService;
 
         /// <summary>
         /// The levels.
@@ -69,13 +73,18 @@ namespace IngressTracker.ViewModels
         /// <param name="badgeProgressService">
         /// The badge Progress Service.
         /// </param>
+        /// <param name="statisticProgressService">
+        /// The statistic Progress Service.
+        /// </param>
         public LevelProgressViewModel(
             ISession databaseSession, 
             ILoginService loginService, 
-            IBadgeProgressService badgeProgressService)
+            IBadgeProgressService badgeProgressService,
+            IStatisticProgressService statisticProgressService)
             : base(Resources.LevelProgressView, databaseSession, loginService)
         {
             this.badgeProgressService = badgeProgressService;
+            this.statisticProgressService = statisticProgressService;
         }
 
         #endregion
@@ -132,10 +141,36 @@ namespace IngressTracker.ViewModels
         /// </summary>
         protected override void RefreshDataAsync()
         {
+            this.badgeProgressService.Refresh();
+
+            Stat apstat = this.DatabaseSession.QueryOver<Stat>().Where(s => s.IsAccessPointsStat).SingleOrDefault();
+            var approgress = this.statisticProgressService.GetStatisticProgress(this.LoginService.Agent, apstat);
+            this.AccessPoints = approgress.CurrentPosition;
+
+            var badges =
+                this.DatabaseSession.QueryOver<Badge>()
+                    .Where(x => !x.Awardable)
+                    .List()
+                    .Select(x => this.badgeProgressService.GetProgress(x))
+                    .ToList();
+
+            var awardedBadges =
+                this.DatabaseSession.QueryOver<BadgeAward>().Where(x => x.Agent == this.LoginService.Agent).List();
+
+            this.BlackCount = badges.Count(x => x.CurrentLevel == BadgeLevel.Black)
+                              + awardedBadges.Count(x => x.Level == BadgeLevel.Black);
+            this.PlatinumCount = this.BlackCount + badges.Count(x => x.CurrentLevel == BadgeLevel.Platinum)
+                                 + awardedBadges.Count(x => x.Level == BadgeLevel.Platinum);
+            this.GoldCount = this.PlatinumCount + badges.Count(x => x.CurrentLevel == BadgeLevel.Gold)
+                             + awardedBadges.Count(x => x.Level == BadgeLevel.Gold);
+            this.SilverCount = this.GoldCount + badges.Count(x => x.CurrentLevel == BadgeLevel.Silver)
+                               + awardedBadges.Count(x => x.Level == BadgeLevel.Silver);
+            this.BronzeCount = this.SilverCount + badges.Count(x => x.CurrentLevel == BadgeLevel.Bronze)
+                               + awardedBadges.Count(x => x.Level == BadgeLevel.Bronze);
+
             var levelProgressList =
                 this.DatabaseSession.QueryOver<Level>().List().Select(x => new LevelProgress(x, this.LoginService));
-
-            var levels = new List<LevelProgress>();
+            var levelProgresses = new List<LevelProgress>();
 
             foreach (var levelProgress in levelProgressList)
             {
@@ -163,48 +198,60 @@ namespace IngressTracker.ViewModels
                     progress.LastBlack = lastLevel.BlackBadges;
                 }
 
-                levels.Add(progress);
+                progress.ApProgress = (StatisticProgress)approgress.Clone();
+                progress.ApProgress.NextTarget = progress.AccessPoints;
+
+                progress.LevelTargetMonth = progress.ApProgress.NextTargetDateMonth;
+                progress.LevelTargetWeek = progress.ApProgress.NextTargetDateWeek;
+
+                if (progress.SilverBadges > this.SilverCount)
+                {
+                    var missing = progress.SilverBadges - this.SilverCount;
+                    progress.LevelTargetWeek =
+                        progress.LevelTargetWeek.PropagatePrediction(
+                            this.badgeProgressService.GetNext(missing, BadgeLevel.Silver, true));
+                    progress.LevelTargetMonth =
+                        progress.LevelTargetMonth.PropagatePrediction(
+                            this.badgeProgressService.GetNext(missing, BadgeLevel.Silver, false));
+                }
+
+                if (progress.GoldBadges > this.GoldCount)
+                {
+                    var missing = progress.GoldBadges - this.GoldCount;
+                    progress.LevelTargetWeek =
+                        progress.LevelTargetWeek.PropagatePrediction(
+                            this.badgeProgressService.GetNext(missing, BadgeLevel.Gold, true));
+                    progress.LevelTargetMonth =
+                        progress.LevelTargetMonth.PropagatePrediction(
+                            this.badgeProgressService.GetNext(missing, BadgeLevel.Gold, false));
+                }
+
+                if (progress.PlatinumBadges > this.PlatinumCount)
+                {
+                    var missing = progress.PlatinumBadges - this.PlatinumCount;
+                    progress.LevelTargetWeek =
+                        progress.LevelTargetWeek.PropagatePrediction(
+                            this.badgeProgressService.GetNext(missing, BadgeLevel.Platinum, true));
+                    progress.LevelTargetMonth =
+                        progress.LevelTargetMonth.PropagatePrediction(
+                            this.badgeProgressService.GetNext(missing, BadgeLevel.Platinum, false));
+                }
+
+                if (progress.BlackBadges > this.BlackCount)
+                {
+                    var missing = progress.BlackBadges - this.BlackCount;
+                    progress.LevelTargetWeek =
+                        progress.LevelTargetWeek.PropagatePrediction(
+                            this.badgeProgressService.GetNext(missing, BadgeLevel.Black, true));
+                    progress.LevelTargetMonth =
+                        progress.LevelTargetMonth.PropagatePrediction(
+                            this.badgeProgressService.GetNext(missing, BadgeLevel.Black, false));
+                }
+
+                levelProgresses.Add(progress);
             }
 
-            var badges =
-                this.DatabaseSession.QueryOver<Badge>()
-                    .Where(x => !x.Awardable)
-                    .List()
-                    .Select(x => this.badgeProgressService.GetProgress(x))
-                    .ToList();
-
-            var awardedBadges =
-                this.DatabaseSession.QueryOver<BadgeAward>().Where(x => x.Agent == this.LoginService.Agent).List();
-
-            this.BlackCount = badges.Count(x => x.CurrentLevel == BadgeLevel.Black)
-                              + awardedBadges.Count(x => x.Level == BadgeLevel.Black);
-            this.PlatinumCount = this.BlackCount + badges.Count(x => x.CurrentLevel == BadgeLevel.Platinum)
-                                 + awardedBadges.Count(x => x.Level == BadgeLevel.Platinum);
-            this.GoldCount = this.PlatinumCount + badges.Count(x => x.CurrentLevel == BadgeLevel.Gold)
-                             + awardedBadges.Count(x => x.Level == BadgeLevel.Gold);
-            this.SilverCount = this.GoldCount + badges.Count(x => x.CurrentLevel == BadgeLevel.Silver)
-                               + awardedBadges.Count(x => x.Level == BadgeLevel.Silver);
-            this.BronzeCount = this.SilverCount + badges.Count(x => x.CurrentLevel == BadgeLevel.Bronze)
-                               + awardedBadges.Count(x => x.Level == BadgeLevel.Bronze);
-
-            var agent = this.LoginService.Agent;
-
-            Stat apstat = this.DatabaseSession.QueryOver<Stat>().Where(s => s.IsAccessPointsStat).SingleOrDefault();
-
-            QueryOver<ValueEntry, ValueEntry> newestStat =
-                QueryOver.Of<ValueEntry>()
-                    .SelectList(p => p.SelectMax(x => x.Timestamp))
-                    .Where(c => c.Agent == agent && c.Statistic == apstat);
-
-            ValueEntry value =
-                this.DatabaseSession.QueryOver<ValueEntry>()
-                    .Where(c => c.Agent == agent && c.Statistic == apstat)
-                    .WithSubquery.Where(x => x.Timestamp == newestStat.As<DateTime>())
-                    .SingleOrDefault();
-
-            this.AccessPoints = value == null ? 0 : value.Value.GetValueOrDefault();
-
-            this.levels = levels;
+            this.levels = levelProgresses;
         }
 
         /// <summary>

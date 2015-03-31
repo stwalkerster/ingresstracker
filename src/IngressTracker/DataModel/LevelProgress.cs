@@ -22,6 +22,8 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace IngressTracker.DataModel
 {
+    using System;
+
     using IngressTracker.DataModel.Models;
     using IngressTracker.Services.Interfaces;
 
@@ -75,6 +77,11 @@ namespace IngressTracker.DataModel
                 return this.level.AccessPoints;
             }
         }
+
+        /// <summary>
+        /// Gets or sets the ap progress.
+        /// </summary>
+        public StatisticProgress ApProgress { get; set; }
 
         /// <summary>
         /// Gets the black badges.
@@ -133,6 +140,16 @@ namespace IngressTracker.DataModel
                 return this.level.LevelNumber;
             }
         }
+
+        /// <summary>
+        /// Gets or sets the level target month.
+        /// </summary>
+        public DateTime? LevelTargetMonth { get; set; }
+
+        /// <summary>
+        /// Gets or sets the level target week.
+        /// </summary>
+        public DateTime? LevelTargetWeek { get; set; }
 
         /// <summary>
         /// Gets the login service.

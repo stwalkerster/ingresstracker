@@ -9,4 +9,5 @@
     <converters:PercentageConverter x:Key="PercentageConverter" />
     <converters:MinimumConverter x:Key="MinimumConverter" />
     <converters:VisibilityGreaterThanEqualToConverter x:Key="VisibilityGreaterThanEqualToConverter" />
+    <converters:HidePastPredictionConverter x:Key="HidePastPredictionConverter" />
 </ResourceDictionary>

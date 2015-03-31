@@ -20,18 +20,19 @@
 //   The badge progress service.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace IngressTracker.Services
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     using IngressTracker.DataModel;
     using IngressTracker.DataModel.Models;
+    using IngressTracker.Extensions;
     using IngressTracker.Properties;
     using IngressTracker.Services.Interfaces;
 
     using NHibernate;
-    using NHibernate.Criterion;
 
     /// <summary>
     /// The badge progress service.
@@ -50,6 +51,16 @@ namespace IngressTracker.Services
         /// </summary>
         private readonly ILoginService loginService;
 
+        /// <summary>
+        /// The statistic progress service.
+        /// </summary>
+        private readonly IStatisticProgressService statisticProgressService;
+
+        /// <summary>
+        /// The badge progresses.
+        /// </summary>
+        private IDictionary<Badge, BadgeProgress> badgeProgresses = new Dictionary<Badge, BadgeProgress>();
+
         #endregion
 
         #region Constructors and Destructors
@@ -60,18 +71,68 @@ namespace IngressTracker.Services
         /// <param name="loginService">
         /// The login service.
         /// </param>
-        /// <param name="databaseSession">
-        /// The database session.
+        /// <param name="statisticProgressService">
+        /// The statistic Progress Service.
         /// </param>
-        public BadgeProgressService(ILoginService loginService, ISession databaseSession)
+        /// <param name="databaseSession">
+        /// The database Session.
+        /// </param>
+        public BadgeProgressService(
+            ILoginService loginService, 
+            IStatisticProgressService statisticProgressService, 
+            ISession databaseSession)
         {
             this.loginService = loginService;
+            this.statisticProgressService = statisticProgressService;
             this.databaseSession = databaseSession;
         }
 
         #endregion
 
         #region Public Methods and Operators
+
+        /// <summary>
+        /// The get next.
+        /// </summary>
+        /// <param name="count">
+        /// The count.
+        /// </param>
+        /// <param name="level">
+        /// The level.
+        /// </param>
+        /// <param name="weekMode">
+        /// The week Mode.
+        /// </param>
+        /// <returns>
+        /// The <see cref="DateTime"/>.
+        /// </returns>
+        public DateTime? GetNext(int count, BadgeLevel level, bool weekMode)
+        {
+            this.UpdateProgressCache();
+
+            var badgeDates =
+                this.badgeProgresses.Values.Where(x => x.CurrentLevel < level)
+                    .Select(
+                        x =>
+                        new StatisticProgress(x.CurrentValue, x.MonthValue, x.WeekValue)
+                            {
+                                NextTarget =
+                                    x.Badge.GetNextTarget(
+                                        level)
+                            })
+                    .Select(x => weekMode ? x.NextTargetDateWeek : x.NextTargetDateMonth)
+                    .Where(x => x.HasValue)
+                    .OrderBy(x => x.GetValueOrDefault())
+                    .ToList();
+
+            if (badgeDates.Count < count)
+            {
+                // not enough to predict
+                return null;
+            }
+
+            return badgeDates.Take(count).Max();
+        }
 
         /// <summary>
         /// The get progress.
@@ -89,51 +150,58 @@ namespace IngressTracker.Services
                 throw new ArgumentOutOfRangeException("badge", Resources.BadgeIsAwardable);
             }
 
-            var agent = this.loginService.Agent;
-            var statistic = badge.Statistic;
+            this.UpdateProgressCache();
 
-            QueryOver<ValueEntry, ValueEntry> newestStat =
-                QueryOver.Of<ValueEntry>()
-                    .SelectList(p => p.SelectMax(x => x.Timestamp))
-                    .Where(c => c.Agent == agent && c.Statistic == statistic);
-
-            ValueEntry value =
-                this.databaseSession.QueryOver<ValueEntry>()
-                    .Where(c => c.Agent == agent && c.Statistic == statistic)
-                    .WithSubquery.Where(x => x.Timestamp == newestStat.As<DateTime>())
-                    .SingleOrDefault();
-
-            if (value == null)
+            if (this.badgeProgresses.ContainsKey(badge))
             {
-                return new BadgeProgress(badge, null, null, null);
+                return this.badgeProgresses[badge];
             }
 
-            var weekTime = value.Timestamp.AddDays(-7);
-            var monthTime = value.Timestamp.AddDays(-28);
+            return this.QueryBadgeProgress(badge);
+        }
 
-            QueryOver<ValueEntry, ValueEntry> week =
-                QueryOver.Of<ValueEntry>()
-                    .SelectList(p => p.SelectMax(x => x.Timestamp))
-                    .Where(c => c.Agent == agent && c.Statistic == statistic && c.Timestamp < weekTime);
+        /// <summary>
+        /// The refresh.
+        /// </summary>
+        public void Refresh()
+        {
+            this.badgeProgresses = null;
+        }
 
-            QueryOver<ValueEntry, ValueEntry> month =
-                QueryOver.Of<ValueEntry>()
-                    .SelectList(p => p.SelectMax(x => x.Timestamp))
-                    .Where(c => c.Agent == agent && c.Statistic == statistic && c.Timestamp < monthTime);
+        #endregion
 
-            ValueEntry weekValue =
-                this.databaseSession.QueryOver<ValueEntry>()
-                    .Where(c => c.Agent == agent && c.Statistic == statistic)
-                    .WithSubquery.Where(x => x.Timestamp == week.As<DateTime>())
-                    .SingleOrDefault();
+        #region Methods
 
-            ValueEntry monthValue =
-                this.databaseSession.QueryOver<ValueEntry>()
-                    .Where(c => c.Agent == agent && c.Statistic == statistic)
-                    .WithSubquery.Where(x => x.Timestamp == month.As<DateTime>())
-                    .SingleOrDefault();
-            
-            return new BadgeProgress(badge, value, weekValue, monthValue);
+        /// <summary>
+        /// The query badge progress.
+        /// </summary>
+        /// <param name="badge">
+        /// The badge.
+        /// </param>
+        /// <returns>
+        /// The <see cref="BadgeProgress"/>.
+        /// </returns>
+        private BadgeProgress QueryBadgeProgress(Badge badge)
+        {
+            return new BadgeProgress(
+                badge, 
+                this.statisticProgressService.GetStatisticProgress(this.loginService.Agent, badge.Statistic));
+        }
+
+        /// <summary>
+        /// The update progress cache.
+        /// </summary>
+        private void UpdateProgressCache()
+        {
+            if (this.badgeProgresses == null)
+            {
+                this.badgeProgresses =
+                    this.databaseSession.QueryOver<Badge>()
+                        .Where(x => !x.Awardable)
+                        .List()
+                        .Select(this.QueryBadgeProgress)
+                        .ToDictionary(x => x.Badge);
+            }
         }
 
         #endregion

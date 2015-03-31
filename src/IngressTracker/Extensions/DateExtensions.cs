@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IBadgeProgressService.cs" company="Simon Walker">
+// <copyright file="DateExtensions.cs" company="Simon Walker">
 //   Copyright (C) 2015 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,53 +17,44 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The BadgeProgressService interface.
+//   The date extensions.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace IngressTracker.Services.Interfaces
+namespace IngressTracker.Extensions
 {
     using System;
-
-    using IngressTracker.DataModel;
-    using IngressTracker.DataModel.Models;
+    using System.Linq;
 
     /// <summary>
-    /// The BadgeProgressService interface.
+    /// The date extensions.
     /// </summary>
-    public interface IBadgeProgressService
+    public static class DateExtensions
     {
-        /// <summary>
-        /// The get progress.
-        /// </summary>
-        /// <param name="badge">
-        /// The badge.
-        /// </param>
-        /// <returns>
-        /// The <see cref="BadgeProgress"/>.
-        /// </returns>
-        BadgeProgress GetProgress(Badge badge);
+        #region Public Methods and Operators
 
         /// <summary>
-        /// The get next.
+        /// The propagate prediction.
         /// </summary>
-        /// <param name="count">
-        /// The count.
+        /// <param name="currentPrediction">
+        /// The current prediction.
         /// </param>
-        /// <param name="level">
-        /// The level.
-        /// </param>
-        /// <param name="weekMode">
-        /// The week mode.
+        /// <param name="newPrediction">
+        /// The new prediction.
         /// </param>
         /// <returns>
         /// The <see cref="DateTime?"/>.
         /// </returns>
-        DateTime? GetNext(int count, BadgeLevel level, bool weekMode);
+        public static DateTime? PropagatePrediction(this DateTime? currentPrediction, DateTime? newPrediction)
+        {
+            if (currentPrediction == null || newPrediction == null)
+            {
+                return null;
+            }
 
-        /// <summary>
-        /// The refresh - clears all caches
-        /// </summary>
-        void Refresh();
+            return new[] { currentPrediction, newPrediction }.Max();
+        }
+
+        #endregion
     }
 }

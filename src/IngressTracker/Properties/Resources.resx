@@ -1387,4 +1387,10 @@ Are you sure you wish to delete this statistic?</value>
   <data name="CannotDeleteLoggedInUser" xml:space="preserve">
     <value>You cannot delete the currently logged-in user.</value>
   </data>
+  <data name="ApTarget" xml:space="preserve">
+    <value>AP Target</value>
+  </data>
+  <data name="LevelTarget" xml:space="preserve">
+    <value>Level Target</value>
+  </data>
 </root>

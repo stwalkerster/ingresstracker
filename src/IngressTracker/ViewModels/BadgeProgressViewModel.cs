@@ -118,6 +118,8 @@ namespace IngressTracker.ViewModels
         {
             var agent = this.LoginService.Agent;
 
+            this.badgeProgressService.Refresh();
+
             this.badges =
                 this.DatabaseSession.QueryOver<Badge>()
                     .Where(x => !x.Awardable)

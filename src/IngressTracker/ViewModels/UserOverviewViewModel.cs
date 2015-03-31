@@ -322,6 +322,8 @@ namespace IngressTracker.ViewModels
         /// </summary>
         public void RefreshData()
         {
+            this.badgeProgressService.Refresh();
+
             var badges =
                 this.DatabaseSession.QueryOver<Badge>()
                     .Where(x => !x.Awardable)

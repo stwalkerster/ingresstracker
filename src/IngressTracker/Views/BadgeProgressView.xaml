@@ -63,7 +63,7 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border x:Name="ItemBorder" Width="600" Margin="5" BorderThickness="1" BorderBrush="Black" Background="#E9E9E9">
+                                <Border x:Name="ItemBorder" Width="600" Margin="5" Style="{StaticResource ItemBorderStyle}">
                                     <Grid x:Name="ItemGrid">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto" />

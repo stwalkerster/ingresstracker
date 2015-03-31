@@ -1,5 +1,5 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IBadgeProgressService.cs" company="Simon Walker">
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="IStatisticProgressService.cs" company="Simon Walker">
 //   Copyright (C) 2015 Simon Walker
 //   
 //   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,53 +17,36 @@
 //   SOFTWARE.
 // </copyright>
 // <summary>
-//   The BadgeProgressService interface.
+//   The StatisticProgressService interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace IngressTracker.Services.Interfaces
 {
-    using System;
-
     using IngressTracker.DataModel;
     using IngressTracker.DataModel.Models;
 
     /// <summary>
-    /// The BadgeProgressService interface.
+    /// The StatisticProgressService interface.
     /// </summary>
-    public interface IBadgeProgressService
+    public interface IStatisticProgressService
     {
-        /// <summary>
-        /// The get progress.
-        /// </summary>
-        /// <param name="badge">
-        /// The badge.
-        /// </param>
-        /// <returns>
-        /// The <see cref="BadgeProgress"/>.
-        /// </returns>
-        BadgeProgress GetProgress(Badge badge);
+        #region Public Methods and Operators
 
         /// <summary>
-        /// The get next.
+        /// The get statistic progress.
         /// </summary>
-        /// <param name="count">
-        /// The count.
+        /// <param name="agent">
+        /// The agent.
         /// </param>
-        /// <param name="level">
-        /// The level.
-        /// </param>
-        /// <param name="weekMode">
-        /// The week mode.
+        /// <param name="statistic">
+        /// The statistic.
         /// </param>
         /// <returns>
-        /// The <see cref="DateTime?"/>.
+        /// The <see cref="StatisticProgress"/>.
         /// </returns>
-        DateTime? GetNext(int count, BadgeLevel level, bool weekMode);
+        StatisticProgress GetStatisticProgress(User agent, Stat statistic);
 
-        /// <summary>
-        /// The refresh - clears all caches
-        /// </summary>
-        void Refresh();
+        #endregion
     }
 }

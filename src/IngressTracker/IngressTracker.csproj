@@ -130,6 +130,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Extensions\BadgeExtensions.cs" />
     <Compile Include="Controls\Badge.xaml.cs">
       <DependentUpon>Badge.xaml</DependentUpon>
     </Compile>
@@ -145,6 +146,7 @@
     <Compile Include="Converters\DateFormattingConverter.cs" />
     <Compile Include="Converters\DebugConverter.cs" />
     <Compile Include="Converters\EqualityToVisibilityConverter.cs" />
+    <Compile Include="Converters\HidePastPredictionConverter.cs" />
     <Compile Include="Converters\HideWhenNullConverter.cs" />
     <Compile Include="Converters\InverseBooleanConverter.cs" />
     <Compile Include="Converters\MinimumConverter.cs" />
@@ -168,7 +170,11 @@
     <Compile Include="DataModel\Models\User.cs" />
     <Compile Include="DataModel\Models\ValueEntry.cs" />
     <Compile Include="DataModel\NewValueEntryContainer.cs" />
+    <Compile Include="DataModel\StatisticProgress.cs" />
+    <Compile Include="Extensions\DateExtensions.cs" />
     <Compile Include="ScreenBase\DataScreenBase.cs" />
+    <Compile Include="Services\Interfaces\IStatisticProgressService.cs" />
+    <Compile Include="Services\StatisticProgressService.cs" />
     <Compile Include="Validation\ValidationHelper.cs" />
     <Compile Include="Validation\Validators\BadgeAwardValidator.cs" />
     <Compile Include="Helpers\PasswordHelper.cs" />

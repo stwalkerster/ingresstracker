@@ -276,4 +276,10 @@
         <Setter Property="Template" Value="{StaticResource RevealExpanderTemp}" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
     </Style>
+    
+    <Style x:Key="ItemBorderStyle" TargetType="Border">
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="Black" />
+        <Setter Property="Background" Value="#E9E9E9" />
+    </Style>
 </ResourceDictionary>
