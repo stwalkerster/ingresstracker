@@ -6,6 +6,7 @@
              xmlns:dataModel="clr-namespace:IngressTracker.DataModel"
              xmlns:properties="clr-namespace:IngressTracker.Properties"
              xmlns:controls="clr-namespace:IngressTracker.Controls"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
@@ -30,6 +31,6 @@
                 <DataGridCheckBoxColumn Header="{x:Static properties:Resources.UserStaticDataAdmin}" Binding="{Binding StaticDataAdmin}" />
             </DataGrid.Columns>
         </DataGrid>
-        <controls:LoadingIndicator Visibility="{Binding BackgroundInProgress, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <xctk:BusyIndicator IsBusy="{Binding BackgroundInProgress}" />
     </Grid>
 </UserControl>

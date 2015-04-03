@@ -6,7 +6,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              xmlns:properties="clr-namespace:IngressTracker.Properties"
-             xmlns:controls="clr-namespace:IngressTracker.Controls">
+             xmlns:controls="clr-namespace:IngressTracker.Controls"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
     <Grid>
         <DataGrid Style="{StaticResource StaticDataScreenDataGridStyle}">
             <DataGrid.RowValidationRules>
@@ -17,6 +18,6 @@
                 <DataGridTextColumn Header="{x:Static properties:Resources.DisplayOrder}" Binding="{Binding DisplayOrder}" />
             </DataGrid.Columns>
         </DataGrid>
-        <controls:LoadingIndicator Visibility="{Binding BackgroundInProgress, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <xctk:BusyIndicator IsBusy="{Binding BackgroundInProgress}" />
     </Grid>
 </UserControl>

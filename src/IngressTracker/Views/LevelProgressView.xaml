@@ -7,6 +7,7 @@
              xmlns:markupExtensions="clr-namespace:IngressTracker.MarkupExtensions"
              xmlns:views="clr-namespace:IngressTracker.Views"
              xmlns:properties="clr-namespace:IngressTracker.Properties"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" x:Name="View"
              d:DesignHeight="500" d:DesignWidth="620">
 
@@ -223,6 +224,6 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
-        <controls:LoadingIndicator Visibility="{Binding BackgroundInProgress, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <xctk:BusyIndicator IsBusy="{Binding BackgroundInProgress}" />
     </Grid>
 </UserControl>

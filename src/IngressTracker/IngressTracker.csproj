@@ -158,9 +158,6 @@
     <Compile Include="Controls\LevelIndicator.xaml.cs">
       <DependentUpon>LevelIndicator.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\LoadingIndicator.xaml.cs">
-      <DependentUpon>LoadingIndicator.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Converters\DateFormattingConverter.cs" />
     <Compile Include="Converters\DebugConverter.cs" />
     <Compile Include="Converters\EqualityToVisibilityConverter.cs" />
@@ -328,10 +325,6 @@
     <Page Include="Controls\LevelIndicator.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\LoadingIndicator.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Converters\Converters.xaml">
       <SubType>Designer</SubType>
