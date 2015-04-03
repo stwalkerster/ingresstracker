@@ -141,6 +141,11 @@ namespace IngressTracker.ViewModels
                                                    Name = "Fluent Validation", 
                                                    Licence = string.Format(Resources.LicApache2)
                                                }, 
+                                           new LibraryLicence
+                                               {
+                                                   Name = "Extended WPF Toolkit Community Edition", 
+                                                   Licence = string.Format(Resources.LicMSPL)
+                                               }, 
                                        };
         }
 
