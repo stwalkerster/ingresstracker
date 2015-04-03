@@ -22,11 +22,11 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace IngressTracker.Startup.Facilities
 {
-    using System;
     using System.Data.SQLite;
     using System.IO;
 
     using Castle.MicroKernel.Facilities;
+    using Castle.MicroKernel.Registration;
 
     using FluentNHibernate.Cfg;
     using FluentNHibernate.Cfg.Db;
@@ -36,15 +36,49 @@ namespace IngressTracker.Startup.Facilities
     using IngressTracker.Persistence.Proxy;
 
     using NHibernate;
+    using NHibernate.Cfg;
 
-    using Component = Castle.MicroKernel.Registration.Component;
-    using Configuration = NHibernate.Cfg.Configuration;
+    using Environment = System.Environment;
 
     /// <summary>
     /// The persistence facility.
     /// </summary>
     public class PersistenceFacility : AbstractFacility
     {
+        #region Public Properties
+
+        /// <summary>
+        /// Gets the data file path.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public static string DataFilePath
+        {
+            get
+            {
+                var appDataFolder = "IngressTracker";
+#if DEBUG
+                appDataFolder += "-DEBUG";
+#endif
+
+                var appDataPath = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), 
+                    appDataFolder);
+
+                var appData = new DirectoryInfo(appDataPath);
+                if (!appData.Exists)
+                {
+                    appData.Create();
+                }
+
+                var dataFilePath = Path.Combine(appDataPath, "data.s3db");
+                return dataFilePath;
+            }
+        }
+
+        #endregion
+
         #region Public Methods and Operators
 
         /// <summary>
@@ -109,20 +143,7 @@ namespace IngressTracker.Startup.Facilities
         /// </returns>
         private IPersistenceConfigurer SetupDatabase()
         {
-            var appDataFolder = "IngressTracker";
-#if DEBUG
-            appDataFolder += "-DEBUG";
-#endif
-
-            var appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), appDataFolder);
-
-            var appData = new DirectoryInfo(appDataPath);
-            if (!appData.Exists)
-            {
-                appData.Create();
-            }
-
-            var dataFilePath = Path.Combine(appDataPath, "data.s3db");
+            var dataFilePath = DataFilePath;
             if (!File.Exists(dataFilePath))
             {
                 SQLiteConnection.CreateFile(dataFilePath);

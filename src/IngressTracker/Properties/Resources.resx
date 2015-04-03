@@ -1393,4 +1393,7 @@ Are you sure you wish to delete this statistic?</value>
   <data name="LevelTarget" xml:space="preserve">
     <value>Level Target</value>
   </data>
+  <data name="OpenDataDirectory" xml:space="preserve">
+    <value>Open Data Directory</value>
+  </data>
 </root>

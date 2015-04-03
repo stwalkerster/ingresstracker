@@ -965,6 +965,15 @@ namespace IngressTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open Data Directory.
+        /// </summary>
+        public static string OpenDataDirectory {
+            get {
+                return ResourceManager.GetString("OpenDataDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Platinum.
         /// </summary>
         public static string Platinum {

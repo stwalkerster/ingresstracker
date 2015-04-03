@@ -22,6 +22,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace IngressTracker.ViewModels
 {
+    using System.Diagnostics;
     using System.Windows;
 
     using Caliburn.Micro;
@@ -30,6 +31,7 @@ namespace IngressTracker.ViewModels
     using IngressTracker.Interfaces;
     using IngressTracker.ScreenBase.Interfaces;
     using IngressTracker.Services.Interfaces;
+    using IngressTracker.Startup.Facilities;
     using IngressTracker.ViewModels.Interfaces;
 
     using Microsoft.Practices.ServiceLocation;
@@ -469,6 +471,15 @@ namespace IngressTracker.ViewModels
         public void OpenCategoryStatic()
         {
             this.OpenWindow<ICategoryStaticViewModel>();
+        }
+
+        /// <summary>
+        /// The open data directory.
+        /// </summary>
+        public void OpenDataDirectory()
+        {
+            string args = string.Format("/select,{0}", PersistenceFacility.DataFilePath);
+            Process.Start("explorer.exe", args);
         }
 
         /// <summary>

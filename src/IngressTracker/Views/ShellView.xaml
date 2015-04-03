@@ -157,6 +157,7 @@
                                 <ContentControl cal:View.Model="{Binding About}" Foreground="{DynamicResource DefaultFontBrush}" />
                             </fluent:BackstageTabItem.Content>
                         </fluent:BackstageTabItem>
+                        <fluent:Button Header="{x:Static properties:Resources.OpenDataDirectory}" cal:Message.Attach="OpenDataDirectory" />
                         <fluent:Button Header="{x:Static properties:Resources.Exit}" cal:Message.Attach="Exit" />
                     </fluent:BackstageTabControl>
                 </fluent:Backstage>
