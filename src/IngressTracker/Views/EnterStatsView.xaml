@@ -25,6 +25,14 @@
                             <TextBlock Grid.Column="3" Margin="5" FontSize="11" VerticalAlignment="Bottom" HorizontalAlignment="Left">
                                 <Run Text="Last Value: " />
                                 <Run Text="{Binding Path=OldValue, StringFormat={x:Static properties:Resources.IntegerFormat}}" />
+                                <Run>
+                                    <Run.Text>
+                                        <MultiBinding Converter="{StaticResource YesterdayDeltaConverter}">
+                                            <Binding Path="OldValue" />
+                                            <Binding Path="Value" />
+                                        </MultiBinding>
+                                    </Run.Text>
+                                </Run>
                             </TextBlock>
                         </Grid>
                         <DataTemplate.Triggers>

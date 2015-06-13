@@ -1396,4 +1396,7 @@ Are you sure you wish to delete this statistic?</value>
   <data name="OpenDataDirectory" xml:space="preserve">
     <value>Open Data Directory</value>
   </data>
+	<data name="YesterdayDeltaConverterFormat" xml:space="preserve">
+    <value>(Difference: {0})</value>
+  </data>
 </root>

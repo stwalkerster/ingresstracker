@@ -10,4 +10,5 @@
     <converters:MinimumConverter x:Key="MinimumConverter" />
     <converters:VisibilityGreaterThanEqualToConverter x:Key="VisibilityGreaterThanEqualToConverter" />
     <converters:HidePastPredictionConverter x:Key="HidePastPredictionConverter" />
+    <converters:YesterdayDeltaConverter x:Key="YesterdayDeltaConverter" />
 </ResourceDictionary>

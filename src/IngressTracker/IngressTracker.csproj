@@ -130,6 +130,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\YesterdayDeltaConverter.cs" />
     <Compile Include="Extensions\BadgeExtensions.cs" />
     <Compile Include="Controls\Badge.xaml.cs">
       <DependentUpon>Badge.xaml</DependentUpon>
