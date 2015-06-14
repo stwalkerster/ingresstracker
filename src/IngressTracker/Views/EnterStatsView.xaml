@@ -21,7 +21,7 @@
                             
                             <TextBlock Text="{Binding Statistic.Category.Name}" Margin="5" />
                             <TextBlock Grid.Column="1" Text="{Binding Statistic.Description}" Margin="5" FontSize="14"/>
-                            <TextBox Grid.Column="2" Text="{Binding Value, ValidatesOnDataErrors=True}" Width="100" HorizontalAlignment="Left" Margin="0,5"/>
+                            <TextBox Grid.Column="2" Text="{Binding Value, StringFormat={x:Static properties:Resources.IntegerFormat}, ValidatesOnDataErrors=True}" Width="100" HorizontalAlignment="Left" Margin="0,5"/>
                             <TextBlock Grid.Column="3" Margin="5" FontSize="11" VerticalAlignment="Bottom" HorizontalAlignment="Left">
                                 <Run Text="Last Value: " />
                                 <Run Text="{Binding Path=OldValue, StringFormat={x:Static properties:Resources.IntegerFormat}}" />

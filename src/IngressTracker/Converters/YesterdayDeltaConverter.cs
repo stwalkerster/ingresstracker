@@ -16,18 +16,13 @@
 //   TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //   SOFTWARE.
 // </copyright>
+// <summary>
+//   The yesterday delta converter.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
-
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace IngressTracker.Converters
 {
+    using System;
     using System.Globalization;
     using System.Windows.Data;
 
@@ -38,6 +33,8 @@ namespace IngressTracker.Converters
     /// </summary>
     public class YesterdayDeltaConverter : IMultiValueConverter
     {
+        #region Public Methods and Operators
+
         /// <summary>
         /// The convert.
         /// </summary>
@@ -63,7 +60,9 @@ namespace IngressTracker.Converters
 
             if (val != null && oldVal != null)
             {
-                return string.Format(Resources.YesterdayDeltaConverterFormat, val - oldVal);
+                return string.Format(
+                    string.Format(Resources.YesterdayDeltaConverterFormat, Resources.IntegerFormat),
+                    val - oldVal);
             }
 
             return null;
@@ -93,5 +92,7 @@ namespace IngressTracker.Converters
         {
             throw new NotImplementedException();
         }
+
+        #endregion
     }
 }
