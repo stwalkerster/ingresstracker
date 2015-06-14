@@ -84,10 +84,8 @@ namespace IngressTracker.Converters
         /// The culture.
         /// </param>
         /// <returns>
-        /// The <see cref="object[]"/>.
+        /// The <see cref="object"/>.
         /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
