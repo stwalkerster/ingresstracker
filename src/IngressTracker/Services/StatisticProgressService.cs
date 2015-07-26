@@ -115,7 +115,7 @@ namespace IngressTracker.Services
                         .WithSubquery.Where(x => x.Timestamp == month.As<DateTime>())
                         .SingleOrDefault();
 
-                return new StatisticProgress(value, weekValue, monthValue);
+                return new StatisticProgress(value, monthValue, weekValue);
             }
 
             return new StatisticProgress(null, null, null);

@@ -178,7 +178,7 @@ namespace IngressTracker.DataModel
 
                     try
                     {
-                        this.monthPrediction = this.MonthValue.Timestamp.Add(prediction.Value);
+                        this.monthPrediction = this.CurrentValue.Timestamp.Add(prediction.Value);
                         this.monthPredictionDone = true;
                     }
                     catch (ArgumentOutOfRangeException)
@@ -219,7 +219,7 @@ namespace IngressTracker.DataModel
 
                     try
                     {
-                        this.weekPrediction = this.WeekValue.Timestamp.Add(prediction.Value);
+                        this.weekPrediction = this.CurrentValue.Timestamp.Add(prediction.Value);
                         this.weekPredictionDone = true;
                     }
                     catch (ArgumentOutOfRangeException)
